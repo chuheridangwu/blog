@@ -1,0 +1,56 @@
+# docsify
+使用docsify快速搭建个人博客
+[官方文档]( https://docsify.js.org/#/zh-cn/quickstart)
+> 1. mac 安装npm
+brew install node
+
+> 2. 安装 docsify
+npm i docsify-cli -g
+
+> 3. 初始化docsify文档
+docsify init ./docs
+
+> 4. 启动本地预览
+docsify serve docs
+
+> 5. 设置搜索
+```
+<script>
+  window.$docsify = {
+    // 完整配置参数
+    search: {
+      maxAge: 86400000,               // 过期时间，单位毫秒，默认一天
+      paths: [],                      // or 'auto'，匹配文件路径
+      placeholder: 'Type to search',  // 搜索提示框文字， 支持本地化，例子在下面
+      // placeholder: {
+      //   '/zh-cn/': '搜索',
+      //   '/': 'Type to search'
+      // },
+      noData: 'No Results!',          // 找不到结果文字提示，支持本地化，例子在下面
+      // noData: {
+      //   '/zh-cn/': '找不到结果',
+      //   '/': 'No Results'
+      // },
+      depth: 2,                       // 搜索标题的最大程级, 1 - 6
+    }
+  }
+</script>
+<!-- 引入搜索模块 -->
+<script src="//unpkg.com/docsify/lib/plugins/search.js"></script>
+```
+> 6. 侧边栏显示标题
+
+`
+window.$docsify = {
+    subMaxLevel: 3
+}
+`
+
+> 7. 代码高亮
+
+`<script src="//cdn.jsdelivr.net/npm/docsify/lib/docsify.min.js"></script>`
+
+
+> 参考网址
+* https://segmentfault.com/a/1190000017576714
+* https://docsify.js.org/#/zh-cn/quickstart

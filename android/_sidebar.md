@@ -1,0 +1,5 @@
+* [Activity](android/activity)
+* [Intent](android/intent)
+* [初始化](android/init)
+* [Layout布局](android/layout)
+* [常见控件](android/view)
