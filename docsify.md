@@ -47,9 +47,27 @@ window.$docsify = {
 `
 
 > 7. 代码高亮
+查看支持的代码高亮库列表 [prism](https://github.com/PrismJS/prism/tree/gh-pages/components)
+`<script src="//cdn.jsdelivr.net/npm/prismjs/components/prism-php.min.js"></script>`
+使用的方法
+````
+``` php
+function getAdder(int $x): int 
+{
+    return 123;
+}
+```
+````
 
-`<script src="//cdn.jsdelivr.net/npm/docsify/lib/docsify.min.js"></script>`
-
+> 8. 代码块重复引用
+如果多个代码块进行重读，使用多个`` ` ``来包含
+`````
+````
+    ```kotlin
+        代码块
+    ```
+````
+`````
 
 > 参考网址
 * https://segmentfault.com/a/1190000017576714
