@@ -2,6 +2,13 @@
 * [Activity](android/activity)
 * [Intent](android/intent)
 * [初始化](android/init)
-* [Layout布局](android/layout)
-* [常见控件](android/view)
-* [常用的第三方框架](android/thirdparty)
+* 布局
+    * [Layout布局](android/layout/layout)
+    * [LinearLayout 线性布局](android/layout/linearlayout)
+    * [RelativeLayout 相对布局](android/layout/relativelayout)
+    * [ConstranintLayout 约束布局](android/layout/constranintlayout)
+* View
+    * [常用View属性](android/view)
+    * [RecyclerView](/android/ui/recyclerview)
+    * [ViewPage2](/android/ui/viewpage2)
+* [第三方框架](android/thirdparty)

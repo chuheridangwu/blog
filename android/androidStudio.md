@@ -1,6 +1,34 @@
-
 # AndroidStudio
-AndroidStudio是安卓的开发工具，这里主要说明AndroidStudio的使用技巧
+AndroidStudio是安卓目前主流的开发工具，这里主要说明AndroidStudio在使用过程中一些有助于提高我们工作效率的使用技巧
+
+* 打开项目一直卡顿，需要在编译前进入build.gradle文件中将`google()`修改代码
+```kotlin
+maven { url 'https://maven.aliyun.com/repository/public' }
+maven { url 'https://maven.aliyun.com/repository/google' }
+```
+* 代码设置不区分大小写自动补全
+```kotlin
+Editor -> Code Completion -> 去掉Match case的勾
+```
+* 查看当前类的所有方法
+```kotlin
+Mac command + fn + f12
+window Ctrl + f12
+Navigate -> file structure
+```
+* 查看所有类是否包含当前关键字
+```kotlin
+Command + shift  +f
+```
+
+## 本地添加jar包
+本地添加jar包，第三方的jar包放在app/lib文件夹内，androidstudio4.0打开顶部File ->Project Structure->Dependencies ->app->点击左上角+ 号 ->jar Dependency
+
+
+
+## 插件 java快速生成model类插件
+点击androidstudio偏好设置-> 选择Plugins->输入GsonFormat->点击install
+在新建的model类中，单机右键->选中Generate->选择GsonFormat->粘贴上对应的json->点击format验证json是否正确，点击ok，生成对应的属性
 
 
 
@@ -146,3 +174,10 @@ private  String getRandomLengthName(String name){
     return builder.toString();
 }
 ```
+
+## adb安装apk包
+### 查看设备列表
+`adb devices`
+### 安装安卓包
+`adb -s 设备id install a.apk`
+
