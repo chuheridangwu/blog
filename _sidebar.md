@@ -4,5 +4,4 @@
 * [iOS](ios/)
 * [Shell](shell/)
 * [C](c/)
-* [PhotoShop](photoshop/)
-* [aaa](/android/ui/)
+* [Photoshop](photoshop/)
