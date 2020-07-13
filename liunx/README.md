@@ -1,0 +1,34 @@
+# Linux
+学习linux主要是在编程过程中偶尔要用到这些命令，使用linux来查询相对来说方便一些，自己经常忘记linux命令，查找不是很方便，所以记录下来
+
+手册： 如果不知道命令都有什么参数，可以使用`man  对应的命令`来查询，比如`man  ls`
+
+linux常见命令
+
+cd ls cat pwd mkdir rmdir  touch  cp  rm mv
+
+## ls 查看文件
+* ls  查看当前文件
+* ls -l 文件详情
+* ls -h 文件大小，以字节显示
+* ls -2*  搜索2开头的文件
+* ls -2?  
+
+## ln
+* ln -s 文件名
+* ln -s
+
+ln -s  属于软连接快捷方式
+ln 属于硬链接快捷键
+
+## cat
+查看当前文件内容
+cat 1.txt 2.txt >> 3.txt : 把1.txt  和 2.txt的内容合并到3.txt中
+
+## grep
+用来查找当前文件的内容
+grep 'a' 1.txt  查找a在1.txt的所有记录
+grep -n 'a' 1.txt   显示在多少行
+grep '^a' 1.txt   显示a开头的内容
+a$ 查找以a结尾的文件
+

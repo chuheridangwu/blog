@@ -3,5 +3,6 @@
 * [Android](android/)
 * [iOS](ios/)
 * [Shell](shell/)
+* [Linux](/liunx/)
 * [C](c/)
 * [Photoshop](photoshop/)
