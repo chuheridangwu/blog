@@ -90,11 +90,45 @@ private  void requestOkHttp() {
       }).start();
   }
 ```
+
+* 异步请求
+  
+```kotlin
+val client = OkHttpClient();
+val request =
+    Request.Builder().url(url).build()
+val response = client.newCall(request).execute()
+
+client.newCall(request).enqueue(object: Callback{
+    override fun onFailure(call: Call, e: IOException) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onResponse(call: Call, response: Response) {
+        TODO("Not yet implemented")
+    }
+
+})
+```
+
+* 异步
+```kotlin
+Thread{
+    
+}.start()
+```
+
+* 返回主线程
+```kotlin
+Handler(Looper.getMainLooper()).post {
+
+}
+```
            
 ### 使用gson解析json数据
 * 导入 `implementation 'com.google.code.gson:gson:2.8.6'`
 * 字典数据解析
-```
+```kotlin
     {"name":"Tom","age":20}
     Gson gson = new Gson();
     Person person = gson.fromJson(JsonData,Person.class);
@@ -306,13 +340,153 @@ mInterstitialAd.adListener = object: AdListener() {
 }
 ```
 
+## KSYMediaPlayer_Android 金山播放器
+
+### 导入项目地址
+
+```kotlin
+android {
+    compileSdkVersion 24
+    buildToolsVersion '25.0.0'
+
+    defaultConfig {
+        applicationId "com.ksyun.player.demo"
+        minSdkVersion 16
+        targetSdkVersion 22
+        versionCode 1
+        versionName "1.0"
+        // 此处很重要，指定APP只使用 armeabi-v7a和arm64-v8a的库
+        ndk {
+            abiFilters 'armeabi-v7a','arm64-v8a'
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    sourceSets.main {
+        jniLibs.srcDirs 'src/main/libs' // 动态库和jar的存放路径
+        jni.srcDirs = [] // This prevents the auto generation of Android.mk
+    }
+}
+
+//引用jcenter
+dependencies {
+    ...
+    implementation 'com.ksyun.media:libksyplayer-java:2.1.2'
+    implementation 'com.ksyun.media:libksyplayer-armv7a:2.1.2'
+    implementation 'com.ksyun.media:libksyplayer-arm64:2.1.2'
+    ...
+}
+
+```
+
+### 在 AndroidManifest.xml 文件中添加权限
+
+```kotlin
+<uses-permission android:name="android.permission.INTERNET" />
+<uses-permission android:name="android.permission.WAKE_LOCK" />
+<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+<uses-permission android:name="android.permission.READ_PHONE_STATE" />
+```
+### xml中引用播放界面
+
+```kotlin
+    <com.ksyun.media.player.KSYTextureView
+        android:id="@+id/ksy_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:targetApi="ice_cream_sandwich"/>
+```
+
+### activity中使用
+
+```kotlin
+class MainActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        //设置监听器
+//        ksy_view.setOnBufferingUpdateListener(mOnBufferingUpdateListener);
+//        ksy_view.setOnCompletionListener(mOnCompletionListener);
+        ksy_view.setOnPreparedListener(mOnPreparedListener);
+//        ksy_view.setOnInfoListener(mOnInfoListener);
+//        ksy_view.setOnVideoSizeChangedListener(mOnVideoSizeChangeListener);
+        ksy_view.setOnErrorListener(mOnErrorListener)
+//        ksy_view.setOnSeekCompleteListener(mOnSeekCompletedListener);
+        //设置播放参数
+        ksy_view.bufferTimeMax = 2.0f;
+        ksy_view.setTimeout(5, 30);
+
+        // 循环播放
+        ksy_view.isLooping = true
+
+        //设置播放地址并准备
+        ksy_view.dataSource = "rtmp://pull.lvpucheng.com/live/6326389_1595117745?txSecret=4c6d27ba4dfcdcd4560c450ffe0642a4&txTime=5F1396A8";
+        ksy_view.prepareAsync();
+    }
+
+    // 开始播放
+    private val  mOnPreparedListener: IMediaPlayer.OnPreparedListener
+    get() =
+        IMediaPlayer.OnPreparedListener(){
+            // 设置视频伸缩模式，此模式为裁剪模式
+            ksy_view.setVideoScalingMode(KSYMediaPlayer.VIDEO_SCALING_MODE_SCALE_TO_FIT_WITH_CROPPING);
+            // 开始播放视频
+            ksy_view.start();
+        }
+
+    // 停止播放
+    private val mStopButton: View.OnClickListener
+    get() = View.OnClickListener {
+        if(ksy_view != null){
+            ksy_view.stop();
+        }
+    }
+
+    // 播放出现错误
+    private val mOnErrorListener: IMediaPlayer.OnErrorListener
+    get() = IMediaPlayer.OnErrorListener {
+            _, _, _ ->
+        true
+    }
+
+    // 切换至前后台
+    override fun onPause() {
+        super.onPause()
+        //true表示切换到后台后仍然播放音频
+        ksy_view.runInBackground(true);
+    }
+
+    override fun onResume() {
+        super.onResume()
+        ksy_view.runInForeground();
+    }
+
+    // 切换视频源，两种方式reload()或者重置播放新的视频
+    private fun changeVideoUrl(){
+        ksy_view.reload("https://media.w3.org/2010/05/sintel/trailer.mp4",true);
+    }
+
+
+    // 离开activity时对播放器进行销毁
+    private  fun videoPlayEnd() {
+            //释放播放器
+            ksy_view.release()
+    }
+}
+```
+
 
 ## 项目中经常导入的包
 ```
 //viewPager2
 implementation 'com.google.android.material:material:1.1.0'
-//noinspection GradleCompatible
-implementation 'com.android.support:recyclerview-v7:28.0.0'
+
 //网络请求
 implementation ("com.squareup.okhttp3:okhttp:4.7.2")
 // 数据解析
@@ -321,12 +495,17 @@ implementation 'com.google.code.gson:gson:2.8.6'
 implementation('org.jsoup:jsoup:1.11.1')
 // 图片下载
 implementation 'com.github.bumptech.glide:glide:4.11.0'
-  // 视频播放
-implementation 'com.github.dueeeke.dkplayer:dkplayer-java:3.2.6'
-implementation 'com.github.dueeeke.dkplayer:dkplayer-ui:3.2.6'
-implementation 'com.github.dueeeke.dkplayer:player-ijk:3.2.6'
+// 金山视频播放器
+implementation 'com.ksyun.media:libksyplayer-java:2.1.2'
+implementation 'com.ksyun.media:libksyplayer-armv7a:2.1.2'
+implementation 'com.ksyun.media:libksyplayer-arm64:2.1.2'
+
 // 图片预览
 implementation 'com.github.chrisbanes:PhotoView:2.1.3'
 // 谷歌广告admob
 implementation 'com.google.android.gms:play-services-ads:19.1.0'
+
+// 下拉刷新和recyclerview
+implementation 'androidx.recyclerview:recyclerview:1.1.0'
+implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
 ```

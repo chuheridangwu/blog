@@ -6,3 +6,4 @@
 * [Linux](/liunx/)
 * [C](c/)
 * [Photoshop](photoshop/)
+* [调试技巧](live/)

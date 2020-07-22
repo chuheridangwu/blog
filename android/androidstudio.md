@@ -1,6 +1,20 @@
 # AndroidStudio
 AndroidStudio是安卓目前主流的开发工具，这里主要说明AndroidStudio在使用过程中一些有助于提高我们工作效率的使用技巧
 
+## 快捷键
+|   快捷键  |   含义    |   as路径  |
+|   ----   |    ---    |    ---   |
+| command + fn + f12 | 查看当前类所有方法 | `Navigate -> file structure` |
+| command + shift  +f | 查看所有类包含当前关键字 |
+| alt + enter | 字符串快捷本地化 |
+| ctrl + alt + f | 生成全局变量(快捷键跟搜狗输入法快捷键有冲突) |
+| common + shift + u | 字母小写转换成大写,如果点击一次无效，u按2次 |
+| control + alt + o | 删除类中没有用到的引用 |
+| shift + f6 | 更改类名或者变量名 |
+| alt + enter | 遇到报错和没有导入的类可以点击提示 |
+
+---
+
 * 打开项目一直卡顿，需要在编译前进入build.gradle文件中将`google()`修改代码
 ```kotlin
 maven { url 'https://maven.aliyun.com/repository/public' }
@@ -10,20 +24,27 @@ maven { url 'https://maven.aliyun.com/repository/google' }
 ```kotlin
 Editor -> Code Completion -> 去掉Match case的勾
 ```
-* 查看当前类的所有方法
-```kotlin
-Mac command + fn + f12
-window Ctrl + f12
-Navigate -> file structure
+---
+
+## 导航栏和状态栏颜色是透明色
+
+```java
+if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+    getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);//设置透明状态栏
+    getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);//设置透明导航栏
+}
 ```
-* 查看所有类是否包含当前关键字
-```kotlin
-Command + shift  +f
-```
+
+## androidstudio开发工具不能显示手机设备
+adb devices 可以查看到手机设备，关闭重新打开开发者选项或者能看到
+
+## 创建项目时的初始颜色作用
+* colorPrimary  导航栏颜色 和 底部`BottomNavigationView`颜色
+* colorPrimaryDark  状态栏颜色
+* colorAccent 进度条、可选控件等颜色
 
 ## 本地添加jar包
 本地添加jar包，第三方的jar包放在app/lib文件夹内，androidstudio4.0打开顶部File ->Project Structure->Dependencies ->app->点击左上角+ 号 ->jar Dependency
-
 
 
 ## 插件 java快速生成model类插件
@@ -181,3 +202,25 @@ private  String getRandomLengthName(String name){
 ### 安装安卓包
 `adb -s 设备id install a.apk`
 
+---
+
+## 常见错误
+###  is not accessible from java.lang.Class android.app.AppComponentFactory
+原因是 activity 不是 public ，不能创建实例，class 前加 public就可以解决了
+
+## 不能打印过长的log
+当打印json数据的时候，经常只能打印一半，剩下的不能显示，是因为android开发工具的打印限制，
+使用下面方法进行循环打印即可
+
+```kotlin
+val tag = "LSG";
+var msg: String? = "$data"
+val max_str_length = 2001 - tag.length;
+                    //大于4000时
+while (msg?.length ?: 0 > max_str_length) {
+    Log.e(tag, msg?.substring(0, max_str_length));
+    msg = msg?.substring(max_str_length);
+     }
+//剩余部分
+Log.e(tag, msg);
+```

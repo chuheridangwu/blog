@@ -9,10 +9,13 @@ cd ls cat pwd mkdir rmdir  touch  cp  rm mv
 
 ## ls 查看文件
 * ls  查看当前文件
-* ls -l 文件详情
-* ls -h 文件大小，以字节显示
-* ls -2*  搜索2开头的文件
-* ls -2?  
+
+|  快捷键   | 含义  |
+|  ----  | ----  |
+| `ls -l ` | 文件详情 |
+| `ls -h ` | 文件大小，以字节显示 |
+| `ls -2* ` | 搜索2开头的文件 |
+| `ls -2?` | 文件详情 |
 
 ## ln
 * ln -s 文件名
@@ -27,8 +30,14 @@ cat 1.txt 2.txt >> 3.txt : 把1.txt  和 2.txt的内容合并到3.txt中
 
 ## grep
 用来查找当前文件的内容
-grep 'a' 1.txt  查找a在1.txt的所有记录
-grep -n 'a' 1.txt   显示在多少行
-grep '^a' 1.txt   显示a开头的内容
+
+|  快捷键   | 含义  |
+|  ----  | ----  |
+| `grep 'a' 1.txt` | 查找a在1.txt的所有记录 |
+| `grep -n 'a' 1.txt` | 显示在多少行 |
+| `grep '^a' 1.txt`  | 显示a开头的内容 |
+   
+  
 a$ 查找以a结尾的文件
+
 

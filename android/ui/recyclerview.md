@@ -4,14 +4,14 @@ Recyclerview是现在比较常用的控件，有三种布局方式
 * LinearLayoutManager： //线性布局 可以设置横向或者纵向
 * StaggeredGridLayoutManager: //瀑布流布局
 
-RecyclerView刷新数据有两种方式
+RecyclerView 刷新数据有两种方式
 * notifyDataSetChanged() //刷新全局
 * notifyItemRangeChanged //刷新局部
 
 
 ##  导入库
 ```kotlin
-implementation 'com.android.support:recyclerview-v7:28.0.0'
+implementation 'androidx.recyclerview:recyclerview:1.1.0'
 ```
 ## 设置布局样式
 * GridLayoutManager  卡片布局
@@ -23,6 +23,9 @@ recycler.layoutManager = manager
 ```kotlin
 val manager =  LinearLayoutManager(context)
 recycler.layoutManager = manager
+// 设置分页
+val snapHelper = PagerSnapHelper()
+snapHelper.attachToRecyclerView(recycler)
 ```
 * StaggeredGridLayoutManager  瀑布流布局
 ```kotlin
@@ -178,5 +181,19 @@ public static class ViewHolder extends RecyclerView.ViewHolder{
         mTextView = (TextView)itemView.findViewById(R.id.tv);
     }
 }
+```
+## 滚动到指定位置
 
+```kotlin
+// scrollBy(x, y)这个方法是自己去控制移动的距离，单位是像素,使用scrollBy(x, y)需要自己去计算移动的高度或宽度
+recyclerView.scrollBy(x, y)
+
+// scrollToPosition(position)这个方法的作用是定位到指定项，就是把你想显示的项显示出来，但是在屏幕的什么位置是不管的，
+recyclerView.scrollToPosition(3)
+
+//smoothScrollToPosition(position)和scrollToPosition(position)效果基本相似，不同的是smoothScrollToPosition是平滑到你想显示的项，而scrollToPosition是直接定位显示
+recyclerView.smoothScrollToPosition(position)。
+
+// 滚动到指定位置，如果该项可以置顶就将其置顶显示
+manager.scrollToPositionWithOffset(3, 0);
 ```
