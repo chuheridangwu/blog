@@ -2,6 +2,7 @@
 * AndroidStudio
     * [AndroidStudio](android/androidstudio) 
     * [ADB](android/adb.md) 
+    * [系统权限](/android/authorith.md)
 * [Activity](android/activity)
 * [Intent](android/intent)
 * [初始化](android/init)
