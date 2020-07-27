@@ -213,6 +213,13 @@ private  String getRandomLengthName(String name){
 }
 ```
 
+### 截屏
+1. 在连接的设备或模拟器上运行您的应用。如果使用连接的设备，请确保您已启用 USB 调试。
+2. 在 Android Studio 中，依次选择 View > Tool Windows > Logcat 以打开 Logcat。
+3. 点击Logcat窗口左侧的 Screen Capture 图标 。
+4. 此时，屏幕截图便会显示在 Screenshot Editor 窗口中。
+5. 点击save保存
+
 ---
 
 ## 常见错误
