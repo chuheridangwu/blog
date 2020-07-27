@@ -182,6 +182,23 @@ public static class ViewHolder extends RecyclerView.ViewHolder{
     }
 }
 ```
+瀑布流获取最后显示位置的方法，因为瀑布流的item高矮不确定性，所以在获取最后一个显示的position的时候和线性不一样
+```kotlin
+main_recycler_view.addOnScrollListener(object: RecyclerView.OnScrollListener(){
+    override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+        super.onScrollStateChanged(recyclerView, newState)
+        if (newState == RecyclerView.SCROLL_STATE_IDLE){
+        val  position = manager.findFirstCompletelyVisibleItemPositions(null) // 获取显示的位置，数组形式
+            for (i in position){
+                if (i >= ApiClient.videoList.size -3 ){
+
+                }
+            }
+        }
+    }
+})
+```
+
 ## 滚动到指定位置
 
 ```kotlin
@@ -197,3 +214,73 @@ recyclerView.smoothScrollToPosition(position)。
 // 滚动到指定位置，如果该项可以置顶就将其置顶显示
 manager.scrollToPositionWithOffset(3, 0);
 ```
+
+## Adapter跟Activity的交互
+>有时候 adapter 里面的控件点击事件需要回调给 Activity，这个时候就需要它们进行交互，通常的做法是，定义一个接口类，定义实现的方法，adapter中创建对应的接口属性， 当需要回调时， adapter 通过接口方法回调给 Activity， Activity需要实现对应的接口方法
+
+adapter中的类
+```kotlin
+class PlayAdapter(list: MutableList<Video>, listener: OnItemClickListener): RecyclerView.Adapter<PlayAdapter.ViewHolder>() {
+
+    var videoList = list
+    private val clickListener = listener // 接口属性
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlayAdapter.ViewHolder {
+        return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.play_recycler_item,parent,false))
+    }
+
+    override fun getItemCount(): Int = videoList.size
+
+    override fun onBindViewHolder(holder: PlayAdapter.ViewHolder, position: Int) {
+        val video = videoList[position]
+        Glide.with(holder.bgImg).load(video.headImg).into(holder.bgImg)
+        holder.closeBtn.setOnClickListener { this.clickListener.onCloseView()}
+
+    }
+
+    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
+        val bgImg: ImageView = itemView.findViewById(R.id.play_item_img)
+        val closeBtn: Button = itemView.findViewById(R.id.close_btn)
+    }
+
+    interface OnItemClickListener{
+        fun onCloseView()
+    }
+}
+
+OnItemClickListener: 是对应的接口类
+```
+
+Activity中的代码
+```kotlin
+class PlayActivity : AppCompatActivity(),PlayAdapter.OnItemClickListener{
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_play)
+    }
+
+    override fun onCloseView() {
+        finish()
+    }
+}
+```
+
+## 获取当前显示的位置
+| 方法 | 作用 |
+| --- | --- |
+| findFirstVisibleItemPosition() | 返回当前RecycelrView中 **第一个可见的item** 的adapter postion |
+| findLastVisibleItemPosition() | 返回当前RecycelrView中 **最后一个可见的item** 的adapter postion |
+| findFirstCompletelyVisibleItemPosition() | 返回当前RecycelrView中 **第一个完整可见的item** 的adapter postion |
+| findLastCompletelyVisibleItemPosition() | 返回当前RecycelrView中 **最后一个完整可见的item** 的adapter postion |
+
+调用方式
+```kotlin
+val postion = (recyclerView.layoutManager as LinearLayoutManager ).findFirstCompletelyVisibleItemPosition()
+```
+
+这几个方法的差别在于： **一个是可见，一个是要完全可见**
+
+> 注意点： 这4个方法，只有当 RecyclerView 在屏幕展示出来后，才能得到正常的返回值，否则都是`-1`
+
+
+

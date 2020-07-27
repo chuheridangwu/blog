@@ -36,3 +36,23 @@ Activity拥有四种启动模式standard、 singleTop、 singleTask 、singleIns
     android:launchMode="singleInstance">
 </activity>
 ```
+
+## 进制 Activity 横屏切换
+横竖屏切换会调用 Avtivity 的 oncreate 方法，一般禁止横竖屏切换有两种方法
+
+第一种，在 AndroidManifest.xml 中注册时禁止横屏
+```kotlin
+android:screenOrientation="landscape"  // 横屏
+android:screenOrientation="portrait"   // 竖屏
+ <activity android:name=".ui.activity.PlayActivity" android:screenOrientation="portrait"></activity>
+```
+
+第二种，在代码中进行设置
+```kotlin
+requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE; //横屏设置
+
+requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT;  //竖屏设置
+
+requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED; //默认设置
+
+```

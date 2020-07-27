@@ -1,5 +1,5 @@
 * [首页](/)
-* [docsify](/docsify)
+* [docsify](docsify)
 * [Android](android/)
 * [iOS](ios/)
 * [Shell](shell/)

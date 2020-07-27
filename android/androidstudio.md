@@ -5,15 +5,30 @@ AndroidStudio是安卓目前主流的开发工具，这里主要说明AndroidStu
 |   快捷键  |   含义    |   as路径  |
 |   ----   |    ---    |    ---   |
 | command + fn + f12 | 查看当前类所有方法 | `Navigate -> file structure` |
-| command + shift  +f | 查看所有类包含当前关键字 |
+| command + shift  + A | 全局搜索 |
 | alt + enter | 字符串快捷本地化 |
 | ctrl + alt + f | 生成全局变量(快捷键跟搜狗输入法快捷键有冲突) |
 | common + shift + u | 字母小写转换成大写,如果点击一次无效，u按2次 |
 | control + alt + o | 删除类中没有用到的引用 |
 | shift + f6 | 更改类名或者变量名 |
+| common + p | 提示方法参数|
+| F2 | 定位到错误代码 |
+| alt(option) + F1 | 查找文件所在目录位置 | 左侧文件列表上有一个靶心的图标，点击效果一样 |
+| ctrl(command) + -/+ | 折叠/展开代码 |
+| ctrl(command) + d| 赋值代码 | 需要先选中代码 |
+| ctrl(command) + shaift + 上/下键 | 上/下移动代码 |
+| ctrl(command) + shaift + 左/右键 | 选中 左/右 代码 |
+| alt + 鼠标上下移动 | 同时编辑多行代码 |
+| control + h | 查看继承关系 |
 | alt + enter | 遇到报错和没有导入的类可以点击提示 |
-
 ---
+
+```kotlin
+使用if 或者 for循环时，可以直接打 videos == null.if, 直接按回车就会出现
+if (videos == null){
+
+}
+```
 
 * 打开项目一直卡顿，需要在编译前进入build.gradle文件中将`google()`修改代码
 ```kotlin
@@ -77,7 +92,9 @@ keytool -genkey -alias testalias -keypass 123456 -keyalg RSA -keysize 2048 -vali
   validity    有效期,以天为单位
   keystore  文件输出路径，文件名称是- test.keystore
   storepass 文件密码- 123456
-  3.  查看证书信息`keytool -list -keystore "test.keystore"`
+  3.  查看证书信息`keytool -list -v -keystore "test.keystore"`
+  4.  修改keystore密码：keytool -storepasswd -keystore 文件名  执行后会提示输入证书的当前密码，和新密码以及重复新密码 确认。
+  5.  修改别名：keytool -changealias -keystore my.keystore 文件名 -alias 别名 -destalias 新别名
   
 ### 使用Gradle打包
 1. 在项目根目录下的`gradle.properties`文件下配置数据
@@ -195,12 +212,6 @@ private  String getRandomLengthName(String name){
     return builder.toString();
 }
 ```
-
-## adb安装apk包
-### 查看设备列表
-`adb devices`
-### 安装安卓包
-`adb -s 设备id install a.apk`
 
 ---
 
