@@ -69,6 +69,12 @@ function getAdder(int $x): int
 ````
 `````
 
+> 9. 代码拷贝
+```
+  <!-- 引入代码拷贝  -->
+  <script src="//unpkg.com/docsify-copy-code"></script>
+```
+
 > 参考网址
 * https://segmentfault.com/a/1190000017576714
 * https://docsify.js.org/#/zh-cn/quickstart

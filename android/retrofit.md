@@ -154,6 +154,66 @@ fun login(){
 }
 ```
 
+## 图片下载
+```kotlin
+// 下载请求
+fun downFile(){
+    val retrofit = Retrofit.Builder().baseUrl("http://192.168.11.141:9102/").build()
+    val api = retrofit.create(API::class.java)
+    val task = api.downFile("download/8")
+    task.enqueue(object :Callback<ResponseBody>{
+        override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+            Log.d("TAG", "onFailure:  + ${t.toString()}")
+        }
+
+        override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+            val headers = response.headers()
+            
+            val fileNameHeader = headers.get("Content-disposition")
+            var fileName = "未命名.png"
+            if (fileNameHeader != null) {
+                fileName = fileNameHeader.replace("attachment; filename=","")
+                writeToFile(response,fileName)
+            }
+
+            // 获取文件名字在哪个字典中,文件名字一般在headers中，需要遍历找到
+            for (i in 0 until  headers.size()) {
+                val value = headers.value(i)
+                val key = headers.name(i)
+                Log.d("TAG", "onResponse:  $key  ++ $value")
+            }
+        }
+    })
+}
+
+// 异步下载文件
+private fun writeToFile(response: Response<ResponseBody>, fileName: String) {
+    Thread{
+        kotlin.run {
+            val inputStream = response.body()?.byteStream()
+            val baseOutFile = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+            val outFile = File(baseOutFile,fileName)
+            Log.d("TAG", "outFile:  == >>>  $outFile")
+
+            try {
+                if (inputStream != null){
+                    val fos = FileOutputStream(outFile)
+                    val buffer = ByteArray(1024)
+                    var len = 0
+                    while (inputStream.read(buffer).apply { len = this } > 0){
+                        fos.write(buffer,0,len)
+                    }
+                    fos.close()
+                }
+            }catch (e: Exception){
+                e.printStackTrace()
+            }
+        }
+    }.start()
+}
+
+```
+
 ## 接口注解示范
 ```kotlin
 interface API {
