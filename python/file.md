@@ -1,6 +1,6 @@
 # 文件操作常用到的python段
 
-## 修改文件名
+## 批量修改文件名
 ```python
 # -*- coding: UTF-8 -*-
 import os
