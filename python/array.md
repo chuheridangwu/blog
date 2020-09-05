@@ -75,7 +75,7 @@ list = [123, 'xyz', 'zara', 'abc', 123];
 ```
 
 
-## 删除元素(del, pop, remove)
+## 删除元素(del, pop, remove,clear)
 * del：根据下标进行删除
 
 ```python
@@ -96,6 +96,14 @@ list.pop()
 list = ['a', 'b', 'c', 'a']
 list.remove('a')
 打印list结果 ['b', 'c', 'a']
+```
+
+* clear： 清空列表元素
+
+```python
+list = ['a', 'b', 'c', 'a']
+list.clear()
+打印list结果 []
 ```
 
 ## 排序(sort, reverse)
@@ -137,3 +145,11 @@ list.reverse()
 | max(list) | 返回列表元素最大值 |
 | min(list) | 返回列表元素最小值 |
 | list(seq) | 将元组转换为列表 |
+
+## 常用技巧
+* 带索引的数组遍历
+```python
+chars = ['a', 'b', 'c', 'd']
+for i, chr in enumerate(chars):
+    print(i, chr)
+```

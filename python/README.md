@@ -117,3 +117,17 @@ def sample(n_samples):
 MAC电脑在命令行输入 `Python3` 进入`Python`环境，输入`str = "a"`回车，输入`str.` ,连续按两次`Tab`键，显示可用方法
 
 ![](../python/imgs/python.png)
+
+## with ... as ... 用法
+```python
+file = open("/tmp/foo.txt")
+try:
+    data = file.read()
+finally:
+    file.close()
+
+等价于
+
+with open("/tmp/foo.txt") as file:
+    data = file.read()
+```

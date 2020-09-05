@@ -80,3 +80,5 @@ speed   速度
 repeat  重复
 symbols  符号
 section  部分
+encode  编码
+decode  解码
