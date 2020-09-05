@@ -41,8 +41,8 @@ os.removedirs(path)
 # 删除文件
 os.remove("毕业论文.txt")
 
-# 重命名文件或目录
-os.rename("毕业论文.txt", "毕业论文-最终版.txt")
+# 重命名文件或目录,需要完整路径 src -- 要修改的目录名  dst -- 修改后的目录名
+os.rename(src, dst) 
 
 # 递归重命名目录或文件。类似rename()。
 os.renames(old, new)
