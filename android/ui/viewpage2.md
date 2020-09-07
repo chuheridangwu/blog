@@ -1,12 +1,14 @@
 # ViewPage2
 1. 导入第三方库
+
 ```kotlin
-    implementation "androidx.viewpager2:viewpager2:1.0.0"
-    implementation 'com.google.android.material:material:1.1.0'
+implementation "androidx.viewpager2:viewpager2:1.0.0"
+implementation 'com.google.android.material:material:1.1.0'
 ```
 
-2. 在xml中，确认自己是否需要使用tablayout布局，可以不使用
-```
+1. 在xml中，确认自己是否需要使用tablayout布局，可以不使用
+
+```xml
 <com.google.android.material.tabs.TabLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -21,19 +23,21 @@
     android:id="@+id/main_viewpager"></androidx.viewpager2.widget.ViewPager2>
 ```
 
-3. activity中的使用
+1. activity中的使用
+
 ```kotlin
-    val data = listOf(mutableListOf("a", "b", "c","d","e","f"),mutableListOf("1", "2"))
-    val data1 = listOf("1", "2")
-    val adapter =  ViewPagerAdaper(data,this)
-    view_pager.adapter = adapter
-    TabLayoutMediator(tabs,view_pager){tab,posint->
-        tab.text = data1[posint]
-    }.attach()
+val data = listOf(mutableListOf("a", "b", "c","d","e","f"),mutableListOf("1", "2"))
+val data1 = listOf("1", "2")
+val adapter =  ViewPagerAdaper(data,this)
+view_pager.adapter = adapter
+TabLayoutMediator(tabs,view_pager){tab,posint->
+    tab.text = data1[posint]
+}.attach()
 ```
 
 ## 创建适配器
 创建ViewPage2的是适配器，使用解析的妹子图为例，页面布局样式是ViewPage2内是RecyclerView控件，所以传入的数据时数组嵌套的模式。
+
 ```kotlin
 class MainViewAdapter(list:MutableList<MutableList<PhotoModel>>,pContext: Context): RecyclerView.Adapter<MainViewAdapter.Viewholder>() {
     var datas = list

@@ -41,7 +41,7 @@ there
 ## 替换、分割、拼接
 | 方法 | 说明 | 参数说明 |
 | :---: | :---: | :---: |
-| `string.replace(str1, str2,  num=string.count(str1))` | 把 string 中的 str1 替换成 str2,如果 num 指定，则替换不超过 num 次. (num默认是全部替换) |
+| `string.replace(str1, str2,  num=string.count(str1))` | 把 string 中的 str1 替换成 str2,如果 num 指定，则替换不超过 num 次. (num默认是全部替换),返回替换的字符串 |
 | `string.split(str="", num=string.count(str))` | 以 str 为分隔符切片 string，如果 num 有指定值，则仅分隔 num + 1 个子字符串| str -- 分隔符，默认为所有的空字符，包括空格、换行(\n)、制表符(\t)等。<br> num -- 分割次数。默认为 -1, 即分隔所有。 |
 | `str.splitlines([keepends])` | 按照行('\r', '\r\n', \n')分隔，返回各行作为元素的列表，参数 keepends 为 False，不包含换行符，如果为 True，则保留换行符 , 默认是False|
 | `string.partition(str)` | 有点像 find()和 split()的结合体,从 str 出现的第一个位置起,把 字 符 串 string 分 成 一 个 3 元 素 的 元 组 (string_pre_str,str,string_post_str),如果 string 中不包含str 则 string_pre_str == string  | 
@@ -68,6 +68,9 @@ there
 | `string.isspace()` | 如果 string 中只包含空格，则返回 True，否则返回 False. |
 | `string.islower()` | 如果 string 中所有的字母是否都为小写 |
 | `string.isupper()` | 如果 string 中所有的字母是否都为大写 |
+| `str == str` | 判断两个字符串是否相等 |
+| `str1 not in str` | str1 不在 str内，返回True，否在False |
+| `str1  in str` | str1 在 str内，返回True，否在False |
 
 
 ## 字符串填充
@@ -188,3 +191,10 @@ b'\xe4\xb8\xad\xe6\x96\x87'
 <class 'str'>
 ```
 
+* 字符串可以直接判断是否在数组内
+```python
+controls = ("UIImageView","UILabel","UIView","UIScrollView","UIButton")
+str = "UILable"
+if str in controls:
+    print('含有str')
+```

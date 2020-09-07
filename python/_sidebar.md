@@ -5,8 +5,8 @@
     * [字典](/python/dictionary.md)
     * [切片](/python/slice.md)
     * [公共方法](/python/公共方法.md)
-    * [文件处理](/python/file.md)
-    * [目录文件处理](/python/os.md)
+    * [文件操作](/python/file.md)
+    * [目录文件夹操作](/python/os.md)
     * [Re库](/python/re.md)
     * [正则表达式](/python/regular.md)
 
