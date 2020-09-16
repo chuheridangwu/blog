@@ -1,11 +1,12 @@
 * [回到首页](/)
-* AndroidStudio
+* AndroidStudio开发工具
     * [AndroidStudio](android/androidstudio) 
     * [ADB](android/adb.md) 
     * [系统权限](/android/authorith.md)
 * [Activity](android/activity)
 * [Intent](android/intent)
 * [初始化](android/init)
+* [本地存储](android/store.md)
 * 布局
     * [Layout布局](android/layout/layout)
     * [LinearLayout 线性布局](android/layout/linearlayout)

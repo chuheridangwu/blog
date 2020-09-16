@@ -16,7 +16,6 @@ adb只是一套用于调试android系统的指令集合。有了这套指令集�
 | `adb shell` | 进入shell |  |
 | `adb root` | 获取root权限 | 进入shell里面，没有权限，有些文件夹是不允许你进入的 |
 ## 文件操作
-如果没有
 | 命令 | 作用 | 备注 |
 | --- | --- | --- |
 | `adb pull 内部文件地址 电脑本地目录 ` | 从android系统中拉取文件到本地 |  需要退出shell进行拉取 |
@@ -83,9 +82,10 @@ adb pull /sdcard/screen.png ./
 ## Mac电脑不能使用adb功能
 项目已经安装了AndroidStudio，但是还不能使用adb，原因是没找到对应的路径,需要把`platform-tools`文件路径添加到PATH中。
 
-1.在终端输入：echo $HOME。进入home目录下，及/Users/songyan
-2.继续输入：touch .bash_profile，创建.bash_profile文件
-3.在终端输入：open -e .bash_profile，打开bash_profile文件，即打开了一个文本编辑器
+1.在终端输入：`echo $HOME`。进入home目录下，及/Users/songyan
+2.继续输入：`touch .bash_profile`，创建.bash_profile文件
+3.在终端输入：`open -e .bash_profile`，打开bash_profile文件，即打开了一个文本编辑器
+4.`source ~/.bash_profile` 立刻生效
 
 ```
 export PUB_HOSTED_URL=https://pub.flutter-io.cn 
@@ -95,6 +95,13 @@ export PATH=${PATH}:/Users/mlive/Desktop/flutter/bin:/Users/mlive/Library/Androi
 单个路径是: `export PATH=/Users/mlive/Desktop/flutter/bin:$PATH`
 多个路径使用`:`号进行区分,如果指定多个路径，结尾就不用写:`$PATH了`: `export PATH=${PATH}:/Users/mlive/Desktop/flutter/bin:/Users/mlive/Library/Android/sdk/platform-tools`
 
+
+## 错误问题
+### 模拟器adbd cannot run as root in production builds
+是因为模拟器的问题， Google Play类型的模拟器，不支持`adb root`
+
+* google APIs：支持adb root
+* google Play：不支持adb root 
 
 >技术来源：[阳光沙滩](https://www.sunofbeach.net/a/1186220804795289600)
 
