@@ -9,5 +9,6 @@
     * [目录文件夹操作](/python/os.md)
     * [Re库](/python/re.md)
     * [正则表达式](/python/regular.md)
+    * [类和对象](/python/class.md)
 
 

@@ -124,3 +124,23 @@ class MainViewAdapter(list:MutableList<MutableList<PhotoModel>>,pContext: Contex
     }
 }
 ```
+
+## 监听Viewpager2的滚动方法
+```java
+      mLoopView.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+          @Override
+          public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+              super.onPageScrolled(position, positionOffset, positionOffsetPixels);
+          }
+
+          @Override
+          public void onPageSelected(int position) {
+              super.onPageSelected(position);
+          }
+
+          @Override
+          public void onPageScrollStateChanged(int state) {
+              super.onPageScrollStateChanged(state);
+          }
+      });
+```

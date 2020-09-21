@@ -323,3 +323,109 @@ public class MainActivity extends AppCompatActivity {
         android:dashGap="integer" />  <!-- 虚线间隔 -->  
 </shape> 
 ```
+
+## CardView
+CardView需要导入`implementation 'com.android.support:cardview-v7:28.0.0'`
+
+* cardUseCompatPadding: 设置默认分割线，背景色设置父类的背景颜色
+* cardCornerRadius: 设置圆角
+
+
+
+## 使用代码创建View
+```java
+@NonNull
+@Override
+public InnerHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    // 创建view
+    ImageView iv = new ImageView(parent.getContext());
+    // 设置宽高
+    ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT);
+    iv.setLayoutParams(layoutParams);
+    // 设置拉伸
+    iv.setScaleType(ImageView.ScaleType.CENTER);
+    return new InnerHolder(iv);
+}
+```
+
+## 单位转换工具类 px转dp
+单位转换工具类 dp 和 px 之间的关系取决于具体设备上的像素密度,density
+`density = px / dp;`
+
+```java
+//根据手机分辨率从dp转成px
+public class SizeUtils {
+    public static int dip2px(Context context,float dpValue) {
+        float scale = context.getResources().getDisplayMetrics().density;
+        return (int) (dpValue * scale + 0.5f);
+    }
+    //根据手机分辨率从px转成为dip
+    public static int px2dip(Context context,float pxValue){
+        //获取当前手机的像素密度
+        final float scale = context.getResources().getDisplayMetrics().density;
+        return (int)(pxValue / scale + 0.5f); //四舍五入取整
+    }
+}
+```
+
+## 使用代码获取Drawable
+```java
+GradientDrawable selectedDrawable = (GradientDrawable)getContext().getDrawable(R.drawable.shape_indicator_point);
+GradientDrawable normalDrawable = (GradientDrawable)getContext().getDrawable(R.drawable.shape_indicator_point);
+normalDrawable.setColor(getContext().getColor(R.color.white));
+```
+
+## NestedScrollView 嵌套 ReclerView时的冲突问题
+当 ReclerView 被嵌套到 NestedScrollView 中时，ReclerView 首先会遇到 **每个item都会被创建的问题**，会增加很大的内存，需要动态设置ReclerView 的高度
+
+```java
+// 父类布局，动态设置 RecyclerView 高度
+// mHomePagerParent 是包裹  NestedScrollView 的 ViewGroup
+// mHomePagerNestedView 是 NestedScrollView，为了获取顶部高度
+// mContentList 是 ReclerView，动态设置他的高度是为了防止多个item一起创建
+mHomePagerParent.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+    @Override
+    public void onGlobalLayout() {
+        // 获取头部的高度
+        int headerHeight = mHomeHeaderContainer.getMeasuredHeight();
+        mHomePagerNestedView.setHeaderHeight(headerHeight);
+
+        // 获取RecyclerView的高度
+        int measureHeight = mHomePagerParent.getMeasuredHeight();
+        LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) mContentList.getLayoutParams();
+        layoutParams.height = measureHeight;
+        mContentList.setLayoutParams(layoutParams);
+
+        if (measureHeight != 0){
+            mHomePagerParent.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+        }
+    }
+});
+```
+
+当 ReclerView 滑动时，他顶部的视图不能跟着滚动，需要先给出顶部视图的高度，在  NestedScrollView 视图滚动的位置，如果当前滚动的位小于顶部的高度，在监听到视图滚动时，需要让顶部视图跟随滚动
+
+```java
+// 获取顶部视图的高度
+public void setHeaderHeight(int headerHeight){
+    this.mHeaderHeight = headerHeight;
+}
+@Override
+public void onNestedPreScroll(@NonNull View target, int dx, int dy, @NonNull int[] consumed, int type) {
+    if (originScroll < mHeaderHeight){ //如果移动的值小于头部的值
+        scrollBy(dx,dy);
+        consumed[0] = dx;
+        consumed[1] = dy;
+    }
+
+    super.onNestedPreScroll(target, dx, dy, consumed, type);
+    Log.d("TAG", "onNestedScroll: 2");
+}
+
+@Override
+protected void onScrollChanged(int l, int t, int oldl, int oldt) { 
+    // 获取当前视图滚动的位置
+    this.originScroll = t;
+    super.onScrollChanged(l, t, oldl, oldt);
+}
+```

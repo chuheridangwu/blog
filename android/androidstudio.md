@@ -167,7 +167,8 @@ class SplashActivity : AppCompatActivity() {
 </style>
 ```
 3.  在AndroidManifest.xml中给SplashActivity设置style
-```kotlin
+
+```xml
 <activity android:name=".SplashActivity"
           android:theme="@style/SplashTheme">
   <intent-filter>
@@ -219,6 +220,9 @@ private  String getRandomLengthName(String name){
 3. 点击Logcat窗口左侧的 Screen Capture 图标 。
 4. 此时，屏幕截图便会显示在 Screenshot Editor 窗口中。
 5. 点击save保存
+
+### 查看图层
+点击AndroidStudio 顶部 `Tools` ,选中 `Layout Inspector`
 
 ---
 

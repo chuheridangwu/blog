@@ -20,9 +20,9 @@ te.text = "哇哈哈哈，我拿到这里面的控件了"
 * 可以在Activity运行时动态地添加或删除Fragment
 
 ## 静态加载 fragment
-1. 创建fragment对应的xml文件，比如fragment_home.xml
+1. 创建fragment对应的xml文件，比如 `fragment_home.xml`
 
-```kotlin
+```xml
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
@@ -35,10 +35,9 @@ te.text = "哇哈哈哈，我拿到这里面的控件了"
         android:layout_gravity="center_horizontal"
         android:text="Button"
         />
-
 </LinearLayout>
 ```
-2. 创建对应的 HomeFragment 类，继承自 Fragment
+2. 创建对应的 `HomeFragment` 类，继承自 `Fragment`
 
 ```kotlin
 class HomeFragment : Fragment() {
@@ -54,7 +53,7 @@ class HomeFragment : Fragment() {
 
 3. 在 activity_main.xml 文件中引入 fragment 
    
-```kotlin
+```xml
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -67,7 +66,7 @@ class HomeFragment : Fragment() {
         android:id="@+id/leftFrag"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:name="com.cool.testkotlin.FragmentLeft"></fragment> //name 应该是当前的文件路径
+        android:name="com.cool.testkotlin.FragmentLeft"></fragment>
 
 </LinearLayout>
 ```
@@ -77,7 +76,8 @@ class HomeFragment : Fragment() {
 ## 动态加载 FrameLayout
 
 1.  在 activity_main.xml 文件中引入 fragment 
-```kotlin
+
+```xml
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -95,7 +95,8 @@ class HomeFragment : Fragment() {
 ```
 
 
-2. MainActivity 动态加载 Fragment 
+1. MainActivity 动态加载 Fragment 
+
 ```kotlin
 class MainActivity : AppCompatActivity() {
 
@@ -117,7 +118,7 @@ class MainActivity : AppCompatActivity() {
 }
 ```
 
-3. 动态加载 fragmnet 的步骤
+1. 动态加载 fragmnet 的步骤
 * 创建fragment的实例
 * 获取 FragmentManager,在Activity中直接调用 `getSupportFragmentManager()` 获取
 * 开启一个事务，通过调用`manager.beginTransaction()`方法开启
@@ -140,6 +141,24 @@ class MainActivity : AppCompatActivity() {
 
 ## 使用findViewById
 fragment中可以直接使用`getView().findViewById(R.id.btn)`，fragment可以直接获取到`context`
+
 ```kotlin
 ksy_view = view?.findViewById(R.id.ksy_view) ?: KSYTextureView(context)
+```
+
+## java提交fragment
+
+```java
+private void initView() {
+    // 创建fragment
+    HomeFragment home = new HomeFragment();
+    // 获取fragment管理器
+    FragmentManager manager = getSupportFragmentManager();
+    // 开启事务
+    FragmentTransaction transaction =  manager.beginTransaction();
+    // 添加 或 替换 fragment
+    transaction.add(R.id.main_page_container,home);
+    // 提交事务
+    transaction.commit();
+}
 ```

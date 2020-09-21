@@ -26,6 +26,10 @@ User Header Search Paths
 ## MAC 修改host权限
 sudo vi /etc/hosts
 
+## ping ip + 端口
+nc -vz -w 2 120.79.79.253 12009
+
+
 ## XIB创建TableViewCell
 ```oc
 // 创建cell
@@ -45,8 +49,16 @@ return cell;
 }
 ```
 
-### APP内切换语言
+## 使用URLWithString方法时 无法生成url
+`NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@?%@",host_url,baseurl,postURL]];`
+原因是字符串中存在特殊字符，需要先对字符串进行转义，
+```
+NSString *urlString = [NSString stringWithFormat:@"%@?paramstr=%@",url,[self jsonData]];
+urlString = [urlString stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+```
 
+
+### APP内切换语言
 
 
 1387371333 ： 是appid

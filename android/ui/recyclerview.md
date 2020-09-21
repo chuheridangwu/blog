@@ -282,5 +282,38 @@ val postion = (recyclerView.layoutManager as LinearLayoutManager ).findFirstComp
 
 > 注意点： 这4个方法，只有当 RecyclerView 在屏幕展示出来后，才能得到正常的返回值，否则都是`-1`
 
+## 一个Recyclerview中多个样式的View
+主要是两个方法的配置，`getItemViewType` 和 `onCreateViewHolder` 方法
+```java
+// 返回定义的类型
+public int getItemViewType(int position){
+    ItemModel model = mData.get(position);
+    if (model.getType() == 0){
+        return TYPE_FULL_IMAGE;
+    }else if (model.getType() == 1){
+        return TYPE_RIGHT_IMAGE;
+    }else {
+        return TYPE_THREE_IMAGES;
+    }
+}
 
+// 定义三个常量标识，三种item类型
+public static final int TYPE_FULL_IMAGE = 0;
+public static final int TYPE_RIGHT_IMAGE = 1;
+public static final int TYPE_THREE_IMAGES = 2;
 
+// 根据类型返回对应的view
+@NonNull
+@Override
+public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    View view;
+    if (viewType == TYPE_FULL_IMAGE){
+        view = View.inflate(parent.getContext(),R.layout.item_type_full_image,null);
+    }else if (viewType == TYPE_RIGHT_IMAGE){
+        view = View.inflate(parent.getContext(),R.layout.item_type_left_title,null);
+    }else {
+        view = View.inflate(parent.getContext(),R.layout.item_type_right_title,null);
+    }
+    return new ViewHolder(view);
+}
+```

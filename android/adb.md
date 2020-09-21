@@ -12,16 +12,15 @@ adb只是一套用于调试android系统的指令集合。有了这套指令集�
 | `adb remount` | 重新挂载 | 一般用于我们要对已经root的设备里面的文件进行操作的时候，需要重新挂载 |
 | `adb reboot` | 重启手机 |  |
 | `adb shell reboot -p` | 关机 | -p 则是poweroff的意思 |
-| `adb shell reboot -p` |  |  |
 | `adb shell` | 进入shell |  |
 | `adb root` | 获取root权限 | 进入shell里面，没有权限，有些文件夹是不允许你进入的 |
+
 ## 文件操作
-如果没有
 | 命令 | 作用 | 备注 |
 | --- | --- | --- |
 | `adb pull 内部文件地址 电脑本地目录 ` | 从android系统中拉取文件到本地 |  需要退出shell进行拉取 |
 | `adb push 电脑本地目录 内部文件地址` | 将本地文件推送到android文件夹内 |  |
-|  |  |  |
+
 
 
 

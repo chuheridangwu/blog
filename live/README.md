@@ -65,21 +65,26 @@ Host github.com
 在面对自己不理解或者认为很奇怪的错误时，尽可能的先停下来，不要不断的测试已经验证过的信息，要找一些别的角度来验证自己的想法，不要陷在思维怪圈里面。
 
 ## 单词
-bridge  桥梁
-below   下面
-above   上面
-layout  布局
-position 位置
-anchorPoint  锚点
-interface  接口
-transaction  交易
-disable  禁用
-forword   前言
-duration  持续时间
-speed   速度
-repeat  重复
-symbols  符号
-section  部分
-encode  编码
-decode  解码
-platform  平台
+单词 | 含义
+------- | -------
+bridge | 桥梁
+below | 下面
+above | 上面
+layout | 布局
+position | 位置
+anchorPoint | 锚点
+interface | 接口
+transaction | 交易
+disable | 禁用
+forword | 前言
+duration | 持续时间
+speed | 速度
+repeat | 重复
+symbols | 符号
+section | 部分
+encode | 编码
+decode | 解码
+platform | 平台
+abstract | 抽象
+gravity | 重力
+stagger | 错开
