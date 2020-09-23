@@ -79,8 +79,8 @@ adb pull /sdcard/screen.png ./
 ./  当前文件夹下
 ```
 
-## 修改模拟器的host文件
-模拟器的host文件通过`adb pull`拉取到桌面，修改后通过`adb push` 上传到模拟器原来位置，因为 hosts 文件时只读的，需要通过`emulator -avd (your AVD name) -writable-system`的形式启动模拟器后对 hostos 文件进行修改[来源网址](https://blog.csdn.net/mq2553299/article/details/68065469)
+## 修改模拟器的hosts文件
+模拟器的host文件通过`adb pull`拉取到桌面，修改后通过`adb push` 上传到模拟器原来位置，因为 hosts 文件时只读的，需要通过`emulator -avd (your AVD name) -writable-system`的形式启动模拟器后对 hosts 文件进行修改[来源网址](https://blog.csdn.net/mq2553299/article/details/68065469)
 
 启动模拟器
 ```

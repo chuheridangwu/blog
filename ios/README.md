@@ -23,7 +23,7 @@ User Header Search Paths
 只有在Always Search User Paths为Yes时才会被搜索。
 
 
-## MAC 修改host权限
+## MAC 修改hosts权限
 sudo vi /etc/hosts
 
 ## ping ip + 端口
