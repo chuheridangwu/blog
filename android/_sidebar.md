@@ -5,7 +5,6 @@
     * [系统权限](/android/authorith.md)
 * [Activity](android/activity)
 * [Intent](android/intent)
-* [初始化](android/init)
 * [本地存储](android/store.md)
 * 布局
     * [Layout布局](android/layout/layout)
@@ -22,3 +21,4 @@
     * [第三方框架](android/thirdparty)
     * [AdMob](android/admob1)
     * [Retrofit](android/retrofit)
+* [常见错误](.android/../errorInfo.md)

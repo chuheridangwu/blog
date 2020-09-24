@@ -317,3 +317,17 @@ public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
     return new ViewHolder(view);
 }
 ```
+
+## 设置每个item边距
+```java
+// 设置每个item的边距
+mContentList.addItemDecoration(new RecyclerView.ItemDecoration(){
+    @Override
+    public void getItemOffsets(@NonNull Rect outRect, @NonNull View view, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
+        outRect.top = SizeUtils.dip2px(getContext(),2.5f);
+        outRect.bottom = SizeUtils.dip2px(getContext(),2.5f);
+        outRect.left = SizeUtils.dip2px(getContext(),2.5f);
+        outRect.right = SizeUtils.dip2px(getContext(),2.5f);
+    }
+});
+```

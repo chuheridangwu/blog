@@ -21,9 +21,11 @@ android:background="@android:color/transparent"
 ## TextView
 * textSize   文字大小 16sp
 * textStyle 文字字体 bold： 加粗
-* textColor  文字颜色
+* textColor  文字颜色   // 文字颜色默认是白色，如果背景也是白色要注意被坑
 * gravity   文字是否居中显示 top bottom left right  center,可以使用|同时指定多个值
 * isEnabled   是否可以被点击
+* maxLines  最大行数
+* ellipsize 当字符超过大小时展示的方式
 
 ## EditText
 * focusable   是否允许获取焦点
@@ -329,6 +331,7 @@ CardView需要导入`implementation 'com.android.support:cardview-v7:28.0.0'`
 
 * cardUseCompatPadding: 设置默认分割线，背景色设置父类的背景颜色
 * cardCornerRadius: 设置圆角
+* cardBackgroundColor  背景颜色
 
 
 

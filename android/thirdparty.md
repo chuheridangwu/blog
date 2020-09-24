@@ -529,7 +529,22 @@ private void request() {
 ## 项目中经常导入的包
 ```
 //viewPager2
-implementation 'com.google.android.material:material:1.1.0'
+implementation "androidx.viewpager2:viewpager2:1.0.0"
+// recyclerView 和 cardView
+implementation 'androidx.recyclerview:recyclerview:1.1.0'
+//noinspection GradleCompatible
+implementation 'com.android.support:cardview-v7:28.0.0'
+
+// 上下拉刷新第三方
+implementation  'com.scwang.smart:refresh-layout-kernel:2.0.1'      //核心必须依赖
+implementation  'com.scwang.smart:refresh-header-classics:2.0.1'
+
+// 网络请求第三方
+implementation 'com.squareup.retrofit2:retrofit:2.6.3'
+implementation 'com.squareup.retrofit2:converter-gson:2.7.0'
+
+// 基础adapter
+implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.4'
 
 //网络请求
 implementation ("com.squareup.okhttp3:okhttp:4.7.2")
