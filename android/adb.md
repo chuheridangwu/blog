@@ -79,6 +79,26 @@ adb pull /sdcard/screen.png ./
 ./  当前文件夹下
 ```
 
+## 修改模拟器的hosts文件
+模拟器的host文件通过`adb pull`拉取到桌面，修改后通过`adb push` 上传到模拟器原来位置，因为 hosts 文件时只读的，需要通过`emulator -avd (your AVD name) -writable-system`的形式启动模拟器后对 hosts 文件进行修改[来源网址](https://blog.csdn.net/mq2553299/article/details/68065469)
+
+启动模拟器
+```
+cd ~/Library/Android/sdk/emulator //进入目标文件夹
+./emulator -list-avds //列出所有模拟器
+./emulator -avd Nexus_4_API_22 -writable-system //启动你想要修改的模拟器
+```
+
+打开另外一个窗口，修改文件
+```
+1.adb root  //root 运行
+2.adb remount  //可更改用户账户
+3.adb pull /system/etc/hosts ~/Desktop/hosts // 将hosts文件放在指定文件夹下（本文中放在桌面）
+4. 修改对应的hosts文件
+5.adb push ~/Desktop/hosts /system/etc/hosts //将修改完成的hosts文件放到模拟器中。
+6.shell cat /etc/hosts //查看host文件
+```
+
 ## Mac电脑不能使用adb功能
 项目已经安装了AndroidStudio，但是还不能使用adb，原因是没找到对应的路径,需要把`platform-tools`文件路径添加到PATH中。
 
