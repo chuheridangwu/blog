@@ -3,7 +3,6 @@
 
 ```kotlin
 implementation "androidx.viewpager2:viewpager2:1.0.0"
-implementation 'com.google.android.material:material:1.1.0'
 ```
 
 1. 在xml中，确认自己是否需要使用tablayout布局，可以不使用

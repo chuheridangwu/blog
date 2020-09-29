@@ -178,16 +178,6 @@ class SplashActivity : AppCompatActivity() {
 </activity>
 ```
 
-## 开发者经常遇到的问题
-### Cannot fit requested classes in a single dex file
-* 方法数量超出一个dex文件数量限制，在app的`build.gradle`文件中`defaultConfig`中添加
-```
-defaultConfig{
-    ... ...
-    multiDexEnabled true
- }
-```
-
 ### 隐藏顶部导航栏  supportActionBar?.hide()
 
 ### 刘海屏
@@ -223,26 +213,3 @@ private  String getRandomLengthName(String name){
 
 ### 查看图层
 点击AndroidStudio 顶部 `Tools` ,选中 `Layout Inspector`
-
----
-
-## 常见错误
-###  is not accessible from java.lang.Class android.app.AppComponentFactory
-原因是 activity 不是 public ，不能创建实例，class 前加 public就可以解决了
-
-## 不能打印过长的log
-当打印json数据的时候，经常只能打印一半，剩下的不能显示，是因为android开发工具的打印限制，
-使用下面方法进行循环打印即可
-
-```kotlin
-val tag = "LSG";
-var msg: String? = "$data"
-val max_str_length = 2001 - tag.length;
-                    //大于4000时
-while (msg?.length ?: 0 > max_str_length) {
-    Log.e(tag, msg?.substring(0, max_str_length));
-    msg = msg?.substring(max_str_length);
-     }
-//剩余部分
-Log.e(tag, msg);
-```
