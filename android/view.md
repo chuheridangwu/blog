@@ -16,6 +16,38 @@ imageView.setBackgroundColor(getResources().getColor(R.color.blue_color)); //设
 android:background="@android:color/transparent"
 ```
 
+## 设置透明
+`android:background="#CCFFFFFF"`,其中`FFFFFF`是白色颜色值，`CC`是代表透明度，可以根据以下的值进行改变
+```
+100% — FF
+95% — F2
+90% — E6
+85% — D9
+80% — CC
+75% — BF
+70% — B3
+65% — A6
+60% — 99
+55% — 8C
+50% — 80
+45% — 73
+40% — 66
+35% — 59
+30% — 4D
+25% — 40
+20% — 33
+15% — 26
+10% — 1A
+ 5% — 0D
+ 0% — 00 
+```
+
+使用16进制表示
+```
+tv.setBackgroundColor(0x66000000);
+0x（代表16进制）|66（透明度，0为完全透明，ff为不透明）|000000（颜色的16进制码）
+```
+
 * orientation: 选择滚动方向 horizontal 水平，默认垂直
 
 ## TextView
