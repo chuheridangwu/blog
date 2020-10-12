@@ -432,3 +432,47 @@ protected void onScrollChanged(int l, int t, int oldl, int oldt) {
     super.onScrollChanged(l, t, oldl, oldt);
 }
 ```
+
+## 设置全屏
+设置全屏有两种方式，
+
+第一种直接使用xml文件，在对应的activty中添加 对应的主题，注意： 必须继承自Activity,否则会造成崩溃
+```xml
+<activity
+    android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+    android:name=".ui.activity.BrowseActivity"></activity>
+```
+
+第二种，使用代码的方式,在创建的时候设置全屏
+```java
+@Override
+protected void onCreate(@Nullable Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    // 设置全屏
+    this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+    this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+            WindowManager.LayoutParams.FLAG_FULLSCREEN);
+            
+    setContentView(R.layout.activity_browse);
+}
+```
+
+## 禁止横屏
+1. 单个页面禁用横屏模式：
+在清单文件中加入 `android:screenOrientation="portrait"`
+
+```xml
+<activity
+    android:name=".activity.CalculateFreightActivity_"
+    android:screenOrientation="portrait" />
+```
+
+2. 使用代码进制横屏
+
+```java
+ @Override
+ protected void onCreate(@Nullable Bundle savedInstanceState) {
+     super.onCreate(savedInstanceState);
+     setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT); // 禁用横屏
+ }
+ ```

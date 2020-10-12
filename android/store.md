@@ -126,5 +126,66 @@ edit.commit();
 mSharedPreferences.getBoolean("state",false)
 ```
 
+## 存储对象时，如果需要转存对象
+```java
+// 调用方式
+List<Game> gameList = GsonUtil.getObjects(data, Game[].class);
+
+// 使用Gson进行解析List对象
+public static <T> ArrayList<T> getObjects(String s, Class<T[]> clazz) {
+    ArrayList<T> ts = new ArrayList<😠);
+    try {
+        T[] arr = new Gson().fromJson(s, clazz);
+        ts.addAll(Arrays.asList(arr));
+    } catch (Exception ignore) {
+    }
+    return ts;
+}
+```
+
+## 两个不同的实体类保存在一个数组中如何取
+两个不同的实体类实现一个接口，保存数据时保存的是两个不同的实体类，在获取数据的时候，需要先转成 HashMap ,判断 map 中是否包含某个类的字段，如果包含，就是某个类
+```java
+// 实体类
+public static class FeedsBean implements IBasePhotoInfo {
+    private String image_large;
+    private String image_thumb;
+}
+
+public static class ItemsBean implements IBasePhotoInfo {
+    private String thumbUrl;
+    private String smallThumbUrl;
+}
+
+// 读取
+public List<IBasePhotoInfo> getPhotos(String key){
+    String json = mSharedPreferences.getString(key,null);
+
+    List<IBasePhotoInfo> photos = new ArrayList<>();
+
+    // 定义转换类型
+    Type type = new TypeToken<List<HashMap>>(){}.getType();
+    List<HashMap> maps =mGson.fromJson(json, type);
+
+    for (HashMap map : maps) {
+        if (map.get("image_large") != null){
+            FeedsBean feedsBean = new FeedsBean();
+            feedsBean.setImage_large((String)map.get("image_large"));
+            feedsBean.setImage_thumb((String)map.get("image_thumb"));
+            photos.add(feedsBean);
+        }else if (map.get("smallThumbUrl") != null){
+            ItemsBean itemsBean = new ItemsBean();
+            itemsBean.setSmallThumbUrl((String)map.get("smallThumbUrl"));
+            itemsBean.setThumbUrl((String)map.get("thumbUrl"));
+            photos.add(itemsBean);
+        }
+    }
+    Log.d("TAG", "getPhotos: " + maps.toString());
+
+    return photos;
+}
+```
+
+
 ## 参考网址
 [Android-文件存储目录](https://cloud.tencent.com/developer/article/1551994)
