@@ -14,6 +14,8 @@ adb只是一套用于调试android系统的指令集合。有了这套指令集�
 | `adb shell reboot -p` | 关机 | -p 则是poweroff的意思 |
 | `adb shell` | 进入shell |  |
 | `adb root` | 获取root权限 | 进入shell里面，没有权限，有些文件夹是不允许你进入的 |
+| `adb kill-server` | 关闭adb |  |
+| `adb start-server` | 启动adb |  |
 
 ## 文件操作
 | 命令 | 作用 | 备注 |
@@ -39,7 +41,7 @@ adb只是一套用于调试android系统的指令集合。有了这套指令集�
 | `adb shell screencap -p /sdcard/screen.png` | 截屏 | 手机界面截屏 |
 | `adb shell screenrecord /sdcard/demo.mp4` | 录制屏幕 |  |
 | `adb shell input keyevent  键码（keyCode）` | 模拟手机按钮 | kesCode的值在`android.view.KeyEvent`文件中查看，按`command + shift + a 搜索 KeyEvent` |
-|  |  |  |
+
 
 
 

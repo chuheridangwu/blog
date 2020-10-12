@@ -39,3 +39,8 @@ while (msg?.length ?: 0 > max_str_length) {
 //剩余部分
 Log.e(tag, msg);
 ```
+
+> 调试时手机打开app一直显示waiting for debugger，进不去app界面
+
+重启手机
+
