@@ -29,6 +29,9 @@ android:background="@android:color/transparent"
 
 ## EditText
 * focusable   是否允许获取焦点
+* android:imeOptions="actionSearch"  设置确定按钮类型
+* android:inputType="text"    设置文本格式
+
 
 ##  代码设置视图宽高比
 因为获取的是int类型，需要转换成float类型进行计算，最后使用的是像素，需要计算结果/2，不知道为什么计算的还不是很准确
