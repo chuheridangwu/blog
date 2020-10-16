@@ -18,7 +18,8 @@
     * [Fragment](/android/ui/fragment)
     * [自定义控件](/android/ui/customview.md)
 * 第三方框架
-    * [第三方框架](android/thirdparty)
-    * [AdMob](android/admob1)
-    * [Retrofit](android/retrofit)
+    * [第三方框架](android/thirdparty/thirdparty)
+    * [AdMob](android/thirdparty/admob1)
+    * [Retrofit](android/thirdparty/retrofit)
+    * [BaseRecyclerViewAdapterHelper](android/thirdparty/BaseRecyclerView.md)
 * [常见错误](.android/../errorInfo.md)

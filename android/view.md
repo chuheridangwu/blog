@@ -367,6 +367,7 @@ CardView需要导入`implementation 'com.android.support:cardview-v7:28.0.0'`
 * cardUseCompatPadding: 设置默认分割线，背景色设置父类的背景颜色
 * cardCornerRadius: 设置圆角
 * cardBackgroundColor  背景颜色
+* cardElevation 底部阴影
 
 
 

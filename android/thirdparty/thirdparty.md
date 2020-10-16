@@ -400,132 +400,6 @@ class MainActivity : AppCompatActivity() {
 }
 ```
 
-##  BaseRecyclerViewAdapterHelper 基础adapter
-导入包
-```kotlin
-implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.4'
-
-allprojects {
-    repositories {
-        google()
-        jcenter()
-        maven { url "https://jitpack.io" }
-    }
-}
-```
-### 初始化
-`BaseQuickAdapter<T, VH>`为最基础的类型，直接使用`BaseQuickAdapter<T, VH>`即可简单快速实现一个Adapter：
-```java
-public class DemoAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
-
-    /**
-     * 构造方法，此示例中，在实例化Adapter时就传入了一个List。
-     * 如果后期设置数据，不需要传入初始List，直接调用 super(layoutResId); 即可
-     */
-    public DemoAdapter(list List<String>) {
-        super(R.layout.layout_demo, list);
-    }
-
-    /**
-     * 在此方法中设置item数据
-     */
-    @Override
-    protected void convert(@NotNull BaseViewHolder helper, @NotNull String item) {
-        helper.setText(R.id.tweetName, "This is an Item, pos: " + (helper.getAdapterPosition() - getHeaderLayoutCount()));
-    }
-}
-```
-
-### 添加点击事件
-```java
-// 设置点击事件
-adapter.setOnItemClickListener(new OnItemClickListener() {
-    @Override
-    public void onItemClick(@NonNull BaseQuickAdapter adapter, @NonNull View view, int position) {
-        Tips.show("onItemClick " + position);
-    }
-});
-```
-
-### 设置view中子view的点击事件,需要先注册点击控件
-```java
-// 先注册需要点击的子控件id（注意，请不要写在convert方法里）
-adapter.addChildClickViewIds(R.id.btn, R.id.iv_num_add, R.id.item_click);
-// 设置子控件点击监听
-adapter.setOnItemChildClickListener(new OnItemChildClickListener() {
-    @Override
-    public void onItemChildClick(@NonNull BaseQuickAdapter adapter, @NonNull View view, int position) {
-        if (view.getId() == R.id.btn) {
-            Tips.show("onItemChildClick " + position);
-        }
-    }
-});
-```
-### 加载更多
-`LoadMoreModule`获取更多数据的接口，需要先实现接口数据`public class LoadMoreAdapter extends BaseQuickAdapter<Status, BaseViewHolder> implements LoadMoreModule`
-```java
-/**
-    * 初始化加载更多
-    */
-private void initLoadMore() {
-    mAdapter.getLoadMoreModule().setOnLoadMoreListener(new OnLoadMoreListener() {
-        @Override
-        public void onLoadMore() {
-            request();
-        }
-    });
-    mAdapter.getLoadMoreModule().setAutoLoadMore(true);
-    //当自动加载开启，同时数据不满一屏时，是否继续执行自动加载更多(默认为true)
-    mAdapter.getLoadMoreModule().setEnableLoadMoreIfNotFullPage(false);
-}
-
-/**
-    * 请求数据
-    */
-private void request() {
-    new Request(pageInfo.page, new RequestCallBack() {
-        @Override
-        public void success(List<Status> data) {
-            mSwipeRefreshLayout.setRefreshing(false);
-            mAdapter.getLoadMoreModule().setEnableLoadMore(true);
-
-            if (pageInfo.isFirstPage()) {
-                //如果是加载的第一页数据，用 setData()
-                mAdapter.setList(data);
-            } else {
-                //不是第一页，则用add
-                mAdapter.addData(data);
-            }
-
-            if (data.size() < PAGE_SIZE) {
-                //如果不够一页,显示没有更多数据布局
-                mAdapter.getLoadMoreModule().loadMoreEnd();
-                Tips.show("no more data");
-            } else {
-                mAdapter.getLoadMoreModule().loadMoreComplete();
-            }
-
-            // page加一
-            pageInfo.nextPage();
-        }
-
-        @Override
-        public void fail(Exception e) {
-            Tips.show(getResources().getString(R.string.network_err));
-            mSwipeRefreshLayout.setRefreshing(false);
-            mAdapter.getLoadMoreModule().setEnableLoadMore(true);
-
-            mAdapter.getLoadMoreModule().loadMoreFail();
-        }
-    }).start();
-}
-```
-
-
-
-
-
-
 ## 项目中经常导入的包
 ```
 //viewPager2
@@ -562,7 +436,7 @@ implementation 'com.ksyun.media:libksyplayer-arm64:2.1.2'
 // 图片预览
 implementation 'com.github.chrisbanes:PhotoView:2.1.3'
 // 谷歌广告admob
-implementation 'com.google.android.gms:play-services-ads:19.1.0'
+implementation 'com.google.android.gms:play-services-ads:19.4.0'
 
 // 下拉刷新和recyclerview
 implementation 'androidx.recyclerview:recyclerview:1.1.0'
