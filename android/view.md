@@ -338,7 +338,7 @@ CardView需要导入`implementation 'com.android.support:cardview-v7:28.0.0'`
 
 
 
-## 使用代码创建View
+## 使用代码动态创建View
 ```java
 @NonNull
 @Override
@@ -352,6 +352,14 @@ public InnerHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
     iv.setScaleType(ImageView.ScaleType.CENTER);
     return new InnerHolder(iv);
 }
+
+// 动态添加view，假设使用的是RelativeLayout布局
+// 首先获取LayoutParams,然后添加相对布局的属性，之后给view重新设置LayoutParams
+RelativeLayout.LayoutParams layoutParams=  new RelativeLayout.LayoutParams(mAdView.getLayoutParams());
+layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+// 设置边距,需要是dp
+layoutParams.setMargins(0,0,0, SizeUtils.dip2px(getContext(),adHeight));
+mAdView.setLayoutParams(layoutParams);
 ```
 
 ## 单位转换工具类 px转dp
@@ -459,6 +467,41 @@ protected void onCreate(@Nullable Bundle savedInstanceState) {
     setContentView(R.layout.activity_browse);
 }
 ```
+
+如果在fragment中动态切换全屏和非全屏，使用添加和清除flags, 这样做会有一个问题，在切换时，因为状态栏的出现和隐藏，会造成界面跳动，这样给用户的体验不太好，使用透明的状态栏会友好一些。
+```java
+private void switchFullScreen(Fragment fragment){
+    //  设置是否是全屏,这样会有一个缺陷，切换fragment的时候界面出现跳动
+    if ((fragment instanceof HomeFragment)){
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+    }else {
+        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+    }
+}
+```
+
+设置透明状态栏，这样设置的意思是，把全部的界面都给activity使用，包括状态栏
+```java
+/**
+    * 设置状态栏透明
+    */
+public void setStatusBarTranslucent(Activity activity) {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+        Window window = activity.getWindow();
+        window.setNavigationBarColor(Color.BLACK);
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        View decorView = window.getDecorView();
+        int option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
+        decorView.setSystemUiVisibility(option);
+        //透明着色
+        window.setStatusBarColor(Color.TRANSPARENT);
+    }
+}
+```
+
+
 
 ## 禁止横屏
 1. 单个页面禁用横屏模式：

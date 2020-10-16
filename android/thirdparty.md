@@ -571,12 +571,14 @@ implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
 
 ## 导入本地library包
 
-第一步把第三方下载到本地，解压，看到library包
+1. 
+第一步把第三方下载到本地，解压，看到library包，依次选择 ** File > New > Import Module **，选中library包
 
+2. 
 接着修改项目中`settings.gradle` 内容，添加library
 ```
 include ':app', ':library'
 rootProject.name = "TaoBaoJava"
 ```
-
+3. 
 在`app/build.gradle` 下的 `dependencies` 中添加`implementation project(':library')`
