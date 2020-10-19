@@ -1,4 +1,12 @@
 # 常见问题
+
+> 打开项目一直卡顿，需要在编译前进入build.gradle文件中将`google()`修改代码
+
+```kotlin
+maven { url 'https://maven.aliyun.com/repository/public' }
+maven { url 'https://maven.aliyun.com/repository/google' }
+```
+
 >Cannot fit requested classes in a single dex file (# methods: 65600 > 65536)
 
 编译报错,方法数量超出一个dex文件数量限制,在app的build.gradle文件的defaultConfig中添加

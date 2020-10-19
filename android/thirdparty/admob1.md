@@ -3,11 +3,12 @@ admob是谷歌广告，分为横幅广告、插页式广告、原声广告、激
 
 广告主要显示过程是 注册、初始化、请求广告、显示。如果有业务需要在某个时间点进行实现，可以监听广告的每个过程
 
-实例id
+谷歌提供的测试id
 ```kotlin
 <!-- Sample AdMob App ID: ca-app-pub-3940256099942544~3347511713 -->
 横幅广告测试id： ca-app-pub-3940256099942544/6300978111
-插页式广告测试id：ca-app-pub-3940256099942544/1033173712 
+插页式广告测试id：ca-app-pub-3940256099942544/1033173712
+原生广告id： ca-app-pub-3940256099942544/2247696110 
 ```
 
 ## 导入包
@@ -20,7 +21,7 @@ admob是谷歌广告，分为横幅广告、插页式广告、原声广告、激
         <!-- Sample AdMob App ID: ca-app-pub-3940256099942544~3347511713 -->
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-xxxxxxxxxxxxxxxx~yyyyyyyyyy"/>
+            android:value="ca-app-pub-3940256099942544~3347511713"/>
     </application>
 </manifest>
 ```
@@ -36,7 +37,7 @@ override fun onCreate(savedInstanceState: Bundle?) {
 ```
 
 ## 横幅式
-横幅广告分为三种，普通横幅广告、自适应横幅广告、智能横幅广告
+横幅广告分为四种，普通横幅广告、自适应横幅广告、智能横幅广告和原生广告
 ### 自适应横幅广告
 1. 使用代码添加自适应横幅广告，宽高比的那种，横幅大小： 提供的宽度 x 自适应高度
 ```java
@@ -202,6 +203,46 @@ if (mInterstitialAd.isLoaded) { //
     Log.d("TAG", "The interstitial wasn't loaded yet.")
 }
 ```
+
+## 原生广告
+
+原生广告是一种跟原有布局相兼容的广告，自由度比较高，可以自己定制模板，也可以使用谷歌提供的模板。[点击跳转到下载地址](https://github.com/googleads/googleads-mobile-android-native-templates)
+
+谷歌提供的模板有两种，一个小的横幅模板`@layout/gnt_small_template_view`，一个大的正方形模板`@layout/gnt_medium_template_view`，适合放在启动页或者其他空白处较多的地方。
+
+布局文件，使用`TemplateView`显示资源
+```java
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <!--  This is your template view 加载小图 -->
+    <com.google.android.ads.nativetemplates.TemplateView
+        android:id="@+id/my_template"
+    app:gnt_template_type="@layout/gnt_small_template_view" 
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" />
+</LinearLayout>
+```
+
+加载数据
+```java
+AdLoader adLoader = new AdLoader.Builder(getContext(), "ca-app-pub-3940256099942544/2247696110")
+        .forUnifiedNativeAd(unifiedNativeAd -> {
+            NativeTemplateStyle styles = new
+                    NativeTemplateStyle.Builder().withMainBackgroundColor(new ColorDrawable(0x03DAC5)).build();
+            TemplateView template = baseViewHolder.getView(R.id.my_template);
+            template.setStyles(styles);
+            template.setNativeAd(unifiedNativeAd);
+        })
+        .build();
+
+adLoader.loadAd(new AdRequest.Builder().build());
+```
+
 
 ## 加载失败原因
 | errorcode | 值 | 原因 |

@@ -22,4 +22,4 @@
     * [AdMob](android/thirdparty/admob1)
     * [Retrofit](android/thirdparty/retrofit)
     * [BaseRecyclerViewAdapterHelper](android/thirdparty/BaseRecyclerView.md)
-* [常见错误](.android/../errorInfo.md)
+* [常见错误](/android/errorInfo.md)

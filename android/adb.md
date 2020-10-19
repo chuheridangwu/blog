@@ -74,11 +74,14 @@ startActivity(intent)
 ```
 
 ## 手机界面截屏拉取到本地文件夹
+手机相册的图片路径`/sdcard/DCIM`、相机照片路径`/sdcard/DCIM/Camera` 、截屏路径：`/sdcard/DCIM/Screenshots`
 ```kotlin
 adb shell screencap -p /sdcard/screen.png
 adb pull /sdcard/screen.png ./
 /sdcard/screen.png  手机文件路径
-./  当前文件夹下
+./ :  表示当前文件夹下
+
+adb pull /sdcard/DCIM/Screenshots/  : 会直接将文件拉取到本地当前路径下
 ```
 
 ## 修改模拟器的hosts文件
