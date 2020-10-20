@@ -7,6 +7,7 @@
 * [Linux](/liunx/)
 * [Photoshop](photoshop/)
 * [kotlin](kotlin/)
+* [Web](web/)
 * 杂货铺
     * [调试技巧](live/)
     * [docsify](docsify)
