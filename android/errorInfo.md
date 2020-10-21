@@ -52,3 +52,14 @@ Log.e(tag, msg);
 
 重启手机
 
+> android10 模拟器读取相机图片时报错：
+FileNotFoundException(/storage/emulated/0/DCIM/Camera/xx.jpg: open failed: EACCES (Permission denied))
+
+在下载图片前期已经申请了存储权限，代码中也动态申请过权限，报错的原因是因为在iOS10中，**必须要做分区存储的适配**
+```xml
+暂时性的解决方案，暂时不做分区存储：
+AndroidManifest.xml 中 配置requestLegacyExternalStorage 即可
+
+<application
+        android:requestLegacyExternalStorage="true">  
+```

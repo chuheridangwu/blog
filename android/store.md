@@ -4,6 +4,13 @@
 ## 内部存储
 内部存储的路径`data/data/包名`,**如果你想将文件存储于内部存储中，那么文件默认只能被你的应用访问到**当一个应用卸载之后，内部存储中的这些文件也被删除。对于这个内部目录，用户是无法访问的，除非获取root权限。
 
+**在Android10中，需要进行分区存储，如果不想使用分区存储,需要在`AndroidManifest.xml`配置`requestLegacyExternalStorage`**
+```xml
+AndroidManifest.xml 中 配置requestLegacyExternalStorage即可
+<application
+        android:requestLegacyExternalStorage="true">
+```
+
 ### 获取内部存储路径
 * `context.getFilesDir()`获取当前项目文件路径，可以在设置中进行清除
 * `context.getCacheDir()`获取缓存文件路径，系统根据存储情况进行清理

@@ -2,7 +2,11 @@
 
 html是超文本标记语言，超文本指的是`超链接`,标记指的是`标签`，文件的扩展名为html或者htm
 
-[点击查看HTML5标签属性](https://www.runoob.com/tags/html-reference.html)
+[点击查看HTML5标签列表](https://www.runoob.com/tags/html-reference.html)
+
+[点击查看HTML5全局属性](https://www.runoob.com/tags/ref-standardattributes.html),全局属性是每个标签都可以使用的属性
+
+[点击查看HTML5事件属性](https://www.runoob.com/tags/ref-eventattributes.html)
 
 ## html基础结构
 

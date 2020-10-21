@@ -487,6 +487,18 @@ protected void onScrollChanged(int l, int t, int oldl, int oldt) {
     android:name=".ui.activity.BrowseActivity"></activity>
 ```
 
+```xml
+<!-- 全屏显示页面 -->
+<activity
+    android:name=".ui.FullScreenActivity"
+    android:screenOrientation="portrait"
+    android:theme="@style/FullScreenTheme">
+    <meta-data
+        android:name="android.notch_support"
+        android:value="true" />
+</activity>
+```
+
 第二种，使用代码的方式,在创建的时候设置全屏
 ```java
 @Override
@@ -533,7 +545,6 @@ public void setStatusBarTranslucent(Activity activity) {
     }
 }
 ```
-
 
 
 ## 禁止横屏
