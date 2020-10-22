@@ -2,6 +2,7 @@
 * [HTML](/web/html.md) 
 * CSS
     * [基础语法](/web/css/css.md) 
-    * [选择器](/web/css/selector.md)
+    * [CSS基础](/web/css/selector.md)
+    * [CSS布局](/web/css/layout.md)
 * JS
 

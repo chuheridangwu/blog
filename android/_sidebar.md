@@ -1,8 +1,9 @@
 * [回到首页](/)
 * AndroidStudio开发工具
     * [AndroidStudio](android/androidstudio) 
-    * [ADB](android/adb.md) 
     * [系统权限](/android/authorith.md)
+    * [ADB](android/adb.md) 
+    * [APK](/android/apk.md)
 * [Activity](android/activity)
 * [Intent](android/intent)
 * [本地存储](android/store.md)
@@ -22,4 +23,7 @@
     * [AdMob](android/thirdparty/admob1)
     * [Retrofit](android/thirdparty/retrofit)
     * [BaseRecyclerViewAdapterHelper](android/thirdparty/BaseRecyclerView.md)
+* Kotlin
+    * [简介](/android/kotlin/kotlin简介.md)
+    * [String](/android/kotlin/string.md)
 * [常见错误](/android/errorInfo.md)

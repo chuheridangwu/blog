@@ -352,7 +352,7 @@ box-shadow: 1px 2px 3px 0 gray
 ```
 
 ### 行高和垂直对齐 vertical-align
-![](/web/imgs/vertical.png)
+![](../imgs/vertical.png)
 
 ### 值和单位
 关键字： initial/inherit
