@@ -81,10 +81,18 @@ column0 | column1 |
 
 
 ## 反编译
-使用 apktool 工具对 apk 包进行反编译，我们需要使用到的工具有三个
+使用 apktool 工具对 apk 包进行反编译，目前我掌握的方式有两种
 
+### 第一种方式
+* `jadx`:  下载`jadx`,[点击下载](https://github.com/skylot/jadx/releases)
+
+apk包后缀改成`.zip`，解压之后会看到`classes.dex`文件
+下载文件之后解压,运行bin文件夹下的`jadx-gui`文件，把`classes.dex`文件放到对应的界面中，可以直接查看。
+
+
+### 第二种方式
 * `apktool` : 获取资源文件，提取图片和布局文件， [点击下载](https://ibotpeaches.github.io/Apktool/install/)
-* `dex2jar` : 将apk包反编译成java源码 (classes.dex文件转化成jar文件) [点击下载](https://sourceforge.net/projects/dex2jar/files/)
+* `dex2jar` : 将apk包反编译成java源码 (classes.dex文件转化成jar文件) [点击下载](https://github.com/pxb1988/dex2jar/releases)
 * `JD-GUI` : 查看apk总 classes.dex转化出来的jar文件，即源码文件 [点击下载](http://java-decompiler.github.io/)
 
 ### apktool
@@ -107,6 +115,9 @@ chmod a+x apktool.jar
 4. 如果解压成功，会出现`classes-dex2jar.jar`文件，运行`JD-GUI`查看该文件即可
 
 >如果出现 Permission Denied 异常，是因为当前运行的文件缺少权限，一般报哪个文件就修改对应文件权限即可 `chmod a+x ./dex2jar-2.0/d2j_invoke.sh`
+
+如果出现`Detail Error Information in File ./classes-error.zip`
+`Please report this file to http://code.google.com/p/dex2jar/issues/entry if possible.` 的错误提示，是因为下载的dex2版本不是最新版本.   [点击跳转到最新版本](https://github.com/pxb1988/dex2jar/releases)
 
 
 ### JD-GUI

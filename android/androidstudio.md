@@ -1,5 +1,5 @@
 # AndroidStudio
-AndroidStudio是安卓目前主流的开发工具，这里主要说明AndroidStudio在使用过程中一些有助于提高我们工作效率的使用技巧
+AndroidStudio是安卓目前主流的开发工具，这里主要说明AndroidStudio在使用过程中一些有助于提高我们工作效率的使用技巧，Androidstudio工具可以直接查看`dex`和`apk`文件
 
 ## 快捷键
 | 快捷键                           | 含义                                         | as路径                                       |
