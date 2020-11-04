@@ -32,7 +32,6 @@ public class DemoAdapter extends BaseQuickAdapter<ItemModel, BaseViewHolder> {
     protected void convert(@NotNull BaseViewHolder baseViewHolder, ItemModel itemModel) {
         ((TextView)baseViewHolder.findView(R.id.text)).setText(itemModel.title);
     }
-
 }
 ```
 
@@ -73,7 +72,6 @@ public class MainActivity extends AppCompatActivity {
         mAdapter.setList(datas);
         //mAdapter.addData(datas);用来实现添加数据，一般在获取到加载更多数据的使用
     }
-
 }
 ```
 
@@ -97,6 +95,7 @@ mAdapter.setOnItemChildClickListener(new OnItemChildClickListener() {
 ```
 
 1. 使用`LoadMoreModule`接口实现加载更多数据，adapter实现`public class LoadMoreAdapter extends BaseQuickAdapter<Status, BaseViewHolder> implements LoadMoreModule`
+
 ```java
 /**
     * 初始化加载更多
@@ -159,6 +158,7 @@ private void request() {
 ## 加载不同的界面(简单的分区，不适用于复杂界面)
 
 ### RecyclerView加载不同视图的原理
+
 RecyclerView如果想要加载不同的view，必须要知道在什么时候，加载什么样的视图，如果继承`RecyclerView.Adapter`,需要重写 `getItemViewType` 和 `onCreateViewHolder` 两个方法，在`getItemViewType`方法中返回类型，在`onCreateViewHolder` 方法中根据类型创建不同的视图
 
 举个栗子：
@@ -264,7 +264,6 @@ public class DemoAdapter extends BaseSectionQuickAdapter<ItemModel, BaseViewHold
     protected void convert(@NotNull BaseViewHolder baseViewHolder, ItemModel itemModel) {
         ((TextView)baseViewHolder.findView(R.id.text)).setText(itemModel.title);
     }
-
 }
 ```
 
@@ -313,7 +312,5 @@ public class MainActivity extends AppCompatActivity {
 
         mAdapter.setList(datas);
     }
-
-
 }
 ```
