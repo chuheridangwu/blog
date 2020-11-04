@@ -6,9 +6,8 @@
 * [Shell](shell/)
 * [Linux](/liunx/)
 * [Photoshop](photoshop/)
-* [kotlin](kotlin/)
 * [Web](web/)
-* 杂货铺
+* 计算机基础
     * [调试技巧](live/)
-    * [docsify](docsify)
+    * [docsify](live/docsify.md)
     * [Wireshark](live/Wireshark.md)

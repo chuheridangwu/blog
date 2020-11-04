@@ -1,6 +1,4 @@
 # CSS
- CSS 一周学习挑战2020年从10月21号正式开始。
- [css练习的网站](http://zh.learnlayout.com/)
 
  [点击查看W3c中的css属性介绍](https://www.w3school.com.cn/cssref/index.asp#font)
 

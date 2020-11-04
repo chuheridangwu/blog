@@ -1,13 +1,14 @@
 # CSS 基础
 
 
-## 基础选择器
+## 选择器
 
 [点击查看所有的选择器](https://www.w3school.com.cn/cssref/css_selectors.asp)
 
-选择器优先级
-!important > 内联样式 > ID选择器 > 类选择器、属性选择器、伪类选择器 > 标签选择器、关系选择器、伪元素选择器 > 通配符选择器 
-column0 | column1
+### 选择器优先级
+!important > 内联样式 > ID选择器 > 类选择器、属性选择器、伪类选择器 > 标签选择器、关系选择器、伪元素选择器 > 通配符选择器
+
+选择器 | 优先级
 ------- | -------
 !important | 最高
 内联样式 | 1000
@@ -26,7 +27,7 @@ ID选择器 | 100
 * 按照属性
 * 按照 DOM 数中的位置
  
-通配选择器 
+### 通配选择器 
 
 ```html
 <style>
@@ -35,7 +36,7 @@ ID选择器 | 100
     }
 </style>
 ```
-标签选择器
+### 标签选择器
 ```html
 <h1>This is heading</h1>
 <p>this is some paragraph.</p>
@@ -51,7 +52,7 @@ ID选择器 | 100
 </style>
 ```
 
-id选择器 （id是唯一的）
+### id选择器 （id是唯一的）
 ```html
 <head>
     <h1 id="logo">
@@ -68,7 +69,8 @@ id选择器 （id是唯一的）
 </style>
 ```
 
-类选择器 (类可以是多个)
+### 类选择器 (类可以是多个)
+
 ```html
 <ul>
     <li class="done">Learn HTML</li>
@@ -84,7 +86,8 @@ id选择器 （id是唯一的）
 </style>
 ```
 
-属性选择器 （标签中的属性）
+### 属性选择器 （标签中的属性）
+
 ```html
 <p>
     <label>用户名:</label>
@@ -130,25 +133,24 @@ id选择器 （id是唯一的）
 </style>
 ```
 
-伪类选择器 （动态伪类和结构特性伪类）
+### 伪类选择器 （动态伪类和结构特性伪类）
 
-动态伪类，比如`a`标签，可以通过不同的状态类来显示
+动态伪类，比如`a`标签，可以通过不同的状态类来显示。[点击查看所有伪类选择器](https://www.runoob.com/css/css-pseudo-classes.html)
 ```html
 <a>example.com</a>
 
 <style>
-    a:link{
-        color: black; 
-    }
-
-    a:visited{
-        color: gray;
-    }
-    
-    a:hover{
-        color: orange;
-    }
+    a:link {color:#FF0000;} /* 未访问的链接 */
+    a:visited {color:#00FF00;} /* 已访问的链接 */
+    a:hover {color:#FF00FF;} /* 鼠标划过链接 */
+    a:active {color:#0000FF;} /* 已选中的链接 */
 </style>
+
+注意： 在CSS定义中，a:hover 必须被置于 a:link 和 a:visited 之后，才是有效的。
+
+注意： 在 CSS 定义中，a:active 必须被置于 a:hover 之后，才是有效的。
+
+注意：伪类的名称不区分大小写。
 ```
 
 结构特性伪类
