@@ -1,9 +1,9 @@
 # 字符串
-输出字符串： `print "My name is %s and weight is %d kg!" % ('Zara', 21)`
+**输出字符串： `print "My name is %s and weight is %d kg!"%('Zara', 21)`**
 
 字符串的常见操作，初始化、输出、拼接、插入、删除、比较、长度、查找、替换、部分替换、大小写转换 等等
 
-> 三个引号
+> 字符串换行
 
 三个引号允许一个字符串跨多行，字符串中可以包含换行符、制表符以及其他特殊字符。
 ```python
@@ -197,4 +197,147 @@ controls = ("UIImageView","UILabel","UIView","UIScrollView","UIButton")
 str = "UILable"
 if str in controls:
     print('含有str')
+```
+
+## 字符串转字典 
+字符串转字典，使用系统内置函数`eval()`、`json.loads()`、`ast.literal_eval()`
+```python
+# eval()
+>>> str1 = "{'username':'admin', 'password':123456}"
+>>> dict1 = eval(str1)
+>>> print(type(dict1))
+<class 'dict'>
+>>> print(dict1)
+{'username': 'admin', 'password': 123456}
+
+# json.loads()
+>>> str2 = '{"username":"admin", "password":123456}'
+>>> import json
+>>> dict2 = json.loads(str2)
+>>> print(type(dict2))
+<class 'dict'>
+>>> print(dict2)
+{'username': 'admin', 'password': 123456}
+
+
+# ast.literal_eval(),需要导入import ast库，跟eval()的区别在于它会判断计算后的结果是不是合法的python类型，如果是则进行运算，否则就不进行运算。相比 eval() 函数， ast.literal_eval() 更加安全，更被 推荐使用
+>>> import ast
+>>> str3 = "{'username':'admin', 'password':123456}"
+>>> dict3 = ast.literal_eval(str3)
+>>> print(type(dict3))
+<class 'dict'>
+>>> print(dict3)
+{'username': 'admin', 'password': 123456}
+```
+
+## 字符串转数组
+字符串转数组,系统有多个内置函数 `list()`、`eval()`、`json.loads()`、`split()` 或者使用正则 `re库`
+
+```python
+# list()
+>>> str1 = "abcdefg"
+>>> list1 = list(str1)
+
+# eval
+>>> str2 = "['aaa', 'bbb', 'ccc', 'ddd']"
+>>> list2 = eval(str2)
+
+# json.loads(),需要导入json
+>>> import json
+>>> str3 = '["aaa", "bbb", "ccc", "ddd"]'
+>>> list3 = json.loads(str3)
+
+# split()
+>>> str4 = "username=admin&passsword=123456"
+>>> list4 = str4.split("&")
+
+# 正则 导入re库
+>>> import re
+>>> str5 = "username=admin&passsword=123456"
+>>> list5 = re.split("&|=", str5)
+>>> print(type(list5))
+<class 'list'>
+>>> print(list5)
+['username', 'admin', 'passsword', '123456']
+```
+
+## 数组转字符串
+数组转字符串，可以使用多个内置函数：`str()`、`join()`、`join.dumps()`
+```python
+# str() 注意，转换之后，双引号会变为单引号
+# 注意，转换之后，双引号会变为单引号
+>>> list1 = ["aaa", 123, 'ccc', True]
+>>> str1 = str(list1)
+>>> print(str1)
+['aaa', 123, 'ccc', True]
+
+# join()
+>>> list3 = ['username=admin', 'passsword=123456']
+>>> str3 = "&".join(list3)
+>>> print(str3)
+username=admin&passsword=123456
+
+# join.dumps(),需要导入json库
+>>> import json
+>>> list4 = ['username=admin', 'passsword=123456']
+>>> str4 = json.dumps(list4)
+>>> print(type(str4))
+<class 'str'>
+>>> print(str4)
+["username=admin", "passsword=123456"]
+```
+
+## 字典转字符串
+字典转字符串，使用内置函数`str()`、`json.dumps()`
+```python
+# str()
+>>> dict1 = {'username': 'admin', 'password': 123456}
+>>> str1 = str(dict1)
+>>> print(type(str1))
+<class 'str'>
+>>> print(str1)
+{'username': 'admin', 'password': 123456}
+
+# json.dumps()
+>>> dict2 = {'username': 'admin', 'password': 123456}
+>>> import json
+>>> str2 = json.dumps(dict2)
+>>> print(type(str2))
+<class 'str'>
+>>> print(str2)
+{"username": "admin", "password": 123456}
+```
+
+## 字典转数组
+字典转数组，使用内置函数`list()`
+
+```python
+>>> dict1 = {"a": 1, "b": "2", "c": True}
+>>> list1 = list(dict1.keys())
+>>> print(list1)
+['a', 'b', 'c']
+>>> list2 = list(dict1.values())
+>>> print(list2)
+[1, '2', True]
+```
+
+## 数组转字典
+数组转字符串分两种形式，一种是将嵌套数组转为字典`dict()`，一种是将2个数组转换成字典`zip()`
+```python
+# dict() 嵌套数组转换成字典
+>>> list3 = [['a', 1], ['b', '2'], ['c', True]]
+>>> dict2 = dict(list3)
+>>> print(type(dict2))
+<class 'dict'>
+>>> print(dict2)
+{'a': 1, 'b': '2', 'c': True}
+
+# zip() 两个数组转换成字典，两个数组长度不一样时，也可以转换，多出的元素不展示
+>>> list1 = ["a", 'b', "c", 'd', "f"]
+>>> list2 = ["1", '2', "3", '4', "5"]
+>>> dict1 = dict(zip(list1,list2))
+>>> print(type(dict1))
+<class 'dict'>
+>>> print(dict1)
+{'a': '1', 'b': '2', 'c': '3', 'd': '4', 'f': '5'}
 ```
