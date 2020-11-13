@@ -1,6 +1,7 @@
 # JavaScript
 JavaScript 因为也是一门语言，所以学起来应该也是快的。基础变量什么的不用学习，直接学习函数和类
 
+ HTML是逐行解析的，所以在使用JavaScript时，需要将引用的JavaScript放在body结束标签前面，或者使用`window.load=function(){}`的方式来进行执行，这段代码是告诉浏览器在界面加载完成之后进行执行里面的代码
 
 ## 数据类型转换
 
@@ -42,6 +43,8 @@ let num = Number(string)
 ```
 
 ## 数组
+
+数组的初始化`var list = new Array();`
 
 [点击跳转到菜鸟教程查看](https://www.runoob.com/jsref/jsref-obj-array.html)
 
@@ -111,5 +114,36 @@ function sum(){
     let a = arguments[0]
     let b = arguments[1]
     return a + b
+}
+```
+
+## Javascript 中调用网络请求
+
+```javascript
+var xhr = new XMLHttpRequest();
+url = "http://www.baidu.com"
+xhr.open("GET", url, true);
+xhr.send();
+
+// 加载成功
+xhr.onload = function () {
+    // 输出接收到的文字数据
+    console.log(xhr.responseText)
+    // 解析成json数据
+    var json = JSON.parse(xhr.responseText);
+    var list = json["data"]["images"]
+    // 根据类名查询到对应的节点，因为类名是可以有多个重复的，所以获取的是一个数组
+    var body = document.getElementsByClassName("content")[0];
+    for (var dict of list) {
+        // 生成节点，把节点添加到content节点下
+        var img = document.createElement("img")
+        body.appendChild(img)
+    }
+
+}
+
+// 加载失败 
+xhr.onerror = function () {
+    document.getElementById("demo").innerHTML="请求出错";
 }
 ```
