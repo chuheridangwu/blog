@@ -56,11 +56,116 @@ let num = Number(string)
 `push()` | 数组的末尾添加新的元素 | ```ary.push("a")```
 `reverse()` | 数组内的元素顺序反转排序 | ```ary.reverse()```
 `shift()` | 删除数组的第一个元素 | ```ary.shift()```
-`slice()` | 从数组中选择元素 | ```ary.aplice(1,3) // 取数组内1-2的元素```
 `sort()` | 数组排序，可安装字母、数字 进行升序或者降序, | ```ary.sort(function(a,b){return a- b}) //升序排列数组 ```
 `splice()` | 数组的第二个位置添加一个元素 | ```fruits.splice(2,0,"Lemon","Kiwi");```
 `toString()` | 数组转换成字符串 | ```ary.toString()```
 `unshift()` | 数组的开头添加新元素 | ```ary.unshift("a")```
+
+遍历数组
+
+```javascript
+let ary = [1,2,3,4,5]
+
+for (let key of ary) {
+    console.log(key);
+}
+
+// value ：数组内的值  index: 下标索引 ary:数组本身
+ary.forEach(function callback(value,index,ary){
+    console.log(value,index,ary);
+})
+
+// 自己写一个forEach
+Array.prototype.myEach = function(fn){
+    for (let i = 0; i < this.length; i++) {
+        fn(this[i],i,this)
+    }
+}
+```
+
+ 查找数组中的某个元素，如果有，返回对应下标，没有则返回-1
+```javascript
+let ary = [1,2,3,4,5]
+console.log(ary.indexOf(3));
+
+// findIndex 返回的是下标
+let index = ary.findIndex(function callback(value,index,ary){
+    if (value == 2) {
+        return true
+    }
+})
+
+// find 返回的是value，找不到返回undefined 
+let value = ary.find(function callback(value,index,ary){
+    if (value == 2) {
+        return true
+    }
+})
+
+```
+
+根据条件查找数组内的元素，并且返回一个新的数组
+```javascript
+let ary = [1,2,3,4,5]
+
+// filter 返回的是一个新的数组
+let ary1 = ary.filter(function callback(value,index,ary){
+    if(value % 2 == 0){
+        return true
+    }
+})
+
+slice() 方法返回一个新的数组对象，这一对象是一个由 begin 和 end 决定的原数组的浅拷贝（包括 begin，不包括end）。原始数组不会被改变
+const animals = ['ant', 'bison', 'camel', 'duck', 'elephant'];
+
+console.log(animals.slice(2));
+// expected output: Array ["camel", "duck", "elephant"]
+
+console.log(animals.slice(2, 4));
+// expected output: Array ["camel", "duck"]
+
+console.log(animals.slice(1, 5));
+// expected output: Array ["bison", "camel", "duck", "elephant"]
+
+
+splice() 方法通过删除或替换现有元素或者原地添加新的元素来修改数组,并以数组形式返回被修改的内容。此方法会改变原数组。第二个数字是0时是添加，>0时是替换
+const months = ['Jan', 'March', 'April', 'June'];
+months.splice(1, 0, 'Feb');
+// inserts at index 1
+console.log(months);
+// expected output: Array ["Jan", "Feb", "March", "April", "June"]
+
+months.splice(4, 1, 'May');
+// replaces 1 element at index 4
+console.log(months);
+// expected output: Array ["Jan", "Feb", "March", "April", "May"]
+```
+
+排序
+```javascript
+let ary = [1,3,2,4,5]
+
+//  使用sort方法默认是正序
+ary.sort()
+
+//  根据 a 和 b的值确定倒序还是正序
+ary.sort(function (a,b){
+    if (a > b) {
+        return -1
+    } else  if (a < b) {
+        return 1
+    }{
+        return 0
+    }
+})
+
+// 升序a-b 降序b-a 
+ary.sort(function (a,b){
+    return a-b
+})
+```
+
+
 
 ## 字符串
 
@@ -91,6 +196,12 @@ toLocaleLowerCase() | 根据本地主机的语言环境把字符串转换为小�
 toLocaleUpperCase() | 根据本地主机的语言环境把字符串转换为大写。
 valueOf() | 返回某个字符串对象的原始值。
 toString() | 返回一个字符串。
+
+```javascript
+// ES6中，字符串可以使用`来引用
+let name ="la"
+let string = `我的名字是${name}`
+```
 
 ## 函数
 
