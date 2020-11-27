@@ -6,5 +6,6 @@
     * [CSS布局](/web/css/layout.md)
     * [CSS动画](/web/css/animation.md)
 * JavaScript
-    * [javaScript基础](/web/js/JavaScript.md) 
+    * [javaScript基础](/web/js/JavaScript.md)
+    * [DOM Document](/web/js/Document.md) 
 

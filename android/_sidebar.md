@@ -14,7 +14,7 @@
     * [Layout布局](android/layout/layout)
     * [LinearLayout 线性布局](android/layout/linearlayout)
     * [RelativeLayout 相对布局](android/layout/relativelayout)
-    * [ConstranintLayout 约束布局](android/layout/constranintlayout)
+    * [ConstraintLayout 约束布局](android/layout/constranintlayout)
 
 * View
     * [常用View属性](android/view)

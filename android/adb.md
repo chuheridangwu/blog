@@ -105,7 +105,7 @@ cd ~/Library/Android/sdk/emulator //进入目标文件夹
 ```
 
 ## Mac电脑不能使用adb功能
-项目已经安装了AndroidStudio，但是还不能使用adb，原因是没找到对应的路径,需要把`platform-tools`文件路径添加到PATH中。
+项目已经安装了AndroidStudio，但是还不能使用adb，原因是没找到对应的路径,需要把`platform-tools`文件路径添加到PATH中。由于在`macOS Catalina`系统中，`shell`文件更换成`zsh`文件进行启动。使用`cat /etc/shells`查看 Mac电脑中的所有的shell文件路径，`echo $SHELL`查看当前使用的shell路径，[点击查看苹果文档](https://support.apple.com/en-us/HT208050)
 
 1.在终端输入：`echo $HOME`。进入home目录下，及/Users/songyan
 2.继续输入：`touch .bash_profile`，创建.bash_profile文件
