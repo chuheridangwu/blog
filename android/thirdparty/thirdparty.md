@@ -456,3 +456,21 @@ rootProject.name = "TaoBaoJava"
 ```
 3. 
 在`app/build.gradle` 下的 `dependencies` 中添加`implementation project(':library')`
+
+4. 导入本地包如果出现`rootProject.ext.minSdkVersion`,是因为多个导入的 jar 包需要共享数据，在根目录下的`build.gradle`文件中添加
+
+```
+ext {
+    compileSdkVersion = 26
+    buildToolsVersion = "28.0.3"
+    supportSdkVersion = "26.0.1"
+    minSdkVersion = 19
+    targetSdkVersion = 26
+    liteavSdk="com.tencent.liteav:LiteAVSDK_Player:latest.release"
+    imSdk = 'com.tencent.imsdk:imsdk:4.9.1'
+    versionCode = 1
+    versionName = "1.1.0"
+    ndkAbi = 'armeabi'//,'armeabi-v7a', 'arm64-v8a'
+    aekit_version = '1.0.10-cloud'
+}
+```
