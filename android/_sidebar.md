@@ -17,7 +17,7 @@
     * [ConstraintLayout 约束布局](android/layout/constranintlayout)
 
 * View
-    * [常用View属性](android/view)
+    * [常用View属性](android/ui/view)
     * [RecyclerView](/android/ui/recyclerview)
     * [ViewPage2](/android/ui/viewpage2)
     * [Fragment](/android/ui/fragment)

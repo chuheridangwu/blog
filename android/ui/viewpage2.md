@@ -143,3 +143,17 @@ class MainViewAdapter(list:MutableList<MutableList<PhotoModel>>,pContext: Contex
           }
       });
 ```
+
+## 获取ViewPage2当前显示的View
+在 adapter 中对当前的itemView设置tag，在 activity 中通过查询 tag 获取到当前的view
+```java
+
+//  设置ItemView的tag
+@Override
+protected void convert(@NotNull BaseViewHolder baseViewHolder, IBasePhotoInfo feedsBean) {
+    baseViewHolder.itemView.setTag(baseViewHolder.getAdapterPosition());
+}
+
+// 根据tag获取到当前的View
+View view = mViewPager.findViewWithTag(mViewPager.getCurrentItem());
+```

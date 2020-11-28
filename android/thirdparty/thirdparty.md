@@ -441,6 +441,9 @@ implementation 'com.google.android.gms:play-services-ads:19.4.0'
 // 下拉刷新和recyclerview
 implementation 'androidx.recyclerview:recyclerview:1.1.0'
 implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
+
+// 集成腾讯播放器
+implementation 'com.tencent.liteav:LiteAVSDK_Player:latest.release'
 ```
 
 ## 导入本地library包
