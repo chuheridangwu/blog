@@ -1,6 +1,9 @@
 # APK的打包 与 反编译
+apk的本质是一个压缩包，查看一个文件属于什么类型可以**通过查看文件的前几个字节进行判断**。比如JPRG图片的文件头是FFD8FF PNG图片的文件头是89504E47，ZIP文件头是504B0304
 
 ## 打包apk
+打包成apk有两种方式，一种是通过Android studio 工具进行打包，另一种是通过Gradle进行打包
+
 ###  使用Android studio工具打包
 1. 选择Build ->Generate Signed Bundle/APK
 2. 使用命令行生成keystore文件，生成过程中可能会遇到报错 密码库格式不对错误
@@ -13,7 +16,7 @@
 JKS 密钥库使用专用格式。建议使用 "keytool -importkeystore -srckeystore E:\androidstudio\androidstudio_work\CommonDemo\app\fast_keystore.jks -destkeystore E:\androidstudio\androidstudio_work\CommonDemo\app\fast_keystore.jks -deststoretype pkcs12" 迁移到行业标准格式 PKCS12。
 ```
 
-### 使用命令行工具生成keystore文件
+#### 使用命令行工具生成keystore文件
 ```
 keytool -genkey -alias testalias -keypass 123456 -keyalg RSA -keysize 2048 -validity 36500 -keystore /Users/mlive/Desktop/test.keystore -storepass 123456 
 点击确定之后会出现让你输入详细信息的，可以直接回车，最后确定时输入y, keypass和storepass两个密码需要一致，不然打包会有问题
@@ -61,7 +64,7 @@ column0 | column1 |
         }
   ```
 3. 配置完成之后，选择右侧Gradle工具->项目名称->app->Tasks->build. 双击`assembleAndroidTest`是只打测试包，双击`assemble`测试包和正式包都会打，打包之前双击`clean`,清除掉之前的打包信息
-### 多个渠道包
+#### 使用Gradle打多个渠道包
 1. 编辑 `app/build.gradle`文件，在`android`闭包中添加闭包内容 添加以下内容
 ```kotlin
    flavorDimensions "default"
@@ -78,6 +81,28 @@ column0 | column1 |
 ```
 2. 配置完成之后，选择右侧Gradle工具->项目名称->app->Tasks->build,可以看到新增了`assembleBaidu` 和`assembleQihoo`两个渠道
 3. 如果是需要差异化的内容，可以在src目录下新建一个baidu文件夹，文件夹下增加res文件和java文件来进行区分
+
+## 代码混淆
+打包的时候为了避免别人轻易破解我们的apk，通常的做法是加上代码混淆，注意混淆有一定的规则，四大组件是不允许被混淆的。`minifyEnabled = true`是开启混淆，混淆的具体规则是在
+```xml
+<!-- 如果debug的时候没有崩溃，release打包之后崩溃，通过配置debug进行混淆可以检查是否是打包混淆代码时出现问题 -->
+buildTypes {
+    release {
+        minifyEnabled false
+        shrinkResources false
+        proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+    }
+
+    debug{
+        minifyEnabled false
+        shrinkResources false
+        proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+    }
+}
+```
+* `proguard-android.txt`：代表系统默认的混淆规则配置文件，该文件在`<Android SDK目录>/tools/proguard`下，一般不要更改该配置文件，因为也会作用于其它项目。
+* `proguard-rules.pro`：代码表当前Project的混淆配置文件，在app module下，可以通过修改该文件来添加适用当前项目的混淆规则。
+
 
 
 ## 反编译

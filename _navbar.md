@@ -2,4 +2,7 @@
 
 * 项目
     * [Android](/Android/)
-    * [Photoshop](/photoshop/)
+    * [iOS](/ios/)
+    * [Python](/python/)
+    * [前端](/web/)
+    * [PhotoShop](/photoshop/)

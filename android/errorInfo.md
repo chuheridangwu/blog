@@ -63,3 +63,37 @@ AndroidManifest.xml 中 配置requestLegacyExternalStorage 即可
 <application
         android:requestLegacyExternalStorage="true">  
 ```
+
+>debug运行时，程序没有出现崩溃，在release打包的时候，程序出现了崩溃无法使用
+
+原因是自己只对打包的时候使用了代码混淆，但是并没有写入混淆规则，导致只有release包崩溃。解决方案，在app/build.gradle文件中，导入自己的签名文件和对应的账号密码。并且配置debug和release一样的环境，这样以后就可以减少因为环境不一样导致的崩溃问题
+```
+signingConfigs {
+        debug {
+                storeFile file("../photoalbum.keystore") //签名文件，放在了project目录下
+                storePassword "photo"
+                keyAlias "photoalbumalias"
+                keyPassword "photo"
+        }
+        release {
+                storeFile file("../photoalbum.keystore")
+                storePassword "photoalbum123"
+                keyAlias "photoalbumalias"
+                keyPassword "photoalbum123"
+        }
+}
+
+buildTypes {
+        release {
+                minifyEnabled false
+                shrinkResources false
+                proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+        debug{
+                minifyEnabled false
+                shrinkResources false
+                proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+}
+```
