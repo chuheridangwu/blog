@@ -97,3 +97,18 @@ buildTypes {
         }
 }
 ```
+
+> 使用Parcelable 读取/写入布尔值时出现崩溃
+
+使用Parcelable读写布尔值时，华为手机出现崩溃信息` java.lang.NoSuchMethodError: No virtual method writeBoolean(Z)V in class Landroid/os/Parcel; or its super classes (declaration of 'android.os.Parcel' appears in /system/framework/framework.jar!classes2.dex)`
+
+解决方式是：
+```java
+public void writeToParcel(Parcel dest, int flags) {
+        dest.writeByte(this.isHeader ? (byte) 1 : (byte) 0);
+}
+
+protected FeedsBean(Parcel in) {
+        this.isHeader = in.readByte() != 0;
+}
+```
