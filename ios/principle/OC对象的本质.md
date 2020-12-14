@@ -5,6 +5,8 @@
 
 系统分配了16个字节给NSObject对象（通过`malloc_size函数`获得）,但NSObject对象内部只使用了8个字节的空间（64bit环境下，可以通过`class_getInstanceSize函数`获得）
 
+---
+
 我们如何验证我们的说法是正确的，将通过以下几个方式去验证
 1. 先将代码转换成`c++`代码，查看转换成之后oc对象是什么样子（这种方式会在以后经常用到）
 2. 通过runtime的`class_getInstanceSize()函数`和 malloc的`malloc_size()函数`查看一个对象在内存中占多少字节
