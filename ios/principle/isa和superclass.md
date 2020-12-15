@@ -1,17 +1,4 @@
 # isa和superclass
-
-**面试题: 对象的isa指向哪里**
-* instance 对象的isa指向class对象
-* class 对象的isa指向meta-class对象
-* meta-calss对象的isa指向基类的meta-class对象
-
-**面试题: OC的类信息存放在哪里**
-* 成员变量的具体值，存放在instance 对象中
-* 对象方法、属性、成员变量、协议信息，存放在class对象中
-* 类方法，存放在meta-class对象中
-
----
-
 如果要学习isa和superclass,首先需要了解对象的分类，不同对象的isa指针指向的内存不同。我们将按照下面的流程学习:
 1. 先了解对象的分类
 2. 通过方法的调用认识isa和superclass指针的调用过程
@@ -121,7 +108,7 @@ int main(int argc, const char * argv[]) {
 }
 ```
 运行之后，我们发现Person类真的可以掉用`metaTest`方法，按照我们刚才所学，它的调用顺序应该如下图所示
-![ios_img_7](./../imgs/ios_img_7.jpg)
+![](./../imgs/ios_img_7.jpg)
 
 ## 通过打印指针地址 来看isa 和 superclass
 
@@ -303,7 +290,7 @@ struct class_ro_t {
 };
 ```
 
-## 扩展问题
+## 扩展知识
 `object_getClass(id obj)`、`objc_getClass(const char *aClassName)`和`+ (Class)class`三个方法的区别
 
  ```cpp
@@ -330,3 +317,14 @@ Class objc_getClass(const char *aClassName)
 + (Class)class
 - (Class)class
 ```
+
+## 面试题
+**面试题1: 对象的isa指向哪里**
+* instance 对象的isa指向class对象
+* class 对象的isa指向meta-class对象
+* meta-calss对象的isa指向基类的meta-class对象
+
+**面试题2: OC的类信息存放在哪里**
+* 成员变量的具体值，存放在instance 对象中
+* 对象方法、属性、成员变量、协议信息，存放在class对象中
+* 类方法，存放在meta-class对象中
