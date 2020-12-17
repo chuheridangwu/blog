@@ -119,3 +119,7 @@ KVC 的全称是`Key-Value Coding`，俗称“键值编码”，可以通过一�
 **面试题1: 通过KVC修改属性会触发KVO么？**
 
 会触发KVO,即使类中没有实现`setKey:`方法，只要使用KVC对属性的值进行改变，就会触发KVO。
+
+
+## 推荐阅读
+[KVC原理剖析](https://segmentfault.com/a/1190000013476163)

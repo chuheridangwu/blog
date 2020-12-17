@@ -263,7 +263,6 @@ struct class_rw_t {
     ...
 }
 
-
 struct class_ro_t {
     uint32_t flags;
     uint32_t instanceStart;
@@ -285,10 +284,10 @@ struct class_ro_t {
     method_list_t *baseMethods() const {
         return baseMethodList;
     }
-
     ...
 };
 ```
+![](./../imgs/ios_img_12.jpg)
 
 ## 扩展知识
 `object_getClass(id obj)`、`objc_getClass(const char *aClassName)`和`+ (Class)class`三个方法的区别

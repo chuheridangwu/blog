@@ -163,7 +163,7 @@ NSLog(@"kvo监听后的setAge:方法的地址: %p",[self.p1 methodForSelector:@s
 ## 面试题
 **面试题1: iOS用什么方式实现对一个对象的KVO？(KVO的本质是什么？)**
 1. 系统利用RuntimeAPI动态生成一个子类，并且让instance对象的isa指向这个全新的子类
-2. 当instance对象的修改属性的值触发`setXxx:`方法时，会调用Foundation的`_NSSetXXXValueAndNotify`函数
+2. 当instance对象的修改属性的值触发`setKey:`方法时，会调用Foundation的`_NSSetXXXValueAndNotify`函数
 3. _NSSetXXXValueAndNotify内部调用了    
     * willChangeValueForKey:
     * 父类原来的setter
