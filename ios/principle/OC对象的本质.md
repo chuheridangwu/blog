@@ -12,6 +12,8 @@
 
 ```
 xcrun -sdk iphoneos14.1 clang -arch arm64  -rewrite-objc main.m -o main.cpp
+或者
+xcrun -sdk iphoneos clang -arch arm64  -rewrite-objc main.m    //输出文件默认使用当前的文件名
 
 xcrun: xcode工具运行 
 -sdk -iphoneos14.1 : iphoneos14.1的sdk 

@@ -137,6 +137,26 @@ _object_get_associative_reference(id object, const void *key)
 ![](./../imgs/ios_img_13.jpg)
 可以得出的结论是：**关联对象并不是存储在被关联对象本身的内存中，统一被`AssociationsManager`管理，当设置关联对象为nil，相当于移除关联对象**
 
+## 知识扩展
+**`self`和`_cmd`**
+
+如何证实系统会在方法上给我们添加 self 和 _cmd 两个参数，使用之前的方法，把 oc 转 c++ 的代码看一下。比如我们有一个Person类,在.m文件实现自己的init方法。转换发现系统确实会在方法上默认添加两个参数
+```objc
+// Person类
+@implementation Person
+- (instancetype)init{
+    return [[Person alloc] init];
+}
+@end
+
+// 转换成c++之后的代码有 self 和 _cmd 参数
+// @implementation Person
+static instancetype _I_Person_init(Person * self, SEL _cmd) {
+    return ((Person *(*)(id, SEL))(void *)objc_msgSend)((id)((Person *(*)(id, SEL))(void *)objc_msgSend)((id)objc_getClass("Person"), sel_registerName("alloc")), sel_registerName("init"));
+}
+// @end
+```
+
 ## 面试题
 **面试题1: Category的实现原理**
 

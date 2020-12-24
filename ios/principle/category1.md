@@ -1,7 +1,11 @@
 # Category的本质
-Category在项目开发过程中会经常使用，通过它给原来的类扩展一些方法或者替换一些系统的方法。但是我们一定会有几个疑问，分类中的方法是怎么调用的，储存在什么位置，它的加载顺序是什么样的？
+Category在项目开发过程中会经常使用，通过它可以给原来的类扩展一些方法或者替换一些系统的方法。但是我们一定会有几个疑问，分类中的方法是怎么调用的，分类的信息储存在什么位置，分类可以添加实例变量吗..等等？下面就让我们来掀开它神秘的面纱。
 
-我们会通过转换成 c++ 代码、查看 runtime 源码、查看类和分类之间`load方法`和`initizlinede方法`的加载顺序、怎么给分类添加实例变量等几个方面去看观察Category
+我们将从以下几个方面观察Category:
+1. 将 Category 转换成c++代码，观察它的结构 `struct category_t`结构体
+2. 通过 runtime 观察 Category 和 class 之间的关系以及分类信息的存储位置
+3. 查看类、分类之间`+load`和`+initialize`的加载顺序
+4. 通过关联对象给分类添加实例变量以及通过runtime观察分类的实例变量存储位置
 
 ## Category的结构
 我们如果想看到 Category 内部的结构，可以使用之前的方法，把oc代码转换成 c++ 代码之后窥探它的内部结构。
@@ -53,7 +57,7 @@ static struct _category_t _OBJC_$_CATEGORY_Person_$_Test __attribute__ ((used, s
 };
 ```
 我们发现一个`_category_t`这样一个结构体，这个就是分类的结构。如果通过runtime源码去查看这个结构体，发现`category_t`这个结构体跟我们现在转换之后的不一样，这是因为转换的代码跟实际源码还是存在一定的差异，但是并不多。
-## 通过 runtime 源码进行查看
+## 通过 runtime 观察分类信息的存储位置
 源码中的`struct category_t` 结构体，跟我们通过oc代码转换的`_category_t`结构体基本差不多。
 ```cpp
 struct category_t {
@@ -212,7 +216,7 @@ void attachLists(List* const * addedLists, uint32_t addedCount) {
 至此，我们可以做一个总结：**Category 编译之后的底层结构是`struct category_t`结构体，里面存储着`分类的对象方法、类方法、属性、协议信息。`
 在程序运行的时候，runtime 会将 Category的数据，合并到类信息中（类对象、元类对象中）**
 
-## 扩展问题
+## 知识扩展
 **`memmove()`和`memcpy()`的区别**
 
 ` void *memmove(void *str1, const void *str2, size_t n)` 从 str2 复制 n 个字符到 str1，**如果目标区域和源区域有重叠的话，memmove() 能够保证源串在被覆盖之前将重叠区域的字节拷贝到目标区域中，复制后源区域的内容会被更改。**如果目标区域与源区域没有重叠，则和 memcpy() 函数功能相同。memmove()方法整体进行拷贝，它里面会做一个判断是向左移还是向右移。
