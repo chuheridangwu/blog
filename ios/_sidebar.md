@@ -10,5 +10,10 @@
     * [7、Category之关联对象](ios/principle/category3.md)
     * [8、Block初认识](ios/principle/block1.md)
     * [9、Block详解](ios/principle/block2.md)
-* [ipa自动化打包工具](ios/ipa自动化打包工具.md)
+
+* IPA
+  * [ipa自动化打包工具](ios/ipa自动化打包工具.md)
+
+* 逆向
+  *  [逆向1](ios/../reverse/reverse1.md)
 * [面试题](ios/面试题.md)
