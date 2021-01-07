@@ -163,6 +163,22 @@ ary.sort(function (a,b){
 ary.sort(function (a,b){
     return a-b
 })
+
+
+// 时间排序
+var data = [
+    {
+        name:'1',
+        time:'2019-04-26 10:53:19'
+    },
+    {
+        name:'2',
+        time:'2019-04-26 10:51:19'
+    }
+]
+data.sort(function(a,b){
+    return a.time < b.time ? 1 : -1
+}
 ```
 
 
@@ -257,4 +273,52 @@ xhr.onload = function () {
 xhr.onerror = function () {
     document.getElementById("demo").innerHTML="请求出错";
 }
+```
+
+## Map
+
+Map的 常用方法
+```
+var map = new Map();
+//设值
+map.set("A","aaaa");
+map.set("B","bbbb");
+map.set("C","cccc");
+map.set("D","dddd");
+console.log(map)
+//结果
+// 0: {"A" => "aaaa"}
+// 1: {"B" => "bbbb"}
+// 2: {"C" => "cccc"}
+// 3: {"D" => "dddd"}
+//取值
+let v =map.get("A")
+console.log(v)
+//结果：aaaa
+
+//根据Key修改Value
+map.set("B","XXX")
+console.log(map)
+//结果
+// 0: {"A" => "aaaa"}
+// 1: {"B" => "XXX"}
+// 2: {"C" => "cccc"}
+// 3: {"D" => "dddd"}
+
+//判断key是否存在
+let boo =  map.has("D");
+console.log(boo)
+//结果 true
+
+//删除
+map.delete("C");
+//结果
+// 0: {"A" => "aaaa"}
+// 1: {"B" => "XXX"}
+// 3: {"D" => "dddd"}
+
+//获取key，value
+map.forEach(function (value, key, map) {
+    alert("key:"+key+"~~~"+"value:"+value)
+})
 ```

@@ -16,6 +16,9 @@
 * 链接： 把我们的.o文件跟系统自带的函数库合并在一起，生成一个可执行文件.out
 * 运行： ./a.out
 
+[c语言代码编译过程](https://www.cnblogs.com/CarpenterLee/p/5994681.html)
+[什么事编译器](http://c.biancheng.net/view/450.html)
+
 ## 代码块 { }
 * 代码块作用域：从定义变量的那一行代码开始，到所在的代码块结束
 * 代码块作用：及时回收不再使用的变量，为了提升性能
@@ -697,6 +700,8 @@ pers[0].age = 3;
  宏定义传参时要注意，每个参数和结构都要用一个小括号（），防止传的值有问题影响计算结果，
  因为宏只起替换的作用，仅仅只有替换作用
 
+// 如果参数前有#号，宏会自动在参数上加上""
+#define file(path)  "123455" #path
 ```
 ## 条件编译
 顾明思议：满足特定的条件才进行编译，有三种形式  `#ifdef、 #ifndef、#if`
@@ -774,3 +779,9 @@ pers[0].age = 3;
 全局变量作用域是从变量定义的位置开始到文件结束，可被文件内的所有函数所共用，如果想在 全局变量定义的位置之前或其他文件中 的函数所引用时，必须对变量使用 extern 声明。
 
 extern的另一个技巧是获取其他文件定义的全局变量，比如在一个文件内使用static定义了一个全局变量，如果要在另一个文件内获取到，可以使用extern进行重新定义获取。
+
+
+int float double char short long signed unsigned
+if else switch case default for while do
+break continue return void const sizeof struct typedef
+static extern auto register enum goto union volatile
