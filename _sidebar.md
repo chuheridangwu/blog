@@ -6,13 +6,13 @@
 * [Linux](/liunx/)
 * [Photoshop](photoshop/)
 * [Web](web/)
-* 计算机基础
-    * [C](c/)
+* [C](c/)
 
-* 开发日常工具和技巧
+* 工具
     * [调试技巧](live/)
-    * [docsify](live/docsify.md)
-    * [Wireshark](live/Wireshark.md)
+    * [docsify](tool/docsify.md)
+    * [Wireshark](tool/Wireshark.md)
+    * [Git](tool/git.md)
 
 * 生活
   * [日常](live/)
