@@ -13,4 +13,6 @@
 * IPA
     * [ipa自动化打包工具](ios/ipa/ipa自动化打包工具.md)
     * [苹果商店获取ipa文件](ios/ipa/获取ipa文件.md)
+* 逆向
+  *  [逆向1](ios/../reverse/reverse1.md)
 * [面试题](ios/面试题.md)
