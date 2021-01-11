@@ -75,6 +75,10 @@ function getAdder(int $x): int
   <script src="//unpkg.com/docsify-copy-code"></script>
 ```
 
+>10. 导入图片限制图片大小
+
+`![](./../imgs/图片名.png ':size=280')`
+
 > 参考网址
 * https://segmentfault.com/a/1190000017576714
 * https://docsify.js.org/#/zh-cn/quickstart
