@@ -1,9 +1,3 @@
-## MAC 修改hosts权限
-sudo vi /etc/hosts
-
-## ping ip + 端口
-nc -vz -w 2 120.79.79.253 12009
-
 
 ## XIB创建TableViewCell
 ```oc

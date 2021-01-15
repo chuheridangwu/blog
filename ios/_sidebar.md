@@ -19,4 +19,6 @@
 * 逆向
   *  [逆向1](ios/reverse/reverse1.md)
 * [Xcode](ios/xcode.md)
+* [Mac](ios/mac.md)
+* [test](ios/test.md)
 * [面试题](ios/面试题.md)
