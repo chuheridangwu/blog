@@ -13,6 +13,7 @@
     * [10、位域和共同体union](ios/principle/runtime1.md)
     * [11、Runtime准备工作](ios/principle/runtime2.md)
     * [12、Runtime认识objc_msgSend](ios/principle/runtime3.md)
+    * [13、Runtim引发的面试题](ios/principle/runtime4.md)
 * IPA
     * [ipa自动化打包工具](ios/ipa/ipa自动化打包工具.md)
     * [苹果商店获取ipa文件](ios/ipa/获取ipa文件.md)

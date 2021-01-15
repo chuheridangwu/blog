@@ -1,4 +1,6 @@
 # 学习Runtime的准备工作
+Objective-C是一门动态性比较强的编程语言，跟C、C++等语言有着很大的不同，Objective-C的动态性是由`Runtime API`来支撑的,Runtime API提供的接口基本都是C语言的，源码由C\C++\汇编语言编写。
+
 要想学习Runtime，首先要了解它底层的一些常用数据结构，比如 isa 指针，在arm64架构之前，isa 就是一个普通的指针，存储着`Class、Meta-Class`对象的内存地址。从arm64架构开始，对 isa 进行了优化，变成了一个共用体（union）结构，并且使用位域来存储更多的信息
 
 ## isa的位域
