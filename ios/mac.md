@@ -56,3 +56,6 @@ Command+H
 Command+w
 // 隐藏窗口
 Command+h
+
+
+[苹果内购测试流程](https://developer.apple.com/documentation/storekit/in-app_purchase/testing_in-app_purchases_with_sandbox)
