@@ -14,6 +14,7 @@
     * [11、Runtime准备工作](ios/principle/runtime2.md)
     * [12、Runtime认识objc_msgSend](ios/principle/runtime3.md)
     * [13、Runtim引发的面试题](ios/principle/runtime4.md)
+    * [14、Runtime的API](ios/principle/runtime5.md)
 * IPA
     * [ipa自动化打包工具](ios/ipa/ipa自动化打包工具.md)
     * [苹果商店获取ipa文件](ios/ipa/获取ipa文件.md)
@@ -21,4 +22,5 @@
   *  [逆向1](ios/reverse/reverse1.md)
 * [Xcode](ios/xcode.md)
 * [Mac](ios/mac.md)
+* [LLVM](ios/llvm.md)
 * [面试题](ios/面试题.md)

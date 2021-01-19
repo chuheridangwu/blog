@@ -24,3 +24,7 @@ Header Search Path
 
 User Header Search Paths
 只有在Always Search User Paths为Yes时才会被搜索。
+
+## 查看汇编代码的两种方式
+* 进入断点查看汇编的方式 `Debug -> Debug Workflow -> Always show Disassembly`，进入断点时会显示汇编代码
+* 通过将.m文件转成汇编文件的方式 `Product -> Perform Action -> Assemble 文件名.m`,会将对应的文件转成汇编文件。如果想看具体的行号，搜索`m:行号`
