@@ -115,5 +115,43 @@ static int32_t __CFRunLoopRun(CFRunLoopRef rl, CFRunLoopModeRef rlm, CFTimeInter
 ```
 通过源码我们看到，Runloop的本质就是在循环中不停的处理`Source`、`Timers`和`Blocks`,当没有事情处理时，进入休眠状态。有事情处理时会唤醒当前Runloop对象继续处理事件。
 
-## Runloop在程序中的应用
+**Runloop的细节**
+1. GCD只有在返回主线程刷新U界面时使用Runloop
+```objc
+    dispatch_async(dispatch_get_main_queue(), ^{
 
+    });
+```
+
+2. `__CFRunLoopServiceMachPort()`函数是通过调用内核态的`mach_msg()`函数，真正让线程休眠，当有事件时重新唤醒线程。
+
+## Runloop在实际开发中的应用
+Runloop在实际开发中主要的应用场景有 控制线程生命周期、解决NSTimer在滑动时停止工作的问题、监控应用卡顿和性能优化。
+
+> 解决NSTimer在滑动时停止工作的问题
+
+这个在项目中经常会遇到的问题。比如轮播图，如果不把NSTimer添加到Runloop中，当我们滑动UITableView的时候，定时器会停止操作。
+
+为什么会造成这种情况？相比经过我们的学习大家都知道。一条线程对应一个Runloop对象，而且Runloop只能在一种模式下运行，在主线程中，Runloop默认是`kCFRunLoopDefaultMode`模式，当我们滚动视图时，Runloop会切换到`UITrackingRunLoopMode`模式，不再处理定时器的事件，所以会造成当前这种现象。
+
+解决问题的方式也很简单，把 NSTimer 添加到当前模式的中即可。
+```objc
+NSTimer *timer = [NSTimer timerWithTimeInterval:1.0 repeats:YES block:^(NSTimer * _Nonnull timer) {
+    NSLog(@"-----");
+}];
+//NSRunLoopCommonModes只是一个标记，timer能在_commonModes数组中存放的模式下工作.
+[[NSRunLoop currentRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
+```
+
+> 线程保活
+
+如果需要在子线程中经常做事情，就会考虑一直保持子线程的生命周期，不能做完就被释放。这个时候就会用到我们的Runloop。
+
+注意点：
+`[[NSRunLoop currentRunLoop] run];`方法会开启一个无限循环，无法停止。`CFRunLoopStop(CFRunLoopGetCurrent());`方法也只能停止其中的一次循环。并不能停止Runloop的循环。如果我们希望能退出Runloop，应该使用下面的代码
+```
+BOOL shouldKeepRunning = YES; // global
+NSRunLoop *theRL = [NSRunLoop currentRunLoop];
+while (shouldKeepRunning && [theRL runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]]);
+// 在想要停止Runloop时，设置shouldKeepRunning = NO
+```
