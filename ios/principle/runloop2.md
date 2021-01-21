@@ -1,5 +1,5 @@
 # Runloop
-知道了什么是Runloop、Runloop的内部结构和Mode的切换。现在我们来学习Runloop的调用流程以及从源码上分析Runloop的调用流程，最后讲Runloop在程序内的应用。
+知道了什么是Runloop和Runloop的内部结构以及Runloop如何切换Mode。现在我们来了解Runloop的调用流程,以及从源码上分析Runloop的调用流程，最后再讲一下Runloop在程序内的应用。
 
 ## Runloop的调用流程
 01. 通知Observers：进入Loop
@@ -25,7 +25,7 @@
 ## 通过源码分析Runloop
 该怎么找Runloop的入口呢？在上一章中，我们通过打印堆栈信息查看是否是 Source0 处理点击事件，在堆栈事件中，有一个`__CFRunLoopRun`函数，在Runloop运行之前调用的是`CFRunLoopRunSpecific`函数，可以确定`CFRunLoopRunSpecific`函数是Runloop的入口。
 
-我们通过源码分析Runloop的具体实现，代码片段来自`CF-1153.18`，代码经过删减，只显示主逻辑：
+我们通过源码分析Runloop的具体实现，代码片段来自`CF-1153.18`，代码经过删减，只显示主要逻辑：
 ```c
 SInt32 CFRunLoopRunSpecific(CFRunLoopRef rl, CFStringRef modeName, CFTimeInterval seconds, Boolean returnAfterSourceHandled) {   
     // 通知Observers: 进入Runloop
@@ -113,7 +113,7 @@ static int32_t __CFRunLoopRun(CFRunLoopRef rl, CFRunLoopModeRef rlm, CFTimeInter
     return retVal;
 }
 ```
-通过源码我们看到，Runloop的本质就是在循环中不停的处理`Source`、`Timers`和`Blocks`,当没有事情处理时，进入休眠状态。有事情处理时会唤醒当前Runloop对象继续处理事件。
+在`__CFRunLoopRun()`函数中我们看到，Runloop的本质就是一个`do{}while()`循环，在循环中不停的处理`Source`、`Timers`和`Blocks`,当没有事情需要处理时，进入休眠状态。有事情需要处理时会唤醒当前Runloop对象继续处理事件。
 
 **Runloop的细节**
 1. GCD只有在返回主线程刷新U界面时使用Runloop
@@ -130,9 +130,9 @@ Runloop在实际开发中主要的应用场景有 控制线程生命周期、解
 
 > 解决NSTimer在滑动时停止工作的问题
 
-这个在项目中经常会遇到的问题。比如轮播图，如果不把NSTimer添加到Runloop中，当我们滑动UITableView的时候，定时器会停止操作。
+这个问题是在项目中经常会遇到的问题。比如轮播图，如果不把NSTimer添加到Runloop中，当我们滑动UITableView的时候，定时器会停止调用。
 
-为什么会造成这种情况？相比经过我们的学习大家都知道。一条线程对应一个Runloop对象，而且Runloop只能在一种模式下运行，在主线程中，Runloop默认是`kCFRunLoopDefaultMode`模式，当我们滚动视图时，Runloop会切换到`UITrackingRunLoopMode`模式，不再处理定时器的事件，所以会造成当前这种现象。
+为什么会造成这种情况？经过之前的学习我们知道。**一条线程对应一个Runloop对象，并且Runloop只能在一种模式下运行，在主线程中，Runloop默认是`kCFRunLoopDefaultMode`模式，当我们滚动视图时，Runloop会切换到`UITrackingRunLoopMode`模式，那么处在`kCFRunLoopDefaultMode`模式下的定时器就会停止工作。**所以造成了当前这种现象。
 
 解决问题的方式也很简单，把 NSTimer 添加到当前模式的中即可。
 ```objc
@@ -145,13 +145,154 @@ NSTimer *timer = [NSTimer timerWithTimeInterval:1.0 repeats:YES block:^(NSTimer 
 
 > 线程保活
 
-如果需要在子线程中经常做事情，就会考虑一直保持子线程的生命周期，不能做完就被释放。这个时候就会用到我们的Runloop。
+如果有一个需求,需要在子线程中不断的做事情。按照以往的做法，不断的创建销毁线程，会消耗不少的资源。这个时候就要考虑保持一条子线程存活不被销毁，如果要保持子线程不被销毁。就需要使用到Runloop对象。只要Runloop一直在运行，线程就不会被销毁。Runloop运行有两个前提，1. Mode中要包含 Source0/Source1/Timer/Observer任意一种 2. 需要在线程中调用。通过下面代码来看一下。
 
-注意点：
-`[[NSRunLoop currentRunLoop] run];`方法会开启一个无限循环，无法停止。`CFRunLoopStop(CFRunLoopGetCurrent());`方法也只能停止其中的一次循环。并不能停止Runloop的循环。如果我们希望能退出Runloop，应该使用下面的代码
+这是使用Runloop封装的线程保活Demo:
+```objc
+typedef void (^LastingThreadTask)(void);
+@interface MMLastingThread : NSObject
+// 在当前子线程执行一个任务
+- (void)executeTask:(LastingThreadTask)task;
+// 结束线程
+- (void)stop;
+@end
+
+@interface MMLastingThread()
+@property (strong, nonatomic) NSThread *innerThread;
+@property (assign, nonatomic,getter=isStopped) BOOL stopped;
+@end
+
+@implementation MMLastingThread
+#pragma mark - public methods
+- (instancetype)init
+{
+    if (self = [super init]) {
+        _stopped = NO;
+        __weak typeof(self) weakSelf = self;
+        
+        _innerThread = [[NSThread alloc] initWithBlock:^{
+            
+            [[NSRunLoop currentRunLoop] addPort:[[NSPort alloc] init] forMode:NSDefaultRunLoopMode];
+            
+            while (weakSelf && !weakSelf.isStopped) {
+                [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
+            }
+            
+        }];
+        
+        [self.innerThread start];
+    }
+    return self;
+}
+
+- (void)executeTask:(LastingThreadTask)task{
+    if (!self.innerThread || !task) return;
+    
+    [self performSelector:@selector(__executeTask:) onThread:self.innerThread withObject:task waitUntilDone:NO];
+}
+
+- (void)stop{
+    if (!self.innerThread) return;
+    [self performSelector:@selector(__stop) onThread:self.innerThread withObject:nil waitUntilDone:YES];
+}
+
+- (void)dealloc{
+    NSLog(@"%s", __func__);
+    
+    [self stop];
+}
+
+#pragma mark - private methods
+- (void)__stop{
+    self.stopped = YES;
+    CFRunLoopStop(CFRunLoopGetCurrent());
+    self.innerThread = nil;
+}
+
+- (void)__executeTask:(LastingThreadTask)task{
+    task();
+}
+@end
+```
+看过代码之后我们可能存在两个疑问？
+
+**1. 停止Runloop时为什么要使用`performSelector:onThread:withObject:waitUntilDone:`方法？**
+
+通过之前所学我们知道，`CFRunLoopGetCurrent()`函数返回的是当前线程的Runloop对象，如果我们想要停止子线程中的Runloop，当然要在子线程中调用`CFRunLoopGetCurrent()`函数。
+
+**2. 另一个问题，使用`performSelector:onThread:withObject:waitUntilDone:`时，`wait`参数为什么传Yes？**
+
+`stop`方法是在`MMLastingThread`对象释放的时候调用的，在这个时间里同时在子线程调用`__stop`方法，因为我们自身已经被释放了，在子线程内再访问`__stop`方法时，会造成坏内存访问。传入YES，是为了阻塞当前线程，等子线程执行完之后再执行主线程的操作。
+
+如果使用C语言实现Runloop中添加Source,不需要额外的变量进行控制。
+```objc
+@interface MMLastingThread()
+@property (strong, nonatomic) NSThread *innerThread;
+@end
+
+@implementation MMLastingThread
+#pragma mark - public methods
+- (instancetype)init
+{
+    if (self = [super init]) {
+        
+        self.innerThread = [[NSThread alloc] initWithBlock:^{
+            
+            // 创建上下文 (要初始化一下结构体)
+            CFRunLoopSourceContext context = {0};
+            // 创建source
+            CFRunLoopSourceRef source = CFRunLoopSourceCreate(kCFAllocatorDefault, 0, &context);
+            // 将source添加到Runloop
+            CFRunLoopAddSource(CFRunLoopGetCurrent(), source, kCFRunLoopDefaultMode);
+            // 销毁source
+            CFRelease(source);
+            // 启动RunLoop. returnAfterSourceHandled参数设置为true，代表执行完source后就会退出当前loop。如果要一直运行，设置为false
+            CFRunLoopRunInMode(kCFRunLoopDefaultMode, 1.0e10, false);
+            
+        }];
+        
+        [self.innerThread start];
+    }
+    return self;
+}
+
+- (void)executeTask:(LastingThreadTask)task{
+    if (!self.innerThread || !task) return;
+    
+    [self performSelector:@selector(__executeTask:) onThread:self.innerThread withObject:task waitUntilDone:NO];
+}
+
+- (void)stop{
+    if (!self.innerThread) return;
+    [self performSelector:@selector(__stop) onThread:self.innerThread withObject:nil waitUntilDone:YES];
+}
+
+- (void)dealloc{
+    NSLog(@"%s", __func__);
+    [self stop];
+}
+
+#pragma mark - private methods
+- (void)__stop{
+    CFRunLoopStop(CFRunLoopGetCurrent());
+    self.innerThread = nil;
+}
+
+- (void)__executeTask:(LastingThreadTask)task{
+    task();
+}
+@end
+``` 
+
+**注意点：**
+1. `[[NSRunLoop currentRunLoop] run];`方法会开启一个无限循环，无法停止。`CFRunLoopStop(CFRunLoopGetCurrent());`方法只能停止其中的一次循环。并不能停止Runloop的循环。如果我们希望能退出Runloop，应该使用`runMode:beforeDate:`方法，例如:
 ```
 BOOL shouldKeepRunning = YES; // global
 NSRunLoop *theRL = [NSRunLoop currentRunLoop];
 while (shouldKeepRunning && [theRL runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]]);
 // 在想要停止Runloop时，设置shouldKeepRunning = NO
 ```
+
+2. `- (void)performSelector:(SEL)aSelector onThread:(NSThread *)thr withObject:(nullable id)arg waitUntilDone:(BOOL)wait`函数,在其他线程执行方法。
+* wait代表为YES时，代表会阻塞当前线程，直到指定的线程方法执行完成之后再返回。(线程同步，注意如果线程不存或者无法执行方法时会造成坏内存访问。)
+* wait代表为NO时，不阻塞当前线程。
