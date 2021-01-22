@@ -28,3 +28,17 @@ User Header Search Paths
 ## 查看汇编代码的两种方式
 * 进入断点查看汇编的方式 `Debug -> Debug Workflow -> Always show Disassembly`，进入断点时会显示汇编代码
 * 通过将.m文件转成汇编文件的方式 `Product -> Perform Action -> Assemble 文件名.m`,会将对应的文件转成汇编文件。如果想看具体的行号，搜索`m:行号`
+
+## Instruments — Time Profiler使用 排查耗时代码
+有时候程序在某个时间运行很慢，通过Time Profiler工具可以对耗时代码进行排查，比如我在做PK时，需要使用YY_Image加载webp动画，webp动画解码的时候特别耗时，通过`Time Profiler`工具可以直接定位到代码。
+打开方式：`Instruments` -> `Time Profiler`
+
+![](./imgs/ios_img_43.jpg)
+
+* `Separate by State :` 线程分离，状态分开显示 ，例如：Running状态，
+* `Separate by Thread :` 线程分离, 每个线程分开显示，只有这样 才能在调用路径中能够清晰看到占用CPU耗时最大的线程.(默认勾选)
+* `Invert Call Tree :` 堆栈信息显示顺序,默认是`FunA { FunB { FunC } }`,勾选后堆栈顺序是`C->B->A`
+* `Hide System Libraries :` 隐藏系统调用,只关注自己代码的耗时(建议勾选，方便查看)
+* `Flatten Recursion : `递归函数, 每个堆栈跟踪一个条目
+* `Top Functions :` 显示某个函数的总时间，A函数内调用多个函数时，可以显示A函数的总耗时
+

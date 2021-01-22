@@ -17,6 +17,9 @@
     * [14、Runtime的API](ios/principle/runtime5.md)
     * [15、Runloop分析](ios/principle/runloop1.md)
     * [16、Runloop的调用流程及应用](ios/principle/runloop2.md)
+    * [17、认识多线程](ios/principle/thread1.md)
+    * [18、线程锁的应用](ios/principle/thread2.md)
+
 * IPA
     * [ipa自动化打包工具](ios/ipa/ipa自动化打包工具.md)
     * [苹果商店获取ipa文件](ios/ipa/获取ipa文件.md)

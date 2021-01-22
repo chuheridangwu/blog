@@ -32,6 +32,10 @@ Command-W | 关闭窗口
 Command-Option-W | 要关闭应用的所有窗口
 Command-Tab | 切换打开的 App 
 Command-逗号(,) | 打开当前应用的偏好设置
+Shift-Command-5 | 在 macOS Mojave 或更高版本中，拍摄截屏或录制屏幕。
+Shift-Command-4 |  截屏自定义的部分区域
+Shift-Command-3 |  整个桌面截屏 
+
 
 **访达和系统快捷键**
 
