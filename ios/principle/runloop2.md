@@ -296,3 +296,65 @@ while (shouldKeepRunning && [theRL runMode:NSDefaultRunLoopMode beforeDate:[NSDa
 2. `- (void)performSelector:(SEL)aSelector onThread:(NSThread *)thr withObject:(nullable id)arg waitUntilDone:(BOOL)wait`函数,在其他线程执行方法。
 * wait代表为YES时，代表会阻塞当前线程，直到指定的线程方法执行完成之后再返回。(线程同步，注意如果线程不存或者无法执行方法时会造成坏内存访问。)
 * wait代表为NO时，不阻塞当前线程。
+
+## 面试题
+
+1. 下面代码的打印结果:
+
+```objc
+- (void)viewDidLoad {
+    [super viewDidLoad];  
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        NSLog(@"--任务1--");
+        [self performSelector:@selector(run) withObject:self afterDelay:0.0];
+        NSLog(@"--任务3--");
+    });
+    
+}
+- (void)run{
+    NSLog(@"--任务2--");
+}
+```
+不出所料，只打印了任务1和任务3，原因是`performSelector:withObject:afterDelay`方法的本质是往Runloop中添加定时器，在子线程中，Runloop默认是没有启动的，导致不能处理对应的Timers事件
+
+2. 下面的代码会引起什么结果？
+
+```objc
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    NSThread *therad = [[NSThread alloc] initWithBlock:^{
+        NSLog(@"--任务1--  %@",[NSThread currentThread]);
+    }];
+    
+    [therad start];
+    [self performSelector:@selector(run) onThread:therad withObject:self waitUntilDone:YES];
+}
+- (void)run{
+    NSLog(@"--任务2--");
+}
+```
+`performSelector:withObject:afterDelay:`方法会引起崩溃` target thread exited while waiting for the perform"`。
+
+崩溃的原因是：子线程中没有Runloop对象对其进行保活，在执行完start方法之后，线程已经死掉了。
+
+## GNUstep
+
+GNUstep是GNU计划的项目之一，它将Cocoa的OC库重新开源实现了一遍,[点击进入源码地址](http://www.gnustep.org/resources/downloads.php),下载`GNUstep Base`,虽然GNUstep不是苹果官方源码，但还是具有一定的参考价值。
+
+通过GUNstep的查看`performSelector:withObject:afterDelay:`方法的具体实现，通过下面的代码我们看到，其本质就是往Runloop中添加定时器。
+```objc
+- (void) performSelector: (SEL)aSelector
+	      withObject: (id)argument
+	      afterDelay: (NSTimeInterval)seconds
+{
+  NSRunLoop		*loop = [NSRunLoop currentRunLoop];
+  GSTimedPerformer	*item;
+
+  item = [[GSTimedPerformer alloc] initWithSelector: aSelector
+					     target: self
+					   argument: argument
+					      delay: seconds];
+  [[loop _timedPerformers] addObject: item];
+  RELEASE(item);
+  [loop addTimer: item->timer forMode: NSDefaultRunLoopMode];
+}
+```

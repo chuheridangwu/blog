@@ -1,18 +1,18 @@
 # isa和superclass
 如果要学习isa和superclass,首先需要了解对象的分类，不同对象的isa指针指向的内存不同。我们将按照下面的流程学习:
 1. 先了解对象的分类
-2. 通过方法的调用认识isa和superclass指针的调用过程
+2. 通过方法的调用认识isa和superclass指针的作用
 3. 通过一张图加强对isa和superclass的认识
 4. 通过打印指针地址的方式验证isa和superclass的调用过程
-5. 通过阅读runtime源码来确定
+5. 通过阅读runtime源码查看isa和superclass
 
 ## oc对象的分类
 oc对象可以分为三种，`instance对象 （实例对象）`、 `class 对象 （类对象）` 和 `meta-class 对象(元类对象)`
 
-我们都知道实例对象在内存中保存着自己成员变量的具体值，每一个通过`[[NSObject alloc] init]`返回的实例对象的地址都不一样，但是它们内部都有一个共同的 isa 指针，这个isa指针是保存在哪里呢？另外我们平时用到协议又是保存到什么地方呢？答案就在类对象中。
+我们都知道实例对象在内存中保存着自己成员变量的具体值，每一个通过`[[NSObject alloc] init]`返回的实例对象的地址都不一样，但是它们内部都有一个共同的 isa 指针，这个isa指针是保存在哪里呢？另外我们平时用到协议、属性、方法又是保存在什么地方呢？
 
 ### 类对象 class
-通过下面的代码获取到class对象,通过打印地址，我们发现它们指向的是同一个地址。**也就是说每个类在内存中只有一个class对象**。
+通过下面的代码获取到class对象,通过打印地址，会发现它们指向的是同一个地址。**也就是说每个类在内存中只有一个class对象**。
 
 **class 对象在内存中存储的信息主要包括 isa指针、superclass指针、类的属性信息(@property)、类的对象方法信息(instance method)、类的协议信息(@protocol)、类的成员变量信息(ivar) ...等等**,这里的成员变量信息主要指成员变量的类型和名字，不是它的具体值。
 
@@ -29,7 +29,7 @@ NSLog(@"%p %p %p",class1,class2,class3);
 ```
 
 ### 元类对象 meta-class
-通过`object_getClass()`方法，将类对象作为参数传递进去，会返回元类对象。你会发现`元类对象`和`类对象`一样，返回的都是class类型，说明他们的结构是一样的，但是里面保存的值是不一样的。
+通过`object_getClass()`方法，将类对象作为参数传递进去，返回元类对象。`元类对象`和`类对象`一样，返回的都是class类型，说明他们的结构是一样的，但是里面保存的值是不一样的。
 
 **每个元类对象在内存中只有一份，主要保存isa指针、superclass指针、类的类方法信息、类的属性信息(值为null)、类的协议信息(null) ...等等**，虽然它的结构跟类对象是一样的，但是主要保存的还是isa、superclass和类的类方法，其他信息都是null。
 
@@ -58,16 +58,16 @@ isa指针是怎么找到方法的呢？可以根据下面的图来认识一下�
 
 > 元类对象 的superclass指针
 
-同上所述，**元类对象的superlcass指针 指向的是自己父类的元类对象。**当Student调用Person类的类方法时，会先通过类对象的isa指针找到自己的元类对象，然后通过元类对象的 superclass指针 找到Person的元类对象进行调用。
+同上所述，**元类对象的superlcass指针 指向的是自己父类的元类对象。**当Student调用Person的类方法时，会先通过类对象的isa指针找到自己的元类对象，然后通过元类对象的 superclass指针 找到Person的元类对象进行调用。
 
 ![](./../imgs/ios_img_5.jpg)
 
 ## 通过图来认识isa和superclass
-图中有三个类，子类、父类、基类，通过superclass连接在一起。还有三种对象类型，实例对象、类对象、元类对象，通过isa连接在一起。我们可以把它们看成我们刚才讲的Student类、Person类、NSObject类。虚线是isa，实线是superclass。
+图中有三个类，子类、父类、基类，通过superclass连接在一起。还有三种对象类型，实例对象、类对象、元类对象，通过isa连接在一起。我们可以把它们看成我们刚才讲的Student、Person、NSObject。虚线是isa，实线是superclass。
 
 ![](./../imgs/ios_img_6.jpg ':size=300')
 通过这张图我们可以做一个总结：
-1. instance的isa指向class, class的isa指向meta-calss, meta-calss的isa指向基类的meta-calss
+1. instance的isa指向 class, class 的isa指向 meta-calss, meta-calss 的isa指向基类的meta-calss
 2. class的 superclass指针 指向父类的class，如果没有父类，指向nil
 3. meta-calss的 superclass指针 指向父类的meta-calss，**基类的meta-calss的 superclass指针 指向 基类的class**
 
@@ -84,7 +84,6 @@ isa指针是怎么找到方法的呢？可以根据下面的图来认识一下�
 @end
 
 @implementation Person
-
 @end
 
 @interface NSObject (Test)
@@ -107,7 +106,7 @@ int main(int argc, const char * argv[]) {
     return 0;
 }
 ```
-运行之后，我们发现Person类真的可以掉用`metaTest`方法，按照我们刚才所学，它的调用顺序应该如下图所示
+Person只做了方法声明，并没有对方法进行实现，创建NSObject分类，并且实现`- (void)metaTest`方法。运行之后，我们发现Person类真的可以调用`metaTest`方法，按照我们刚才所学，它的调用顺序应该如下图所示
 ![](./../imgs/ios_img_7.jpg)
 
 ## 通过打印指针地址 来看isa 和 superclass
@@ -157,7 +156,7 @@ int main(int argc, const char * argv[]) {
     return 0;
 }
 ```
-通过上面的地址打印，会发现基本跟我们描述的是一样的。实例对象的isa指针我们通过lldb命令进行获取，获取之后你会发现 实例对象的isa指针 指向的并不是 类对象的地址，这是因为在新的代码中 `实例对象的isa指针 &  ISA_MASK  = 类对象地址`，通过下图可以确认。
+通过上面的地址打印，发现跟我们描述的基本是一样的。实例对象的isa指针我们通过 lldb 命令进行获取，获取之后你会发现 实例对象的isa指针 指向的并不是 类对象的地址，这是因为在新的源码中 `实例对象的isa指针 &  ISA_MASK  = 类对象地址`，通过下图可以确认:
 ![](./../imgs/ios_img_8.jpg)
 `ISA_MASK`宏不同平台显示的是不同的值。因为我们是通过Mac电脑进行演示的，所以这里是`0x00007ffffffffff8`
 ```cpp
@@ -198,7 +197,7 @@ int main(int argc, const char * argv[]) {
 通过上面的代码打印，发现 Person 类对象的 superclass 指针指向的正是 NSObject 的类对象地址，也验证了我们的说法是正确的。
 
 ## 通过源码来看isa 和 superclass
-如果要阅读源码，首先我们要搞清楚 Class 是一个什么东西,通过查看 objc.h 文件，`typedef struct objc_class *Class;`我们看到Class是一个定义的结构体，下载最新的源码在源码中搜索`struct objc_class`找到定义位置开始读吧。下面的代码片段来自于`objc4-781`，[点击进入下载地址](https://opensource.apple.com/tarballs/objc4/)。由于功力有限，自己阅读源码感受一下吧。
+如果要阅读源码，首先我们要搞清楚 Class 是一个什么东西,通过查看 objc.h 文件，`typedef struct objc_class *Class;`我们看到Class是一个定义的结构体，在源码中搜索`struct objc_class`找到定义位置开始读。代码片段来自于`objc4-781`，[点击进入下载地址](https://opensource.apple.com/tarballs/objc4/)。由于功力有限，自己阅读源码感受一下吧。
 
 ```cpp
 struct objc_object {
@@ -307,7 +306,6 @@ Class object_getClass(id obj)
 Class objc_getClass(const char *aClassName)
 {
     if (!aClassName) return Nil;
-
     // NO unconnected, YES class handler
     return look_up_class(aClassName, NO, YES);
 }
