@@ -19,6 +19,7 @@
     * [16、Runloop的调用流程及应用](ios/principle/runloop2.md)
     * [17、认识多线程](ios/principle/thread1.md)
     * [18、线程锁的应用](ios/principle/thread2.md)
+    * [19、内存管理 - 定时器](ios/principle/memory1.md)
 
 * IPA
     * [ipa自动化打包工具](ios/ipa/ipa自动化打包工具.md)
