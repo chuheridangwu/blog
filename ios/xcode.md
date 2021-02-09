@@ -42,3 +42,22 @@ User Header Search Paths
 * `Flatten Recursion : `递归函数, 每个堆栈跟踪一个条目
 * `Top Functions :` 显示某个函数的总时间，A函数内调用多个函数时，可以显示A函数的总耗时
 
+## 设置环境变量
+`Product` -> `Scheme` -> `Edit Scheme` -> `Run` -> `Environment Variables`
+
+## 关闭ARC
+选中`Build Settings`,选择 `ALL` 和 `Combined` ，搜索 `Automatic Reference Counting`，将值从YES 更改为 NO;
+
+Xcode 提供了一个迁移工具，可以自动将MRC代码转换为ARC代码，选择 `Edit > Convert > To Objective-C ARC`
+
+使用ARC作为默认方式的项目,可以使用`-fno-objc-arc`编译器标志为指定文件禁用ARC
+使用MRC作为默认方式的项目,可以使用`-fobjc-arc`编译器标志为指定文件启用ARC
+
+## 开启僵尸对象
+`Product` -> `Scheme` -> `Edit Scheme` -> `Run` -> `Diagnostics` -> `Zombie Objects`
+
+## 开启LinkMap
+生成LinkMap条件，`Build Settings` 
+ `Path to Link Map File`  LinkMap 文件保存地址
+ `Write Link Map File`  开启LinkMap
+可借助第三方工具解析LinkMap文件： https://github.com/huanxsd/LinkMap

@@ -71,7 +71,7 @@ Core Foundation 框架中跟RunLoop有关的5个类， `CFRunLoopRef`、`CFRunLo
 
 ![](./../imgs/ios_img_40.jpg)
 
-我们再通过`CFRunLoopRef`和`CFRunLoopModeRef`结构体来认识他们的关系，代码经过删减来自`CF-1153.18`：
+我们再通过`CFRunLoopRef`和`CFRunLoopModeRef`结构体来认识他们的关系，代码片段来自`CF-1153.18`,经过删减：
 ```
 typedef struct __CFRunLoop * CFRunLoopRef;
 struct __CFRunLoop {
@@ -80,6 +80,8 @@ struct __CFRunLoop {
     CFMutableSetRef _commonModeItems;
     CFRunLoopModeRef _currentMode; //当前Mode
     CFMutableSetRef _modes;  //Mode的合集
+    struct _block_item *_blocks_head; //调用CFRunLoopPerformBlock 函数时，blocks_heads 会被赋值。双向链表结构，在进入runloop 休眠之前就执行了。不影响runloop 的执行顺序。
+    struct _block_item *_blocks_tail; //执行的block的链表的尾部
 };
 
 typedef struct __CFRunLoopMode *CFRunLoopModeRef;

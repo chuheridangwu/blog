@@ -2,18 +2,23 @@
 使用docsify快速搭建个人博客
 [官方文档]( https://docsify.js.org/#/zh-cn/quickstart)
 > 1. mac 安装npm
-brew install node
+
+`brew install node`
 
 > 2. 安装 docsify
-npm i docsify-cli -g
+
+`npm i docsify-cli -g`
 
 > 3. 初始化docsify文档
-docsify init ./docs
+
+`docsify init ./docs`
 
 > 4. 启动本地预览
-docsify serve docs
+
+`docsify serve docs`
 
 > 5. 设置搜索
+
 ```
 <script>
   window.$docsify = {
@@ -78,6 +83,10 @@ function getAdder(int $x): int
 >10. 导入图片限制图片大小
 
 `![](./../imgs/图片名.png ':size=280')`
+
+>11. 使用斜体和小与正常字号
+
+正常字号 、_斜体_ 、<small>小字号</small>
 
 > 参考网址
 * https://segmentfault.com/a/1190000017576714

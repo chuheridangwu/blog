@@ -20,7 +20,8 @@
     * [17、认识多线程](ios/principle/thread1.md)
     * [18、线程锁的应用](ios/principle/thread2.md)
     * [19、内存管理 - 定时器](ios/principle/memory1.md)
-
+    * [20、内存管理 - Tagged Pointer](ios/principle/memory2.md)
+    * [21、内存管理 - autorelease](ios/principle/memory3.md)
 * IPA
     * [ipa自动化打包工具](ios/ipa/ipa自动化打包工具.md)
     * [苹果商店获取ipa文件](ios/ipa/获取ipa文件.md)
