@@ -22,6 +22,7 @@
     * [19、内存管理 - 定时器](ios/principle/memory1.md)
     * [20、内存管理 - Tagged Pointer](ios/principle/memory2.md)
     * [21、内存管理 - autorelease](ios/principle/memory3.md)
+    * [22、性能优化](ios/principle/性能优化.md)
 * IPA
     * [ipa自动化打包工具](ios/ipa/ipa自动化打包工具.md)
     * [苹果商店获取ipa文件](ios/ipa/获取ipa文件.md)

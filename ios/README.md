@@ -33,8 +33,3 @@ urlString = [urlString stringByAddingPercentEncodingWithAllowedCharacters:[NSCha
 1387371333 ： 是appid
 testflight测试地址：https://beta.itunes.apple.com/v1/app/1391515055
 appstore下载地址：https://itunes.apple.com/app/id1387371333
-
-
-### iOS优化性能和卡顿
-
-[iOS应用千万级架构：性能优化与卡顿监控](https://www.cnblogs.com/jys509/p/13296128.html) 来自李明杰的底层原理班
