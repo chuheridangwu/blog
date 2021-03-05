@@ -82,6 +82,4 @@ sudo spctl --master-disable
 1. 安装 ImageMagick，brew install imagemagick
 2. 压缩工程目录下所有 png 文件，find filename "*.png" -exec echo {} \; -exec convert {} {} \;
 
-
-
 [苹果内购测试流程](https://developer.apple.com/documentation/storekit/in-app_purchase/testing_in-app_purchases_with_sandbox)

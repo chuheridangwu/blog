@@ -4,16 +4,16 @@
 * [Python](python/)
 <!-- * [Shell](shell/) -->
 <!-- * [Linux](/liunx/) -->
-* [Photoshop](photoshop/)
 * [Web](web/)
 * [C](c/)
+* [Photoshop](photoshop/)
 
 * 工具
-    * [调试技巧](live/)
+    * [调试技巧](tool/skill.md)
     * [docsify](tool/docsify.md)
     * [Wireshark](tool/Wireshark.md)
     * [Git](tool/git.md)
 
 * 生活
-  * [日常](live/)
   * [单词](live/keyword.md)
+  * [百科](live/live.md)

@@ -24,3 +24,6 @@ Apple Configurator2在App Store可以直接搜到，安装要求，**系统版�
 ## 如何获取里面的资源文件
 * 找到对应的ipa之后，修改后缀名为zip进行解压，解压后找到里面的资源包，右击 > 显示包内容
 * 获取图片资源可以使用[iOS-Images-Extractor](https://github.com/devcxm/iOS-Images-Extractor)或者[AssetsExtractor](https://github.com/pcjbird/AssetsExtractor)
+
+## IPA的链接
+假设appid是1387371333,在testflight中的测试地址：https://beta.itunes.apple.com/v1/app/1387371333，在appstore中的下载地址：https://itunes.apple.com/app/id1387371333

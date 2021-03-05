@@ -1,35 +1,16 @@
+iOS做了好几年了，最近越发感觉移动端的的发展已经到了瓶颈，需求正在慢慢饱和，也许是时候转型了。之后的发展发现想以前端、逆向、Flutter为主。
 
-## XIB创建TableViewCell
-```oc
-// 创建cell
-[_tableView registerNib:[UINib nibWithNibName:@"PersonMessageCell" bundle:nil] forCellReuseIdentifier:@"PersonMessageCell"];
+**为什么想学习前端？**
 
-// 使用
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-PersonMessageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PersonMessageCell"];
-return cell;
-}
+很早之前就想学习前端，前端可以跨多个端进行运行，而移动端被限制到自己的平台。现在移动端的发展感觉已经到了瓶颈，多学点技能傍身总是没错的。对前端的发展比较好。
 
-// 初始化界面时，需要创建圆角等
-- (void)awakeFromNib {
-    [super awakeFromNib];
-    _bgView.layer.cornerRadius = 5;
-    _bgView.layer.masksToBounds = YES;
-}
-```
+**为什么想学习逆向？**
 
-## 使用URLWithString方法时 无法生成url
-`NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@?%@",host_url,baseurl,postURL]];`
-原因是字符串中存在特殊字符，需要先对字符串进行转义，
-```
-NSString *urlString = [NSString stringWithFormat:@"%@?paramstr=%@",url,[self jsonData]];
-urlString = [urlString stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
-```
+逆向是我一直想学习的，不想一直只做业务需求，学习逆向可以做一些比较有意思的事情，不用执着于写业务需求代码。路漫漫其修远兮、吾将上下而求索。
 
+**为什么要学习Flutter？**
 
-### APP内切换语言
+学习Flutter的主要原因是它能够同时运行与Android和iOS平台，对移动应用开发成本比较低，另外自己本身对Android和iOS的开发都有了解，学习起来比较快。
 
+在移动端发展越来越慢的时候，能够快速实现功能并且节省开发成本的首选可能就是Flutter。如果自己以后想做APP，使用Flutter开发会更加方便。
 
-1387371333 ： 是appid
-testflight测试地址：https://beta.itunes.apple.com/v1/app/1391515055
-appstore下载地址：https://itunes.apple.com/app/id1387371333

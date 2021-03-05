@@ -31,4 +31,6 @@
 * [Xcode](ios/xcode.md)
 * [Mac](ios/mac.md)
 * [LLVM](ios/llvm.md)
+* [NSArray](ios/nsarray.md)
+<!-- * [错误](ios/../ios_error.md) -->
 * [面试题](ios/面试题.md)
