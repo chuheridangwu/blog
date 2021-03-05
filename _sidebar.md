@@ -3,7 +3,7 @@
 * [iOS](ios/)
 * [Python](python/)
 <!-- * [Shell](shell/) -->
-* [Linux](/liunx/)
+<!-- * [Linux](/liunx/) -->
 * [Photoshop](photoshop/)
 * [Web](web/)
 * [C](c/)

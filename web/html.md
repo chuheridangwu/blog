@@ -217,3 +217,180 @@ label 和 input进行绑定，点击label，input会聚焦
 * optgroup 组标题
 * selected 默认选中
 * option 一组
+
+## 颜色
+基本的颜色 red、black、blue
+使用RGB表示颜色 ，我们知道颜色都是由红绿蓝三原色组成。
+RGB格式表示颜色： 通过R（red）/G(Green)/B(Blue)三种颜色通道的变化，叠加产生各种各样的颜色。
+十进制表示形式，每一种颜色的取值范围0~255，正好是一个字节。RGB(122，122，122)
+十六进制表示形式，每一种颜色的取值范围是00~FF，一个字节八个二进制位，两个16进制表示一个字节。只是换了一种表达形式。#ff0000,如果是重复的，可以直接用三位数进行表示比如#00ff00和#0f0代表的是相同的意思。
+
+颜色的规律：
+* RGB颜色值越大，越靠近白色，越浅色。
+* 颜色值越小，越靠近黑色，越深色
+* RGB颜色值一样的，一般是灰色，值越大越靠近深灰，越小越靠近浅灰
+
+RGBA： 在RGB颜色的基础上加上透明度alpha，实现带有透明度的颜色。alpha取值0.0~1.0.#
+
+白色rgb(255,255,255)  黑色rgb(0,0,0)
+
+
+# html快捷键
+!和html:5 可以快速生成完整结构的html5代码
+
+`>` 和 `+`
+div>ul>li 快速生成
+```
+<div>
+    <ul>
+        <li></li>
+    </ul>
+</div>
+```
+
+div+p+bq
+```
+<div></div>
+<p></p>
+<blockquote></blockquote>
+```
+div+div>p>span+em
+```
+<div></div>
+<div>
+    <p><span></span><em></em></p>
+</div>
+```
+
+`*` 和`^`
+ul>li*3
+```
+<ul>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+</ul>
+```
+
+div+div>p>span+em^h1
+```
+<div></div>
+<div>
+    <p><span></span><em></em></p>
+    <h1></h1>
+</div>
+```
+
+`()`
+div>(header>ul>li*2>a)+footer>p
+```
+<div>
+    <header>
+        <ul>
+            <li><a href=""></a></li>
+            <li><a href=""></a></li>
+        </ul>
+    </header>
+    <footer>
+        <p></p>
+    </footer>
+</div>
+```
+
+(div>dl>(dt+dd)*3)+footer>p
+```
+<div>
+    <dl>
+        <dt></dt>
+        <dd></dd>
+        <dt></dt>
+        <dd></dd>
+        <dt></dt>
+        <dd></dd>
+    </dl>
+</div>
+<footer>
+    <p></p>
+</footer>
+```
+
+属性
+div#footer+div.page+div#footer.class1.class2.class3
+```
+<div id="header"></div>
+<div class="page"></div>
+<div id="footer" class="class1 class2 class3"></div>
+```
+
+td[title=hello]
+```
+<td title="hello"></td>
+```
+
+td[title=hello colspan=3]
+`<td title="hello" colspan="3"></td>`
+
+td[title colspan]
+`<td title="" colspan=""></td>`
+
+$: 代表索引 
+ul>li.item$*5
+```
+<ul>
+    <li class="item1"></li>
+    <li class="item2"></li>
+    <li class="item3"></li>
+    <li class="item4"></li>
+    <li class="item5"></li>
+</ul>
+```
+
+ul>li.item$@4*5
+```
+<ul>
+    <li class="item4"></li>
+    <li class="item5"></li>
+    <li class="item6"></li>
+    <li class="item7"></li>
+    <li class="item8"></li>
+</ul>
+```
+
+{}
+a{click}
+`<a href="">click</a>`
+a>{click}+span{here}
+`<a href="">click<span>here</span></a>`
+
+隐式标签：因为一些标签下面的子标签是固定的，所以不用写也没问题
+ul>.item*3
+```
+<ul>
+    <li class="item"></li>
+    <li class="item"></li>
+    <li class="item"></li>
+</ul>
+```
+
+table>#row$*4>[colspan=2]
+```
+<table>
+    <tr id="row1">
+        <td colspan="2"></td>
+    </tr>
+    <tr id="row2">
+        <td colspan="2"></td>
+    </tr>
+    <tr id="row3">
+        <td colspan="2"></td>
+    </tr>
+    <tr id="row4">
+        <td colspan="2"></td>
+    </tr>
+</table>
+```
+
+css
+w100=`width: 100px;`
