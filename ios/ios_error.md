@@ -44,3 +44,17 @@ bug描述： 项目接入腾讯播放器后，iOS13之前的系统不能播放�
 总结：
 1. 在遇到问题首先怀疑是库文件引起的没有错，但是删除之后视频依然不能播放时应该首先想到是因为分类引起的。
 2. 在浪费大量时间解决删除项目文件时遇到引用问题，这个时候就应该停下来先想一想有没有更好的解决办法或者更好的删除方案。
+
+
+## pch文件
+项目使用oc和c++进行混编开发，在使用pch导入头文件时，需要使用`if __OBJC__`，表示宏内引用的文件确保只被使用Objective-C语言的文件所引用，保证引用关系的清晰。
+```objc
+#ifndef PrefixHeader1_pch
+#define PrefixHeader1_pch
+
+#ifdef __OBJC__
+#import "NSDictionary+TGATransform.h"
+#endif
+
+#endif /* PrefixHeader1_pch */
+```

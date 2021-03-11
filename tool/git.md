@@ -20,6 +20,7 @@ Git保存的是每一次的修改记录
 git status  //查看当前状态
 git log     //查看提交日志
 git reflog  //查看提交过的命令
+git log --graph --pretty=oneline --abbrev-commit  // 查看提交过的记录
 git reset --hard b957a5f    //hard:强制回退  b957a5f:提交过的版本号
 git checkout --file         //撤销文件内的修改过 file为文件
 git rm file //删除文件，如果文件没有提交到版本库，使用rm file 就可以， file: 文件名
@@ -66,6 +67,35 @@ git push origin --tags  //一次推送所有尚未推送到远程的本地标签
 ```
 touch .gitignore    //创建.gitigonre文件
 vim .gitignore      //编辑，直接将上面配置好的忽略文件copy过来就可以了
+```
+
+## 变基 rebase
+rebase 命令：可以将提交到某一分支上的所有修改都移至另一分支上。
+rebase操作原则：只对尚未推送或分享给别人的本地修改执行变基操作清理历史， 从不对已推送至别处的提交执行变基操作。
+```
+多人开发项目,当你进行提交代码时，如果需要先从主分支拉取最新代码，当你再次提交时查看提交日志会显示多出一条线，
+
+*   5eee114 (HEAD -> main) Merge branch 'dev1' into main 就是想合并
+|\  
+| * 130455b (dev1) 7
+* | 5d5348e 6
+* | 9c6e9db (dev2) 5
+|/  
+* 4f028ad 4
+* f712934 (dev) 3
+* 0a88a77 2
+* 040700e 1
+* 40c8fb6 Initial Commit
+
+使用 git rebase dev 之后的日志
+* 737c1eb (HEAD -> main) 7
+* 324cd55 6
+* fcc7600 5
+* e04703d 4
+* f712934 (dev) 3
+* 0a88a77 2
+* 040700e 1
+* 40c8fb6 Initial Commit
 ```
 
 ## github设置代理
