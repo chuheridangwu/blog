@@ -13,6 +13,7 @@
     * [docsify](tool/docsify.md)
     * [Wireshark](tool/Wireshark.md)
     * [Git](tool/git.md)
+    * [Job](tool/job.md)
 
 * 生活
   * [单词](live/keyword.md)

@@ -8,4 +8,24 @@
 
 后来准备搭建本地`gitbook`的时候发现了`Docsify`这个工具。简直不要太方便，不同于 `GitBook、Hexo` 的地方是它不会生成静态的`.html`文件，所有转换工作都是在运行时。如果你想要开始使用它，只需要创建一个 `index.html`就可以开始编写文档并直接部署在`GitHub Pages`。
 
+> Mac电脑中常用软件
 
+* Wireshark、Charles: 抓包工具
+* Xcode、Android Studio、VSCode、WebStorm: 开发工具
+* iFunBox: IPA安装工具
+* Apple Configurator2: 获取苹果商店IPA
+* Alfred: 快捷命令，支持快捷搜索
+* Downie4: 视频下载工具 
+* Evplayer: 视频播放器
+* 010 Editor: 二进制查看工具
+* The Unarchiver: 解压工具
+* Google Chrome、小飞机: 谷歌浏览器
+* Sourcetree: Git图形化工具
+* ClearMyMac X: 电脑垃圾清理工具
+* XMind、MindNode: 思维导图
+
+> 团队中常用的文档
+
+* ShowDoc: 可以当做接口文档进行使用
+* GitLab: 代码仓库，可使用CI/CD做自动化打包
+* 蓝湖： UI素材上传和产品文档编写

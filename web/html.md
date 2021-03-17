@@ -1,14 +1,9 @@
 # HTML
 
-html是超文本标记语言，超文本指的是`超链接`,标记指的是`标签`，文件的扩展名为html或者htm
+超文本标记语言（HyperText Markup Language，简称：HTML）是一种用于创建网页的标准标记语言。文件的扩展名为html或者htm。HTML文档由无数个标签组成，由标签和内容组成的成为元素（element）。
 
-[点击查看HTML5标签列表](https://www.runoob.com/tags/html-reference.html)
-
-[点击查看HTML5全局属性](https://www.runoob.com/tags/ref-standardattributes.html),全局属性是每个标签都可以使用的属性
-
-[点击查看HTML5事件属性](https://www.runoob.com/tags/ref-eventattributes.html)
-
-## html基础结构
+## HTML的基础结构
+通过下面的代码认识一下HTML的结构:
 
 ```html
 <!DOCTYPE html>
@@ -18,47 +13,63 @@ html是超文本标记语言，超文本指的是`超链接`,标记指的是`标
         <title>网页标题</title>
     </head>
     <body>
-        网页显示内容
+    
     </body>
 </html>
 ```
-* `<!DOCTYPE html>` 声明为 HTML5 文档
+* `<!DOCTYPE html>` HTML文档声明，告诉浏览器当前页面是 HTML5 文档
 * `<html>` 元素是 HTML 页面的根元素
-* `<head>` 元素包含了文档的元（meta）数据，如 <meta charset="utf-8"> 定义网页编码格式为 utf-8。
+* `<head>` 元素包含了文档的元（meta）数据，如 `<meta charset="utf-8">` 定义网页编码格式为 utf-8。
 * `<title>` 元素描述了文档的标题
 * `<body>` 元素包含了可见的页面内容
-* `<h1>` 元素定义一个大标题
-* `<p>` 元素定义一个段落
+
+## 常用元素
+HTML提供了大量元素，每一个元素都有特定的用途。大部分标签是以标签对的格式进行使用`<元素名>具体内容</元素名>`,`meta、img、br、input`没有包含具体内容，书写格式是单标签`<元素名>`。[点击查看HTML5所有标签](https://www.runoob.com/tags/html-reference.html)
+```html
+区块： div
+区分： span
+文本： p、h1~h6、em、dt、dd
+表格： table、tbody、thread、tr、td、th、tfoot、caption
+表单： form、input、label、textarea、select
+链接： a
+图片： img
+音频： audio
+视频： video
+文档： html、head、title、body、meta
+列表： ul、ol、li、dlside、footer、nav
+其他： br、hr、iframe
+结构： header、section、a、strong、pre、address、q、blockquote、cite、code
+```
+每一个标签都可以拥有自己的属性，属性可以增加元素的功能，书写格式是`<起始标签 属性名="属性值">`，比如`<body id="box">`。[点击查看HTML5全局属性](https://www.runoob.com/tags/ref-standardattributes.html)全局属性是每个标签都可以使用的属性
+
+另外HTML 事件触发浏览器中的行为，比方说当用户点击某个 HTML 元素时启动一段 JavaScript，称为事件。[点击查看HTML5事件属性](https://www.runoob.com/tags/ref-eventattributes.html)
 
 ## 常用的标签
-column0 | column1
-------- | -------
-`<h1>` | 标题H1-H6，搜索引擎会使用标题将网页的结构和内容编制索引，网页上使用标题是很重要的。
-`<p>` | 段落
-`<bt/>` | 换行
-`<img>` | 图像
-`<a>` | 链接
+标签 | 作用 | 示例
+------- | ------- | -------
+`<h1>` | 标题H1-H6，搜索引擎会使用标题将网页的结构和内容编制索引，H1标签SEO优化。 | `<h1>标题</h1>`
+`<p>` | 段落  | `<p>标题</p>`
+`<bt/>` | 换行 | 
+`<img>` | 图像 | `<img src="图片地址" alt="占位文字（图片加载失败时显示）" width="100">` <br> img只设置宽度或者高度，浏览器会自动根据宽高比自动计算
+`<a>` | 超链接 | `<a href="http://www.baidu.com" target="">`
+`<iframe>` | 在当前 HTML 文档中嵌入另一个文档 | ` <iframe src="http://www.baidu.com" frameborder="0"></iframe>`
 `<ol>` | 无序列表
 `<ul>` | 有序列表
 `<textarea>` | 多行文本输入框
 `<video>` | 视频播放器
 `<textarea>` | 多行文本输入框
-`<marquee>` | 跑马灯 `direction` 控制方向`up/down/right`，
+`<marquee>` | 跑马灯 `direction` 控制方向`up/down/right`
+`&nbsp;` | 空格 | 字符实体
+`&lt;` | <  | 字符实体
+`&gt;` | >  | 字符实体
+`&copy;` | 版权符号  | 字符实体
 
-## 字符实体
-column0 | column1
-------- | -------
-`&nbsp;` | 空格
-`&lt;` | <
-`&gt;` | >
-`&copy;` | 版权符号
-
-
-### 相对路径 和 绝对路径
-* `./ ` 表示当前文件所在目录下，比如：`./pic.jpg` 表示当前目录下的pic.jpg的图片，这个使用时可以省略。
-
-* ` ../ ` 表示当前文件所在目录下的上一级目录，比如：`../images/pic.jpg` 表示当前目录下的上一级目录下的images文件夹中的pic.jpg的图片。
-
+## 锚点
+锚点可以实现:跳转到网页中的具体位置。需要先在跳转的位置设置id，按钮的链接使用`#id`的模式
+```html
+ <a href="#first">跳转到对应锚点</a>
+ <h2 id="first">定义锚点</h2>
+```
 
 ## 行内元素 和 块元素
 ### html块
@@ -76,42 +87,8 @@ column0 | column1
 
 
 ## 列表
-
-### 有序列表
-
-```html
-<ol>
-    <li>列表文字一</li>
-    <li>列表文字二</li>
-    <li>列表文字三</li>
-</ol>
-```
-### 无序列表
-
-```html
-<ul>
-    <li>列表文字一</li>
-    <li>列表文字二</li>
-    <li>列表文字三</li>
-</ul>
-```
-
-### 定义列表
-
-```html
-<h3>前端三大块</h3>
-<dl>
-    <dt>html</dt>
-    <dd>负责页面的结构</dd>
-
-    <dt>css</dt>
-    <dd>负责页面的表现</dd>
-
-    <dt>javascript</dt>
-    <dd>负责页面的行为</dd>
-
-</dl>
-```
+列表有三种：自定义列表、有序列表、无序列表
+![](../web/imgs/web_img_1.jpg)
 
 ## 表格
 
@@ -218,24 +195,7 @@ label 和 input进行绑定，点击label，input会聚焦
 * selected 默认选中
 * option 一组
 
-## 颜色
-基本的颜色 red、black、blue
-使用RGB表示颜色 ，我们知道颜色都是由红绿蓝三原色组成。
-RGB格式表示颜色： 通过R（red）/G(Green)/B(Blue)三种颜色通道的变化，叠加产生各种各样的颜色。
-十进制表示形式，每一种颜色的取值范围0~255，正好是一个字节。RGB(122，122，122)
-十六进制表示形式，每一种颜色的取值范围是00~FF，一个字节八个二进制位，两个16进制表示一个字节。只是换了一种表达形式。#ff0000,如果是重复的，可以直接用三位数进行表示比如#00ff00和#0f0代表的是相同的意思。
-
-颜色的规律：
-* RGB颜色值越大，越靠近白色，越浅色。
-* 颜色值越小，越靠近黑色，越深色
-* RGB颜色值一样的，一般是灰色，值越大越靠近深灰，越小越靠近浅灰
-
-RGBA： 在RGB颜色的基础上加上透明度alpha，实现带有透明度的颜色。alpha取值0.0~1.0.#
-
-白色rgb(255,255,255)  黑色rgb(0,0,0)
-
-
-# html快捷键
+## html快捷键
 !和html:5 可以快速生成完整结构的html5代码
 
 `>` 和 `+`
@@ -394,3 +354,25 @@ table>#row$*4>[colspan=2]
 
 css
 w100=`width: 100px;`
+
+## 扩展知识
+**相对路径 和 绝对路径**
+
+* `./ ` 表示当前文件所在目录下，比如：`./pic.jpg` 表示当前目录下的pic.jpg的图片，这个使用时可以省略。
+* ` ../ ` 表示当前文件所在目录下的上一级目录，比如：`../images/pic.jpg` 表示当前目录下的上一级目录下的images文件夹中的pic.jpg的图片。
+
+**图片格式**
+* png: 静态图片，支持透明
+* jpg: 静态图片，不支持透明
+* gif: 动态图片、静态图片，支持透明
+
+像素: 屏幕成像是由一个个像素点组成的，可以把像素点比作一个格子，一个格子中只能有一种颜色。像素越高图片质量越清晰。
+
+URL的基本格式： `协议://主机地址/路径`
+协议：不同的协议，代表不同的资源查找方式、资源传输方式
+主机地址： 服务器的ip地址或者域名
+路径：资源在主机中的具体位置
+
+
+## 单词
+element： 元素
