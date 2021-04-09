@@ -196,6 +196,7 @@ label 和 input进行绑定，点击label，input会聚焦
 * option 一组
 
 ## html快捷键
+
 !和html:5 可以快速生成完整结构的html5代码
 
 `>` 和 `+`

@@ -24,7 +24,8 @@
     * [21、内存管理 - autorelease](ios/principle/memory3.md)
     * [22、性能优化](ios/principle/性能优化.md)
 * IPA
-    * [ipa自动化打包工具](ios/ipa/ipa自动化打包工具.md)
+    * [fastlane自动化打包工具](ios/ipa/fastlane自动化打包工具.md)
+    * [xcodebuild自动打包工具](ios/ipa/xcodebuild打包工具.md)
     * [苹果商店获取ipa文件](ios/ipa/获取ipa文件.md)
 * 逆向
   *  [逆向1](ios/reverse/reverse1.md)
@@ -32,5 +33,5 @@
 * [Mac](ios/mac.md)
 * [LLVM](ios/llvm.md)
 * [NSArray](ios/nsarray.md)
-<!-- * [错误](ios/../ios_error.md) -->
+* [常见错误](/ios_error.md)
 * [面试题](ios/面试题.md)

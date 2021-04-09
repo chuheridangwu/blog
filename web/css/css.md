@@ -42,7 +42,7 @@ CSS 有很多修饰元素的属性，正式这些属性让HTML文档的色彩变
  定位: vertical-align、position、left、top、right、bottom、float、clear
  ```
 
-### 字体属性（Font）
+## 字体属性（Font）
 属性 | 描述 | CSS
 ------- | ------- | -------
 font | 在一个声明中设置所有字体属性。 | 1
@@ -71,7 +71,15 @@ font-weight | 规定字体的粗细，取值范围100~900。 <br> 一些标签�
 }
 ```
 
-### 文本相关属性
+**字体图标**
+
+字体可以当做图标进行使用，减少http请求数。使用方式:
+1. 设计师提供svg格式图标,上传到对应字体图标网站，例如[阿里巴巴矢量图](https://www.iconfont.cn/),点击选中的图片，选择右侧下载生成的代码
+2. 解压之后打开demo_index.html文件，里面会告诉你详细步骤是怎么做
+3. 首先把`iconfont`开头的文件拷贝到项目中，然后在css样式中填写`@font-face`和`.iconfont`样式，`@font-face`中需要正确的资源文件路径
+4. 有三种添加字体图标的方式:`Unicode`、`Font class`、`Symbol`,常用的是`Font class`，未来的主流是`Symbol`，可以使用多个颜色。
+
+## 文本相关属性
 属性 | 描述 | 值
 ------- | ------- | -------
 text-decoration | 用于设置文字的装饰线 <br> u、ins元素默认设置了`underline` | * none:去掉a元素默认的下划线 <br> * underline: 下划线 <br> * overline: 上划线 <br> * line-throough: 中划线
@@ -80,7 +88,6 @@ word-spacing |  设置单词之间的间距 |
 text-transform | 用于设置文字的大小写转换 | * capitalize:将每个单词的首字符变为大写 <br> * uppercase: 将每个单词的所有字符变为大写 <br> * lowercase: 将每个单词的所有字符变为小写 <br> * none: 没有任何影响
 text-indent | 用于设置第一行内容的缩进 | `text-indent:2em`刚好缩进2个文字
 text-align | 用于设置元素内容在元素中的水平对齐方式 | * left:左对齐 <br> * right: 右对齐 <br> * center: 正中间显示 <br> * justify: 两端对齐
-
 
 * em相对与font-size进行计算，2em相当于font-size*2
   
@@ -99,3 +106,53 @@ text-align | 用于设置元素内容在元素中的水平对齐方式 | * left:
 
 **RGBA:**
 在RGB颜色的基础上加上透明度alpha，实现带有透明度的颜色。`alpha取值0.0~1.0`
+
+## CSS技巧
+1. div的宽度不等于屏幕宽度想要实现居中时，使用`margin:0 auto`的方式进行居中
+2. 使用img标签添加大图想要居中时，父标签添加属性`text-align: center`,img标签添加`margin: 0 -100%`进行图片居中
+3. 图片默认vertical-align：baseline，导致图片距离div底部会有1-2像素的间距，设置vertical-align：bottom解决这个问题。
+4. 如果是绝对定位，使用`left: 50%; transform: translateX(-50%);`进行居中
+5. 视图大小不能够填充整个内容时，使用`object-fit: cover;`进行等比拉伸填充
+6. 盒子塌陷:子视图使用浮动之后，视图会发生贴靠，父视图的高度不会被内容撑开，如果想要换到下一行，在父视图进行清除浮动
+7. 对视图使用了绝对定位或者相对定位时，会被其他视图挡住，这个时候使用`z-index`增加权重
+8. div使用定位流之后，不能被内容撑开，需要设置宽高。
+9. 给行内元素添加形变是无效的，必须是行内块级元素或者块级元素。
+
+## block、inline、inline-block
+
+**block**
+1.block元素会独占一行，默认情况下其宽度自动填满其父元素的宽度
+2.block元素可以设置width,height属性
+3.block元素可以设置margin的padding属性
+
+**inline**
+1.inline元素不会独占一行,多个相邻元素会排列在同一行，直到排满换行,其宽度随元素内容而变化
+2.inline元素设置width,height属性无效
+3.inline元素的margin和padding属性都只有水平方向上的起效果
+
+**inline-block**
+1.将对象呈现为inline对象，故其宽度能由内容撑开
+2.但是将对象的内容作为block对象呈现,故可以用伪元素first-letter将首字母选中
+3.故被设置为inline-block的元素会既具有宽高属性，又具有同行特性
+
+
+## 响应式查询
+响应式查询是根据当前手机屏幕宽度，适配不同的css样式，只适用于少量的元素修改。
+```css
+<style>
+    @media screen and (min-width: 1200px) {
+        div{
+            width: 100px;
+            height: 100px;
+            background-color: red;
+        }
+    }
+    @media screen and (max-width: 1200px) {
+        div{
+            width: 50px;
+            height: 50px;
+            background-color: yellow;
+        }
+    }
+</style>
+```

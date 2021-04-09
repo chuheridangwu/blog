@@ -23,6 +23,7 @@ git reflog  //查看提交过的命令
 git log --graph --pretty=oneline --abbrev-commit  // 查看提交过的记录
 git reset --hard b957a5f    //hard:强制回退  b957a5f:提交过的版本号
 git checkout --file         //撤销文件内的修改过 file为文件
+git checkout .              //撤销全部文件的修改内容
 git rm file //删除文件，如果文件没有提交到版本库，使用rm file 就可以， file: 文件名
 ```
 
@@ -38,6 +39,11 @@ git branch -d dev   //删除dev分支
 git merge dev       //将dev分支跟主分支进行合并
 ```
 >当分支合并发生冲突时，使用`git status`可以告诉我们冲突的文件，Git的用`<<<<<<<，=======，>>>>>>>`标记出不同分支的内容，我们需要修改后重新合并
+
+多个分支进行合并同一次提交，当一个项目创建多个分支，并且多个分支都有同一个bug的时候，需要使用命令`git cherry-pick`
+* `git cherry-pick 提交commitHash` 合并单次提交到当前分支
+* `git cherry-pick 分支名` 合并分支的最新提交到当前分支
+* `git cherry-pick A..B`  合并A到B的提交到当前分支
 
 ## 文件管理
 ```

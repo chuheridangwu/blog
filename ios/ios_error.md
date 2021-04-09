@@ -1,21 +1,37 @@
 # 常见问题
 
-## XIB创建TableViewCell
-```oc
-// 创建cell
-[_tableView registerNib:[UINib nibWithNibName:@"PersonMessageCell" bundle:nil] forCellReuseIdentifier:@"PersonMessageCell"];
+## 基于Xcode11创建自定义UIWindow
+Xcode 11 建新工程默认会创建通过 UIScene 管理多个 UIWindow 的应用,增加了 SceneDelegate 类，这是为了实现iPadOS支持多窗口的结果。
 
-// 使用
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-PersonMessageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PersonMessageCell"];
-return cell;
+![](imgs/ios_img_57.png)
+```info
+enable Multipe Windows --- 是否允许分屏
+Scene Configuratiton --- 屏幕配置项
+Application Session Role --- 程序屏幕配置规则（为每个Scene指定规则）
+Configuration Name --- 配置名称
+Delegate Class Name --- 代理类名称
+Storyboard Name  --- Storyboard的名字
+```
+
+在iOS13系统中，使用代码更换根控制器。
+```objc
+- (void)scene:(UIScene *)scene willConnectToSession:(UISceneSession *)session options:(UISceneConnectionOptions *)connectionOptions {
+    if (scene) {
+        self.window = [[UIWindow alloc] initWithWindowScene:(UIWindowScene *)scene];
+        self.window.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height);
+        self.window.rootViewController = [[ViewController alloc]init];
+        [self.window makeKeyAndVisible];
+    }
 }
+```
+针对iOS13系统以下，需要`删除info.plist文件中的Application Scene Manifest选项;`,`删除SceneDelegate文件;`、`删除AppDelegate里面的UISceneSession lifecycle方法;`、`在AppDelegate头文件添加window属性;`
+```objc
 
-// 初始化界面时，需要创建圆角等
-- (void)awakeFromNib {
-    [super awakeFromNib];
-    _bgView.layer.cornerRadius = 5;
-    _bgView.layer.masksToBounds = YES;
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    self.window.rootViewController = [[ViewController alloc]init];
+    [self.window makeKeyAndVisible];
+    return YES;
 }
 ```
 

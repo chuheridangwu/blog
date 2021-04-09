@@ -11,14 +11,11 @@
 
 **display修改元素的显示类型：**
 ```css
-/* 行级元素 */
-display: inline; 
-/* 块级元素 */
-display: block;
-/* 本身是行级，可以放在行盒中，可以设置宽高，作为一个整体不会被拆散成多行 */
-display: inline-block;
-/* 此元素不会被显示,排版时完全被忽略 */
-display: none;
+display: flex; /* 伸缩布局 */
+display: inline;  /* 行级元素 */
+display: block; /* 块级元素 */
+display: inline-block; /* 本身是行级，可以放在行盒中，可以设置宽高，作为一个整体不会被拆散成多行 */
+display: none;/* 此元素不会被显示,排版时完全被忽略 */
 ```
 
 ### 行级元素
@@ -30,7 +27,7 @@ IFC内的排版规则
 * vertical-align 决定一个盒子在行内的垂直对齐
 * 避开浮动(float)元素
 
-### Flexible Box
+## 弹性盒子布局 Flexible Box 
 控制盒子的 摆放流向、摆放顺序、盒子的宽度和高度、水平和垂直方向的对齐、是否允许折行
 ```css
 /* 生成一个块级的Flex容器 */
@@ -176,28 +173,33 @@ justify-self: center;
 ```
 
 ### absolute 绝对定位
-绝对定位是脱离文档流位置的，绝对定位不区分行内元素/块级元素/行内块级元素,根据显示屏幕的宽高进行定位，如果父级元素是绝对定位，则会根据父级元素进行定位。**绝对定位搭配相对定位进行使用，子绝父相**
-```css
-.box2{
-    width:100px;
-    height:100px;
-    position: adbsolute;
-    bottom: 10px;
-    background-color: sandybrown;
-}
-```
+绝对定位是脱离文档流位置的，绝对定位不区分行内元素/块级元素/行内块级元素,根据显示屏幕的宽高进行定位，如果父级元素是绝对定位，则会根据父级元素进行定位。**绝对定位搭配相对定位进行使用，子绝父相**,绝对定位水平居中的方式,**只要设置left 是50%， margin-left是物体的负数宽度的一半就可以了**
 
-绝对定位水平居中的方式,**只要设置left 是50%， margin-left是物体的负数宽度的一半就可以了**
 ```css
 .box2{
     width:100px;
     height:100px;
     position: adbsolute;
     left:50%;
-    margin-left:50px; 
+    margin-left: -50px; 
     background-color: sandybrown;
 }
 ```
+
+## 绝对定位 和 相对定位的区别
+position 的四个值：static、relative、absolute、fixed。默认是static,absolute 和 fixed 统称为绝对定位,relative是相对定位。
+
+**relative相对定位特点:**
+1. 元素设置此属性之后仍然处在文档流中，不影响其他元素的布局。
+2. 设置left和top时，元素相对于原来位置偏移，宽高不变。
+
+**absolute绝对定位特点:**
+1. 元素会脱离文档流。脱离文档流后原来的位置相当于是空的，下面的元素会来占据它的位置。
+2. 元素在没有定义宽度的情况下，宽度由元素里面的内容决定，效果和用float方法一样。
+3. 设置left或者top时，如果父元素没有相对或者决定定位的情况下，元素相对于根元素定位
+4. 如果父元素设置了相对定位或绝对定位，元素会选择离自己最近的父元素进行定位
+
+![position 相对定位和绝对定位的区别](https://www.runoob.com/w3cnote/css-position-static-relative-absolute-fixed.html)
 
 
 ### 典型的定位布局
