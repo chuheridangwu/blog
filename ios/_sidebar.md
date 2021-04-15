@@ -31,6 +31,8 @@
   *  [逆向1](ios/reverse/reverse1.md)
 * [Xcode](ios/xcode.md)
 * [Mac](ios/mac.md)
+* [Automator](ios/automator.md)
+* [AppleScript](ios/applescript.md)
 * [LLVM](ios/llvm.md)
 * [NSArray](ios/nsarray.md)
 * [常见错误](/ios_error.md)

@@ -74,3 +74,6 @@ bug描述： 项目接入腾讯播放器后，iOS13之前的系统不能播放�
 
 #endif /* PrefixHeader1_pch */
 ```
+
+## 多语言
+添加多语言适配报错`Localizable.strings” couldn’t be copied to “zh-Hans.lproj” because an item with the same name already`,原因是之前添加过，但是没有删干净。

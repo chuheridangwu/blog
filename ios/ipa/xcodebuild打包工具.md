@@ -3,7 +3,7 @@ xcodebuild 是苹果发布的自动构建工具,平时打包的过程中可以�
 
 ## 常用的xcodebuild命令
 常用的命令有这么几个，`clean`清除项目 、`archive` 打包 、 `-exportArchive` 导出ipa。
-1. 清理项目`xcodebuild clear`
+1. 清理项目`xcodebuild clean`
 2. 打包 `xcodebuild archive`，打包有两种方式，一种是项目中没有使用cocoapods，一种是项目中使用了cocoapods。打包完成后生成对应的`.xcarchive`文件。
 ```
 // 没有使用cocoapods的项目进行打包，在当前目录下只有一个个项目时可以忽略 -project projectName.xcodeproj 
@@ -41,7 +41,7 @@ xcodebuild -exportArchive -archivePath projectName.xcarchive -exportPath 文件�
 
 ## xcodebuild对应的参数说明	
 
-参数 | 值 | 说明
+可选参数 | 对应值 | 说明
 ------- | ------- | -------
 -project | name.xcodeproj | 在当前目录下有多个项目是需要指定改参数
 -target | targetname | 如果不指定的话默认会构建第一个target
@@ -57,6 +57,7 @@ xcodebuild -exportArchive -archivePath projectName.xcarchive -exportPath 文件�
 -list |  | 列出当前项目所有的 Targets、Build、Configurations、Schemes
 -derivedDataPath | path | 构建成功时相关的缓存文件默认路径
 -archivePath | xcarchivepath | 设置导出的.xcarchive文件的路径
+-allowProvisioningUpdates | | 允许xcodebuild与Apple Developer网站进行通信。对于自动签名的目标，xcodebuild将创建并更新配置文件，应用程序ID和证书。对于手动签名的目标， xcodebuild将下载丢失或更新的配置文件。要求已在Xcode的帐户中添加开发者帐户。
 
 参数 | 说明
 ------- | -------
@@ -70,6 +71,30 @@ clean | 从构建目录（SYMROOT）删除构建时的products和一些中间文
 
 ## Xcode Serve
 Xcode开发工具提供了自动打包工具`Xcode Serve`，`Xcode Serve`是一个基本的持续继承方案，可以获取分支代码，指定出发CI的条件，执行对应的Archive操作。在`Preferences`中，选择`Accounts`，删除`Xcode Serve`。
+
+## 常见问题
+
+1. 找不到`exportOptionsPlist`文件
+
+```
+error: Couldn't load -exportOptionsPlist: The file “ExportOptions.plist” couldn’t be opened because there is no such file.
+
+Error Domain=NSCocoaErrorDomain Code=260 "The file “ExportOptions.plist” couldn’t be opened because there is no such file." UserInfo={NSFilePath=/ExportOptions.plist, NSUnderlyingError=0x7f80c769ff70 {Error Domain=NSPOSIXErrorDomain Code=2 "No such file or directory"}}
+
+** EXPORT FAILED **
+```
+
+**解决方案:** 看一下`exportOptionsPlist`文件路径是否正确
+
+2. 没有允许自动签名，项目使用了一个新的`Bundle id`，在使用xcodebuild进行自动打包时出现这个问题
+
+```
+IDEDistribution: -[IDEDistributionLogging _createLoggingBundleAtPath:]: Created bundle at path '/var/folders/lq/035f13253jg7rg4pbw518q440000gn/T/loan_2021-04-15_09-14-34.927.xcdistributionlogs'.
+error: exportArchive: No profiles for 'com.elephan222.cccc' were found
+
+Error Domain=IDEProfileLocatorErrorDomain Code=1 "No profiles for 'com.elephan222.cccc' were found" UserInfo={IDEDistributionIssueSeverity=3, NSLocalizedDescription=No profiles for 'com.elephan222.cccc' were found, NSLocalizedRecoverySuggestion=Xcode couldn't find any iOS App Store provisioning profiles matching 'com.elephan222.cccc'. Automatic signing is disabled and unable to generate a profile. To enable automatic signing, pass -allowProvisioningUpdates to xcodebuild.}
+```
+**解决方案:**xcodebuild 没有允许自动签名导致的，使用`-allowProvisioningUpdates`,允许xcodebuild与Apple Developer网站进行通信。对于自动签名的目标，xcodebuild将创建并更新配置文件，应用程序ID和证书。对于手动签名的目标， xcodebuild将下载丢失或更新的配置文件。要求已在Xcode的帐户中添加开发者帐户。
 
 ## 参考网址
 * [iOS开发-自动打包初步探究](http://zhangzr.cn/2018/07/27/iOS%E5%BC%80%E5%8F%91-%E8%87%AA%E5%8A%A8%E6%89%93%E5%8C%85%E5%88%9D%E6%AD%A5%E6%8E%A2%E7%A9%B6/)

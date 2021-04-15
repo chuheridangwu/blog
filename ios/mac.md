@@ -47,35 +47,26 @@ Option-Command-L | 打开“下载”文件夹。
 Shift-Command-R | 打开“隔空投送”窗口
 Shift-Command-N | 创建一个新的应用
 
+## 常用命令
 
+命令 | 含义
+------- | -------
+`sudo vi /etc/hosts` | 修改hosts权限
+`nc -vz -w 2 120.79.79.253 12009` | ping对应的ip + 端口
+`sudo spctl --master-disable`  |   Mac下允许安装任意来源的命令
+`ifconfig` | 获取本地地址,或者打开网络设置，wifi上有本地ip地址
+`shasum + 文件路径/文件名` | 查看本地文件的hash值
+`defaults write com.apple.finder AppleShowAllFiles -bool true` | 显示隐藏文件
+`defaults write com.apple.finder AppleShowAllFiles  YES` | 显示隐藏文件
+`defaults write com.apple.finder AppleShowAllFiles  N` | 隐藏文件
+`defaults write com.apple.finder AppleShowAllFiles -bool false` | 隐藏文件
+`killall Finder `   |  重启Finer
 
-killall Finder      重启Finer
-
- ## MAC 修改hosts权限
-sudo vi /etc/hosts
-
-## ping ip + 端口
-nc -vz -w 2 120.79.79.253 12009
-
-
-显示隐藏文件命令  defaults write com.apple.finder AppleShowAllFiles -bool true
-隐藏文件命令      defaults write com.apple.finder AppleShowAllFiles -bool false
-显示Mac隐藏文件的命令：defaults write com.apple.finder AppleShowAllFiles  YES
-隐藏Mac隐藏文件的命令：defaults write com.apple.finder AppleShowAllFiles  N
-
-
-iOS描述文件位置
-~/Library/MobileDevice/Provisioning Profiles
-
-
-## Mac下安装任意来源的命令
-sudo spctl --master-disable
-
-## 获取本地地址 ifconfig
-或者打开网络设置，wifi上有本地ip地址
-
-## 查看本地文件的hash值
-使用命令行， shasum + 文件路径/文件名
+## 路径信息
+文件位置 | 具体路径
+------- | -------
+Mac设置文件位置 | `/System/Library/PreferencePanes/Keyboard.prefPane`
+iOS描述文件位置 | `~/Library/MobileDevice/Provisioning Profiles`
 
 ## 修改图片hash值的办法
 使用 ImageMagick 对png图片做轻量压缩，并且不损失图片质量，又可以改变图片文件的hash值

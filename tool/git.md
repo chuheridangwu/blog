@@ -77,7 +77,8 @@ vim .gitignore      //编辑，直接将上面配置好的忽略文件copy过来
 
 ## 变基 rebase
 rebase 命令：可以将提交到某一分支上的所有修改都移至另一分支上。
-rebase操作原则：只对尚未推送或分享给别人的本地修改执行变基操作清理历史， 从不对已推送至别处的提交执行变基操作。
+
+rebase操作原则：**只对尚未推送或分享给别人的本地修改执行变基操作清理历史， 从不对已推送至别处的提交执行变基操作。**
 ```
 多人开发项目,当你进行提交代码时，如果需要先从主分支拉取最新代码，当你再次提交时查看提交日志会显示多出一条线，
 
@@ -103,6 +104,75 @@ rebase操作原则：只对尚未推送或分享给别人的本地修改执行�
 * 040700e 1
 * 40c8fb6 Initial Commit
 ```
+
+**reabse合并多次提交日志**
+本地开发使用多次提交，在提交远程仓库时想要将多次提交合并成一次提交，保留提交日志，可以使用`git rebase -i  [startpoint]  [endpoint]`命令。
+
+`-i`:表示提出交互式界面让用户编辑完成操作
+`[startpoint] [endpoint]`: 则指定了一个编辑区间,如果不指定`[endpoint]`，默认是该分支的终点
+
+1. 假设我们现在有一个项目，有三次提交记录，我们想合并成一次提交，使用`git rebase -i HEAD~3 `或者`git rebase -i  c6b5ced caef37f`
+
+2. 弹出交互式界面，`#`表示它的一些操作，比如`pick`表示保留当前commit，缩写是p
+```
+pick ea8da36 第一次提交
+pick a505e3d 第二次提交
+pick caef37f 第三次提交
+
+# Rebase c6b5ced..caef37f onto c6b5ced (3 commands)
+#
+# Commands:
+# p, pick <commit> = use commit   // 保留当前commit
+# r, reword <commit> = use commit, but edit the commit message  // 保留commit，需要修改提交日志
+# e, edit <commit> = use commit, but stop for amending  // 保留commit，需要修改本次提交
+# s, squash <commit> = use commit, but meld into previous commit  // 将当前commit和前一个commit进行合并
+# f, fixup <commit> = like "squash", but discard this commit's log message  //  // 将当前commit和前一个commit进行合并，保留提交日志
+# x, exec <command> = run command (the rest of the line) using shell // 执行shell命令
+# b, break = stop here (continue rebase later with 'git rebase --continue') 
+# d, drop <commit> = remove commit // 丢弃本次提交
+# l, label <label> = label current HEAD with a name
+# t, reset <label> = reset HEAD to a label
+# m, merge [-C <commit> | -c <commit>] <label> [# <oneline>]
+# .       create a merge commit using the original merge commit's
+# .       message (or the oneline, if no original merge commit was
+# .       specified). Use -c <commit> to reword the commit message.
+```
+
+3. 修改提交日志
+可以修改之前的提交日志
+```
+# This is a combination of 3 commits.
+# This is the 1st commit message:
+
+第一次提交
+
+# This is the commit message #2:
+
+第二次提交
+
+# This is the commit message #3:
+
+第三次提交
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+#
+# Date:      Mon Apr 12 11:26:36 2021 +0800
+#
+# interactive rebase in progress; onto c6b5ced
+# Last commands done (3 commands done):
+#    squash a505e3d 第二次提交
+#    squash caef37f 第三次提交
+# No commands remaining.
+# You are currently rebasing.
+#
+# Changes to be committed:
+#       modified:   gitTest/ViewController.m
+#
+```
+**注意事项：**
+* 如果这个过程中有操作错误，可以使用`git rebase --abort`来撤销修改
+
 
 ## github设置代理
 使用github中，我们经常会遇到下载的时候贼慢的问题，需要设置一下github的代理
