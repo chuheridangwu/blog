@@ -5,7 +5,19 @@ AppleScript是一种面向对象（Object-Oriented，简称OO）的脚本语言�
 
 注意：本文是从**Applescript 简明基础教程**里面摘抄出来的，只是做一些简化。
 
-AppleScript中执行shell命令 `do shell script "touch  Users/xxx/Desktop/b.text"`,在shell中调用AppleScript使用`osascript -e 'display alert "警告！"'`
+## Appscript和shell的交互
+1. AppleScript中执行shell命令 `do shell script "touch  Users/xxx/Desktop/b.text"`
+2. 在 AppleScript 中获取 shell 中的变量:
+
+```shell
+text="Hello world"
+osascript <<EOF
+display alert "IPA成功 -- $text"
+EOF
+```
+
+3. 在shell中调用 AppleScript 使用命令`osascript -e 'display alert "警告！"'`
+4. 在shell中获取 appscript的参数使用 `$1`,注意，**使用Mac电脑的自动操作`automator`进行开发时，shell接收 AppleScript 的变量，需要首先将 `右上角的传递输入 stdin` 更改为 `传递输入 作为自变量`**
 
 ## 数据类型
 AppleScript支持布尔型、数字型、字符型、日期型、常量型、List列表（也就是数组）、Record记录型（也就是我们说的字典）
@@ -118,6 +130,7 @@ display dialog "赋值的结果：a=" & a & "; b=" & b    --显示a和b的值
 set item 1 of b to 0 --修改List b中的第一个值为0
 display dialog "修改变量b之后：a=" & a & "; b=" & b --再次显示a和b的值
 
+set name to item 1 of a   -- 获取数字中第一个的item的值，下标是从1开始
 赋值的结果：a=12345; b=12345
 修改变量b之后：a=02345; b=02345
 ```

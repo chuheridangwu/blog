@@ -2,7 +2,7 @@
 * [Android](android/)
 * [iOS](ios/)
 * [Python](python/)
-<!-- * [Shell](shell/) -->
+* [Shell](shell/)
 <!-- * [Linux](/liunx/) -->
 * [Web](web/)
 * [C](c/)

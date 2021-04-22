@@ -147,3 +147,5 @@ chmod a+x apktool.jar
 
 ### JD-GUI
 解压 JD-GUI 压缩包，双击 JD-GUI 图标打开，把`classes.dex`转化出来的 jar 文件放进去即可
+
+*[apk包破解工具](https://crifan.github.io/android_app_security_crack/website/android_crack_tool/app_to_dex/fdex2.html)
