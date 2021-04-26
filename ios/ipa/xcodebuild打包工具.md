@@ -70,7 +70,7 @@ install | 构建target然后安装到target的安装目录和发布目录（DSTR
 clean | 从构建目录（SYMROOT）删除构建时的products和一些中间文件
 
 ## Xcode Serve
-Xcode开发工具提供了自动打包工具`Xcode Serve`，`Xcode Serve`是一个基本的持续继承方案，可以获取分支代码，指定出发CI的条件，执行对应的Archive操作。在`Preferences`中，选择`Accounts`，删除`Xcode Serve`。
+Xcode开发工具提供了自动打包工具`Xcode Serve`，`Xcode Serve`是一个基本的持续继承方案，可以获取分支代码，指定出发CI的条件，执行对应的Archive操作。在`Preferences`中，选择`Accounts`，删除`Xcode Serve`。[使用 Xcode Server 持续集成 & 打包测试](https://juejin.cn/post/6844903620610097159)
 
 ## 常见问题
 

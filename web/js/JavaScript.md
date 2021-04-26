@@ -1,187 +1,202 @@
 # JavaScript
-JavaScript 因为也是一门语言，所以学起来应该也是快的。基础变量什么的不用学习，直接学习函数和类
+JavaScript是一种运行在浏览器中的解释型的编程语言。在HTML中有两种嵌套方式，可以直接在HTML文件中进行嵌套:
+```html
+<html>
+<head>
+  <script>
+    alert('Hello, world');
+  </script>
+</head>
+<body>
+    <!-- 加载完成后执行里面的函数 -->
+  window.load=function(){
 
- HTML是逐行解析的，所以在使用JavaScript时，需要将引用的JavaScript放在body结束标签前面，或者使用`window.load=function(){}`的方式来进行执行，这段代码是告诉浏览器在界面加载完成之后进行执行里面的代码
+  }
+</body>
+</html>
+```
+也可以单独放到一个js文件中进行导入:
+```html
+<head>
+  <script src="/static/js/abc.js"></script>
+</head>
+```
+需要注意的是：HTML是逐行解析的，在使用JavaScript时，需要将引用的JavaScript放在body结束标签前面，或者使用`window.load=function(){}`的方式进行执行，这段代码是告诉浏览器在界面加载完成之后进行执行里面的代码。
 
-## 数据类型转换
+学习JavaScript也可以通过[MDN Web Docs](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript)网站来学习，或者查询函数的使用方法。
 
-基本数据类型
+## 基本语法
+```javascript
+// 表示定义一个变量x,在ES6之后，使用let表示定义一个变量 
+var x = 1; 
+let x = 1;
 
-* Number
-* String
-* Boolean
-* Undefined
-* Null
-* Object
+// 表示定义一个常量x
+const x = 1;
+```
+在 ES6 之前，JavaScript 可以先使用变量，再定义变量。这是因为浏览器在解析JavaScript代码之前会进行预处理操作,**将当前JavaScript中所有定义变量和函数的代码放到最前面。**
 
-转换成对应的字符串
+**strict模式:**
+如果一个变量没有通过var申明就被使用，那么该变量就自动被申明为全局变量。不同页面的js代码如果有同一个全局变量，会被互相影响变得难以调试。为了预防这一问题，在ES5中出现了`strict`模式，开启`strict`模式，需要在所有语句之前放一个特定语句` "use strict"; （或 'use strict';）`
+```javascript
+// 整个脚本都开启严格模式的语法
+"use strict";
+var v = "Hi!  I'm a strict mode script!";
+```
 
-```Javascript
+## 基本数据类型
+
+基本数据类型有 `Number、 String、 Boolean、Undefined、Null、Object`几种,当我们不知道当前数据是什么类型时，使用`typeof`查看数据类型，例如`typeof 123`。
+
+**Number**
+
+JavaScript不区分整数和浮点数，统一用Number表示，以下都是合法的Number类型：
+```JavaScript
+123; // 整数123
+0.456; // 浮点数0.456
+1.2345e3; // 科学计数法表示1.2345x1000，等同于1234.5
+-99; // 负数
+NaN; // NaN表示Not a Number，当无法计算结果时用NaN表示,NaN属于Number类型
+Infinity; // Infinity表示无限大，当数值超过了JavaScript的Number所能表示的最大值时，就表示为Infinity
+```
+
+**类型之间的转换**
+
+1. Number、Bool、Undefined、Null 转String类型
+
+```javascript
 // number 转 string
 let num = 123;
 let string = num.toString();
+
+// 这样也可以转成字符串类型，本质是调用String()函数
+let str = 123 + ""; 
 
 // bool 转 string
 let bool = true;
 let string1 = bool.toString();
 
 // undefined 转 string
-let un = undefined
-let string2 = String(un)
+let str = String(undefined)
 
 // null 转 string
-let un = null
-let string2 = String(un)
+let str = String(null)
 ```
 
-转换成数据类型
+2. String、Bool、Undefined、Null 转Number类型
 
 ```Javascript
-// 字符串 转 number类型，如果字符串是空，默认转为0 ，如果不是纯数字字符串，转成NaN = Not a Number
-let string = "123"
-let num = Number(string)
+// 字符串 转 Number类型，如果字符串是空，默认转为0 ，如果不是纯数字字符串，转成NaN = Not a Number
+let num = Number("123")
+
+// 通过 + 号或者 - 号也可以将字符串转 Number类型
+let num = +"123"
+
+// Bool 转 Number类型,true返回1，false返回0
+let num = Number(true);
+
+// parseInt和parseFloat 从左到右从字符串中提取数值
+let str = "3.1415px"
+let num = parseInt(str); // 3
+let num = parseFloat(str); // 3.1415
 ```
 
-## 数组
-
-数组的初始化`var list = new Array();`
-
-[点击跳转到菜鸟教程查看](https://www.runoob.com/jsref/jsref-obj-array.html)
-
-方法 | 含义 | 代码 
-------- | ------- | ------
-`concat()` | 合并多个数组 | ```var children = hege.concat(ary);```
-`join()` | 用数组的元素组成字符串 | ```ary.join()```
-`pop()` | 删除数组的最后一个元素 | ```ary.pop()```
-`push()` | 数组的末尾添加新的元素 | ```ary.push("a")```
-`reverse()` | 数组内的元素顺序反转排序 | ```ary.reverse()```
-`shift()` | 删除数组的第一个元素 | ```ary.shift()```
-`sort()` | 数组排序，可安装字母、数字 进行升序或者降序, | ```ary.sort(function(a,b){return a- b}) //升序排列数组 ```
-`splice()` | 数组的第二个位置添加一个元素 | ```fruits.splice(2,0,"Lemon","Kiwi");```
-`toString()` | 数组转换成字符串 | ```ary.toString()```
-`unshift()` | 数组的开头添加新元素 | ```ary.unshift("a")```
-
-遍历数组
+3. String、Number、Undefined、Null 转Bool类型
 
 ```javascript
-let ary = [1,2,3,4,5]
-
-for (let key of ary) {
-    console.log(key);
-}
-
-// value ：数组内的值  index: 下标索引 ary:数组本身
-ary.forEach(function callback(value,index,ary){
-    console.log(value,index,ary);
-})
-
-// 自己写一个forEach
-Array.prototype.myEach = function(fn){
-    for (let i = 0; i < this.length; i++) {
-        fn(this[i],i,this)
-    }
-}
+// 字符串转Bool
+let flag = Boolean("123");
+// Number转Bool,只有数值为0和NaN时才会转换成false
+let flag = Boolean(123);
+// Undefined 转Bool
+let flag =  Boolean(undefined);
+// Null 转Bool
+let flag =  Boolean(null);
 ```
 
- 查找数组中的某个元素，如果有，返回对应下标，没有则返回-1
+**null 和 undefined**
+
+null 表示一个“空”的值，它和 0 以及空字符串`''`不同，0是一个数值，`''`表示长度为0的字符串，而null表示“空”。
+
+在其他语言中，也有类似JavaScript的`null`的表示，例如Java也用`null`，Swift用`nil`，Python用`None`表示。但是，在JavaScript中，还有一个和`null`类似的`undefined`，它表示“未定义”。
+
+JavaScript的设计者希望用null表示一个空的值，而`undefined`表示值未定义。事实证明，这并没有什么卵用，区分两者的意义不大。大多数情况下，我们都应该用`null`。 **`undefined`仅仅在判断函数参数是否传递的情况下有用。**
+
+## 运算符
+* 数值运算符: `+ 、- 、* 、/、%、++、--`
+* 布尔运算符: `&&、||、！`
+* 赋值运算符: `=、+=、-=、*=、/=、%=`
+* 比较运算符: `>、>=、===、!===、<=、<、`,注意比较两个值是否相等时使用`===`,另外`NaN`这个特殊的Number与所有其他值都不相等，包括它自己。唯一能判断 NaN 的方法是通过`isNaN()`函数：
 ```javascript
-let ary = [1,2,3,4,5]
-console.log(ary.indexOf(3));
-
-// findIndex 返回的是下标
-let index = ary.findIndex(function callback(value,index,ary){
-    if (value == 2) {
-        return true
-    }
-})
-
-// find 返回的是value，找不到返回undefined 
-let value = ary.find(function callback(value,index,ary){
-    if (value == 2) {
-        return true
-    }
-})
-
+isNaN(NaN); // true
 ```
 
-根据条件查找数组内的元素，并且返回一个新的数组
+## 流程控制
+JavaScript使用`if () { ... } else { ... }`来进行条件判断，其中`else`语句是可选的。多个条件语句时使用`if() {...} else if() {...} else {....}`
 ```javascript
-let ary = [1,2,3,4,5]
-
-// filter 返回的是一个新的数组
-let ary1 = ary.filter(function callback(value,index,ary){
-    if(value % 2 == 0){
-        return true
-    }
-})
-
-slice() 方法返回一个新的数组对象，这一对象是一个由 begin 和 end 决定的原数组的浅拷贝（包括 begin，不包括end）。原始数组不会被改变
-const animals = ['ant', 'bison', 'camel', 'duck', 'elephant'];
-
-console.log(animals.slice(2));
-// expected output: Array ["camel", "duck", "elephant"]
-
-console.log(animals.slice(2, 4));
-// expected output: Array ["camel", "duck"]
-
-console.log(animals.slice(1, 5));
-// expected output: Array ["bison", "camel", "duck", "elephant"]
-
-
-splice() 方法通过删除或替换现有元素或者原地添加新的元素来修改数组,并以数组形式返回被修改的内容。此方法会改变原数组。第二个数字是0时是添加，>0时是替换
-const months = ['Jan', 'March', 'April', 'June'];
-months.splice(1, 0, 'Feb');
-// inserts at index 1
-console.log(months);
-// expected output: Array ["Jan", "Feb", "March", "April", "June"]
-
-months.splice(4, 1, 'May');
-// replaces 1 element at index 4
-console.log(months);
-// expected output: Array ["Jan", "Feb", "March", "April", "May"]
-```
-
-排序
-```javascript
-let ary = [1,3,2,4,5]
-
-//  使用sort方法默认是正序
-ary.sort()
-
-//  根据 a 和 b的值确定倒序还是正序
-ary.sort(function (a,b){
-    if (a > b) {
-        return -1
-    } else  if (a < b) {
-        return 1
-    }{
-        return 0
-    }
-})
-
-// 升序a-b 降序b-a 
-ary.sort(function (a,b){
-    return a-b
-})
-
-
-// 时间排序
-var data = [
-    {
-        name:'1',
-        time:'2019-04-26 10:53:19'
-    },
-    {
-        name:'2',
-        time:'2019-04-26 10:51:19'
-    }
-]
-data.sort(function(a,b){
-    return a.time < b.time ? 1 : -1
+var age = 20;
+if (age >= 18) { // 如果age >= 18为true，则执行if语句块
+    alert('adult');
+} else { // 否则执行else语句块
+    alert('teenager');
 }
 ```
 
+也可以使用`switch`来进行条件判断。
+```javascript
+var age = 20;
+switch (age) {
+    case 10:
+        console.log("age = 10");
+        break;
+    case 20:
+        console.log("age = 20");
+        break;
+    default:
+        console.log("默认是0");
+}
+```
 
+## 循环
+JavaScript循环有多个表示方式：`while`、`do...while`、`for`、`for...in`。
+```javascript
+// while循环
+let x = 0;
+while (x <= 10) {
+    x++;
+}
+
+// do...while循环，每次循环完成的时候判断条件
+let n = 0;
+do {
+    n++;
+} while (n < 10);
+
+// for 循环
+let arr = ['Apple', 'Google', 'Microsoft'];
+let i, x;
+for (i=0; i<arr.length; i++) {
+    x = arr[i];
+    console.log(x);
+}
+
+// for ... in循环，它可以把一个对象的所有属性依次循环出来
+var obj = {
+    name: 'Jack',
+    age: 20,
+    city: 'Beijing'
+};
+for (var key in obj) {
+    console.log(key); // 'name', 'age', 'city'
+}
+
+// 使用for...in循环数组
+var arys = ['A', 'B', 'C'];
+for (var i in arys) {
+    console.log(i); //索引 '0', '1', '2'
+    console.log(a[i]); // 'A', 'B', 'C'
+}
+```
 
 ## 字符串
 

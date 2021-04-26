@@ -9,5 +9,8 @@
 
 * JavaScript
     * [javaScript基础](/web/js/JavaScript.md)
-    * [DOM Document](/web/js/Document.md) 
+    * [数组](/web/js/array.md)
+    * [函数](/web/js/function.md)
+    * [类和对象](/web/js/class.md)
+    * [DOM Document](/web/js/document.md) 
 
