@@ -6,6 +6,7 @@
     * [函数](/shell/function.md)
 * 字典、数组
     * [数组](/shell/array.md)
+    * [liunx](/liunx/README.md)
 
 * 文件
     * [文件引用](/shell/quote.md)

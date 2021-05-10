@@ -16,6 +16,7 @@ function demoFunction(){
 }
 demoFunction
 
+# 可以省略function或者()，两个只能同时省略一个
 demo(){
     echo "这是一个方法"
 }
@@ -43,7 +44,7 @@ demoFunction 1 2 3 4   # 函数后跟参数，参数用空格进行分割
 ```
 
 ## 有返回值函数
-
+返回值是作为退出状态来使用，如果没有 return ，以函数中最后一条执行命令的返回状态为整个函数的退出状态
 ```shell
 # 函数返回值使用 $? 进行获取 ， $? 只能获取上一次函数调用的记过
 function fun_echo_return(){
@@ -53,6 +54,10 @@ function fun_echo_return(){
 fun_echo_return 1 2
 
 echo "函数的返回值是 $?"
+
+# 通过函数代换的方式获取返回值
+result=`fun_echo_return`
+echo $result
 ```
 ## 函数内使用全局变量
 

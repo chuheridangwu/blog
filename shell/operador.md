@@ -65,6 +65,8 @@ example:
 ```shell
 [ [ 1 -lt 2 && 5 -gt 10 ] ];echo $?
 [ [ 1 -lt 2 || 5 -gt 10 ] ];echo $?
+# 如果执行失败，退出shell，一般使用
+echo xxx || exit -1
 ```
 
 ## 字符串比较

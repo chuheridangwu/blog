@@ -1,15 +1,17 @@
 # 流程控制
 
 ## 单分支语句 
-if 条件语句跟`[ ]`两边必须有空格,可以使用的条件  
+if 条件语句跟`[ ]`两边必须有空格,可以使用的条件，使用 `man test` 查看判断条件测试。
 
 ```shell
-if [ 条件 ];then
-    操作
+#  输入YES或者NO
+read YES_OR_NO
+if [ "$YES_OR_NO" = "yes" ];then
+    echo $YES_OR_NO
 fi
 
 if which ls;then
-    echo "ok"
+    echo "ok" 
 fi
 ```
 ## 双分支语句  if  ...  else
@@ -64,13 +66,11 @@ done
 ## case 循环
 
 ```shell
-echo "输入 1 - 4之间的数字"
-read -p "你输入的数字为:" num
-case $num in
-    1) echo "你选择了 1" ;;
-    1) echo "你选择了 1" ;;
-    1) echo "你选择了 1" ;;
-    1) echo "你选择了 1" ;;
+echo "输入yes或者no"
+read yes_or_no
+case $yes_or_no in
+    yes|y|Yes|YES) echo "你输入了yes" ;;
+    n|[nN][oO]) echo "你输入了no" ;;
     *) echo "你选择了退出" ;;
 esac
 ```

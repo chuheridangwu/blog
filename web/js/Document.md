@@ -76,10 +76,12 @@ console.log(div.style.width);
 ```
 
 ## DOM 事件
-绑定事件,[点击查看所有事件名称](https://www.w3school.com.cn/jsref/dom_obj_event.asp)
+Dom的点击事件也可以看做用户跟 HTML 的交互。
+
+当用户点击鼠标时会有`onclick`事件，当一张页面或一幅图像完成加载会有`onload`事件,用户退出界面会有`onunload`事件，鼠标移动到元素上时会有`onmouseover`事件，鼠标移开时会有`onmouseout`事件,当输入字段被改变时会有`onchange`事件。[点击查看所有事件名称](https://www.w3school.com.cn/jsref/dom_obj_event.asp)
 
 ```javascript
-// 元素.事件名称=function(){}
+//绑定事件: 元素.事件名称=function(){}
 let div = document.querySelector("div")
 div.onclick=function(){
     alert("lalala")

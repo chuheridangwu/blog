@@ -13,4 +13,5 @@
     * [函数](/web/js/function.md)
     * [类和对象](/web/js/class.md)
     * [DOM Document](/web/js/document.md) 
+    * [Node](/web/js/node.md)
 
