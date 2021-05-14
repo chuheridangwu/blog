@@ -5,6 +5,7 @@
 * [Shell](shell/)
 <!-- * [Linux](/liunx/) -->
 * [Web](web/)
+* [Flutter](flutter/)
 * [C](c/)
 * [Photoshop](photoshop/)
 
