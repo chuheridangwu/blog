@@ -11,8 +11,8 @@
 
 * 工具
     * [调试技巧](tool/skill.md)
+    * [抓包工具](tool/package.md)
     * [docsify](tool/docsify.md)
-    * [Wireshark](tool/Wireshark.md)
     * [Git](tool/git.md)
     * [FFmpeg](tool/ffmpeg.md)
     * [Job](tool/job.md)

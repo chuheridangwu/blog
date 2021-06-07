@@ -96,6 +96,9 @@ Error Domain=IDEProfileLocatorErrorDomain Code=1 "No profiles for 'com.elephan22
 ```
 **解决方案:**xcodebuild 没有允许自动签名导致的，使用`-allowProvisioningUpdates`,允许xcodebuild与Apple Developer网站进行通信。对于自动签名的目标，xcodebuild将创建并更新配置文件，应用程序ID和证书。对于手动签名的目标， xcodebuild将下载丢失或更新的配置文件。要求已在Xcode的帐户中添加开发者帐户。
 
+3. 使用自动打包时一直提示输入管理员账号和密码
+`钥匙串 -> 找到对应的证书秘钥 -> 选择对应的秘钥 -> 双击 -> 选择属性控制 -> 允许所有应用程序访问此程序`
+
 ## 参考网址
 * [iOS开发-自动打包初步探究](http://zhangzr.cn/2018/07/27/iOS%E5%BC%80%E5%8F%91-%E8%87%AA%E5%8A%A8%E6%89%93%E5%8C%85%E5%88%9D%E6%AD%A5%E6%8E%A2%E7%A9%B6/)
 * [使用 Xcode Server 持续集成](https://blog.wskfz.com/index.php/archives/82/)

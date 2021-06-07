@@ -157,3 +157,6 @@ if oldFile:
 这个问题主要是因为在python3和python2的问题，如果在Python2中是不会报错的，Python3则会报错。因为Pyhon3在文本文件中，没有使用b模式选项打开的文件，只允许从文件头开始计算相对位置，从文件尾计算时就会引发异常
 
 解决办法：`fi =open("mytest.txt","rb") #将打开模式从r变成rb即可`
+
+> IOError: [Errno 9] Bad file descriptor
+没有写的权限，在open$$打开文件的时候给写入权限

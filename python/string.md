@@ -262,7 +262,7 @@ if str in controls:
 ```
 
 ## 数组转字符串
-数组转字符串，可以使用多个内置函数：`str()`、`join()`、`join.dumps()`
+数组转字符串，可以使用多个内置函数：`str()`、`join()`、`json.dumps()`
 ```python
 # str() 注意，转换之后，双引号会变为单引号
 # 注意，转换之后，双引号会变为单引号
@@ -277,7 +277,7 @@ if str in controls:
 >>> print(str3)
 username=admin&passsword=123456
 
-# join.dumps(),需要导入json库
+# json.dumps(),需要导入json库
 >>> import json
 >>> list4 = ['username=admin', 'passsword=123456']
 >>> str4 = json.dumps(list4)

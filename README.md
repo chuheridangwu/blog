@@ -29,3 +29,9 @@
 * ShowDoc: 可以当做接口文档进行使用
 * GitLab: 代码仓库，可使用CI/CD做自动化打包
 * 蓝湖： UI素材上传和产品文档编写
+
+> 常用的网站
+* [Mac软件地址](https://www.macwk.com/)
+* [小米GetAPPs开发者中心](http://global.developer.mi.com/register/result)
+* [亚马逊安卓开发者中心](https://developer.amazon.com/apps-and-games/console/app/list)
+* [GooglePlay开发者中心](https://play.google.com/console/developers/6239515804522162761/app-list)

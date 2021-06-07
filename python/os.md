@@ -7,12 +7,15 @@
 
 import os, sys
 
-# 打开文件
+# 打开文件，如果没有会创建
 fd = os.open("f1.txt",os.O_RDWR|os.O_CREAT)
 
-# 写入字符串
+# 写入内容必须是字节流
 str = "This is runoob.com site"
 ret = os.write(fd,bytes(str, 'UTF-8'))
+
+# 数组转字符串
+JsonStr = json.dumps(array) 
 
 # 关闭文件
 os.close(fd)
@@ -117,8 +120,6 @@ os.path.isdir(path)
 
 # 判断路径是否是文件
 os.path.isfile(path)
-
-
 
 ```
 

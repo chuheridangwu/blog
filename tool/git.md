@@ -114,6 +114,7 @@ rebase操作原则：**只对尚未推送或分享给别人的本地修改执行
 1. 假设我们现在有一个项目，有三次提交记录，我们想合并成一次提交，使用`git rebase -i HEAD~3 `或者`git rebase -i  c6b5ced caef37f`
 
 2. 弹出交互式界面，`#`表示它的一些操作，比如`pick`表示保留当前commit，缩写是p
+
 ```
 pick ea8da36 第一次提交
 pick a505e3d 第二次提交
@@ -140,6 +141,7 @@ pick caef37f 第三次提交
 
 3. 修改提交日志
 可以修改之前的提交日志
+
 ```
 # This is a combination of 3 commits.
 # This is the 1st commit message:
@@ -175,9 +177,7 @@ pick caef37f 第三次提交
 
 
 ## github设置代理
-使用github中，我们经常会遇到下载的时候贼慢的问题，需要设置一下github的代理
-
-github上有两种下载方式，设置代理前要知道设置形式的代理
+使用github中，我们经常会遇到下载的时候贼慢的问题，需要设置一下github的代理。有两种下载方式，设置代理前要知道设置形式的代理。如果电脑有开VPN，需要知道VPN对应的端口，映射到VPN的端口上。
 * HTTP 形式： `git clone https://github.com/owner/git.git`
 * SSH 形式： `git clone git@github.com:owner/git.git`
 

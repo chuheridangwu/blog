@@ -74,3 +74,7 @@ iOS描述文件位置 | `~/Library/MobileDevice/Provisioning Profiles`
 2. 压缩工程目录下所有 png 文件，find filename "*.png" -exec echo {} \; -exec convert {} {} \;
 
 [苹果内购测试流程](https://developer.apple.com/documentation/storekit/in-app_purchase/testing_in-app_purchases_with_sandbox)
+
+## 常见问题
+1. 使用自动打包时一直提示输入管理员账号和密码
+`钥匙串 -> 找到对应的证书秘钥 -> 选择对应的秘钥 -> 双击 -> 选择属性控制 -> 允许所有应用程序访问此程序`

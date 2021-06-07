@@ -153,3 +153,11 @@ chars = ['a', 'b', 'c', 'd']
 for i, chr in enumerate(chars):
     print(i, chr)
 ```
+
+* 数组转字符串
+```python
+# 数组转json字符串
+JsonStr = json.dumps(array)
+# 字符串转json
+array = json.load(str)
+```
