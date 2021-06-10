@@ -35,3 +35,13 @@
 * [小米GetAPPs开发者中心](http://global.developer.mi.com/register/result)
 * [亚马逊安卓开发者中心](https://developer.amazon.com/apps-and-games/console/app/list)
 * [GooglePlay开发者中心](https://play.google.com/console/developers/6239515804522162761/app-list)
+
+
+
+
+> 流量变现
+* [华为ads](https://ads.huawei.com/usermgtportal/home/index.html#/) 不支持个人开发者
+* [头条穿山甲ads](https://www.pangle.cn/) 不支持个人开发者
+* [Facebook的Audience Network](https://developers.facebook.com/docs/audience-network?locale=zh_CN) 需要美国银行卡，可以通过`PingPong`发放虚拟银行卡
+* [Admob](https://admob.google.com/home/) 收款相对比较麻烦
+  
