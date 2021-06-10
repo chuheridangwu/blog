@@ -30,15 +30,35 @@
 * GitLab: 代码仓库，可使用CI/CD做自动化打包
 * 蓝湖： UI素材上传和产品文档编写
 
-> 常用的网站
-* [Mac软件地址](https://www.macwk.com/)
+> 开发者网站
+
 * [小米GetAPPs开发者中心](http://global.developer.mi.com/register/result)
 * [亚马逊安卓开发者中心](https://developer.amazon.com/apps-and-games/console/app/list)
 * [GooglePlay开发者中心](https://play.google.com/console/developers/6239515804522162761/app-list)
 * [OPPO开发者中心](https://developers.oppomobile.com/)
 * [三星商店开发者中心](https://seller.samsungapps.com/login/signIn.as)
 * [华为海外商店开发者中心](https://developer.huawei.com/consumer/cn/service/josp/agc/index.html#/) 注意: Admob不支持华为商店的广告投送
+
+> 流量变现
+
+* [华为ads](https://ads.huawei.com/usermgtportal/home/index.html#/) 不支持个人开发者
+* [头条穿山甲ads](https://www.pangle.cn/) 不支持个人开发者
+* [Facebook的Audience Network](https://developers.facebook.com/docs/audience-network?locale=zh_CN) 需要美国银行卡，可以通过`PingPong`发放虚拟银行卡
+* [Admob](https://admob.google.com/home/) 收款相对比较麻烦
+  
+> 素材网站
+
+* [Mac软件地址](https://www.macwk.com/)
 * [APP图标制作](https://www.pgyer.com/tools/appIcon)
 * [素材网站-觅元素](http://www.51yuansu.com/)
 * [素材网站-花瓣](https://huaban.com/home/)
 * [数据存储-Bmob后端云](https://www.bmob.cn/),可以免费存储一些数据，通过他们的SDK查询对应的数据库
+* [蓝奏云](https://www.lanzou.com/) 可以将apk上传到网盘，将连接进行分享
+
+> 论坛
+
+* [V2ex](https://v2ex.com/)
+* [个人开发者社区](https://w2solo.com/)
+* [远程工作社区](https://eleduck.com/)
+* [PaysApi-个人收款](https://www.paysapi.com/docpay)
+* [020支付-个人收款](https://020zf.com/index.html) 未验证
