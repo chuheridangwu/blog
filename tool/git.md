@@ -30,7 +30,9 @@ git rm file //删除文件，如果文件没有提交到版本库，使用rm fil
 ## 分支管理
 **HEAD**指向的永远是当前分支
 
-```
+```shell
+git branch -a       #查看所有分支
+git push origin --delete <branchName>   #删除远程分支
 git branch dev      //创建dev分支 dev: 分支名称
 git checkout dev    //切换到dev分支
 git checkout -b dev //创建并切换到dev分支，相当于一次执行上面两个命令

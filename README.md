@@ -35,3 +35,10 @@
 * [小米GetAPPs开发者中心](http://global.developer.mi.com/register/result)
 * [亚马逊安卓开发者中心](https://developer.amazon.com/apps-and-games/console/app/list)
 * [GooglePlay开发者中心](https://play.google.com/console/developers/6239515804522162761/app-list)
+* [OPPO开发者中心](https://developers.oppomobile.com/)
+* [三星商店开发者中心](https://seller.samsungapps.com/login/signIn.as)
+* [华为海外商店开发者中心](https://developer.huawei.com/consumer/cn/service/josp/agc/index.html#/) 注意: Admob不支持华为商店的广告投送
+* [APP图标制作](https://www.pgyer.com/tools/appIcon)
+* [素材网站-觅元素](http://www.51yuansu.com/)
+* [素材网站-花瓣](https://huaban.com/home/)
+* [数据存储-Bmob后端云](https://www.bmob.cn/),可以免费存储一些数据，通过他们的SDK查询对应的数据库

@@ -718,3 +718,8 @@ showDialog(context: context, builder: (ctx){
   }
 
 ```
+
+Flutter 打多个渠道包。
+Android打渠道包，可以使用美团出品的`walle`。其原理是apk分四个段，第二段数据可以被修改，在程序安装之后，利用dex读取apk中第二段存储的数据，用来区分渠道，walle的原理就是这样。
+[新一代开源Android渠道包生成工具Walle](https://tech.meituan.com/2017/01/13/android-apk-v2-signature-scheme.html), dex是程序，在程序安装之后，apk文件并没有被删除，被存储在系统内存中，打开软件时可以apk文件的内容。
+
