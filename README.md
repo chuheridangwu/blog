@@ -44,14 +44,20 @@
 * [华为ads](https://ads.huawei.com/usermgtportal/home/index.html#/) 不支持个人开发者
 * [头条穿山甲ads](https://www.pangle.cn/) 不支持个人开发者
 * [Facebook的Audience Network](https://developers.facebook.com/docs/audience-network?locale=zh_CN) 需要美国银行卡，可以通过`PingPong`发放虚拟银行卡
-* [Admob](https://admob.google.com/home/) 收款相对比较麻烦
+* [谷歌-Admob](https://admob.google.com/home/) 收款相对比较麻烦
+* [ironSource](https://platform.ironsrc.com/partners/tour)
   
+市场上有很多公司都在对外提供聚合广告平台服务，面向出海业务的聚合平台，我大概已知的有`Mopub`、`Admob`、`Topon`、`ironSource`、`Chartboost`、`AdTiming`、`TradPlus`等等。`ironSource`仅次于谷歌和Facebook。
+
 > 素材网站
 
 * [Mac软件地址](https://www.macwk.com/)
-* [APP图标制作](https://www.pgyer.com/tools/appIcon)
 * [素材网站-觅元素](http://www.51yuansu.com/)
 * [素材网站-花瓣](https://huaban.com/home/)
+* [素材网站-图精灵](http://616pic.com/tupian/katongshuiguo.html)
+* [制作APP图标](https://www.bufanapp.com/tool/icon)
+* [蒲公英-制作App图标](https://www.pgyer.com/tools/appIcon)
+* [图标工厂-生成对应大小的APP图标](https://icon.wuruihong.com/)
 * [数据存储-Bmob后端云](https://www.bmob.cn/),可以免费存储一些数据，通过他们的SDK查询对应的数据库
 * [蓝奏云](https://www.lanzou.com/) 可以将apk上传到网盘，将连接进行分享
 
