@@ -58,7 +58,7 @@
 ```python
 #!/usr/bin/python3
  
-# 打开文件
+# 打开文件, 文件中有中文需要加上 encoding="utf-8"
 file = open("runoob.txt", "r")
 print ("文件名为: ", fo.name)
  
@@ -159,4 +159,9 @@ if oldFile:
 解决办法：`fi =open("mytest.txt","rb") #将打开模式从r变成rb即可`
 
 > IOError: [Errno 9] Bad file descriptor
+
 没有写的权限，在open$$打开文件的时候给写入权限
+
+> TypeError: an integer is required (got type str)
+
+文档有中文就要`encoding`,例如`f=open("123.txt","rb+",encoding="utf-8")`

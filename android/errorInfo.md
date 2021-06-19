@@ -112,3 +112,23 @@ protected FeedsBean(Parcel in) {
         this.isHeader = in.readByte() != 0;
 }
 ```
+
+>  报错  Calls to static methods in Java interfaces are prohibited in JVM target 1.6. Recompile with '-jvm-target 1.8'
+
+原因是不能使用java8的新特性，在 `app/build.gradle` 下添加一下配置即可:
+
+java项目
+```
+compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+```
+
+Kotlin项目
+```
+kotlinOptions {
+        jvmTarget = '1.8'
+    }
+```

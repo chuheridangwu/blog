@@ -32,7 +32,16 @@ for target in list:
     hotIcon = target.get("hoticon")
     if len(icon) != 0 :
         #  下载图片，合并当前路径和新的文件夹路径 + 图片名称 
-        urlretrieve(icon, os.path.join(dir, target.get("name")) + '/icon.png')
+        urllib.request.urlretrieve(icon, os.path.join(dir, target.get("name")) + '/icon.png')
+
+
+
+# 从url中提取文件名
+url = 'http://www.**.net/images/logo.gif'
+filename = os.path.basename(url)
+
+# urllib.request.urlretrieve() 函数有三个参数,第一个是url地址，第二个是路径地址，必须是'/home/zzp/333.jpg'这种类型，需要有文件名
+例如： urllib.request.urlretrieve('https://www.baidu.com/3.jpg', '/home/zzp/333.jpg')
 ```
 
 ## 批量修改文件名

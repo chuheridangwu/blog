@@ -46,8 +46,10 @@
 * [Facebook的Audience Network](https://developers.facebook.com/docs/audience-network?locale=zh_CN) 需要美国银行卡，可以通过`PingPong`发放虚拟银行卡
 * [谷歌-Admob](https://admob.google.com/home/) 收款相对比较麻烦
 * [ironSource](https://platform.ironsrc.com/partners/tour)
+* [adtiming](https://www.adtiming.com/) 可以通过`PingPong`进行收款。不上架应用没有广告或很少
+* [PingPong](https://us.pingpongx.com/)针对海外业务汇款
   
-市场上有很多公司都在对外提供聚合广告平台服务，面向出海业务的聚合平台，我大概已知的有`Mopub`、`Admob`、`Topon`、`ironSource`、`Chartboost`、`AdTiming`、`TradPlus`等等。`ironSource`仅次于谷歌和Facebook。
+市场上有很多公司都在对外提供聚合广告平台服务，面向出海业务的聚合平台，我大概已知的有`Mopub`、`Topon`、`ironSource`、`Chartboost`、`AdTiming`、`TradPlus`等等。`ironSource`仅次于`Admob`和`Facebook`。
 
 > 素材网站
 

@@ -1,23 +1,14 @@
 # docsify
 使用docsify快速搭建个人博客
 [官方文档]( https://docsify.js.org/#/zh-cn/quickstart)
-> 1. mac 安装npm
 
-`brew install node`
+## 安装 Docsify
+1. 安装npm: `brew install node`
+2. 安装 docsify:  `npm i docsify-cli -g`
+3. 初始化docsify文档: `docsify init ./docs`
+4. 启动本地预览:  `docsify serve docs`
 
-> 2. 安装 docsify
-
-`npm i docsify-cli -g`
-
-> 3. 初始化docsify文档
-
-`docsify init ./docs`
-
-> 4. 启动本地预览
-
-`docsify serve docs`
-
-> 5. 设置搜索
+##  添加搜索功能
 
 ```
 <script>
@@ -43,15 +34,15 @@
 <!-- 引入搜索模块 -->
 <script src="//unpkg.com/docsify/lib/plugins/search.js"></script>
 ```
-> 6. 侧边栏显示标题
+##  侧边栏显示标题
 
 `
 window.$docsify = {
-    subMaxLevel: 3
+    subMaxLevel: 3 #这里 3 表示显示几级标题
 }
 `
 
-> 7. 代码高亮
+##   代码高亮
 查看支持的代码高亮库列表 [prism](https://github.com/PrismJS/prism/tree/gh-pages/components)
 `<script src="//cdn.jsdelivr.net/npm/prismjs/components/prism-php.min.js"></script>`
 使用的方法
@@ -64,7 +55,7 @@ function getAdder(int $x): int
 ```
 ````
 
-> 8. 代码块重复引用
+##   代码块重复引用
 如果多个代码块进行重读，使用多个`` ` ``来包含
 `````
 ````
@@ -74,17 +65,17 @@ function getAdder(int $x): int
 ````
 `````
 
-> 9. 代码拷贝
+##   代码拷贝
 ```
   <!-- 引入代码拷贝  -->
   <script src="//unpkg.com/docsify-copy-code"></script>
 ```
 
->10. 导入图片限制图片大小
+##   导入图片限制图片大小
 
 `![](./../imgs/图片名.png ':size=280')`
 
->11. 使用斜体和小与正常字号
+##   使用斜体和小与正常字号
 
 正常字号 、_斜体_ 、<small>小字号</small>
 
