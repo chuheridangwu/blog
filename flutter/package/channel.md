@@ -194,9 +194,22 @@ class SearchReply {
   String result;
 }
 
+// @HostApi() 标注了通信对象和接口的定义，
 @HostApi()
 abstract class Api {
   SearchReply search(SearchRequest request);
+}
+
+// 输出配置信息
+void configurePigeon(PigeonOptions opts) {
+  opts.dartOut = '../video_player_platform_interface/lib/pigeon.dart';  //输出了 dart 模板文件；
+  opts.dartTestOut = '../video_player_platform_interface/lib/test.dart';  //测试模板
+  opts.objcHeaderOut = 'ios/Classes/messages.h'; //iOS输出文件位置
+  opts.objcSourceOut = 'ios/Classes/messages.m'; //iOS输出文件位置
+  opts.objcOptions.prefix = 'FLT'; //插件默认的前缀
+  opts.javaOut =
+      'android/src/main/java/io/flutter/plugins/videoplayer/Messages.java'; //输出java文件
+  opts.javaOptions!.package = 'com.example.demo'; //android 包名
 }
 ```
 在 message.dart 文件中，通过` @HostApi()` 注解标示了通信对象和接口，之后我们只需要执行如下命令，就可以生成对应代码到工程中
