@@ -187,11 +187,11 @@ Pigeon 是为了消除了在主机和客户端之间匹配字符串的需要消�
 import 'package:pigeon/pigeon.dart';
 
 class SearchRequest {
-  String query;
+  String query = "";
 }
 
 class SearchReply {
-  String result;
+  String result = "";
 }
 
 // @HostApi() 标注了通信对象和接口的定义，

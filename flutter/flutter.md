@@ -729,3 +729,18 @@ Android打渠道包，可以使用美团出品的`walle`。其原理是apk分四
 2. `ancestorWidgetOfExactType` 修改为 `SliverAppBar sliverAppBar = context.ancestorWidgetOfExactType(SliverAppBar);`
 3. Error: No named parameter with the name ‘nullOk’.原因是`localeOf()`的`nullOk`参数在新版中被删除了，不需要了。
 4. `resizeToAvoidBottomPadding` 更改为 `resizeToAvoidBottomInset=false`
+
+## 动态添加tabbar
+根据接口数据确定是否隐藏tabbar，有几个坑需要注意。
+1. TabBarView 的组件内容需要根据 _tabs 的长度进行重新创建，不能使用数据封装，会造成不能删除的情况
+2. _tabController 需要重新初始化信息，长度需要跟 _tabs 保持一致
+3. 如果在动态修改前，你已经滑动了TabBarView，动态修改 tabbar 后,需要主动跳转对应位置，内容不会自动跳转
+ 
+```
+setState(() {
+  _tabs = ["1", "2", "3", "4", "5"];
+  _tabController = TabController(
+      initialIndex: 1, length: _tabs.length, vsync: this);
+  _tabController.animateTo(0);
+});
+```
