@@ -71,7 +71,9 @@ iOS描述文件位置 | `~/Library/MobileDevice/Provisioning Profiles`
 ## 修改图片hash值的办法
 使用 ImageMagick 对png图片做轻量压缩，并且不损失图片质量，又可以改变图片文件的hash值
 1. 安装 ImageMagick，brew install imagemagick
-2. 压缩工程目录下所有 png 文件，find filename "*.png" -exec echo {} \; -exec convert {} {} \;
+2. 先 cd 到对应目录下，使用命令`find . -iname "*.png" -exec echo {} \; -exec convert {} {} \;`;
+   1. exec 是可选参数，含义是命令执行完成后，会退出本shell。
+   2. {} 表示当前文件的路径 
 
 [苹果内购测试流程](https://developer.apple.com/documentation/storekit/in-app_purchase/testing_in-app_purchases_with_sandbox)
 
