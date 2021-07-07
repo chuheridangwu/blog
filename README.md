@@ -39,16 +39,17 @@
 * [三星商店开发者中心](https://seller.samsungapps.com/login/signIn.as)
 * [华为海外商店开发者中心](https://developer.huawei.com/consumer/cn/service/josp/agc/index.html#/) 注意: Admob不支持华为商店的广告投送
 
+
 > 流量变现
 
-* [华为ads](https://ads.huawei.com/usermgtportal/home/index.html#/) 不支持个人开发者
-* [头条穿山甲ads](https://www.pangle.cn/) 不支持个人开发者
-* [Facebook的Audience Network](https://developers.facebook.com/docs/audience-network?locale=zh_CN) 需要美国银行卡，可以通过`PingPong`发放虚拟银行卡
+* [华为ads](https://ads.huawei.com/usermgtportal/home/index.html#/)不支持个人开发者
+* [头条穿山甲ads](https://www.pangle.cn/)不支持个人开发者
+* [Facebook的Audience Network](https://developers.facebook.com/docs/audience-network?locale=zh_CN)需要美国银行卡，可以通过`PingPong`发放虚拟银行卡
 * [谷歌-Admob](https://admob.google.com/home/) 收款相对比较麻烦
 * [ironSource](https://platform.ironsrc.com/partners/tour)
 * [adtiming](https://www.adtiming.com/) 可以通过`PingPong`进行收款。不上架应用没有广告或很少
 * [PingPong](https://us.pingpongx.com/)针对海外业务汇款
-  
+
 市场上有很多公司都在对外提供聚合广告平台服务，面向出海业务的聚合平台，我大概已知的有`Mopub`、`Topon`、`ironSource`、`Chartboost`、`AdTiming`、`TradPlus`等等。`ironSource`仅次于`Admob`和`Facebook`。
 
 > 素材网站
@@ -68,5 +69,10 @@
 * [V2ex](https://v2ex.com/)
 * [个人开发者社区](https://w2solo.com/)
 * [远程工作社区](https://eleduck.com/)
+
+> 个人付款
 * [PaysApi-个人收款](https://www.paysapi.com/docpay)
-* [020支付-个人收款](https://020zf.com/index.html) 未验证
+* [020支付-个人收款](https://020zf.com/index.html) 
+* [瑞捷发卡-个人收款](http://www.feelong.net/)
+* [稳发卡-个人收款](http://www.whg55.com/)
+

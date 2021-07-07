@@ -6,7 +6,7 @@
 * [Shell](shell/)
 <!-- * [Linux](/liunx/) -->
 * [Web](web/)
-* [基础网络](network/)
+* [网络](network/)
 * [C](c/)
 * [Photoshop](photoshop/)
 * [常用工具](tool/)

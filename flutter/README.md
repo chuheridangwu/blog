@@ -3,7 +3,7 @@ Flutter是谷歌的移动UI框架，可以快速在iOS和Android上构建高质�
 
 ## Mac平台安装Flutter
 1. 首先[下载SDK](https://flutter.dev/docs/development/tools/sdk/releases#macos)
-2. 在`.bash_profile`文件,添加`Flutter`SDK的路径，` export PATH=~/Desktop/flutter/bin:$PATH`。如果使用的是zsh，需要配置`$HOME/.zshrc`文件
+2. 使用`vi ~/.bash_profile`编辑文件,在`.bash_profile`文件,添加`Flutter`SDK的路径，` export PATH=~/Desktop/flutter/bin:$PATH`。如果使用的是zsh，需要配置`$HOME/.zshrc`文件
 3. 运行 `source $HOME/.bash_profile `刷新当前终端窗口。**如果你使用的是zsh，终端启动时 `~/.bash_profile` 将不会被加载，解决办法就是修改 `~/.zshrc` ，在其中添加：`source ~/.bash_profile`**
 4. 使用`flutter doctor`检查需要安装的依赖项
 
