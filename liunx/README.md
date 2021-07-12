@@ -103,6 +103,13 @@ p | 管道文件
 l | 符号链接文件
 f | 普通文件 | 
 
+> 查找某个文件下面的字符串
+`find <directory> -type f -name "*.c" | xargs grep "<strings>"`
+* <directory>是你要找的文件夹；如果是当前文件夹使用 `find $(pwd)`
+* `-type f` 说明，只找文件
+* `-name "*.c"`  表示只找C语言写的代码，从而避免去查binary；也可以写`"*"`，表示找所有文件
+* <strings>是你要找的某个字符串
+
 ## xargs
 xargs 的作用是将查找到的内容输出到一行，主要用来配合其他命令。比如查找对应的文件并移动到某个目录下
 `find . -name "*.txt" | xargs -I{} mv {}  xxx/`。-I{} 指定一个替换字符串作为参数替换。

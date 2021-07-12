@@ -7,7 +7,7 @@
 <!-- * [Linux](/liunx/) -->
 * [Web](web/)
 * [网络](network/)
-* [C](c/)
+* [C语言](c/)
 * [Photoshop](photoshop/)
-* [常用工具](tool/)
+* [开发工具](tool/)
 * [生活](live/)
