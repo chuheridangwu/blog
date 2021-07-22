@@ -744,3 +744,6 @@ setState(() {
   _tabController.animateTo(0);
 });
 ```
+
+## Flutter Incorrect use of ParentDataWidget
+经过排查后发现是Expanded、Flexible等组件，在“Container、Padding、Stack”组件中导致的。

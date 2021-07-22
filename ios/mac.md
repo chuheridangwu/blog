@@ -61,6 +61,9 @@ Shift-Command-N | 创建一个新的应用
 `defaults write com.apple.finder AppleShowAllFiles  N` | 隐藏文件
 `defaults write com.apple.finder AppleShowAllFiles -bool false` | 隐藏文件
 `killall Finder `   |  重启Finer
+`zip -e ~/Desktop/a.zip  ~/Desktop/file.text` | 单个文件加密成zip
+`zip -er ~/Desktop/a.zip  ~/Desktop/相册` | 文件加密成zip
+
 
 ## 路径信息
 文件位置 | 具体路径
