@@ -6,7 +6,7 @@ Runloop能够保证我们程序一直运行，类似于一个循环，在程序�
 4. Runloop在项目中的应用。
 
 ## 认识Runloop
-Runloop 顾名思义,是在程序运行过程中循环做一些事情，定时器、PerformSelector、事件相应、手势识别、UI刷新等技术都是通过Runloop进行实现的。
+Runloop 顾名思义,是在程序运行过程中循环做一些事情，定时器、PerformSelector、事件响应、手势识别、UI刷新等技术都是通过Runloop进行实现的。
 
 iOS中有2套API来访问和使用 RunLoop ,Foundation框架中的`NSRunLoop`,Core Foundation 框架中的`CFRunLoopRef`,它们都代表着RunLoop对象。NSRunLoop 是基于 CFRunLoopRef的一层OC包装。
 

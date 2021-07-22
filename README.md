@@ -1,4 +1,4 @@
-# 土狗
+# 路漫漫其修远兮、吾将上下而求索
 
 > 为什么搭建这个文档
 
@@ -62,7 +62,7 @@
 * [蒲公英-制作App图标](https://www.pgyer.com/tools/appIcon)
 * [图标工厂-生成对应大小的APP图标](https://icon.wuruihong.com/)
 * [数据存储-Bmob后端云](https://www.bmob.cn/),可以免费存储一些数据，通过他们的SDK查询对应的数据库
-* [蓝奏云](https://www.lanzou.com/) 可以将apk上传到网盘，将连接进行分享
+* [蓝奏云](https://www.lanzou.com/) 可以将apk上传到网盘，将链接进行分享
 
 > 论坛
 
@@ -70,9 +70,14 @@
 * [个人开发者社区](https://w2solo.com/)
 * [远程工作社区](https://eleduck.com/)
 
-> 个人付款
+> 个人收款
 * [PaysApi-个人收款](https://www.paysapi.com/docpay)
 * [020支付-个人收款](https://020zf.com/index.html) 
 * [瑞捷发卡-个人收款](http://www.feelong.net/)
 * [稳发卡-个人收款](http://www.whg55.com/)
+* [聚合支付](http://www.jyhl.top/)
 
+> 看电影
+* [思古影视](https://www.siguyy.com/)
+* [天狼影视](https://www.tlyyy.cc/)
+* [努努影院](https://www.nunuyy.cc/)

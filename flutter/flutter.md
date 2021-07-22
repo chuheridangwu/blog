@@ -747,3 +747,12 @@ setState(() {
 
 ## Flutter Incorrect use of ParentDataWidget
 经过排查后发现是Expanded、Flexible等组件，在“Container、Padding、Stack”组件中导致的。
+## 空安全 The default value of an optional parameter must be constant.
+一个数组初始化，竟然还要const
+```
+class SectionData{
+  String title = "";
+  List<dynamic> datas = [];
+  SectionData({this.title = "",this.datas = const []});
+}
+```

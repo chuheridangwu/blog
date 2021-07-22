@@ -105,5 +105,17 @@ build:
       - ./*.ipa
 ```
 
+## fastlane之使用match同步证书和配置文件
+在开发过程中，证书和配置文件的管理一直是一个让人头痛的问题，不管是Xcode自动创建的众多让人摸不着头脑的配置文件，还是不断被其它人revoke的证书，这些场景无不让人想要一个简单、彻底的解决方案， match正是为解决这些问题而开发的。使用 match 其他开发者在下载仓库时，会自动下载好对应的证书。
+
+1. 下载代码之后执行命令
+```
+fastlane match development --readonly
+```
+
+相关文档:[fastlane之使用match同步证书和配置文件](https://zrocky.com/2018/09/how-to-use-fastlane-match/)
+
+
+
 ## 参考文章
 [效率神器Fastlane 之登陆校验](https://juejin.cn/post/6844903988295368711)
