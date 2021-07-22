@@ -744,3 +744,13 @@ setState(() {
   _tabController.animateTo(0);
 });
 ```
+
+## 空安全 The default value of an optional parameter must be constant.
+一个数组初始化，竟然还要const
+```
+class SectionData{
+  String title = "";
+  List<dynamic> datas = [];
+  SectionData({this.title = "",this.datas = const []});
+}
+```

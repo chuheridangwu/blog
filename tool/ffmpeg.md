@@ -84,5 +84,29 @@ output.mp4
 上面命令中，有两个输入文件，一个是封面图片cover.jpg，另一个是音频文件input.mp3。-loop 1参数表示图片无限循环，-shortest参数表示音频文件结束，输出视频就结束。
 1. **下载m3u8文件并转换成MP4格式**：`ffmpeg -i 'http://devimages.apple.com/iphone/samples/bipbop/bipbopall.m3u8' test.mp4`
 
+## 使用FFMPEG将ts无损转换为mp4
+文章来源:[使用FFMPEG将ts无损转换为mp4](https://www.simaek.com/archives/6/)
+很多伙伴们会从各大视频网站上下载视频、电影、电视剧等，通常网站为了便于传输播放，都是使用TS格式封装视频流的。
+
+>TS文件是一种媒体的扩展名，它是日本高清摄像机拍摄下进行的封装格式。MPEG2-TS（Transport Stream“传输流”；又称TS、TP、MPEG-TS 或 M2T）是用于音效、图像与数据的通信协定，最早应用于DVD的实时传送节目。MPEG2-TS格式的特点就是要求从视频流的任一片段开始都是可以独立解码的。
+缺点就在于很多播放器不支持TS格式的视频，或者有的播放器支持，但是在播放时拖动进度条会卡顿，这时我们就需要将TS格式转换成常见的MP4等视频格式了。
+
+这里使用工具ffmpeg，它可以用于各种音视频封装格式的生成和解析，下载和安装以及详细使用方法见官方文档：[Documentation](http://ffmpeg.org/documentation.html)。
+
+将TS转为MP4的命令：
+```
+input.ts为输入TS文件名，output.mp4为输出的MP4文件名
+ffmpeg -i input.ts -c copy -map 0:v -map 0:a -bsf:a aac_adtstoasc output.mp4
+如果音轨不是AAC_ADTS可以不加-bsf:a aac_adtstoasc。
+```
+附加一个刚开始找到的方法，它对视频流的操作是使用libx264重编码，而不是copy，所以不是无损。
+有重编码需求的可以使用：
+```
+ffmpeg -y -i input.ts -c:v libx264 -c:a copy -bsf:a aac_adtstoasc output.mp4
+```
+ffmpeg默认使用全部线程来进行转码，发热量有点大，可以加-threads n（n代表线程数）这个参数限制线程数。
+
+![]()
+
 ## 相关文章
 [FFmpeg 视频处理入门教程](https://www.ruanyifeng.com/blog/2020/01/ffmpeg.html)
