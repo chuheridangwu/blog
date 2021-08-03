@@ -562,6 +562,8 @@ setState(() {
 });
 ```
 
+## Flutter Incorrect use of ParentDataWidget
+经过排查后发现是Expanded、Flexible等组件，在“Container、Padding、Stack”组件中导致的。
 ## 空安全 The default value of an optional parameter must be constant.
 一个数组初始化，竟然还要const
 ```
@@ -576,3 +578,4 @@ class SectionData{
 
 ![模型生成网址](https://czero1995.github.io/json-to-model/)
 vscode 模型生成插件 `Json to Dart Model`插件。
+
