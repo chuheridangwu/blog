@@ -250,3 +250,25 @@ dependencies:
 widget:
 有状态的widget：statefulwidget,在运行过程中有一些数据需要改变
 无状态的widget，statelesswidget,在运行过程中内容都是确定的
+
+## dart 中List使用Map方法获取到索引的技巧
+首先将List转成map对象，然后使用
+```
+final fruitList = ['apple', 'orange', 'mango'];
+final fruitMap = myList.asMap(); // {0: 'apple', 1: 'orange', 2: 'mango'}
+
+// To access 'orange' use the index 1.
+final myFruit = fruitMap[1] // 'orange'
+
+// To convert back to list
+fruit fruitListAgain = fruitMap.values.toList();
+
+// 使用方式
+fruitList.asMap.map((i, element) => MapEntry(i, Stack(
+  GestureDetector(onTap: () {
+    setState(() {
+      // print("element=${element.toString()}");
+    });
+  }),
+))).values.toList();
+```
