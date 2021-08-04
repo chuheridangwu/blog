@@ -756,3 +756,9 @@ class SectionData{
   SectionData({this.title = "",this.datas = const []});
 }
 ```
+
+## GestureDetector 点击空白处没有效果
+查了一下发现 GestureDetector 有个 behavio r属性，点进去，看一下，包括这三种模式
+* deferToChild: 只有当前容器中的child被点击时才会响应点击事件,默认是这个
+* opaque:  点击整个区域都会响应点击事件，但是点击事件不可穿透向下传递
+* translucent： 点击整个区域都会响应点击事件，并且向下传递点击事件
