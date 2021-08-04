@@ -351,9 +351,6 @@ decoration: new BoxDecoration(
     this.onTap,    //点击输入框时的回调(){}
     this.buildCounter,
   })
-————————————————
-版权声明：本文为CSDN博主「XeonYu」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
-原文链接：https://blog.csdn.net/yuzhiqiang_1993/article/details/88204031
 ```
 
 TextField的边框描述：一堆属性好恶心

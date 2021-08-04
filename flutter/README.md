@@ -1,5 +1,7 @@
 ## Flutter
-Flutter是谷歌的移动UI框架，可以快速在iOS和Android上构建高质量的原生用户界面。可以看做是一个纯粹的UI框架来使用。VSCode安装插件Flutter/Dart/Code Runner,按F5进行调试。
+Flutter是谷歌的移动UI框架，可以快速在iOS和Android上构建高质量的原生用户界面。可以看做是一个纯粹的UI框架来使用。文档内容主要来源于[Flutter实战电子书](https://book.flutterchina.club/#%E7%BC%98%E8%B5%B7)、
+
+VSCode安装插件Flutter/Dart/Code Runner,按F5进行调试。
 
 ## Mac平台安装Flutter
 1. 首先[下载SDK](https://flutter.dev/docs/development/tools/sdk/releases#macos)
