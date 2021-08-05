@@ -27,7 +27,7 @@
     * [fastlane自动化打包工具](ios/ipa/fastlane自动化打包工具.md)
     * [xcodebuild自动打包工具](ios/ipa/xcodebuild打包工具.md)
     * [苹果商店获取ipa文件](ios/ipa/获取ipa文件.md)
-    * [iOS签名](ios/ipa/iOS签名.md)
+    * [iOS签名](ios/ipa/iOS签名机制.md)
     * [IPA重签名](ios/ipa/resignature.md)
 * 逆向
   *  [逆向1](ios/reverse/reverse1.md)

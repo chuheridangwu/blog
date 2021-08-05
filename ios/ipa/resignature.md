@@ -1,5 +1,9 @@
 # IPA重签名
-IPA重签名是将IPA文件使用自己的证书进行重新签名，可以安装到自己的测试设备上，或者使用企业证书进行重签名进行分发。GitHub上的重签名工具[点击下载](https://github.com/DanTheMan827/ios-app-signer/tags)
+看这篇文档之前最好回顾一下[iOS签名机制](/ios/ipa/iOS签名机制.md),冲签名的原理是将IPA安装包内的签名更换成自己的签名。IPA的签名有两处，`_CodeSignature`文件和`embedded.mobileprovision`文件。
+* `_CodeSignature`文件负责APP文件的签名
+* `embedded.mobileprovision`文件是 对`.cer证书 + devices + AppID + entitlements权限`的签名
+
+IPA重签名是将原有的签名文件替换成自己证书的签名文件，这样就可以安装到自己的测试设备上，或者使用企业证书进行重签名进行分发。GitHub上的重签名工具[点击下载](https://github.com/DanTheMan827/ios-app-signer/tags)
 
 重签名的准备工作:
 1. 需要一个有效的证书和对应的描述文件(xxx.mobileprovision文件)，注意：**必须将描述文件命名为`embedded.mobileprovision`,否则即使签名成功也将不能安装ipa**
