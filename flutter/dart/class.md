@@ -1,10 +1,65 @@
 # 类和对象
 
-所有的类默认继承自Object,dart默认会给类一个构造函数，如果我们自定义了构造函数，默认的构造函数就不能使用了。 
+Dart 是支持基于**mixin 继承机制**的面向对象语言，所有对象都是一个类的实例，而除了 `Null` 以外的所有的类都继承自 `Object`类。 基于 mixin 的继承 意味着尽管每个类（top class Object? 除外）都只有一个超类，一个类的代码可以在其它多个类继承中重复使用。 扩展方法 是一种在不更改类或创建子类的情况下向类添加功能的方式。
 
-**static 修饰的成员变量或者方法是类属性/方法。**
+## 构造函数
+构造函数的命名方式可以为 `类名 或 类名 . 标识符 `的形式。
 
-`_`下划线是区分 私有成员变量/方法 的一种方式
+Dart默认会给类一个类名形式的构造函数，如果我们自定义了构造函数，默认的构造函数将不能再使用。
+```dart
+class Person{
+
+  double x = 0;
+  double y = 0;
+  double? z;   // 声明实例变量 z，初始为 null。所有未初始化的实例变量其值均为 null。
+ 
+  // 类名 形式的构造函数，this关键字引用当前实例
+  Point(double x, double y) {
+    this.x = x; 
+    this.y = y;
+  }
+  
+  // 类名.标识符 形式的构造函数
+  Point.from(Map<String,dynamic> map){
+    this.x = map["x"];
+    this.y = map["y"];
+  }
+}
+```
+
+**常量构造函数** 常量构造函数需要使用 const 进行修饰，并且其成员变量都是final类型
+```dart
+class Person{
+  final String name;
+  final int age;
+  const Person(this.name,this.age);
+}
+
+// 使用常量构造函数，在构造函数名之前加 const 关键字
+Person person = const Person("jack",100);
+```
+
+## 实例变量
+
+* 所有未初始化的实例变量其值均为 `null`
+* `static`修饰的成员变量或者方法是类属性/方法
+* `_`下划线是区分 私有成员变量/方法 的一种方式
+* 所有实例变量均会隐式地声明一个 `Getter` 方法。非终值的实例变量和使用 `late 、final` 声明但未声明初始化的实例变量还会隐式地声明一个 `Setter` 方法。
+
+**Getter 和 Setter 方法**
+```dart
+class Rectangle {
+  double left, top, width, height;
+
+  Rectangle(this.left, this.top, this.width, this.height);
+
+  double get right => left + width;
+  set right(double value) => left = value - width;
+
+  double get bottom => top + height;
+  set bottom(double value) => top = value - height;
+}
+```
 
 object:调用方法时，编译时会报错
 dynamic:调用方法时，编译不会报错，但是运行时存在安全隐患。
