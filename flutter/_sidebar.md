@@ -2,7 +2,7 @@
 * Dart
   * [Dart速查表](flutter/dart/dart.md)
   * [List](flutter/dart/list.md)
-  * [String](flutter/dart/string.md)
+  * [异步](flutter/dart/async.md)
   * [类和对象](flutter/dart/class.md)
 * [flutter](flutter/flutter.md)
 * Flutter

@@ -1,6 +1,6 @@
 # IPA重签名
 看这篇文档之前最好回顾一下[iOS签名机制](/ios/ipa/iOS签名机制.md),冲签名的原理是将IPA安装包内的签名更换成自己的签名。IPA的签名有两处，`_CodeSignature`文件和`embedded.mobileprovision`文件。
-* `_CodeSignature`文件负责APP文件的签名
+* `_CodeSignature/CodeResources`这是一个plist文件，可用文本查看，其中的内容就是是程序包中（不包括Frameworks）所有文件的签名。注意这里是所有文件。意味着你的程序一旦签名，就不能更改其中任何的东西，包括资源文件和可执行文件本身。iOS系统会检查这些签名
 * `embedded.mobileprovision`文件是 对`.cer证书 + devices + AppID + entitlements权限`的签名
 
 IPA重签名是将原有的签名文件替换成自己证书的签名文件，这样就可以安装到自己的测试设备上，或者使用企业证书进行重签名进行分发。GitHub上的重签名工具[点击下载](https://github.com/DanTheMan827/ios-app-signer/tags)

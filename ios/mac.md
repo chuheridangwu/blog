@@ -1,4 +1,4 @@
-# MAC 
+# MAC电脑 
 重装电脑之后，xcodebuild报错误：`xcode-select: error: tool 'xcodebuild' requires Xcode, but active developer directory '/Library/Developer/CommandLineTools' is a command line tools instance`
 
 是因为xcodebuild找不到Xcode，需要重定向一下Xcode的文档位置：

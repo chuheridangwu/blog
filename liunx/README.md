@@ -128,3 +128,10 @@ s | substitution替换
 
 ## crontab
 liunx系统定时器，
+
+## dirname
+给予dirname一个路径名时，它会删除最后一个斜线（'/'）后的任何后缀，并返回结果。主要用于shell脚本
+```shell
+dirname /usr/home/carpetsmoker/dirname.wiki
+/usr/home/carpetsmoker     # 返回结果
+```
