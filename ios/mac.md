@@ -93,8 +93,30 @@ $ convert image.png -resize 200 out.png
 $ convert image.png -resize x100 out.png
 ```
 
-在 Mac 电脑中，默认有 sips 命令可以裁剪图片
+### sips命令
+在 Mac 电脑中，默认有 sips 命令可以裁剪和转换图片格式
+
+**转换格式**
+```shell
+# 基本用法
+sips -s format [格式名称] [文件名] --out [输出文件的名称]
+
+# png转换成jpg
+sips -s format jpeg test.png --out test.jpg
+
+# jpg转换成png
+sips -s format png test.jpg --out test.png
+
+# 批量转换图片
+for i in [文件名列表]; do sips -s format [格式名称] $i --out [终点]/$i.[格式名称];done
+
+# 例如：
+for i in *.png; do sips -s format jpeg $i --out ${i%.*}.jpg;done;
 ```
+
+**裁剪图片**
+
+```shell
 sips -Z 600 test.jpg   ##宽度600 高度动态调整所有图片,如果宽高比不对头，会设置成高度，宽度自适应
 sips -z 300 600 test.jpg           ##指定宽300高600
 sips -r 90 ~/*.JPG                 ##顺时针调整90度
