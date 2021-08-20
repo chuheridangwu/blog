@@ -19,7 +19,8 @@
   * 功能性组件
   * 事件处理和通知
   * 动画 
-    * [动画](flutter/animation/animation.md) 
+    * [隐式动画](flutter/animation/animation1.md)
+    * [显示动画](flutter/animation/animation2.md)  
   * 平台通信
     * [多端通信](flutter/package/channel.md)
     * [制作Flutter插件](flutter/package/package.md)

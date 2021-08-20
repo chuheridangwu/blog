@@ -5,10 +5,10 @@
 
 
 Flutter 中关于动画的类有:
-* `Animation`:
-* `AnimationController`: 
+* `Animation`: 是一个抽象类，它本身和UI渲染没有任何关系，而它主要的功能是保存动画的插值和状态；其中一个比较常用的类是`Animation<double>`。
+* `AnimationController`: 派生自`Animation<double>`,用于控制动画,它包含动画的启动`forward()`、停止`stop()` 、反向播放 `reverse()`等方法,生成数字的区间可以通过`lowerBound`和`upperBound`来指定
 * `Curve`: 动画曲线
-* `Tween`: 补间动画
+* `Tween`: 添加映射以生成不同的范围或数据类型的值,例如：`Tween(begin: -200.0, end: 0.0);`
 
 在`Flutter`中我们应该如何选择动画：如果需要 循环播放、随时中断、多个动画协调的时候使用显示动画。如果是内容更新、按钮点击、翻页效果、弹窗、添加/删除控件、渐变过度等效果使用隐式动画
 
@@ -118,14 +118,6 @@ Transform.translate(
 )
 ```
 
-
-## 显示动画
-需要用到动画控制器，并且回收。
-Flutter现有控件`...Teansition`
-自定义显示动画`AnimationBuilder`
-
-
-
 ## 动画曲线 Curve
 动画过程可以是匀速的、匀加速的或者先加速后减速等。Flutter中通过Curve（曲线）来描述动画过程，我们把匀速动画称为线性的(Curves.linear)，而非匀速动画称为非线性的。
 
@@ -134,7 +126,7 @@ Flutter现有控件`...Teansition`
 ```dart
 final CurvedAnimation curve = CurvedAnimation(parent: controller, curve: Curves.easeIn);
 ```    
-`CurvedAnimation`和`AnimationController`（下面介绍）都是`Animation<double>`类型。`CurvedAnimation` 可以通过包装`AnimationController`和`Curve`生成一个新的动画对象 ，我们正是通过这种方式来将动画和动画执行的曲线关联起来的。我们指定动画的曲线为Curves.easeIn，它表示动画开始时比较慢，结束时比较快。
+`CurvedAnimation`和`AnimationController`都是`Animation<double>`类型。`CurvedAnimation` 可以通过包装`AnimationController`和`Curve`生成一个新的动画对象 ，我们正是通过这种方式来将动画和动画执行的曲线关联起来的。我们指定动画的曲线为Curves.easeIn，它表示动画开始时比较慢，结束时比较快。
 
 Curves (opens new window)类是一个预置的枚举类，定义了许多常用的曲线，下面列几种常用的：
 
@@ -159,4 +151,64 @@ class ShakeCurve extends Curve {
     return math.sin(t * math.PI * 2);
   }
 }
+```
+
+## 实例讲解 翻滚的计数器
+通过之前学习的内容，可以做一个简单的计数器效果。
+1. 使用`Stack`叠加两个`Text`文字,设置两个`Text`距离顶部的距离，假设高度是100,A滚出屏幕时距离顶部需要从`0 -> -100`,B距离顶部需要从 `100 -> 0`
+2. 设置补间动画Tween时,设置end为下次滚动的数字,end - begin 之间的差是滚动时针
+3. 计算出滚动时的整数和小数，整数是Text显示的值，小数是动画的一个过程
+4. 设置Text控件距离顶部的距离,A距离顶部`-100 * 小数`，B距离顶部`100 - 100 * 小数`。
+5. 封装成一个单独的控件
+
+```dart
+class AnimatedCounter extends StatelessWidget {
+  const AnimatedCounter({
+    Key? key,
+    required double count,
+    this.duration = const Duration(seconds: 1)
+  }) : _count = count, super(key: key);
+
+  final double _count;
+  final Duration duration;
+
+  @override
+  Widget build(BuildContext context) {
+    return TweenAnimationBuilder(
+      tween: Tween(end: _count),
+      duration: duration,
+      builder: (BuildContext ctx,double value, Widget? child){
+        final whole  = value ~/ 1 ;  // 小数取整 比如 3.15 ~/ 1 = 3
+        final decimal = value - whole; // 获取小数
+        return Stack(
+            children: [
+              Positioned(
+                top: -100 *decimal, //从 0 -> -100
+                child:Opacity(
+                  opacity: 1.0 - decimal, //从 1 -> 0
+                  child: Text(whole.toString(),style: TextStyle(fontSize: 100),))
+              ),
+              Positioned(
+                top: 100 - 100 * decimal, //从 100 -> 0
+                child: Opacity(
+                  opacity: decimal, //从 0 -> 1
+                  child: Text((whole + 1).toString(),style: TextStyle(fontSize: 100)))
+              ),
+            ],
+          );
+      },
+    );
+  }
+}
+```
+
+使用的时候可以设置父控件高度为100:
+```dart
+Center(
+  child: Container(
+    width: 300,
+    height: 100,
+    child: AnimatedCounter(count: _count,),
+  )
+)
 ```
