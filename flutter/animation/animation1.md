@@ -66,7 +66,7 @@ AnimatedCrossFade(
 * `AnimatedOpacity`: 透明度动画
 * `AnimatedPadding`: 间距动画
 
-补间动画`TweenAnimationBuilder`,当我们想自定义一些动画时，可以选择补间动画，默认有三个参数:tween(动画变化过程中的值)、duration(动画时长)、builder(动画控件)。补间动画还可以配合 `Transform` 完成平移旋转和缩放。
+**补间动画`TweenAnimationBuilder`**,当我们想自定义隐式动画时，可以选择补间动画，默认有三个参数:tween(动画变化过程中的值)、duration(动画时长)、builder(动画控件)。补间动画还可以配合 `Transform` 完成平移旋转和缩放。
 
 ```dart
 TweenAnimationBuilder(
@@ -114,7 +114,7 @@ Transform.scale(
 )
 
 Transform.translate(
-  offset: Offset(10,value), // 平移，需要设置x,y的值。 Offset(10,0)表示不平移
+  offset: Offset(10,value), // 平移，需要设置x,y的值。 Offset(0,0)表示不平移,这里写的值表示像素
   child: Text("Hi",style: TextStyle(fontSize: 150)),
 )
 ```
