@@ -4,7 +4,6 @@
 * [Flutter](flutter/)
 * [Python](python/)
 * [Shell](shell/)
-<!-- * [Linux](/liunx/) -->
 * [Web](web/)
 * [网络](network/)
 * [C语言](c/)

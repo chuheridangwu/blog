@@ -10,7 +10,7 @@ Flutter 中关于动画的类有:
 * `Curve`: 动画曲线
 * `Tween`: 添加映射以生成不同的范围或数据类型的值,例如：`Tween(begin: -200.0, end: 0.0);`
 
-在`Flutter`中我们应该如何选择动画：如果需要 循环播放、随时中断、多个动画协调的时候使用显示动画。如果是内容更新、按钮点击、翻页效果、弹窗、添加/删除控件、渐变过度等效果使用隐式动画
+在`Flutter`中,如果需要 循环播放、随时中断、多个动画协调的时候使用显示动画。如果是内容更新、按钮点击、翻页效果、弹窗、添加/删除控件、渐变过度等效果使用隐式动画
 
 ## 隐式动画(系统默认)
 系统自带隐式动画控件以`Animatedxxx`进行开头，常见的控件有：
@@ -30,6 +30,7 @@ AnimatedContainer(
   * `ScaleTransition`: 缩放
   * `RotationTransition`: 旋转
   * `SizeTransition`: 大小
+  * `SlideTransition`:平移动画
 * `AnimatedCrossFade`: 如果只是两个控件来回切换的动画，可以直接使用`AnimatedCrossFade`
 
 ```dart
