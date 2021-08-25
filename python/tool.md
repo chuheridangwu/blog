@@ -7,8 +7,9 @@
 #!/usr/bin/python3
 
 import os
+import json
 import requests
-from urllib.request import urlopen, urlretrieve
+import urllib
 
 url="https://live.maozhuazb.com/Living/GetGiftListV2"
 
@@ -17,7 +18,7 @@ r = requests.get(url)
 str1 = str(r.content, encoding = "utf-8") 
 
 #  将字符串转换成 字典
-dict = eval(str1)
+dict = json.loads(str1)
 list = dict.get("data").get("giftList")
 
 #获取当前工作目录
