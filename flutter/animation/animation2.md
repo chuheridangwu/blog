@@ -49,6 +49,7 @@ late AnimationController _controller;
 ### `AnimationController`中的常用方法
 ```dart
 _controller.forward(); // 运行一次
+_controller.reverse(); // 还原
 _controller.repeat(); //无限循环动画
 _controller.repeat(reverse: true); // 动画完成后会慢慢还原到之前的状态再进行新的动画
 _controller.reset(); //重置
@@ -100,7 +101,7 @@ late AnimationController _controller;
 _controller.drive(Tween(begin: Offset.zero,end: Offset(0,0.5)))
 ```
 
-### 关于 Interval()
+### 关于 `Interval()`
 有时候一个整体动画时间是5秒，我们想在第3秒的时候开始动画，可以选择使用`Interval()`
 ```dart
 Tween(begin: Offset.zero,end: Offset(0,0.5))
@@ -173,8 +174,208 @@ class SlideBox extends StatelessWidget {
 
 
 
-## 自定义动画控件 `AnimationBuilder`
-自定义显示动画`AnimationBuilder`
+## 自定义动画控件 `AnimatedBuilder`
+`AnimatedBuilder` 中包含两个参数：`animation`参数传入 `AnimatinController`,`builder`参数传入对应的动画控件。
 
+`builder`参数这里有一个优化，`builder` 中的 child 对应的是`AnimatedBuilder`的 child 控件，每次屏幕刷新时都需要刷新动画中的控件，如果有一些控件是固定不变不需要动画的，可以写在`AnimatedBuilder`的 child 参数中，通过`builder`函数传入到里面去。
 
+```dart
+class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
 
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      duration: Duration(seconds: 2),
+      vsync: this)..repeat(reverse: true);
+  }
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: AnimatedBuilder(
+          animation: _controller, 
+          builder: (ctx,child){
+            return Opacity(
+              opacity:_controller.value,
+              child: Container(
+                  width: 300,
+                  height: 100 + 100 * _controller.value, // 某一个区间的动画可以直接使用Tween获取_controller的值
+                  color: Colors.blue,
+                  child: child, 
+                ),
+              );
+          },
+          child: Center(child: Text("Hi",style: TextStyle(fontSize: 25),),)),
+      ),
+    );
+  }
+}
+```
+
+设置一些区间动画时，可以直接通过`Tween()`设置一些区间值跟`AnimationController`的值进行计算，使用`Tween()`还可以设置动画曲线。
+```dart
+@override
+Widget build(BuildContext context) {
+
+  final Animation opacityAnimation = Tween(begin: 0.5,end: 0.8).animate(_controller);
+  final Animation heightAnimation = Tween(begin: 100.0,end: 300.0).chain(CurveTween(curve: Curves.bounceOut)).animate(_controller);
+
+  return Scaffold(
+    body: Center(
+      child: AnimatedBuilder(
+        animation: _controller, 
+        builder: (ctx,child){
+          return Opacity(
+            opacity: opacityAnimation.value, // 也可以使用这种写法
+            // opacity:_controller.value, 可以使用这种写法
+            child: Container(
+                width: 300,
+                height: heightAnimation.value,
+                // height: Tween(begin: 100.0,end: 200.0).evaluate(_controller), // 某一个区间的动画也可以直接使用evaluate()获取_controller的值
+                color: Colors.blue,
+                child: child, 
+              ),
+            );
+        },
+        child: Center(child: Text("Hi",style: TextStyle(fontSize: 25),),)),
+    ),
+  );
+}
+```
+## 动画实例 478动画
+478呼吸法动画，4秒吸气，停止7秒，8秒吐气,使用`AnimatedBuilder`配合`Tween()`区间动画进行实现，原理是在总共20秒时间，根据每个动画的时间段进行分配时间。停止7秒不动的时候不进行任何操作。
+```dart
+class HomePage extends StatefulWidget {
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin {
+  
+  late AnimationController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller =
+        AnimationController(duration: Duration(seconds: 20), vsync: this)
+          ..repeat();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    // ++++ ------- 00000000 1  4秒吸气，7秒停止，8秒吐气，1秒停止
+    final animation1 = Tween(begin: 0.0,end: 1.0)
+                .chain(CurveTween(curve: Interval(0.0,4/20)))
+                .animate(_controller);
+    final animation3 = Tween(begin: 1.0,end: 0.0)
+                .chain(CurveTween(curve: Interval(11/20,19/20)))
+                .animate(_controller);
+
+    return Scaffold(
+        body: Center(
+      child: AnimatedBuilder(
+          animation: _controller,
+          builder: (ctx, child) {
+            return Container(
+              width: 300,
+              height: 300,
+              decoration: BoxDecoration(
+                  color: Colors.blue,
+                  shape: BoxShape.circle,
+                  gradient: RadialGradient(colors: [
+                    Colors.blue[600] as Color,
+                    Colors.blue[100] as Color
+                  ], stops: _controller.value < 0.2 ? 
+                    [animation1.value,animation1.value + 0.1] :
+                    [animation3.value,animation3.value + 0.1]
+                  ),),
+            );
+          }),
+    ));
+  }
+}
+```
+
+使用两个`AnimationController`时需要使用`TickerProviderStateMixin`,我们在7s停留的时候做一个呼吸灯的效果。
+```dart
+class HomePage extends StatefulWidget {
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
+  
+  late AnimationController _controller;
+  late AnimationController _opacityController;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(vsync: this);
+    _opacityController = AnimationController(vsync: this);
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+      child: FadeTransition(
+        opacity: Tween(begin: 1.0,end: 0.5).animate(_opacityController), //利用还原制造呼吸灯的效果
+        child: AnimatedBuilder(
+            animation: _controller,
+            builder: (ctx, child) {
+              return Container(
+                width: 300,
+                height: 300,
+                decoration: BoxDecoration(
+                    color: Colors.blue,
+                    shape: BoxShape.circle,
+                    gradient: RadialGradient(colors: [
+                      Colors.blue[600] as Color,
+                      Colors.blue[100] as Color
+                    ], stops: [_controller.value,_controller.value + 0.1]
+                    ),),
+              );
+            }),
+      ),
+    ),
+    floatingActionButton: FloatingActionButton(
+      onPressed: () async {
+        _controller.duration = Duration(seconds: 4);
+        _controller.forward();
+        await Future.delayed(Duration(seconds: 4));
+
+        _opacityController.duration = Duration(milliseconds: 1750);// 这里是7秒制造4次呼吸灯的效果，就是7000/4
+        _opacityController.repeat(reverse: true);
+        await Future.delayed(Duration(seconds: 7));
+        _opacityController.reverse();
+
+        _controller.duration = Duration(seconds: 8);
+        _controller.reverse();
+      },
+    ),
+    );
+  }
+}
+```
