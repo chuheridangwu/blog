@@ -309,13 +309,13 @@ dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER); \
 * 临界区代码复杂或者循环量大
 * 临界区竞争非常激烈
 
-## atumic
+## atomic
 `atomic`用于保证属性`setter、getter`的原子性操作，相当于在`getter和setter`内部加了线程同步的锁
 ,通过objc4 的`objc-accessors.mm`文件可以查看源码，
 
 注意:`atomic`只能保证赋值和取值时的安全，并不能保证使用属性的过程是线程安全的。这句话怎么解读呢？比如说我们定义一个数组，在使用setter和getter的方法的内部数组是安全的，如果是往数组内添加数据，这个过程是不能保证线程安全的。
 
-通过源码查看`automic`:
+通过源码查看`atomic`:
 ```objc
 // getter方法
 id objc_getProperty(id self, SEL _cmd, ptrdiff_t offset, BOOL atomic) {
