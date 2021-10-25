@@ -61,3 +61,35 @@ Xcode 提供了一个迁移工具，可以自动将MRC代码转换为ARC代码�
  `Path to Link Map File`  LinkMap 文件保存地址
  `Write Link Map File`  开启LinkMap
 可借助第三方工具解析LinkMap文件： https://github.com/huanxsd/LinkMap
+
+
+## 图片拉伸
+图片拉伸有三种方法,使用代码或者放到项目中进行拉伸
+第一种放在Assets中，选中图片之后可以通过右侧面板Slicing进行拉伸
+第二种，使用代码设置保护范围，根据2x、3x设置保护不被拉伸的范围
+```objc
+- (UIImage *)resizableImageWithCapInsets:(UIEdgeInsets)capInsets;
+// 使用方式
+UIImage *image = [UIImageimageNamed:@"RedButton"];
+    image = [image resizableImageWithCapInsets:UIEdgeInsetsMake(image.size.height *0.5, image.size.width *0.5, image.size.height *0.5, image.size.width *0.5)];
+```
+
+第三种，leftCapWidth: 左边不拉伸的像素，topCapHeight:上边不拉伸的像素
+```
+- (UIImage *)stretchableImageWithLeftCapWidth:(NSInteger)leftCapWidth topCapHeight:(NSInteger)topCapHeight__TVOS_PROHIBITED;
+
+// 示例
+UIImage *image = [UIImageimageNamed:@"RedButton"];
+image = [image stretchableImageWithLeftCapWidth:image.size.width *0.5topCapHeight:image.size.height *0.5];
+```
+
+拉伸的模式有两种：
+* UIImageResizingModeTile   平铺，默认是平铺
+* UIImageResizingModeStretch  拉伸，
+
+如果是需要对网络图片进行拉伸，首先将图片下载到本地，**对设备来说，网络图片就是1x图**，如果你使用过大的图片，拉伸的时候注意图片不要被压缩了。
+
+比如你调试时，使用3x图，大小是258x111，不被拉伸的区域为上55，左120，下55，右70，控件高度是40，
+当你下载网络图片之后，会发现图片被压缩，这是因为下载的图片对控件来说是1x图，控件最少的高度需要是图片的高度111才不会被压缩。你可以将图片的大小更改为86x37，这样下载好之后只会拉伸而不会被压缩。
+
+很多时候安卓需要使用大的图片才会显示的更完美，如果需要跟安卓使用同一张图片，可以使用大图，下载之后先等比对图片进行压缩，然后再对其进行拉伸即可

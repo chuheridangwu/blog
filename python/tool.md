@@ -70,3 +70,180 @@ for i in fileList:
 
     n+=1
 ```
+
+## 从文件中使用正则提取字符串
+
+```python
+# -*- coding: UTF-8 -*-
+import re
+
+# 读取文件
+path="/Users/mlive/Desktop/strings1.xml"
+
+# 读取文件  errors='ignore' 忽略编码错误  encoding='utf8'： 以utf8的格式读取文件内容
+f=open(path, 'r+', encoding='utf8', errors='ignore')  
+
+# 遍历读取行
+line=f.readline()
+while line:
+    # 根据正则取出字符串 > 开头 < 结尾
+    match=re.search(r'>.*<',line)
+    if match:
+        # 删除左边的 > 和右边的 <
+        reString=match.group(0).lstrip(">").rstrip("<")
+        print(reString)
+    line = f.readline()
+
+# 关闭文件
+f.close()
+```
+
+## 批量将 webp 图片 转成 png图片
+webp 转 png 需要使用到 dwebp 控件
+
+```python
+#!/usr/bin/env python
+# -*- coding:utf-8 -*-
+
+import os
+import time
+
+# 遍历指定目录，显示目录下的所有文件名
+def webpToPngWithPath(path):
+    fileList=os.listdir(path)
+    
+    n=0
+    for i in fileList:
+
+        #设置旧文件名（就是路径+文件名） fileList[n]: 文件名称，os.sep添加系统分隔符
+        filename=fileList[n]
+        if filename.endswith('.webp'):
+            webp = path+ os.sep + filename
+            jpg = "/Users/dikh/Desktop/Resouce/%s.png"%(os.path.splitext(filename)[0])
+
+            # 调用shell命令 将 webp 转换成 png
+            commandline = "dwebp %s -o %s" % (webp, jpg)
+            os.system(commandline)
+
+            print(webp + " ------> 转换成功")
+
+            # 删除原来的图片
+            delline = "rm -f %s" % (webp)
+            os.system(delline)
+
+            print(webp + " ------> 删除原来的图片")
+
+        n+=1
+
+if __name__ == "__main__":
+    webpToPngWithPath("/Users/dikh/Desktop/abc")
+```
+
+## 从网站获取IP池导出excil
+
+```python
+from io import StringIO
+from os import name
+from typing import final
+import bs4
+import requests
+import csv
+import random
+import time
+import socket
+import http.client
+# import urllib.request
+from bs4 import BeautifulSoup
+
+f_csv = 0
+def get_content(url , data = None):
+    header={
+        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+        'Accept-Encoding': 'gzip, deflate, sdch',
+        'Accept-Language': 'zh-CN,zh;q=0.8',
+        'Connection': 'keep-alive',
+        'User-Agent': 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.235'
+    }
+    timeout = random.choice(range(80, 180))
+    while True:
+        try:
+            rep = requests.get(url,headers = header,timeout = timeout)
+            rep.encoding = 'utf-8'
+            # req = urllib.request.Request(url, data, header)
+            # response = urllib.request.urlopen(req, timeout=timeout)
+            # html1 = response.read().decode('UTF-8', errors='ignore')
+            # response.close()
+            break
+        # except urllib.request.HTTPError as e:
+        #         print( '1:', e)
+        #         time.sleep(random.choice(range(5, 10)))
+        #
+        # except urllib.request.URLError as e:
+        #     print( '2:', e)
+        #     time.sleep(random.choice(range(5, 10)))
+        except socket.timeout as e:
+            print( '3:', e)
+            time.sleep(random.choice(range(8,15)))
+
+        except socket.error as e:
+            print( '4:', e)
+            time.sleep(random.choice(range(20, 60)))
+
+        except http.client.BadStatusLine as e:
+            print( '5:', e)
+            time.sleep(random.choice(range(30, 80)))
+
+        except http.client.IncompleteRead as e:
+            print( '6:', e)
+            time.sleep(random.choice(range(5, 15)))
+
+    return rep.text
+    # return html_text
+
+def get_data(html_text):
+    final = []
+    bs = BeautifulSoup(html_text, "html.parser")
+    body = bs.body
+    tables = body.findAll('table')
+    tab = tables[0]
+    for tr in tab.tbody.findAll('tr',{'class':'ip1'}):
+        td = tr.findAll('td')
+        td1 = td[0].string
+        td2 = td[1].get('title')
+        strs = td2.split('IP地址')
+        pro = strs[0]
+        url = 'http://ip.bczs.net/city/' + td1
+        html = get_content(url)
+        result = get_ips(html,pro)
+        for string in result:
+                strs = string.split(' ')
+                f_csv.writerow(strs)
+        print(td2)
+        time.sleep(1)
+    return final
+
+
+def get_ips(html_text,proname):
+    final = []
+    bs = BeautifulSoup(html_text, "html.parser")
+    body = bs.body
+    tables = body.findAll('table')
+    tab = tables[0]
+    for tr in tab.tbody.findAll('tr'):
+        td = tr.findAll('td')
+        td1 = td[0].string
+        td2 = td[1].string
+        td3 = td[3].string
+        string = td1 + ' ' + td2 + ' ' + proname + td3
+        final.append(string)
+    return final
+
+
+if __name__ == '__main__':
+    url ='http://ip.bczs.net/city'
+    with open('ip.csv', 'a', errors='ignore', newline='') as f:
+            f_csv = csv.writer(f)
+            f_csv.writerow(["开始","结束","地区"])
+            html = get_content(url)
+            result = get_data(html)
+```

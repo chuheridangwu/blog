@@ -32,6 +32,7 @@
 * 逆向
   *  [逆向1](ios/reverse/reverse1.md)
 * [Xcode](ios/xcode.md)
+* [NFC](ios/nfc.md)
 * [Mac电脑](ios/mac.md)
 * [Automator 自动话工具](ios/automator.md)
 * [AppleScript](ios/applescript.md)
