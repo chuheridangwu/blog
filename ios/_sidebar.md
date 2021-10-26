@@ -38,6 +38,7 @@
 * [AppleScript](ios/applescript.md)
 * [LLVM](ios/llvm.md)
 * [视频画中画](ios/画中画.md)
+* [搭建本地服务器](ios/server.md)
 * [NSArray](ios/nsarray.md)
 * [常见错误](/ios_error.md)
 * [面试题](ios/面试题.md)
