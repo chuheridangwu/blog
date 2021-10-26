@@ -37,6 +37,7 @@
 * [Automator 自动话工具](ios/automator.md)
 * [AppleScript](ios/applescript.md)
 * [LLVM](ios/llvm.md)
+* [视频画中画](ios/画中画.md)
 * [NSArray](ios/nsarray.md)
 * [常见错误](/ios_error.md)
 * [面试题](ios/面试题.md)
