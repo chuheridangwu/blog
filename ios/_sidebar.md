@@ -1,6 +1,6 @@
 * [回到首页](/)
 
-* OC底层原理
+* OC - 底层原理
     * [1、OC对象的本质](ios/principle/OC对象的本质) 
     * [2、isa和supperclass](ios/principle/isa和superclass.md)
     * [3、KVO](ios/principle/kvo.md)
@@ -29,16 +29,20 @@
     * [苹果商店获取ipa文件](ios/ipa/获取ipa文件.md)
     * [iOS签名](ios/ipa/iOS签名机制.md)
     * [IPA重签名](ios/ipa/resignature.md)
+* API
+    * [NSArray](ios/api/nsarray.md)
+    * [NSString](ios/api/nsstring.md)
+    * [NSFilemanager](ios/api/nsfilemanager.md)
+    * [iOS相关权限](ios/api/authority.md)
+    * [视频画中画](ios/api/画中画.md)
+    * [NFC](ios/api/nfc.md)
+    * [iOS搭建本地服务器](ios/api/server.md)
 * 逆向
   *  [逆向1](ios/reverse/reverse1.md)
 * [Xcode](ios/xcode.md)
-* [NFC](ios/nfc.md)
 * [Mac电脑](ios/mac.md)
 * [Automator 自动话工具](ios/automator.md)
 * [AppleScript](ios/applescript.md)
 * [LLVM](ios/llvm.md)
-* [视频画中画](ios/画中画.md)
-* [搭建本地服务器](ios/server.md)
-* [NSArray](ios/nsarray.md)
 * [常见错误](/ios_error.md)
 * [面试题](ios/面试题.md)
