@@ -443,6 +443,7 @@ EMV：支付系统的集成电路卡规范和支付系统的集成电路卡终�
 * [一卡通CPU指令解析](https://www.cxymm.net/article/qq_20069435/75097810)
 * [NFC读取公交卡](https://www.shangmayuan.com/a/9b129aaa94f54cf3b18b5e8d.html) 三星
 * [CPU卡校验MAC1、计算MAC2、校验TAC的方式及流程](https://daimajiaoliu.com/daima/47966f360900400)
+* [CPU卡流程备忘](https://www.dazhuanlan.com/lichenbo/topics/1478942)
 * [NFC手机模拟加密门禁卡](https://hceng.cn/2019/07/12/NFC%E6%89%8B%E6%9C%BA%E6%A8%A1%E6%8B%9F%E5%8A%A0%E5%AF%86%E9%97%A8%E7%A6%81%E5%8D%A1/)
 
 

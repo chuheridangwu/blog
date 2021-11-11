@@ -33,9 +33,9 @@
     * [NSArray](ios/api/nsarray.md)
     * [NSString](ios/api/nsstring.md)
     * [NSFilemanager](ios/api/nsfilemanager.md)
-    * [iOS相关权限](ios/api/authority.md)
+    * [iOS权限](ios/api/authority.md)
     * [视频画中画](ios/api/画中画.md)
-    * [NFC](ios/api/nfc.md)
+    * [NFC功能](ios/api/nfc.md)
     * [iOS搭建本地服务器](ios/api/server.md)
 * 逆向
   *  [逆向1](ios/reverse/reverse1.md)
