@@ -20,6 +20,9 @@
 * 类 
     * [类和对象](/python/class.md)
 
+* 网络
+    * [简单创建服务端和客户端](/python/network.md)
+
 * Python脚本
     * [常用脚本](/python/tool.md)
     * [iOS审核脚本](/python/review.md)

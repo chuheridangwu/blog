@@ -8,5 +8,5 @@
 * [网络](network/)
 * [C语言](c/)
 * [Photoshop](photoshop/)
-* [开发工具](tool/)
+* [工具文档](tool/)
 * [生活](live/)

@@ -30,3 +30,6 @@ ios超级签名：简单来说，是把添加苹果设备UDID进行真机测试�
 
 `超级签的优点是稳定、不需要信任证书，不需要通过苹果商店进行下载，缺点就是贵，开发设备最多100个测试设备`
 
+**辅助项目**
+* [LSUnusedResources](https://github.com/tinymind/LSUnusedResources) 清除没有使用的图片
+* []()
