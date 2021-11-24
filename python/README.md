@@ -5,3 +5,6 @@ iOS因为上马甲包的问题，需要给类修改文件名、添加属性和�
 
 ----
 注意： Mac中现在使用Python3下载其他包时，使用的命令不再是`pip3 install xxx`，而是 `python3 -m pip install xxx`
+
+## 推荐网址
+* [爬虫入门教程](http://121.5.151.41/mylesson/%E7%BD%91%E9%A1%B5%E7%88%AC%E8%99%AB/%E7%88%AC%E8%99%AB%E5%85%A5%E9%97%A8/index.html)

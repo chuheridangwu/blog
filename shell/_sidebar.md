@@ -7,10 +7,11 @@
 * 字典、数组
     * [数组](/shell/array.md)
     * [liunx](/liunx/README.md)
-
 * 文件
     * [文件引用](/shell/quote.md)
     * [特殊字符](/shell/character.md)
+* 工具类
+    * [shell常用工具](/shell/tool.md) 
 
 
 
