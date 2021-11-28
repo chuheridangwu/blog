@@ -265,5 +265,101 @@ Tornado：Facebook的开源异步Web框架。
 
 在编写URL处理函数时，除了配置URL外，从HTTP请求拿到用户数据也是非常重要的。Web框架都提供了自己的API来实现这些功能。Flask通过request.form['name']来获取表单的内容。
 
+### Flask 设置 响应体、响应头、状态码
+Flask 设置响应报文的格式`return 响应体,响应码,响应头`
+第一种方式
+```
+@app.route('/login', methods=['GET','POST'])
+def login():
+    return '成功',200,[("token","123456"),("City","深圳")]
+```
+第二种方式
+```
+@app.route('/login', methods=['GET','POST'])
+def login():
+    return '成功',200,{"token":"123456"),"City":"深圳"}
+```
+第三种方式
+```python
+@app.route('/login', methods=['GET','POST'])
+def login():
+    res = make_response("成功") # 设置响应体
+    res.status = 200 # 设置响应码
+    res.headers["token"] = "123456" # 设置响应头
+    res.headers["city"] = "深圳" # 设置响应头
+    return res
+```
+
+### Flask 设置重定向
+重定向应用场景一般是用户没有登录的时候，重新指向登录界面，通过请求头中的`Location`跳转到新的网页
+```
+from flask import Flask,redirect,url_for
+
+app = Flask(__name__)
+
+@app.route('/')
+def index():
+    login_url=url_for('login')
+    return redirect(login_url)
+
+@app.route('login')
+def login():
+    return "这是登录页面"
+
+if __name__=='__main__':
+    app.run(debug=True)
+```
+
+### flask 导入静态网页
+1、render_template()： 引入html文件，同时根据后面传入的参数，对html进行修改渲染。
+
+```html
+<html>
+  <body>
+      <h1>Hello, {{user.nickname}}!</h1>
+  </body>
+</html>
+<!-- 注:{{}}表示这是一个变量，可以根据用户在模块端给予的参数的不同，进行调整 -->
+```
+Python的代码
+
+```python
+from flask import render_template
+from app import app
+ 
+@app.route('/index')
+def index():
+    data= {'nickname': 'Miguel'} # fake user
+    return render_template("index.html",user = data)   
+
+```2、 send_from_directory() 主要用于下载文件
+
+```python
+from flask import Flask
+from flask import send_from_directory
+import os.path
+ 
+app = Flask(__name__)
+dirpath = os.path.join(app.root_path,'upload')
+@app.route("/download/<path:filename>")
+def downloader(filename):
+    return send_from_directory(dirpath,filename,as_attachment=True)
+```    
+3、send_static_file(): 返回一个静态页面
+
+```python
+from flask import Flask
+ 
+#默认静态文件目录为static
+app = Flask(__name__)#修改静态文件夹的目录
+ 
+@app.route('/')
+def home():
+    return app.send_static_file('homepage.html')#homepage.html在static文件夹下
+``` 
+
+### Flask  设置Cookie
+ 
+
 ## 相关网址
 * [用 Python 实现一个简易版 HTTP 客户端](https://segmentfault.com/a/1190000039167462)
