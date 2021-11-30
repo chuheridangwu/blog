@@ -24,3 +24,5 @@ MAC电脑使用 Wireshark 通过usb连接苹果手机，使用`Remote Virtual In
 5. 点击`Rules`，进入`Rules`详情页，点击右上角的加号，进入`Add filter rule`，action选择`Local proxy chain`，Application选择需要抓包的应用，然后保存，返回主页
 6. 左滑到`LOG`标签页，点击底部到`OFF`按钮，启用Drony，同时确保Drony进程在后台不会被杀掉。（这个时候英文版的就可以看到 很多log 数据了， 繁体版的看不到固不推荐。）**注意：**不要忘记第6点
 
+## 推荐阅读
+* [原来wireshark可以抓HTTPS明文包](https://segmentfault.com/a/1190000023568902)

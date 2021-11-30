@@ -359,7 +359,43 @@ def home():
 ``` 
 
 ### Flask  设置Cookie
- 
+设置Cookie
+ ```python
+ from flask import Flask,redirect,request
+from flask import Flask,redirect,url_for
+from flask.helpers import make_response
+
+app = Flask(__name__)
+
+@app.route('/', methods=['GET'])
+@app.route('/signin', methods=['GET'])
+def signin_form():
+    return '''<form action="/login" method="post">
+              <p><input name="username"></p>
+              <p><input name="password" type="password"></p>
+              <p><button type="submit">Sign In</button></p>
+              </form>'''
+
+@app.route('/login', methods=['POST'])
+def login():
+    # 需要从request对象读取表单内容：
+    if request.form['username']=='123' and request.form['password']=='456':
+        response = make_response('<h3>Hello, admin!</h3>')
+        response.set_cookie('username',request.form['username'])
+        response.set_cookie('password',request.form['password'])
+        return response
+    return '<h3>Bad username or password.</h3>'
+
+@app.route('/user', methods=['GET'])
+def user():
+    # 如果有Cookie 并且保存的用户名是 123，密码是 456，跳转到新的网页
+    if request.cookies.get('username')=='123' and request.cookies.get('password')=='456':
+        return "<h3>用户已经登录成功，并且有cookie</h3>"
+    return redirect('http://127.0.0.1:5000/signin')
+
+if __name__ == '__main__':
+    app.run()
+ ```
 
 ## 相关网址
 * [用 Python 实现一个简易版 HTTP 客户端](https://segmentfault.com/a/1190000039167462)
