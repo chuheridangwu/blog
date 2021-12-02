@@ -10,6 +10,15 @@ MAC电脑使用 Wireshark 通过usb连接苹果手机，使用`Remote Virtual In
 从play消息获取到流地址,域名+流地址获取到完整的`rtmp`播放地址:`rtmp://live/hkstv.hk.1xdns.com/live/hks`
 ![](imgs/tool_play.png)
 
+### wireshark 使用方式
+
+```
+tcp.port==8080 查看某个端口
+ip.addr==192.168.1.1  查看某个ip
+tcp  查看某个协议
+
+```
+
 
 ## 安卓手机抓包
 因为有些软件只有安卓版本，不能在苹果商店进行下载，所有有时候我们需要抓安卓APP的包。小米手机通过 Charles 抓取接口，首先需要安装证书，`设置->WLAN->高级设置->添加证书`
