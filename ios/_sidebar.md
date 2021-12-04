@@ -1,6 +1,6 @@
 * [回到首页](/)
 
-* OC - 小码哥底层原理
+* 小码哥底层原理
     * [01-OC对象的本质](ios/principle/OC对象的本质) 
     * [02-isa和supperclass](ios/principle/isa和superclass.md)
     * [03-KVO](ios/principle/kvo.md)

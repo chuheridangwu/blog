@@ -41,6 +41,6 @@ RAPP (Reverse Address Resolution Protocol)译为：逆地址解析协议,使用�
 `arp -s 主机地址 MAC地址` | 增加一条缓存信息（这是静态缓存，存储时间较久，不同系统的存储时间不同）
 
 ## ICMP
-ICMP（Internet Control Message Protocol），译为：互联网控制消息协议。IPv4中的ICMP被称作ICMPv4，IPv6中的ICMP则被称作ICMPv6。
+ICMP（`Internet Control Message Protocol）`，译为：互联网控制消息协议。IPv4中的ICMP被称作ICMPv4，IPv6中的ICMP则被称作ICMPv6。
 
 通常用于返回错误信息: 比如 值过期、目的不可达,ICMP 的错误消息总是包括了源数据并返回给发送者。`ping` 命令发送的就是 ICMP 协议。
