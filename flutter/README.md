@@ -1,5 +1,27 @@
-## Flutter
-Flutter是谷歌的移动UI框架，可以快速在iOS和Android上构建高质量的原生用户界面。可以看做是一个纯粹的UI框架来使用。文档内容主要来源于[Flutter实战电子书](https://book.flutterchina.club/#%E7%BC%98%E8%B5%B7)、
+# 关于Flutter
+Flutter是谷歌的移动UI框架，可以快速在iOS和Android上构建高质量的原生用户界面。Flutter自身只是一个纯粹的UI框架。
+
+文档内容是在学习过程中的一些积累，来源自[Dart的官方文档](https://dart.cn/guides/language/language-tour)、[《Flutter实战·第二版》](https://book.flutterchina.club/chapter14/flutter_app_startup.html)、[B站王叔不秃](https://space.bilibili.com/589533168/?spm_id_from=333.999.0.0)
+
+我自己学习Flutter也算有一段时间了，断断续续的学，因为自身有开发经验，所以在Dart语言这里就没怎么看，直接上手Flutter。在转换语言的时候，总是带一些以前的编程思维，搞的不伦不类。在转换编程语言的时候，还是要打好语言基础。
+
+>自定的学习路线: Dart -> Flutter控件  -> Flutter 项目
+
+#### 关于Dart
+如何学习一门新语言,有时候看很多大佬会很多们语言，尤其是不单单会写，而是理解它的一些特性，可以直接进行教学，很奇怪他们是怎么学习的。
+
+首先说一下我对语言的理解，一门编程语言可以看成一本定义规则的书，这本书中描述了怎么去写一个变量，怎么去定义一个方法，怎么去定义一个类 等等。
+
+当我们把这本书读懂之后，我们可以在这本书的基础上去进行创作。这本书可以当做是房屋的地基。**在学习Flutter之前，需要先将Dart语言学清楚**。
+
+#### 关于Flutter
+因为自身有iOS开发经验，所以在Flutter的学习过程中，不自觉的会将Flutter中的控件和iOS中的控件进行对比。如果有开发经验的话，还是看一下Flutter的开发文档比较好，Flutter官方有整理出Flutter跟安卓、iOS之中的开发指南，方便快速上手。毕竟**磨刀不误砍柴工**。
+* [Flutter for Android 开发者](https://flutterchina.club/flutter-for-android/)
+* [给 Android 开发者的 Flutter 指南](https://flutter.cn/docs/get-started/flutter-for/android-devs)
+* [Flutter for iOS 开发者](https://flutterchina.club/flutter-for-ios/)
+* [给 iOS 开发者的 Flutter 指南](https://flutter.cn/docs/get-started/flutter-for/ios-devs)
+
+Flutter的控件和iOS中的控件概念上是不一样的，万物皆是 Widget ,跟iOS中的View有很大的区别，理解起来很快，但是在使用上思想上转变比较慢。
 
 VSCode安装插件Flutter/Dart/Code Runner,按F5进行调试。
 
@@ -14,37 +36,11 @@ VSCode安装插件Flutter/Dart/Code Runner,按F5进行调试。
 2. 使用`flutter devices`检查当前电脑的测试设备，如果没有的打开iOS模拟器`open -a Simulator`
 3. cd 到对应的文件夹，使用`flutter run`运行项目
 
-## 学习Flutter推荐网址
+### 推荐网址
 * [Flutter实战电子书](https://book.flutterchina.club/#%E7%BC%98%E8%B5%B7) 讲解的比较细，查看一些控件的使用可以从这里看。这本书写的比较早，很多API都过时了，仅作为参考。
+* [Flutter系列教程](https://mp.weixin.qq.com/mp/appmsgalbum?__biz=Mzg5MDAzNzkwNA==&action=getalbum&album_id=1566028536430247937&scene=173&from_msgid=2247483692&from_itemidx=1&count=3&nolastread=1#wechat_redirect) coderwhy的公众号教程
 * [Flutter官方中文网](https://flutter.cn/docs/cookbook)
+* [Flutter中文网](https://flutterchina.club/get-started/install/) 用户搭建的Flutter中文社区
 * [Flutter中的图标集合](https://fonts.google.com/icons?selected=Material+Icons)
 * [Flutter|老孟](http://laomengit.com/guide/widgets/TextField.html)
 * [Flutter官方所有的Widget](https://flutter.dev/docs/development/ui/widgets)
-
-## 常用的第三方
-```dart
-  dio: ^4.0.0 #网络请求 >>>
-  share: ^2.0.1 #分享 >>>
-  pull_to_refresh: ^2.0.0 #上拉加载 >>>
-  shake_animation_widget: ^1.0.0 #抖动动画
-  animations: ^2.0.0 #动画
-  cached_network_image: ^3.0.0 #图片缓存 >>>
-  shared_preferences: ^2.0.6 #本地存储 >>>
-  package_info: ^2.0.2 #获取APP包名、版本号等信息 >>>
-  webview_flutter: ^2.0.8 #webView
-  path_provider: ^2.0.2 #清除缓存
-  photo_view: ^0.11.1 #图片预览工具
-  google_mobile_ads: ^0.13.0 #谷歌广告
-  fijkplayer: ^0.9.0 # 视频播放器，使用ijk播放器进行封装可以播放rtmp格式
-  fluttertoast: ^8.0.7 # toast 弹窗提示
-  provider: ^5.0.0  #数据传递 >>>
-  sqflite: ^2.0.0+3  #sqlite数据库 >>>
-  permission_handler: ^8.1.3  #权限请求 >>>
-  url_launcher: ^6.0.9  #可以打开网页，发送邮件，拨打电话>>>
-  fluro: ^2.0.3 #第三方路由控件 >>>
-  json_serializable: ^5.0.0 # json解析 >>>
-  flutter_staggered_grid_view: ^0.4.0 # 瀑布流 >>>
-  cupertino_icons: ^1.0.2
-  lpinyin: ^2.0.3   #汉字转拼音库，转失败会报错，需要处理
-  intl: ^0.17.0   # 配合flutter_localizations 进行使用，多语言适配，使用插件Flutter_intl
-```

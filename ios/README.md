@@ -30,6 +30,9 @@ ios超级签名：简单来说，是把添加苹果设备UDID进行真机测试�
 
 `超级签的优点是稳定、不需要信任证书，不需要通过苹果商店进行下载，缺点就是贵，开发设备最多100个测试设备`
 
-**辅助项目**
+**辅助工具**
 * [LSUnusedResources](https://github.com/tinymind/LSUnusedResources) 清除没有使用的图片
-* []()
+* [imageoptim](https://imageoptim.com/mac) 图片压缩工具
+* [ChangeInterfaceBuilderColor](https://github.com/fabcz/ChangeInterfaceBuilderColor) 一键替换 Xib 颜色
+* [MD5Change app](https://pan.baidu.com/s/1OALSZfFssUPXOSsXhJXgYw)  批量修改图片的MD5，上传到自己的百度云盘了`6hs1`
+* [Images Extractor](https://github.com/devcxm/iOS-Images-Extractor/releases) 从 IPA 中读取图片

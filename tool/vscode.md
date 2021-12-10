@@ -4,6 +4,12 @@
 快捷键 | 含义
 ------- | -------
 `shift + alt + i` | 同时编辑多行
+`shift + alt + 拖动鼠标` | 同时编辑多行
+`option + 点击鼠标` | 同时编辑多行
+`SHIFT+TAB `  |   代码块左移
+`Alt+Up 或 Alt+Down`    |   上下移动一行
+`Shift+Alt+F`   |   代码格式化
+
 
 ## 常用插件
 Markdown 相关插件: 

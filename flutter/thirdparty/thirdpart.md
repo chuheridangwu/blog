@@ -1,4 +1,4 @@
-# 关于Flutter常用的第三方
+# 第三方库的一些用法
 
 ## 解析HTML的库
 在Java中使用`Jsoup`解析HTML数据，dart中使用html第三方库进行解析，方法都大差不差。首先在`yaml`文件中中添加`html: ^0.15.0`,html库和material库中有类名相同，同时引用需要在material库后增加后缀`import 'package:flutter/material.dart' as prefix;`，一些常用的方法:
