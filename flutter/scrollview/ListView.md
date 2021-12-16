@@ -10,7 +10,7 @@ ListView 中常用到的参数有以下几种:
 * `separatorBuilder`: 分割构造器，只有使用 ListView.separated() 构造方法时才有
 * `controller`: 用来监听滚动
 * `itemExtent`:  强制给与每一行的高度
-* `shrinkWrap`：该属性表示是否根据子 widget 的总长度来设置 ListView的长度，默认值为false 。默认情况下，ListView的会在滚动方向尽可能多的占用空间。当 ListView 在一个无边界(滚动方向上)的容器中时，**`shrinkWrap` 必须为 true**
+* `shrinkWrap`：该属性表示是否根据子控件的内容来决定 ListView的长度，默认值为false 。默认情况下，ListView的会在滚动方向尽可能多的占用空间。当 ListView 在一个无边界(滚动方向上)的容器中时，**`shrinkWrap` 必须为 true**
 * `scrollDirection`: 滚动方向
 * `reverse`: 数据取反
 * `cacheExtent`: 调整缓冲区的屏幕大小，以像素为单位，默认是屏幕的1/3
@@ -20,6 +20,8 @@ ListView 中常用到的参数有以下几种:
     * `AlwaysScrollableScrollPhysics()` 允许滚动
     * `NeverScrollableScrollPhysics()` 不允许滚动
 ```
+
+>需要注意的是： ListView 默认Padding不为0，留有安全区域的高度
 
 ## ListView 的构造函数
 ListView 常用的构造函数有三种,`ListView()`默认构造函数在项目中使用较少,`ListView.builder()`和`ListView.separated()`在项目中使用较多:

@@ -1,5 +1,24 @@
 #  异步支持
-文档来源于:[Flutter实战电子书](https://book.flutterchina.club/chapter1/dart.html#_1-4-3-%E5%BC%82%E6%AD%A5%E6%94%AF%E6%8C%81)
+关于异步操作，我们先来思考一下什么事情需要在子线程进行操作：
+```markdown
+1. 一些计算非常耗时的操作，会导致当前线程卡顿的操作
+2. 一些需要等待的操作，比如文件的读取、服务器的相应等操作、或者等一个固定的时间。
+```
+
+在OC中，我们说的异步操作一般是指直接开辟一条子线程，把当前操作放到子线程中执行。而在dart中，大部分的异步操作是不需要开辟子线程的,类似于JavaScript，在一个线程中执行操作。
+
+在Dart中，每一个线程都被封装在 Isolate 中，线程之间不能共享内存,通信只能通过发消息的方法。这样的隔离好处是既然不能共享变量，也就不会存在多线程中的抢票、存钱的问题。另外因为相互之间比较独立，所以垃圾回收机制效率也比较高。
+
+一个线程是如何解决网络操作或者等待用户输入的情况呢？这里就要用到Event Loop。
+## Event Loop / Event Queue
+Event Loop 类似于 iOS中的Run Loop机制。一种循环机制，不停的检查 Event Queue 事件队列中是否存在事件，如果存在事件，则先处理当前事件，如果没有，则结束当前程序。
+
+Dart中还有一个 Microtask Queue 事件队列,类似于VIP通道，如果当前队列中存在事件，则优先处理当前队列中的时间。在 Microtask Queue 事件队列里的时间处理完之后，才会处理 Event Queue 事件队列。`scheduleMicrotask(()=>print("C"));`表示向 Microtask Queue 队列中添加事件。
+![](../imgs/flutter_img_2.jpg ':size=400')
+![](../imgs/flutter_img_3.jpg ':size=300')
+
+> 单线程机制只能解决等待的问题，如果是一些计算量太大耗时造成的操作，只能通过创建多个Isolate来解决。
+
 
 Dart类库有非常多的返回`Future`或者`Stream`对象的函数。 这些函数被称为异步函数：它们只会在设置好一些耗时操作之后返回，比如像 IO操作。而不是等到这个操作完成。
 
@@ -93,8 +112,9 @@ Future.wait([
 执行上面代码，4秒后你会在控制台中看到“hello world”。
 
 ## Async/await
-
 Dart中的 `async/await` 和 JavaScript中的`async/await`功能和用法是一模一样的，如果你已经了解JavaScript中的async/await的用法，可以直接跳过本节。
+
+`async/await`都只是一个语法糖，编译器或解释器最终都会将其转化为一个`Promise（Future）`的调用链。
 
 ### 回调地狱(Callback Hell)
 如果代码中有大量异步逻辑，并且出现大量异步任务依赖其它异步任务的结果时，必然会出现`Future.then`回调中套回调情况。
@@ -175,3 +195,6 @@ task() async {
 可以看到，我们通过`async/await`将一个异步流用同步的代码表示出来了。
 
 其实，无论是在JavaScript还是Dart中，`async/await`都只是一个语法糖，编译器或解释器最终都会将其转化为一个`Promise（Future）`的调用链。
+
+## 推荐阅读 
+* [Flutter实战电子书](https://book.flutterchina.club/chapter1/dart.html#_1-4-3-%E5%BC%82%E6%AD%A5%E6%94%AF%E6%8C%81)

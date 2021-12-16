@@ -5,7 +5,7 @@ GridView 类似于 iOS 中的 UICollectionView，一种网格视图，常用于�
     * `SliverGridDelegateWithFixedCrossAxisCount` 设置一行有几个item，系统计算item宽度
     * `SliverGridDelegateWithMaxCrossAxisExtent` 设置一行中item最大的宽度，由系统判断一行应该有几个item
 * `controller`: 用来监听滚动
-* `shrinkWrap`：该属性表示是否根据子 widget 的总长度来设置 ListView的长度，默认值为false。默认情况下，ListView的会在滚动方向尽可能多的占用空间。当 ListView 在一个无边界(滚动方向上)的容器中时，**`shrinkWrap` 必须为 true**
+* `shrinkWrap`：根据子控件内容设置 GridView 的高度/宽度，默认值为false。默认情况下，GridView会在滚动方向尽可能多的占用空间。当 GridView 在一个无边界(滚动方向上)的容器中时，**`shrinkWrap` 必须为 true**
 * `scrollDirection`: 滚动方向
 * `reverse`: 数据取反
 * `cacheExtent`: 调整缓冲区的屏幕大小，以像素为单位，默认是屏幕的1/3
@@ -15,6 +15,8 @@ GridView 类似于 iOS 中的 UICollectionView，一种网格视图，常用于�
     * `AlwaysScrollableScrollPhysics()` 允许滚动
     * `NeverScrollableScrollPhysics()` 不允许滚动
 ```
+
+>需要注意的是： GridView 默认Padding不为0，留有安全区域的高度
 
 ## GridView 构造函数
 GridView 的构造函数有好几种,`GridView.builder()`在项目中使用较多,`GridView.count()`和`GridView.extent()`是一种创建GridView的快捷方式，它内部已经实现了代理,不支持动态加载。:

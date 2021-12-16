@@ -1,6 +1,8 @@
 # 图片
+图片有本地图片和网络图片，记载本地资源图片可以使用`Image.asset`和`Image.file`,加载网络图片使用`Image.network`,目前较好用的第三方库`CachedNetworkImage`。
 
-## 图片圆角的处理
+## 加载图片
+#### 加载本地图片
 1. 本地图片Image.asset加载项目资源包的图片
 ```dart
 //先将图片拷贝到项目 images 目录中，然后在 pubspec.yaml文件配置文件相对路径到 assets 
@@ -10,7 +12,6 @@ Image.asset(
   height: 200,
 )
 ```
-
 `Image.file`加载手机内置或外置存储的图片
 ```dart
 //加载Android平台的外置存储图片需要AndroidManifest.xml配置android.permission.READ_EXTERNAL_STORAGE权限
@@ -20,6 +21,7 @@ Image.file(
   height: 200,
 )
 ```
+#### 加载网络图片
 2. 网络图片
 `Image.network`无本地缓存
 ```dart
@@ -29,8 +31,7 @@ Image.network(
   height: 200,
 )
 ```
-FadeInImage.assetNetwork 淡入效果，无本地缓存
-
+FadeInImage.assetNetwork 淡入效果，无本地缓存。
 ```dart
 FadeInImage.assetNetwork(
   placeholder: 'images/avatar.png',
@@ -39,24 +40,25 @@ FadeInImage.assetNetwork(
   height: 200
 )
 ```
-CachedNetworkImage 第三方控件，有本地缓存和淡入效果
-
+#### 第三方组件
+`CachedNetworkImage` 第三方控件，有本地缓存和淡入效果
 ```dart
-//1、将依赖框架配置到pubspec.yaml文件
-dependencies:
-  cached_network_image: ^0.7.0
+  //1、将依赖框架配置到pubspec.yaml文件
+  dependencies:
+    cached_network_image: ^0.7.0
 
-//2、引入相关类
-import 'package:cached_network_image/cached_network_image.dart';
+  //2、引入相关类
+  import 'package:cached_network_image/cached_network_image.dart';
 
-//3、使用控件，默认自带图片淡入效果
-CachedNetworkImage(
-  imageUrl: 'https://pic4.zhimg.com/v2-19dced236bdff0c47a6b7ac23ad1fbc3.jpg',
-  width: 200,
-  height: 200,
-)
+  //3、使用控件，默认自带图片淡入效果
+  CachedNetworkImage(
+    imageUrl: 'https://pic4.zhimg.com/v2-19dced236bdff0c47a6b7ac23ad1fbc3.jpg',
+    width: 200,
+    height: 200,
+  )
 ```
 
+## 圆角头像图片
 圆形头像方式
 
 1: CircleAvatar
@@ -128,12 +130,16 @@ Container(
 )
 ```
 
-使用`ShapeDecoration`可以做出各种形状
+## ShapeDecoration
+使用`ShapeDecoration`可以做出各种形状,相关的属性有:
+```markdown
 * 斜切角: BeveledRectangleBorder
 * 圆角: RoundedRectangleBorder
 * 超椭圆: SuperellipseShape
 * 体育场: StadiumBorder
 * 圆形: CircleBorder //斜切角形状示例
+```
+用一个简单的Demo进行示例:
 ```dart
 Container(
   width: 120,
