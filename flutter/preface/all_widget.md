@@ -34,6 +34,7 @@ CustomSingleChildLayout | 可容纳一个子组件，并指定代理类对子组
 IntrinsicHeight | 一个widget，它将它的子widget的高度调整其本身实际的高度
 IntrinsicWidth | 一个widget，它将它的子widget的宽度调整其本身实际的宽度
 Transform | 一个widgegt,在绘制小部件之前将它进行旋转的小部件。快速创建的方法有`Transform.rotate()`/`Transform.scale()`/`Transform.translate()`
+Directionality  | 修改小部件的阅读方向，适配阿拉伯语时需要，参数`textDirection`
 
 ##### 拥有多个子元素的Widget
 多个子元素的Widget是指在一个小部件内可以装多个小部件。
