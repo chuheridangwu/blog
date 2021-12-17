@@ -24,3 +24,13 @@ enum Clip {
   antiAliasWithSaveLayer,   /// 很慢，基本不用，分配有离屏缓冲
 }
 ```
+
+
+Stack 内部约束的枚举
+```dart
+enum StackFit {
+  loose, /// 从其父级传递到堆栈的约束被放松。
+  expand, /// 从其父级传递到堆栈的约束被收紧到
+  passthrough,  /// 从其父级传递到堆栈的约束未经修改地传递到下面的子级
+}
+```
