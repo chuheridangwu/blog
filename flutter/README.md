@@ -1,18 +1,18 @@
 # 关于Flutter
 Flutter是谷歌的移动UI框架，可以快速在iOS和Android上构建高质量的原生用户界面。Flutter自身只是一个纯粹的UI框架。
 
-文档内容是在学习过程中的一些积累，来源自[Dart的官方文档](https://dart.cn/guides/language/language-tour)、[《Flutter实战·第二版》](https://book.flutterchina.club/chapter14/flutter_app_startup.html)、[B站王叔不秃](https://space.bilibili.com/589533168/?spm_id_from=333.999.0.0)
+文档内容是在学习过程中的一些积累，一些文档内容来自 [Dart的官方文档](https://dart.cn/guides/language/language-tour)、[《Flutter实战·第二版》](https://book.flutterchina.club/chapter14/flutter_app_startup.html)、[B站王叔不秃](https://space.bilibili.com/589533168/?spm_id_from=333.999.0.0),这些对我学习Flutter都提供了很大的帮助。
 
 我自己学习Flutter也算有一段时间了，断断续续的学，因为自身有开发经验，所以在Dart语言这里就没怎么看，直接上手Flutter。在转换语言的时候，总是带一些以前的编程思维，搞的不伦不类。在转换编程语言的时候，还是要打好语言基础。
 
 #### 学习路线
-1. 首先要掌握好Dart这门语言的特性，尤其是函数和类。数组、字典、语法糖这些可以在以后写项目的过程中慢慢积累
-2. Flutter可以看做一个UI库，里面包含了各种各样的Widget,当然也存在了很多坑。
+1. 首先要掌握好Dart这门语言的特性，尤其是函数和类。数组、字典、语法糖可以在以后写项目的过程中慢慢积累
+2. Flutter可以看做一个UI库，里面包含了各种各样的Widget,当然也存在了很多坑。学Flutter的过程可以
    - 先学习Flutter的布局原理，知道它是怎么控制它的小部件的
    - 再熟悉常用的Widget，根据Widget的分类进行学习,按钮、图片、输入框、导航、页面传值和回调、动画、滚动视图
    - 熟悉之后写一些常见的页面布局
 3. 写一些小项目进行练手，熟悉一些常用的第三方和熟悉Flutter的项目结构。
-4. 跟项目的项目做一些交互，将Flutter使用到现有的项目中。
+4. 跟原来的项目做一些交互，将Flutter使用到现有的项目中。
 
 #### 关于Dart
 如何学习一门新语言,有时候看很多大佬会很多们语言，尤其是不单单会写，而是理解它的一些特性，可以直接进行教学，很奇怪他们是怎么学习的。
@@ -28,20 +28,7 @@ Flutter是谷歌的移动UI框架，可以快速在iOS和Android上构建高质�
 * [Flutter for iOS 开发者](https://flutterchina.club/flutter-for-ios/)
 * [给 iOS 开发者的 Flutter 指南](https://flutter.cn/docs/get-started/flutter-for/ios-devs)
 
-Flutter的控件和iOS中的控件概念上是不一样的，万物皆是 Widget ,跟iOS中的View有很大的区别，理解起来很快，但是在使用上思想上转变比较慢。
-
-VSCode安装插件Flutter/Dart/Code Runner,按F5进行调试。
-
-## Mac平台安装Flutter
-1. 首先[下载SDK](https://flutter.dev/docs/development/tools/sdk/releases#macos)
-2. 使用`vi ~/.bash_profile`编辑文件,在`.bash_profile`文件,添加`Flutter`SDK的路径，` export PATH=~/Desktop/flutter/bin:$PATH`。如果使用的是zsh，需要配置`$HOME/.zshrc`文件
-3. 运行 `source $HOME/.bash_profile `刷新当前终端窗口。**如果你使用的是zsh，终端启动时 `~/.bash_profile` 将不会被加载，解决办法就是修改 `~/.zshrc` ，在其中添加：`source ~/.bash_profile`**
-4. 使用`flutter doctor`检查需要安装的依赖项
-
-## 创建项目
-1. 使用`flutter create helloworld`创建 helloworld项目，
-2. 使用`flutter devices`检查当前电脑的测试设备，如果没有的打开iOS模拟器`open -a Simulator`
-3. cd 到对应的文件夹，使用`flutter run`运行项目
+Flutter的控件和iOS中的控件概念上是不一样的，在Flutter中万物皆是 Widget ,即使是一些功能组件也是Widget,跟iOS中的View有很大的区别，理解起来很快，但是在使用上思想上转变比较慢。
 
 ### 推荐网址
 * [Flutter实战电子书](https://book.flutterchina.club/#%E7%BC%98%E8%B5%B7) 讲解的比较细，查看一些控件的使用可以从这里看。这本书写的比较早，很多API都过时了，仅作为参考。

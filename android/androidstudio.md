@@ -166,3 +166,5 @@ private  String getRandomLengthName(String name){
 4. 此时，屏幕截图便会显示在 Screenshot Editor 窗口中。
 5. 点击save保存
 
+## 推荐阅读
+* [键盘快捷键](https://developer.android.com/studio/intro/keyboard-shortcuts?hl=zh-cn)

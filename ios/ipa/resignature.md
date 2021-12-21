@@ -54,7 +54,7 @@ zip -r resign_xxx.ipa Payload/
 ```
 
 ## 使用shell脚本进行重签名
-将`embedded.mobileprovision`、`entitlements.plist`、ipa、shell文件放到同一个目录下，编写`resign.sh`脚本进行打包。
+将`embedded.mobileprovision`、`entitlements.plist`、ipa、shell文件放到同一个目录下，cd 到对应文件下，输入`sh xxx.sh xx.ipa`运行,如果项目内有多个动态库和扩展库的签名文件，都需要重新进行签名，相关的shell脚本代码如下:
 ```shell
 #!/bin/sh
 
@@ -71,26 +71,66 @@ exit
 fi
 
 ## 证书名称
-signName="iPhone Distribution: Hirich xxx Company xxx"
+signName="iPhone Distribution: Hirich xxx Company Limited"
 
 ## step 1 解压ipa
+echo "step 1 解压ipa"
 unzip ${ipaName}.ipa
 
 ## step 2 删除旧签名文件
+echo "step 2 删除旧签名文件 $app_path"
 rm -rf Payload/*.app/_CodeSignature/
 
 ## step 3 拷贝证书配置和权限文件
+echo "step 3 拷贝证书配置和权限文件"
 cp embedded.mobileprovision Payload/*.app/embedded.mobileprovision
 
-## step 4 重签名,这里要用到entitlements.plist文件，签名不对会安装失败
+## step 4  重签frammework
+echo "step 4 重签frammework"
+framework_path=Payload/*.app/Frameworks
+#判断有没有这个文件夹
+if [ -e $framework_path ]
+then
+    for f in ${framework_path}/*
+    do
+        codesign -fs "${signName}" "${f}"
+    done
+fi
+
+## step 5  重签 推送扩展
+echo "step 5 重签 推送扩展"
+extension_path=Payload/*.app/PlugIns
+#判断有没有这个文件夹
+if [ -e $extension_path ]
+then
+    for f in ${extension_path}/*
+    do
+        codesign -fs "${signName}" "${f}"
+    done
+fi
+
+## step 6 重签名,这里要用到entitlements.plist文件，签名不对会安装失败
+echo "step 6 重签名整个包"
 /usr/bin/codesign -f -s "$signName" --entitlements entitlements.plist Payload/*.app/
 
-## step 5 打包
+## step 7 打包
 echo --- "开始打包"
 zip -r ${ipaName}_resign.ipa Payload/
 rm -rf Payload/
 rm -rf __MACOSX/
 ```
+
+## 对动态库framework和通知扩展进行重签名
+framework 和 通知扩展的重签名一样的，删除掉原来的签名文件，使用`codesign -fs `证书`  xxx.framework`对库进行重签名，如果项目中只有app文件，新建一个Payload目录，将对应的APP文件放到Payload目录中，压缩Payload目录，后缀修改成IPA，再对其进行重签名即可用。
+```markdown
+1. 查看framework的签名证书命令：codesign -d -vv xxxxx.framework
+2. 删除原有的签名， 进入到XX.framwork文件夹内，删除_CodeSignature文件
+3. 查看本机可用的签名文件,命令：`/usr/bin/security find-identity -v` 
+4. 使用签名文件签名命令：`codesign -fs "iPhone Developer: ... (...)" xxxxx.framework`
+```
+
+>如果需要使用超级签的方式安装APP，可以使用一个未付费的苹果账号，通过手动将对应的APP转成IPA，然后通过重签名的方式安装IPA，这样就可以不购买苹果账号了。
+
 
 ## PlistBuddy
 PlistBuddy 是 Mac电脑自带的操作 plist 文件的工具,文件路径`/usr/libexec/PlistBuddy`,使用方式:` /usr/libexec/PlistBuddy -c "Set key value" plist文件路径`
@@ -148,6 +188,7 @@ PlistBuddy 是 Mac电脑自带的操作 plist 文件的工具,文件路径`/usr/
 ```
 
 ## 参考网址
-[iOS软件包ipa重签名详解](https://www.jianshu.com/p/609109d41628)
-[ipa重签名](https://segmentfault.com/a/1190000023388431)
-[PlistBuddy](https://www.jianshu.com/p/e0d254ce9340)
+* [iOS软件包ipa重签名详解](https://www.jianshu.com/p/609109d41628)
+* [ipa重签名](https://segmentfault.com/a/1190000023388431)
+* [PlistBuddy](https://www.jianshu.com/p/e0d254ce9340)
+* [ios-app-signer 重签名工具](https://github.com/DanTheMan827/ios-app-signer/releases/tag/1.13.1)

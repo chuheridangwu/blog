@@ -1,43 +1,72 @@
 # Flutter
+工欲善其事，必先利其器! Flutter开发工具可以选择 `Android Studio` 和 `VS Code`，当前文档主要介绍Flutter的安装方式和开发工具中的一些快捷键，用来提高开发效率。
 
-工欲善其事，必先利其器!
+## 安装Flutter
+,当前也主要介绍MAC电脑中如何安装Flutter,其他系统的安装方式可以[查看官网](https://flutter.cn/docs/get-started/install)。Flutter的安装过程如下：
+1. 首先[下载FlutterSDK](https://flutter.dev/docs/development/tools/sdk/releases#macos)
+2. 使用`vi ~/.bash_profile`编辑文件,在`.bash_profile`文件,添加`Flutter`SDK的路径，` export PATH=~/Desktop/flutter/bin:$PATH`。如果使用的是zsh，需要配置`$HOME/.zshrc`文件
+3. 运行 `source $HOME/.bash_profile `刷新当前终端窗口。**如果你使用的是zsh，终端启动时 `~/.bash_profile` 将不会被加载，解决办法就是修改 `~/.zshrc` ，在其中添加：`source ~/.bash_profile`**
+4. 使用`flutter doctor`检查需要安装的依赖项
 
-主要针对Flutter中常用的控件布局和第三方做一些讲解。方便以后快速查看文档代码。目前的一些网站对Flutter这些讲解的挺好了，这里主要是看能不能做一些简化。方便以后自己查找。
+运行`flutter doctor`确认安装好之后，可以通过开发工具创建Flutter项目或者通过命令行创建Flutter项目,Flutter中常用的一些命令:
 
-1. 如果想给一个按钮设置宽和高，使用一个Container包裹住一个按钮就可以了
-2. 必传参数不传的话编译会报错，选传参数使用@required修饰不传只会报警告
+作用 | 命令
+------- | -------
+创建xxx项目 | `flutter create xxx`
+检查当前电脑的测试设备 | `flutter devices`
+打开iOS模拟器 | `open -a Simulator`
+运行项目 | cd到对应的文件夹，使用`flutter run`
+运行指定设备 | `flutter run -d 设备id `
+终止运行 | `q`
+热重载 | `r`
+清除终端输出的信息 | `command + k`
+清理缓存 | `flutter clean`
+查看Flutter版本 | `flutter --version`
+Flutter升级 | `flutter upgrade`
+
+##  Android Studio 快捷键
+Android studio 自动补全插件`Flutter snipets`,AS可以在保存代码的时候自动格式化，Setting>Language & Frameworks >Flutter中选中`Format Code on Save`选项。
+作用 | 快捷键 
+------- | ------- 
+快速创建Widget | 输入 stf 或者 stl 出现提示后按回车
+快读修复 | `option + 回车`
+自动生成构造函数 | `选中 final 参数，option + 回车`
+添加父组件、变为子组件、删除子组件 | `option + 回车`
+搜索 | `双击shift`
+查看最近打开的文件 | `command + E`
+重命名 | `fn + shift + f6 `
+查看当前类结构 | `command +f12`
+查看源码 | `command + 鼠标点击`
+查看类的子类 | 选中类,`command + B` 或者 `option + command +B`
+将代码更新到模拟器 | 选中模拟器`command + R`
+导入类的快捷键 | 光标放到类上 `option + enter`
+前进后退 | 后退:`option+command+方向左键`,前进:`option+command+方向右键`
+全局搜索 | `commnad + shift + F`
+全局替换 | `command + shift + R`
+查找引用 | `option + shift + F7`
 
 
+##  VSCode 快捷键
+作用 | 快捷键 
+------- | ------- 
+快速创建Widget | 输入 stf 或者 stl 出现提示后按回车
+快读修复 | `option + .`
+自动生成构造函数 | `选中 final 参数，option + .`
+添加父组件、变为子组件、删除子组件 | `option + .`
+重新打开关闭的编辑页面 | `command + shift + T`
+通过匹配文本打开文件 | `command + T`
+代码格式化 | `command + shift + F `
+打开console | `command +J`
+查看源码 | `command + 鼠标点击`
+查看类的子类 | 选中类,`command + F12`
+导入类的快捷键 | 光标放到类上 `command + .`
+前进后退 | 后退:`command + -`
+全局搜索 | `commnad + shift + F`
+交换代码位置 | `option + 上下键`
+快速复制当前行 | `option + shift + 上下键`
 
-##  屏幕常见变量
+>如果是Windows系统，将command 换成Ctrl, option 换成 Alt 即可。VS Code工具自动补全同样可以使用`Flutter snippets`插件
 
-```dart
-  MediaQueryData mq = MediaQuery.of(context);
-  // 屏幕密度
-  pixelRatio = mq.devicePixelRatio;
-  // 屏幕宽(注意是dp, 转换px 需要 screenWidth * pixelRatio)
-  screenWidth = mq.size.width;
-  // 屏幕高(注意是dp)
-  screenHeight = mq.size.height;
-  // 顶部状态栏, 随着刘海屏会增高
-  statusBarHeight = mq padding.top;
-  // 底部功能栏, 类似于iPhone XR 底部安全区域
-  bottomBarHeight = mq.padding.bottom;
-
-/// material 系统保存的常量值里面查看
-export 'src/material/constants.dart’;
-/// AppBar 高度
-const double kToolbarHeight = 56.0;
-/// BottomNavigationBar 高度
-const double kBottomNavigationBarHeight = 56.0;
-
-/// 安全内容高度(包含 AppBar 和 BottomNavigationBar 高度)
-double get safeContentHeight => screenHeight - statusBarHeight - bottomBarHeight;
-/// 实际的安全高度
-double get safeHeight => safeContentHeight - kToolbarHeight - kBottomNavigationBarHeight;
-```
-
-## SafeArea  适配安全区域的View
 
 ## 安卓设置导航栏透明
 ```dart
@@ -49,49 +78,7 @@ if (Platform.isAndroid) {
 }
 ```
 
-## Tabbar
-```dart
-  const TabBar({
-    Key key,
-    @required this.tabs,//显示的标签内容，一般使用Tab对象,也可以是其他的Widget
-    this.controller,//TabController对象
-    this.isScrollable = false,//是否可滚动
-    this.indicatorColor,//指示器颜色
-    this.indicatorWeight = 2.0,//指示器高度
-    this.indicatorPadding = EdgeInsets.zero,//底部指示器的Padding
-    this.indicator,//指示器decoration，例如边框等
-    this.indicatorSize,//指示器大小计算方式，TabBarIndicatorSize.label跟文字等宽,TabBarIndicatorSize.tab跟每个tab等宽
-    this.labelColor,//选中label颜色
-    this.labelStyle,//选中label的Style
-    this.labelPadding,//每个label的padding值
-    this.unselectedLabelColor,//未选中label颜色
-    this.unselectedLabelStyle,//未选中label的Style
-    }) : assert(tabs != null),
-    assert(isScrollable != null),
-    assert(indicator != null || (indicatorWeight != null && indicatorWeight > 0.0)),
-    assert(indicator != null || (indicatorPadding != null)),
-    super(key: key);
-```
-
-TabbarView默认是全屏，使用sizeBox限制高度
-```dart
-SizedBox(
-    height: 220,
-    child: DefaultTabController(
-      length: _giftGroups.length,
-      child: TabBarView(
-          controller: _tabController,
-          children: _giftGroups.map((giftGroup) {
-            return itemView(giftGroup.gifts);
-          }).toList()),
-    ),
-  );
-```
-
-flutter column row布局的列表自适应宽高  mainAxisSize: MainAxisSize.min
-
 ## 高斯模糊效果 BackdropFilter sigmaX和sigmaY跟高斯模糊的程度有关
-
 高斯模糊当做前景：只需要把 BackdropFilter 的 child 设置为一个 Container()，并且设置上颜色（我这里使用的是 Colors.white10），然后放在 Stack 中就ok啦。
 
 ```dart
@@ -99,88 +86,6 @@ BackdropFilter(
         filter: ImageFilter.blur(sigmaX: 15, sigmaY: 15),
         child: Column()
         );
-```
-
-## 分割线 Divider
-```dart
-Divider(height: 1.0,indent: 20.0,endIndent: 20,color: Colors.white,),
-```
-
-## Decoration  背景设定（边框、圆角、阴影、形状、渐变、背景图像等
-
-```dart
-BoxDecoration:实现边框、圆角、阴影、形状、渐变、背景图像
-ShapeDecoration:实现四个边分别指定颜色和宽度、底部线、矩形边色、圆形边色、体育场（竖向椭圆）、 角形（八边角）边色
-FlutterLogoDecoration:实现Flutter图片
-UnderlineTabindicator:下划线
-```
-2 介绍
-一个背景装饰对象，相当于Android中的shape.xml，定制各种各样的背景（边框、圆角、阴影、形状、渐变、背景图像）。
-
-3 BoxDecoration构造方法：
-
-```dart
-  const BoxDecoration({
-    this.color, // 底色
-    this.image, // 图片
-    this.border, 边色
-    this.borderRadius, // 圆角度
-    this.boxShadow, // 阴影
-    this.gradient, // 渐变
-    this.backgroundBlendMode, // 混合Mode
-    this.shape = BoxShape.rectangle,  // 形状
-  }) 
-
-```3.1 边框+圆角:
-```dart
-decoration: new BoxDecoration(
-  border: new Border.all(color: Color(0xFFFF0000), width: 0.5), // 边色与边宽度
-  color: Color(0xFF9E9E9E), // 底色
-  //        borderRadius: new BorderRadius.circular((20.0)), // 圆角度
-  borderRadius: new BorderRadius.vertical(top: Radius.elliptical(20, 50)), // 也可控件一边圆角大小
-),
-
-```3.2 阴影：
-```dart
-decoration: new BoxDecoration(
-    border: new Border.all(color: Color(0xFFFF0000), width: 0.5), // 边色与边宽度
-// 生成俩层阴影，一层绿，一层黄， 阴影位置由offset决定,阴影模糊层度由blurRadius大小决定（大就更透明更扩散），阴影模糊大小由spreadRadius决定
-    boxShadow: [BoxShadow(color: Color(0x99FFFF00), offset: Offset(5.0, 5.0),    blurRadius: 10.0, spreadRadius: 2.0), BoxShadow(color: Color(0x9900FF00), offset: Offset(1.0, 1.0)), BoxShadow(color: Color(0xFF0000FF))],
-),
-
-```3.3 形状（圆形与矩形）：
-```dart
-decoration: new BoxDecoration(
-  border: new Border.all(color: Color(0xFFFFFF00), width: 0.5), // 边色与边宽度
-  color: Color(0xFF9E9E9E), // 底色
-  //        shape: BoxShape.circle, // 圆形，使用圆形时不可以使用borderRadius
-  shape: BoxShape.rectangle, // 默认值也是矩形
-  borderRadius: new BorderRadius.circular((20.0)), // 圆角度
-),
-
-```3.4 渐变（环形、扫描式、线性）：
-```dart
-decoration: new BoxDecoration(
-  border: new Border.all(color: Color(0xFFFFFF00), width: 0.5), // 边色与边宽度
-// 环形渲染
-  gradient: RadialGradient(colors: [Color(0xFFFFFF00), Color(0xFF00FF00), Color(0xFF00FFFF)],radius: 1, tileMode: TileMode.mirror)
-//扫描式渐变
-//        gradient: SweepGradient(colors: [Color(0xFFFFFF00), Color(0xFF00FF00), Color(0xFF00FFFF)], startAngle: 0.0, endAngle: 1*3.14)
-// 线性渐变
-//        gradient: LinearGradient(colors: [Color(0xFFFFFF00), Color(0xFF00FF00), Color(0xFF00FFFF)], begin: FractionalOffset(1, 0), end: FractionalOffset(0, 1))
-),
-
-```3.4 背景图像：
-```dart
-decoration: new BoxDecoration(
-  border: new Border.all(color: Color(0xFFFFFF00), width: 0.5), // 边色与边宽度
-  image: new DecorationImage(
-  image: new NetworkImage('https://avatar.csdn.net/8/9/A/3_chenlove1.jpg'), // 网络图片
-  // image: new AssetImage('graphics/background.png'), 本地图片
-  fit: BoxFit.fill // 填满
-  //          centerSlice: new Rect.fromLTRB(270.0, 180.0, 1360.0, 730.0),// 固定大小
-  ),
-),
 ```
 
 ## 将Flutter添加到现有项目中
@@ -224,52 +129,6 @@ Future<List<Anchor>> getAnchors() async {
     return anchors;
   }
 ```
-
-## TabBar 和 TabBarView
-项目中经常使用的组合，如果要去掉导航栏需要使用`PreferredSize`自定义高度， TabBar 和 TabBarView 需要使用一个默认的`DefaultTabController`进行包裹。Appbar使用`elevation: 0`,//隐藏导航栏底部阴影分割线.TabBar的背景色跟随它的父控件。
-
-```dart
-  @override
-  Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: tabs.length,
-      child: Scaffold(
-        appBar: PreferredSize(
-          preferredSize: Size.fromHeight(40),
-          child: AppBar(
-            automaticallyImplyLeading: false,
-            excludeHeaderSemantics: true,
-            bottom: TabBar(
-              controller: _tabController,
-              tabs: tabs.map((e) =>  Text(e)).toList(),
-            ),
-          ),
-        ),
-        body: TabBarView(
-          controller: _tabController,
-          children: tabs.map((e){
-        return Container(
-          alignment: Alignment.center,
-          child: Text(e, textScaleFactor: 5),
-        );
-        }).toList()),
-        floatingActionButton: floatingBtn(),
-      ),
-    );
-  }
-```
-
-使用TabBarView的时候，每次切换tabbar都会重置，继承自 AutomaticKeepAliveClientMixin 和重写 wantKeepAlive 方法。保持widget的状态
-```dart
-class _OrderListPageState extends BaseState with AutomaticKeepAliveClientMixin{
-  @override
-  Widget build(BuildContext context) { return Text('Hello World');
-  } 
-  @override
-  bool get wantKeepAlive => true;
-}
-```
-
 ## flutter-android启动时全屏显示图片,状态栏透明
 更改 `android\app\src\main\res\drawable\launch_background.xml`
  
@@ -337,20 +196,6 @@ Android打渠道包，可以使用美团出品的`walle`。其原理是apk分四
 3. Error: No named parameter with the name ‘nullOk’.原因是`localeOf()`的`nullOk`参数在新版中被删除了，不需要了。
 4. `resizeToAvoidBottomPadding` 更改为 `resizeToAvoidBottomInset=false`
 
-## 动态添加tabbar
-根据接口数据确定是否隐藏tabbar，有几个坑需要注意。
-1. TabBarView 的组件内容需要根据 _tabs 的长度进行重新创建，不能使用数据封装，会造成不能删除的情况
-2. _tabController 需要重新初始化信息，长度需要跟 _tabs 保持一致
-3. 如果在动态修改前，你已经滑动了TabBarView，动态修改 tabbar 后,需要主动跳转对应位置，内容不会自动跳转
- 
-```
-setState(() {
-  _tabs = ["1", "2", "3", "4", "5"];
-  _tabController = TabController(
-      initialIndex: 1, length: _tabs.length, vsync: this);
-  _tabController.animateTo(0);
-});
-```
 
 ## Flutter Incorrect use of ParentDataWidget
 经过排查后发现是Expanded、Flexible等组件，在“Container、Padding、Stack”组件中导致的。
@@ -375,3 +220,5 @@ class SectionData{
 ![模型生成网址](https://czero1995.github.io/json-to-model/)
 vscode 模型生成插件 `Json to Dart Model`插件。
 
+
+在lib同级目录下创建assets文件,在pubspec文件下创建对应的 `assets/`描述。加载本地文件时，，使用rootBundle.loadString("assets/test.json")。

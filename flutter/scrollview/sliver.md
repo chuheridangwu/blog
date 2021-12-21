@@ -1,0 +1,7 @@
+# Sliver
+
+在英文中sliver表示片段，在Flutter中，Sliver表示滚动中的一小块视图。
+
+CustomScrollView表示是Sliver组件的视窗，Slive组件需要在它上面才能够使用
+
+SliverToBoxAdapter会将普通widget转化成Sliver视图显示在CustomScrollView视窗上。

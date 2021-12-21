@@ -87,7 +87,7 @@ Block内部对person使用的也是弱引用，这也是为什么person会在Blo
 
 `xcrun -sdk iphoneos clang -arch arm64 -rewrite-objc -fobjc-arc -fobjc-runtime=ios-8.0.0 main.m`
 
-我们转过c++代码之后发现，经过`__block`修改过的变量，会被编译器包装成一个新的对象，在Block内部被引用。而之前没有经过`__block`修饰在Block内部捕获它时，仅仅是拷贝它的值到堆上。结构体的关系如下图：
+我们转过c++代码之后发现，**经过`__block`修改过的变量，会被编译器包装成一个新的对象，在Block内部被引用。而之前没有经过`__block`修饰在Block内部捕获它时，仅仅是拷贝它的值到堆上。**结构体的关系如下图：
 ![](./../imgs/ios_img_17.jpg )
 我们通过强转的方式查看一下`__main_block_impl_0`这个结构体是否正确。
 ```objc
@@ -194,6 +194,7 @@ int main(int argc, const char * argv[]) {
 它们内部的引用关系如图：
 
 ![](./../imgs/ios_img_23.jpg ":size=500*300")
+
 Person内部有强指针引用着Block，Block内部有强指针引用着Person对象，只要将其中一方的指针设置弱指针就可以解决循环引用了。
 
 >如何解决循环引用的问题

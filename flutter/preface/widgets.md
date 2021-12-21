@@ -1,5 +1,5 @@
 # Widget目录
-Flutter一共有200多个Widget,在本章中对它进行分类归类，根据官网的方式将常用的Widget进行列出，可以当做一个Widget字典，不知道用什么控件实现的时候可以来此进行查询。
+Flutter一共有很多很多很多的Widget,在本章中对它进行分类归类，根据官网的方式将常用的Widget进行列出，可以当做一个Widget字典，不知道用什么控件实现的时候可以来此进行查询。
 
 ## 常见的Widget
 主要列举一些经常用到的Widget,根据不同的作用对它们进行区分，比如 动画相关的Widget、布局相关的Widget、Text相关的Widget、Button相关的Widget、图片相关的Widget。
@@ -56,36 +56,25 @@ LayoutBuilder | 在添加小部件之前可以知道当前的约束是多少。
 
 ##### Sliver的widget
 
-
-布局约束的概念：
-
-当子控件只有比父控件小的时候，需要知道自己的位置。
-
-
-Widget | 场景
+Sliver控件名称 | 说明
 ------- | -------
-
-
-
-ConstrainedBox  自定义约束
-
-padding  间距
-
-
-Flex 布局
-
-Expanded  有弹性的
-Flexible  有弹性的
-
-
-
-Positioned
-
-LimietdBox, maxHeight 如果父控件是无穷大的时候最大值，如果父控件不是无穷大随意使用
-
-
-越大越好 double.infinity
-越小越好  double.
+CustomScrollView | 使用 slivers 创建自定义滚动效果的 ScrollView。
+SliverList | 列表，对应ListView，代理使用`SliverChildListDelegate`
+SliverFixedExtentList | 高度固定的列表ListView，指定itemExtent时
+SliverPrototypeExtentList | 根据原型生成高度固定的列表 | ListView，指定prototypeItem 时
+SliverGrid | 网格列表，对应GridView,代理使用`SliverChildBuilderDelegate`
+SliverFillViewport | 包含多给子组件，每个都可以填满屏幕，对比PageView
+SliverPadding | 内间距，对应Padding
+SliverToBoxAdapter | 一个适配器，可以将 RenderBox 适配为 Sliver,比如使用 Text 和 Image 的时候通过SliverToBoxAdapter 转成Sliver控件
+SliverAppBar | 对应 AppBar，主要是为了在 CustomScrollView 中使用。
+SliverPersistentHeader | 滑动到顶部时可以固定住,主要在CustomScrollView 中使用。
+SliverAnimatedList | 添加/删除列表项可以执行动画 | AnimatedList
+CupertinoSliverNavigationBar | 一个 iOS 风格的导航栏，带有使用条子的 iOS-11 风格的大标题。
+SliverOpacity | 对控件进行半透明操作
+SliverSafeArea | 安全区域
+SliverIgnorePointer | 不允许点击
+SliverFillRemaining | 占领Sliver组件剩余的屏幕空间
+SliverLayoutBuilder | 知道当前滚动视窗的剩余约束
 
 #### 容器类
 
@@ -130,7 +119,8 @@ Divider 分割线
 RotatedBox  旋转控件,可以选择子控件
 ListTile  配合ListView进行适配，类似于iOS中的一行cell，有左侧图标、标题、副标题 右侧图标
 Visibility  设置透明度的Widget
-
+IgnorePointer   创建一个不能被点击的widget
+Material    添加阴影
 
 #### 功能性相关的类
 ChangeNotifier
@@ -492,3 +482,4 @@ Container(
 ## 推荐阅读
 * [Widget目录](https://flutterchina.club/widgets/)
 * [核心Widget目录](https://flutter.cn/docs/development/ui/widgets)
+* [6.1 可滚动组件简介](https://book.flutterchina.club/chapter6/intro.html#scrollable)
