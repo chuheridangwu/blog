@@ -19,9 +19,9 @@
   * [3.2 图片](flutter/widgets/image.md)
   * [3.3 TextField](flutter/widgets/textfield.md)
   * [3.4 裁剪Clip](flutter/widgets/clip.md)
-  * [3.5 FutureBuilder](flutter/widgets/futureBuilder.md)
-  * [3.6 StreamBuilder](flutter/widgets/stream.md)
 * 第四章: 项目结构和路由
+  * [4.1 Scaffold](flutter/widgets/scaffold.md)
+  * [4.2 AppBar](flutter/widgets/appbar.md)
 * 第五章: Flutter可滚动组件
   * [1.1 前言](flutter/scrollview/scroll.md)
   * [1.2 ListView](flutter/scrollview/ListView.md)
@@ -31,15 +31,17 @@
   * [1.6 ListWheelScrollView](flutter/scrollview/ListWheelScrollView.md)
   * [1.7 PageView](flutter/scrollview/PageView.md)
   * [1.8 TabBarView](flutter/scrollview/TabBarView.md)
-* 功能性组件
+* 第六章:功能性组件
+  * [3.5 FutureBuilder](flutter/widgets/futureBuilder.md)
+  * [3.6 StreamBuilder](flutter/widgets/stream.md)
 * 事件处理和通知
-* 动画 
-  * [隐式动画](flutter/animation/animation1.md)
-  * [显示动画](flutter/animation/animation2.md)
-  * [其他动画](flutter/animation/animation3.md)  
-* 平台通信
-  * [多端通信](flutter/package/channel.md)
-  * [制作Flutter插件](flutter/package/package.md)
-  * [国际化](flutter/package/localizations.md)
-* 第三方插件
+* 第七章:动画 
+  * [7.1 隐式动画](flutter/animation/animation1.md)
+  * [7.2 显示动画](flutter/animation/animation2.md)
+  * [7.3 其他动画](flutter/animation/animation3.md)  
+* 第八章:平台通信
+  * [8.1 多端通信](flutter/package/channel.md)
+  * [8.2 制作Flutter插件](flutter/package/package.md)
+  * [8.3 国际化](flutter/package/localizations.md)
+* 第九章: 三方插件
   * [第三方插件](flutter/thirdparty/thirdpart.md) 
