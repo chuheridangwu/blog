@@ -1,6 +1,5 @@
 * [回到首页](/)
-
-* 小码哥底层原理
+* 第一章:小码哥底层原理
     * [01-OC对象的本质](ios/principle/OC对象的本质) 
     * [02-isa和supperclass](ios/principle/isa和superclass.md)
     * [03-KVO](ios/principle/kvo.md)
@@ -23,26 +22,28 @@
     * [20-内存管理 - Tagged Pointer](ios/principle/memory2.md)
     * [21-内存管理 - autorelease](ios/principle/memory3.md)
     * [22-性能优化](ios/principle/性能优化.md)
-* IPA
-    * [fastlane自动化打包工具](ios/ipa/fastlane自动化打包工具.md)
-    * [xcodebuild自动打包工具](ios/ipa/xcodebuild打包工具.md)
-    * [苹果商店获取ipa文件](ios/ipa/获取ipa文件.md)
-    * [iOS签名流程](ios/ipa/iOS签名机制.md)
-    * [IPA重签名](ios/ipa/resignature.md)
-* API
-    * [NSArray](ios/api/nsarray.md)
-    * [NSString](ios/api/nsstring.md)
-    * [NSFilemanager](ios/api/nsfilemanager.md)
-    * [iOS权限](ios/api/authority.md)
-    * [视频画中画](ios/api/画中画.md)
-    * [NFC功能](ios/api/nfc.md)
-    * [iOS客户端搭建本地服务器](ios/api/server.md)
-* 逆向
-  *  [逆向1](ios/reverse/reverse1.md)
-* [Xcode](ios/xcode.md)
-* [Mac电脑](ios/mac.md)
-* [Automator 自动话工具](ios/automator.md)
-* [AppleScript](ios/applescript.md)
-* [LLVM](ios/llvm.md)
-* [常见错误](/ios_error.md)
-* [面试题](ios/面试题.md)
+* 第二章:IPA相关知识
+    * [01-iOS签名流程](ios/ipa/iOS签名机制.md)
+    * [02-IPA重签名](ios/ipa/resignature.md)
+    * [03-苹果商店获取ipa文件](ios/ipa/获取ipa文件.md)
+    * [04-fastlane自动化打包工具](ios/ipa/fastlane自动化打包工具.md)
+    * [05-xcodebuild自动化打包工具](ios/ipa/xcodebuild打包工具.md)
+    * [06-Windows生成iOS证书及p12文件](ios/ipa/window系统生成证书.md)
+* 第三章:API
+    * [01-NSArray](ios/api/nsarray.md)
+    * [02-NSString](ios/api/nsstring.md)
+    * [03-NSFilemanager](ios/api/nsfilemanager.md)
+    * [04-iOS权限](ios/api/authority.md)
+    * [05-视频画中画](ios/api/画中画.md)
+    * [06-NFC功能](ios/api/nfc.md)
+    * [07-客户端搭建本地服务器](ios/api/server.md)
+    * [08-Storyboard](ios/api/storyboard.md)
+* 第四章: MAC工具
+    * [01-Mac电脑](ios/mac/mac.md)
+    * [02-Xcode](ios/mac/xcode.md)
+    * [03-Automator 自动化工具](ios/mac/automator.md)
+    * [04-AppleScript](ios/mac/applescript.md)
+    * [05-LLVM](ios/mac/llvm.md)
+    * [06-iOS中常见错误](ios/mac/ios_error.md)
+* 第五章: 逆向相关
+  *  [01-逆向1](ios/reverse/reverse1.md)

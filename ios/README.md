@@ -12,9 +12,7 @@ iOS做了好几年了，最近越发感觉移动端的的发展已经到了瓶�
 
 
 ### iOS相关分发渠道
-iOS分发渠道目前有下面四种: AppStore、 企业包、 Testflight、 超级签名。
-
-AppStore没什么好说的，只要上架到AppStore，用户就可以通过AppStore正常下载。只要
+iOS分发渠道目前有下面四种: AppStore、 企业包、 Testflight、 超级签名。AppStore没什么好说的，只要上架到AppStore，用户就可以通过AppStore正常下载。
 
 关于企业包:
 ```markdown
@@ -39,7 +37,7 @@ Testflight 分内部测试和外部测试:
 
 关于超级签名:
 ```markdown
-能想到超级签名的人真他娘是个人才！！！
+能想到超级签名的人真他娘是个人才！！！[苹果无线配置文件交付和配置文档](https://developer.apple.com/library/archive/documentation/NetworkingInternet/Conceptual/iPhoneOTAConfiguration/Introduction/Introduction.html#//apple_ref/doc/uid/TP40009505-CH1-SW1)
 它的原理简单的说，就是将真机测试的过程自动化。利用了苹果提供的Ad-Hoc分发通道，把这一百台安装设备当做开发设备来进行分发。流程是:获取用户设备的UDID→UDID添加到开发者后台→用已添加过的UDID的证书对IPA进行重签名→传到serve→使用`itms-services`的方式实现用户的下载。
 超级签名需要用到个人或者公司的苹果开发者账号。
 
@@ -58,3 +56,4 @@ Testflight 分内部测试和外部测试:
 * [MD5Change app](https://pan.baidu.com/s/1OALSZfFssUPXOSsXhJXgYw)  批量修改图片的MD5，上传到自己的百度云盘了`6hs1`
 * [Images Extractor](https://github.com/devcxm/iOS-Images-Extractor/releases) 从 IPA 中读取图片
 * [Apple Configurator 2](https://apps.apple.com/us/app/apple-configurator-2/id1037126344?mt=12) 获取手机上安装的IPA
+* [ipatool](https://github.com/majd/ipatool) 获取手机上安装过的IPA，直接与 iTunes 和 App Store 通信。

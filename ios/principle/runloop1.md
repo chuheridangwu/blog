@@ -66,7 +66,7 @@ Core Foundation 框架中跟RunLoop有关的5个类， `CFRunLoopRef`、`CFRunLo
 * `CFRunLoopRef`代表 Runloop对象
 * `CFRunLoopModeRef`代表 RunLoop的运行模式
 
-一个 RunLoop 包含若干个Mode，每个Mode又包含若干个 Source0/Source1/Timer/Observer 。如果需要切换Mode，只能退出当前Loop，再重新选择一个Mode进入。这样做的好处是不同组的 Source0/Source1/Timer/Observer 能分隔开来，互不影响。如果Mode里没有任何 Source0/Source1/Timer/Observer ，RunLoop会立马退出。
+一个 RunLoop 包含若干个Mode，每个Mode又包含若干个 Source0/Source1/Timer/Observer 。**如果需要切换Mode，只能退出当前Loop，再重新选择一个Mode进入**。这样做的好处是不同组的 Source0/Source1/Timer/Observer 能分隔开来，互不影响。**如果Mode里没有任何 Source0/Source1/Timer/Observer ，RunLoop会立马退出**。
 它们之间的关系如下图:
 
 ![](./../imgs/ios_img_40.jpg)

@@ -123,6 +123,16 @@ iOS的签名机制流程：
 苹果的每台手机都有Apple的公钥，安装到手机上的包会使用苹果公钥进行验证。
 ```
 ![](../imgs/ios_img_64.png)
+
+```markdown
+（图文步骤不一定相同,Xcode真机调试使用的是双重签名的机制）
+1. 开发时需要真机测试时，需要从钥匙串中的证书中心创建证书请求文件（CSR），并传至苹果服务器。
+2. Apple使用私钥对 CSR 签名，生成一份包含Mac公钥信息及Apple对它的签名，被称为证书（CER：即开发证书，发布证书）。
+3. 编译完一个App后，Mac电脑使用私钥对App进行签名。
+4. 在安装App时，根据当前配置把CER证书一起打包进App。
+5. iOS设备通过内置的Apple的公钥验证CER是否正确，证书验证确保Mac公钥时经过苹果认证的。
+6. 再使用CER文件中Mac的公钥去验证App的签名是否正确，确保安装行为是经过苹果允许的。
+```
 如果软件是从App Store中下载安装的，将没有`.mobileprovision`文件。因为App Store下载渠道本身就是合法的。上传到App Store的包，苹果会通过它的私钥进行签名，安装时直接使用Apple公钥验证签名就可以了。
 ![](../imgs/ios_img_65.png)
 
@@ -134,44 +144,5 @@ iOS的签名机制流程：
 * 数字签名：用私钥加密消息的散列值生成的密文
 * 证书： 用 CA机构 的私钥，对其他人的公钥生成数字签名。
 
-## Windows/Linux 生成iOS证书及p12文件
-苹果现在对马甲包的查找力度比较大，生成证书的文件和上传IPA的IP地址可能都会有记录，为了防止被关联期间，可以使用其他系统生成iOS相关证书文件。
-
-其他系统生成证书需要使用openssl生成对应的请求文件，在苹果下载对应的证书之后，从证书中导出P12文件供其他电脑使用。分为四步:
-```markdwon
-* 生成csr文件（通过OpenSSL命令）
-* 生成mobileprovision文件（通过Apple开发者后台）
-* 生成cer文件（通过Apple开发者后台）
-* 生成P12文件（通过OpenSSL命令）
-```
-
-1. 生成csr文件
-```shell
-# 用到 Windows 或者 Linux 下的 openssl 命令，请自行安装。
-openssl genrsa -out ios.key 2048
-openssl req -new -sha256 -key ios.key -out ios.csr
-```
-
-2. 生成mobileprovision文件: 
-```markdown
-登录开发者后台，提交信息（需要用到前面生成的csr文件），下载。
-https://developer.apple.com/account/ios/profile/
-```
-3. 生成cer文件
-```markdown
-在开发者后台，提交信息（需要用到前面生成的csr文件），下载。
-https://developer.apple.com/account/ios/certificate/
-```
-4. 生成P12文件
-```shell
-   # 需要用到第一步生成的 ios.key 文件，以及 Apple 生成的 ios_distribution.cer 和 ios_development.cer 文件。
-   openssl x509 -in ios_distribution.cer -inform DER -outform PEM -out ios_distribution.pem
-   openssl pkcs12 -export -inkey ios.key -in ios_distribution.pem -out ios_distribution.p12
-
-   openssl x509 -in ios_development.cer -inform DER -outform PEM -out ios_development.pem
-   openssl pkcs12 -export -inkey ios.key -in ios_development.pem -out ios_development.p12
-```
-
 ## 推荐阅读
 * [RSA der加密 p12解密以及配合AES使用详解](https://cloud.tencent.com/developer/article/1486813)
-* [Windows/Linux 生成iOS证书及p12文件](https://www.cnblogs.com/liaozt/p/6202484.html)

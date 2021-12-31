@@ -78,3 +78,38 @@ InputDecoration({
     this.alignLabelWithHint,
   })
 ```
+
+## 全局关闭键盘
+在项目开发中，常用到的场景就是点击页面的空白处关闭键盘,在`MaterialApp`上添加手势按钮，点击时如果键盘有开启，则关闭键盘，这样就可以达到全局点击空白处关闭键盘的方式。
+```dart
+@override
+Widget build(BuildContext context){
+  return GestureDetector(
+    onTap: (){
+      hideKeyboard(context);
+    },
+    child: MaterialApp(
+      title: "书旗小说",
+      navigatorObservers: [routeObserver],
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        primaryColor: Colors.white,
+        dividerColor: const Color(0xffeeeeee),
+        textTheme: TextTheme(
+          bodyText1: TextStyle(color: AppColor.darkGray)
+        ),
+      ),
+      home:const AppRootScene(),
+    ),
+  );
+}
+
+void hideKeyboard(BuildContext context) {
+  FocusScopeNode currentFocus = FocusScope.of(context);
+  if (!currentFocus.hasPrimaryFocus && currentFocus.focusedChild != null) {
+    FocusManager.instance.primaryFocus!.unfocus();
+  }
+  // 也可以通过这种方式关闭键盘
+  // SystemChannels.textInput.invokeMethod("TextInput.hide");
+}
+```

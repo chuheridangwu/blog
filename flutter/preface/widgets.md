@@ -97,6 +97,11 @@ Scrollbar   |   右边的滚动条。如果要和ListView产生对应关系，�
 Dismissible 滑动删除
 
 
+#### 弹窗相关按钮
+// 从底部弹出一个界面
+showModalBottomSheet(context: context, builder: builder)
+// 苹果的Modal效果，从底部弹出一个界面
+showCupertinoModalPopup(context: context, builder: builder)
 
 #### 动画相关的类
 
@@ -121,6 +126,24 @@ ListTile  配合ListView进行适配，类似于iOS中的一行cell，有左侧�
 Visibility  设置透明度的Widget
 IgnorePointer   创建一个不能被点击的widget
 Material    添加阴影
+BottomAppBar   底部导航栏，配合悬浮按钮进行使用 
+BottomNavigationBar   底部导航栏,单个Item使用`BottomNavigationBarItem` 控件,主要参数`items`
+BottomNavigationBarItem   底部导航栏按钮
+Drawer    左右侧滑界面，在`Scaffold`部件中使用
+TextField   输入框
+InputDecoration   输入框的描述
+InputBorder   输入框的边框
+AnnotatedRegion   修改状态栏颜色
+Opacity   透明控件，`value`控制透明度
+DefaultTabController    配合TabBar和TabBarView使用
+
+
+1、Flutter自带工具 DevTools
+2、使用字节开源的ume
+3、使用滴滴开源的 dokit
+
+
+
 
 #### 功能性相关的类
 ChangeNotifier

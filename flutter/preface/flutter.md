@@ -65,7 +65,7 @@ Android studio 自动补全插件`Flutter snipets`,AS可以在保存代码的时
 交换代码位置 | `option + 上下键`
 快速复制当前行 | `option + shift + 上下键`
 
->如果是Windows系统，将command 换成Ctrl, option 换成 Alt 即可。VS Code工具自动补全同样可以使用`Flutter snippets`插件
+>如果是Windows系统，将 command 换成 Ctrl , option 换成 Alt 即可。VS Code工具自动补全同样可以使用`Flutter snippets`插件
 
 
 ## 安卓设置导航栏透明
