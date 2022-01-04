@@ -1,4 +1,5 @@
 * [首页](/)
 * [单词](live/keyword.md)
 * [百科](live/live.md)
-
+* 生活
+  * [2021年总结](live/2022-1-4.md)

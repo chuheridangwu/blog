@@ -51,6 +51,7 @@ Android studio 自动补全插件`Flutter snipets`,AS可以在保存代码的时
 ------- | ------- 
 快速创建Widget | 输入 stf 或者 stl 出现提示后按回车
 快读修复 | `option + .`
+方法体使用 => 方式 | 选中方法体，`option + .`
 自动生成构造函数 | `选中 final 参数，option + .`
 添加父组件、变为子组件、删除子组件 | `option + .`
 重新打开关闭的编辑页面 | `command + shift + T`

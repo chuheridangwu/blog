@@ -5,6 +5,7 @@
   * [1.3 List](flutter/dart/list.md)
   * [1.4 异步](flutter/dart/async.md)
   * [1.5 类和对象](flutter/dart/class.md)
+  * [1.6 空安全](flutter/dart/null-safety.md)
 * 第二章: Flutter开发介绍
   * [2.1 Flutter开发工具](flutter/preface/flutter.md) 
   * [2.2 Widget目录](flutter/preface/widgets.md)
