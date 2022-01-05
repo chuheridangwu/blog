@@ -1,4 +1,4 @@
-# 跟平台进行交互
+# 跨平台交互
 文档根据[Flutter中文社区文档](https://flutter.cn/docs/development/platform-integration/platform-channels?tab=ios-channel-objective-c-tab)参考进行编写，简化文档信息内容，基于Flutter2.0版本。文档介绍了如何编写自定义的平台相关代码。
 
 Flutter允许调用相关平台的 API，无论是 Android 中的 Java 或 Kotlin 代码，还是 iOS 中的 Objective-C 或 Swift 代码。
