@@ -136,7 +136,7 @@ InputBorder   输入框的边框
 AnnotatedRegion   修改状态栏颜色
 Opacity   透明控件，`value`控制透明度
 DefaultTabController    配合TabBar和TabBarView使用
-
+BackdropFilter    高斯模糊效果
 
 1、Flutter自带工具 DevTools
 2、使用字节开源的ume

@@ -16,13 +16,13 @@
 * 第三章: Fluter基础组件
   * [3.1 学习Widget之前](flutter/widgets/前言.md)
   * [3.1 Container](flutter/widgets/container.md) 
-  * [3.1 按钮](flutter/widgets/buttom.md)
   * [3.2 图片](flutter/widgets/image.md)
   * [3.3 TextField](flutter/widgets/textfield.md)
   * [3.4 裁剪Clip](flutter/widgets/clip.md)
 * 第四章: 项目结构和路由
   * [4.1 Scaffold](flutter/widgets/scaffold.md)
   * [4.2 AppBar](flutter/widgets/appbar.md)
+  * [4.3 主题和颜色](flutter/widgets/theme.md)
 * 第五章: Flutter可滚动组件
   * [1.1 前言](flutter/scrollview/scroll.md)
   * [1.2 ListView](flutter/scrollview/ListView.md)
@@ -33,9 +33,9 @@
   * [1.7 PageView](flutter/scrollview/PageView.md)
   * [1.8 TabBarView](flutter/scrollview/TabBarView.md)
 * 第六章:功能性组件
-  * [3.5 FutureBuilder](flutter/widgets/futureBuilder.md)
-  * [3.6 StreamBuilder](flutter/widgets/stream.md)
-* 事件处理和通知
+  * [6.1 FutureBuilder](flutter/action/futureBuilder.md)
+  * [6.2 StreamBuilder](flutter/action/stream.md)
+  * [6.3  数据共享（InheritedWidget）](flutter/action/InheritedWidget.md)
 * 第七章:动画 
   * [7.1 隐式动画](flutter/animation/animation1.md)
   * [7.2 显示动画](flutter/animation/animation2.md)

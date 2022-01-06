@@ -2,7 +2,7 @@
 AppBar是顶部导航栏的显示控件，相关的参数有:
 ```markdown
 * `Widget? leading`: 左侧的按钮，一般是返回按钮
-* `bool? automaticallyImplyLeading`: 是否自动推导左侧按钮
+* `bool? automaticallyImplyLeading`: 如果leading为null，是否自动实现默认的leading按钮
 * `Widget? title`: 导航栏标题
 * `List<Widget>? actions`: 导航栏右侧按钮，一个数组，可能存在多个
 * `Widget? flexibleSpace`: 滚动时改变导航栏高度，通常用于`FlexibleSpaceBar`
