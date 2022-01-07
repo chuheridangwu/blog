@@ -82,3 +82,5 @@ function getAdder(int $x): int
 > 参考网址
 * https://segmentfault.com/a/1190000017576714
 * https://docsify.js.org/#/zh-cn/quickstart
+* https://notebook.js.org/#/
+* [Docsify 进阶配置](https://zxiaosi.cn/archives/cd1d42d1.html)
