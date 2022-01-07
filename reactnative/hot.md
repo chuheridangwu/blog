@@ -15,3 +15,4 @@ Code push 微软推出的React Native 热更新方案。
 * [RN集成codepush](https://www.cxybb.com/article/hxl517116279/104053110)
 * [Code Push 官网](https://microsoft.github.io/code-push/)
 * [ 为什么你的 Charles 会抓包失败？](https://supercodepower.com/use-charles)
+* [code Push](https://www.jianshu.com/p/6a5e00d22723)
