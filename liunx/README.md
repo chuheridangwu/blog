@@ -5,7 +5,22 @@
 
 linux常见命令
 
-cd ls cat pwd  mkdir rmdir  touch  cp  rm mv find
+命令    含义    示例
+column0 | column1 | column2
+------- | ------- | -------
+cd | 切换到对应路径 | `cd xxx`
+ls | 查看当前文件下目录 | `ls`
+cat | 查看当前文件内容 | `cat xxx`
+pwd | 查看当前路径 | `pwd`
+mkdir | 创建文件件 | `mkdir xxx`
+rmdir | 删除文件夹 | `rmdir xxx`
+touch | 创建文件 | `touch xxx`
+rm | 删除文件 | `rm xxx`
+mv | 移动文件位置 | `mv xxx ~/xxx`
+find | 查找文件 | `find xxx`
+file | 查看文件具体类型，比如ipa其实就是zip文件。只是后缀改了 | `file xxx`
+
+cd ls cat pwd  mkdir rmdir  touch  cp  rm mv find  file
 
 ## ls 查看文件
 * ls  查看当前文件
