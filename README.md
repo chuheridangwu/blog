@@ -35,6 +35,12 @@
   * [蓝奏云](https://www.lanzou.com/) 可以将apk上传到网盘，将链接进行分享
   * [FaskMock](https://www.fastmock.site/#/)将请求根地址指向到模拟地址可实现接口模拟，自定义json数据
 ---
+* 谷歌浏览器中常用插件
+  * Adblock Plus: 广告拦截器
+  * GitCodeTree: 查看Git网站文件树
+  * EditThisCookie: cookie编辑器
+  * Tampermonkey:  油猴,超级好用的插件
+---
 * 开发者网站
   * [小米GetAPPs开发者中心](http://global.developer.mi.com/register/result)
   * [亚马逊安卓开发者中心](https://developer.amazon.com/apps-and-games/console/app/list)
@@ -81,6 +87,6 @@
 ---
 * 娱乐
   * [思古影视](https://www.siguyy.com/)
-  * [天狼影视](https://www.tlyyy.cc/)
+  * [天狼影视](https://www.tqyy.cc/)
   * [努努影院](https://www.nunuyy.cc/)
   * [大师兄影视](https://tv.ci/)

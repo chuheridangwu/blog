@@ -18,8 +18,8 @@
     this.obscureText = false,   //是否隐藏输入的文字，一般用在密码输入框中
     this.autocorrect = true,   //是否自动校验
     this.maxLines = 1,   //最大行
-    this.maxLength,   //能输入的最大字符个数
-    this.maxLengthEnforced = true,  //配合maxLength一起使用，在达到最大长度时是否阻止输入
+    this.maxLength,   //能输入的最大字符个数，设置最大个数之后默认会在底部显示，设置 counterText:"",可以不要这种效果
+    this.maxLengthEnforcement = MaxLengthEnforcement.enforced,  //配合maxLength一起使用，在达到最大长度时是否阻止输入
     this.onChanged,  //输入文本发生变化时的回调
     this.onEditingComplete,   //点击键盘完成按钮时触发的回调，该回调没有参数，(){}
     this.onSubmitted,  //同样是点击键盘完成按钮时触发的回调，该回调有参数，参数即为当前输入框中的值。(String){}
@@ -112,4 +112,69 @@ void hideKeyboard(BuildContext context) {
   // 也可以通过这种方式关闭键盘
   // SystemChannels.textInput.invokeMethod("TextInput.hide");
 }
+```
+
+## 设置TextField的高度，输入文字居中
+当我们想给TextField设置一个高度的时候，会发现输入框的内容没有进行居中，可以通过以下几种方式
+
+第一种方案,外部包裹Container,内部修改间距
+```dart
+TextField(                                
+    decoration: const InputDecoration(
+        contentPadding: const EdgeInsets.only(left: 5,top: 5),
+    )
+)
+```
+
+第二种方案，设置isCollapsed属性之后，再设置内间距
+```dart
+TextField(                                
+    decoration: const InputDecoration(
+      isCollapsed: true,
+      contentPadding:const  EdgeInsets.all(5),
+    )
+)
+```
+
+## 通过修改 enabledBorder 和 focusedBorder 可以调整边框在选中和失焦时的颜色
+如果需要设置默认失焦时的颜色需要设置`enabledBorder`,直接设置`Border`是无效的
+```dart
+child: TextField(
+  controller: pwdController,
+  obscureText: true,
+  decoration: InputDecoration(
+  hintText: '请输入验证码',
+  prefixIcon: Icon(Icons.lock),
+  enabledBorder: UnderlineInputBorder(
+    borderSide: BorderSide(color: Colors.orange),
+  ),
+  focusedBorder: UnderlineInputBorder(
+    borderSide: BorderSide(color: Colors.red),
+  ),
+ ),
+),
+```
+
+## 常用的TextField写法
+```dart
+TextField(
+  autofocus: true,
+  controller: TextEditingController.fromValue(TextEditingValue(
+      text: value,
+      selection: TextSelection.fromPosition(TextPosition(
+          affinity: TextAffinity.downstream, offset: value.length)))),
+  decoration: InputDecoration(
+    contentPadding: EdgeInsets.fromLTRB(isHaveUnit ? 20 : 8, 0, 8, 0),
+    enabledBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: Color(0xffB6B6B6), width: 0.5)),
+    focusedBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: Color(0xffFD3F2A), width: 1)),
+  ),
+  textAlign: TextAlign.right,
+  inputFormatters: [
+    WhitelistingTextInputFormatter(RegExp("[0-9.-]")),
+  ],
+  keyboardType: TextInputType.number,
+  onChanged: onChanged,
+);
 ```

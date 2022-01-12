@@ -137,6 +137,10 @@ AnnotatedRegion   修改状态栏颜色
 Opacity   透明控件，`value`控制透明度
 DefaultTabController    配合TabBar和TabBarView使用
 BackdropFilter    高斯模糊效果
+RadioListTile   单选列表
+Radio   单选按钮,不能更改大小，可以使用Tran
+Switch   选择开关
+Checkbox    复选框
 
 1、Flutter自带工具 DevTools
 2、使用字节开源的ume
@@ -502,6 +506,25 @@ Container(
 )
 ```
 
+## 单选框Radio
+Radio,不能手动设置大小，可以选择通过`Transform.scale`的方式对其进行缩小，但是实际大小并不会变化。
+```dart
+class Radio<T> extends StatefulWidget {
+  const Radio({
+    Key key,
+    @required this.value,       // 当前单选框设置的值
+    @required this.groupValue,  // 当前单选框选定状态的值
+    @required this.onChanged,   // 选中回调
+    this.activeColor,           // 选中状态颜色
+    this.focusColor,            // 获取焦点时颜色
+    this.hoverColor,            // 高亮时颜色
+    this.materialTapTargetSize, // 点击范围最小大小
+    this.focusNode,
+    this.autofocus = false,
+  })
+}
+
+```
 ## 推荐阅读
 * [Widget目录](https://flutterchina.club/widgets/)
 * [核心Widget目录](https://flutter.cn/docs/development/ui/widgets)

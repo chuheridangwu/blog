@@ -25,12 +25,20 @@ enum Clip {
 }
 ```
 
-
 Stack 内部约束的枚举
 ```dart
 enum StackFit {
   loose, /// 从其父级传递到堆栈的约束被放松。
   expand, /// 从其父级传递到堆栈的约束被收紧到
   passthrough,  /// 从其父级传递到堆栈的约束未经修改地传递到下面的子级
+}
+```
+
+TextField 限制字符的字数超出时的限制
+```dart
+enum MaxLengthEnforcement {
+  none, /// 默认不管，输入字数可能会超过
+  enforced, /// 保持不超过最大字数
+  truncateAfterCompositionEnds, // 用户可以继续输入，但是不会显示
 }
 ```
