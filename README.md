@@ -23,8 +23,10 @@
   * The Unarchiver: 解压工具
   * Google Chrome、小飞机: 谷歌浏览器
   * Sourcetree: Git图形化工具
+  * Cornerstone: SVN图形工具
   * ClearMyMac X: 电脑垃圾清理工具
   * XMind、MindNode: 思维导图
+  * Postman、ApiPost、curl: 接口调试工具
 ---
 * 团队中常用的工具
   * ShowDoc: 可以当做接口文档进行使用

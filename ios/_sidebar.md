@@ -46,4 +46,7 @@
     * [05-LLVM](ios/mac/llvm.md)
     * [06-iOS中常见错误](ios/mac/ios_error.md)
 * 第五章: 逆向相关
-  *  [01-逆向1](ios/reverse/reverse1.md)
+  *  [01-准备工作](ios/jailbreak/01-ready.md)
+  *  [02-SSH](ios/jailbreak/02-ssh.md)
+  *  [03-Cycript](ios/jailbreak/03-cycript.md)
+  *  [04-Reveal](ios/jailbreak/04-reveal.md)
