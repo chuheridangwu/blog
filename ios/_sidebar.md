@@ -29,6 +29,7 @@
     * [04-fastlane自动化打包工具](ios/ipa/fastlane自动化打包工具.md)
     * [05-xcodebuild自动化打包工具](ios/ipa/xcodebuild打包工具.md)
     * [06-Windows生成iOS证书及p12文件](ios/ipa/window系统生成证书.md)
+    * [07-IPA分发](ios/ipa/ipa分发.md)
 * 第三章:API
     * [01-NSArray](ios/api/nsarray.md)
     * [02-NSString](ios/api/nsstring.md)
