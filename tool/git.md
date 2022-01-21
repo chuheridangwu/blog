@@ -2,7 +2,7 @@
 
 ## 初始化
 
-```
+```shell
 git init                    //初始化仓库
 git add README.md           //添加描述文件
 git add .                   //添加新增文件 .为添加所有新增文件，添加具体某个文件可以将.换为文件名
@@ -16,7 +16,7 @@ Git保存的是每一次的修改记录
 `git add`:将当前修改添加到暂存区，
 `git commit`:将暂存区的所有内容提交到当前分支
 
-```
+```shell
 git status  //查看当前状态
 git log     //查看提交日志
 git reflog  //查看提交过的命令
@@ -48,7 +48,7 @@ git merge dev       //将dev分支跟主分支进行合并
 * `git cherry-pick A..B`  合并A到B的提交到当前分支
 
 ## 文件管理
-```
+```shell
 git mv a.text b.text //更改文件名称 a.text: 原来的文件名 b.text: 更改的文件名
 git mv a.text mydir //移动a.text文件到 mydir文件夹 mydir: 文件夹名称
 git rm a.text       //移除文件，将文件提交到分支后需要这样删除
@@ -59,7 +59,7 @@ git diff            //查看文件修改内容
 >做任何文件操作时，需要先cd到相对应的目录，然后再执行命令，不然会找不到文件
 
 ## 标签管理
-```
+```shell
 git tag         //查看标签     
 git tag v1.0    //创建标签，v1.0: 标签名称
 git tag v0.9 b957a5f    // 在对应的的版本打标签  b957a5f:提交过的版本号
@@ -72,7 +72,7 @@ git push origin --tags  //一次推送所有尚未推送到远程的本地标签
 ## 忽略文件
 系统自动生成的文件或者你觉得不需要上传的文件，可以使用.gitignore文件进行忽略，github上面有对应的忽略配置[点此查看](https://github.com/github/gitignore)
 
-```
+```shell
 touch .gitignore    //创建.gitigonre文件
 vim .gitignore      //编辑，直接将上面配置好的忽略文件copy过来就可以了
 ```
@@ -117,7 +117,7 @@ rebase操作原则：**只对尚未推送或分享给别人的本地修改执行
 
 2. 弹出交互式界面，`#`表示它的一些操作，比如`pick`表示保留当前commit，缩写是p
 
-```
+```shell
 pick ea8da36 第一次提交
 pick a505e3d 第二次提交
 pick caef37f 第三次提交
@@ -144,7 +144,7 @@ pick caef37f 第三次提交
 3. 修改提交日志
 可以修改之前的提交日志
 
-```
+```shell
 # This is a combination of 3 commits.
 # This is the 1st commit message:
 
@@ -216,6 +216,35 @@ User git
 # 走 socks5 代理（如 Shadowsocks）
 # ProxyCommand nc -v -x 127.0.0.1:1080 %h %p
 ```
+
+## Github上传大文件
+github默认限制单个文件是100M,如果要上传过大的文件，需要使用`git-lfs`。首先通过`brew install git-lfs`进行安装。安装好后进入本地仓库目录，执行下面的命令。
+```shell
+git lfs track "file"
+```
+file是需要上传的大文件。执行完命令后会发现目录下生成了一个`".gitattributes"`文件，文件内记录了我们要上传文件的信息。只有先把`".gitattributes"`传上去，才可以上传大文件。
+
+```shell
+git add .gitattributes
+git commit -m "submit file"
+git push -u origin master
+```
+上传完毕后，开始上传大文件。
+```shell
+git add file
+git commit -m "add file"
+git push -u origin master
+```
+
+需要注意的是，通过`git-lfs`上传文件是有空间限制的，免费用户如果上传的文件超过了1G，账号就会被冻结，所以大家在上传前一定要检查一下自己还剩多少空间。
+
+点击自己的头像，进入`"Settings"`，选择`"Billing"`就可以看到自己还剩多少空间。如果在上传过程中出现如下报错：
+```shell
+batch response: Git LFS is disabled for this repository.
+Uploading LFS objects:   0% (0/1), 0 B | 0 B/s, done
+```
+就说明你的账号被冻结了，需要在[GitHub后台提交解封申请](https://support.github.com/contact)。工作日一般几个小时就会帮你把账号解封，解封后就可以继续上传大文件啦~
+
 
 ## 推荐网址
 * [廖雪峰的Git教程](https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/)

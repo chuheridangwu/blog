@@ -2,7 +2,7 @@
 在逆向学习中我们需要准备一台越狱手机，学习如何安装越狱插件，如何使用`Cycript`和`Reveal`对APP界面进行分析，如何使用`MachOView、class-dump、Hopper、Disassembler、ida等`工具对`Mach-O`文件进行分析，以及如何调试代码和对IPA进行重签名。
 
 ## 手机越狱
-在 iOS9 之后越狱的环境越来越差，现在的iOS越狱都不是完美越狱，完美越狱和非完美越狱的差别就在于`非完美越狱只要手机重启之后就需要重新越狱`。目前iOS的最新系统是15.2,我们可以通过[爱思助手网址](https://www.i4.cn/firmware.html)查看可越狱手机的手机和系统。
+在 iOS9 之后越狱的环境越来越差，iOS越狱都不是完美越狱，完美越狱和非完美越狱的差别就在于`非完美越狱只要手机重启之后就需要重新越狱`。目前iOS的最新系统是15.2,我们可以通过[爱思助手网址](https://www.i4.cn/firmware.html)查看可越狱手机的手机和系统。我当前测试手机是iPhoneX，手机系统是13.4。
 
 目前比较6的越狱方案是[uncOver](https://unc0ver.dev/),通过[uncOver官网](https://unc0ver.dev/)下载最新的IPA，对IPA进行重签名之后安装到手机,安装成功后打开`uncOver`软件,直接点击`Jailbreak`按钮就可以直接越狱了，越狱成功后手机会安装`Cydia`商店。手机重启后`Cydia`商店打开会闪退，这时就需要重新越狱了。目前支持越狱的最新系统到`iOS14.8`。
 
@@ -23,13 +23,29 @@ Cydia必装的几个插件有:
 * `Cycript`: 安装之后可以在内存中调试界面
 * `Reveal2Loader`: 配合 Reveal 电脑端对APP界面进行分析
 ```
-iPhone设备上有`root` 和 `mobile`两个用户。mobile是普通权限账户，只能操作一些普通文件，不能操作系统级别的文件,`$HOME`是`/var/mobile`,root是最高权限账户,`$HOME`是`/var/root`。`$HOME`表示当前用户文件夹位置。
+iPhone设备上有`root` 和 `mobile`两个用户。mobile 是普通权限账户，只能操作一些普通文件，不能操作系统级别的文件,文件夹位置是`/var/mobile`,root 是最高权限账户,文件夹位置是`/var/root`。
+
+登录 root 用户使用`ssh root@IP地址`,登录 mobile 用户是`ssh mobile@IP地址`。登录之后可以通过`pwd`查看当前路径，会发现两个用户的路径是不同的。
 
 未越狱的手机使用 iFunBox 连接时,手机名称后显示未越狱三个字，点击查看文件系统时，左下角显示`Media`。如果手机已越狱，手机名后不显示未越狱三个字。如果越狱手机在 Cydia 安装了`Apple File Conduit "2"`插件,使用 iFunBox 查看文件系统时,左下角显示的是`Device`。
 
 >有时候通过Cydia安装插件后，显示重启 SpringBoard。意思是重启桌面，SpringBoard就是iOS的桌面。
 
-通常情况下，通过Cydia安装的安装包是`deb`格式(结合软件包管理工具apt)，如果通过Cydia源安装deb失败，可以先从网上下载deb格式的安装包，然后将deb安装包放到`/var/root/Media/Cydia/AutoInstall`路径下，重启手机，Cydia就会自动安装deb。由于目前都是非完美越狱，手机重启之后越狱会消失，所以这种方法暂时没试过，并且Media文件夹下也没有看到Cydia路径，当前信息只做一个保留，方便以后遇到时进行尝试。目前的测试手机的iPhoneX，手机系统是13.4。
+通常情况下，通过Cydia安装的安装包是`deb`格式(结合软件包管理工具apt)，如果通过Cydia源安装deb失败，可以先从网上下载deb格式的安装包，然后将deb安装包放到`/var/root/Media/Cydia/AutoInstall`路径下，重启手机，Cydia就会自动安装deb。由于目前都是非完美越狱，手机重启之后越狱会消失，所以这种方法暂时没试过，并且Media文件夹下也没有看到Cydia路径，当前信息只做一个保留，方便以后遇到时进行尝试。
+
+## 越狱后的文件路径
+手机越狱后，使用 iFunbox 连接手机，查看文件系统时，会发现左下角显示的是`Device`,文件也比未越狱时要多了很多，这里说一下常见的文件的位置。
+```markdown
+* /var/root    root用户文件位置
+* /var/mobile    mobile用户文件位置
+* /etc/ssh/ssh_config   客户端ssh配置,通过Cydia安装ssh之后才会有
+* /etc/ssh/sshd_config    服务端ssh配置,通过Cydia安装ssh之后才会有
+* /etc/ssh/ssh_host_rsa_key.pub   公钥，客户端连接之后才会有
+* /etc/ssh/ssh_host_rsa_key     私钥,客户端连接之后才会有
+* /var/root/.ssh/authorized_keys    客户端rsa登录授权文件，只有客户端使用密钥登录的时候才会有当前路径
+* /var/containers/Bundle/Application/xxxx      手机内安装的应用对应着xxx目录
+* /usr/lib/cycript0.9/      Cycript插件对应的目录，封装的cy文件可以放到当前目录下
+```
 
 ## 代码判断手机是否越狱
 判断手机是否越狱主要是通过判断手机是否有越狱后的文件夹和文件变量进行判断的。有以下几种方式:
@@ -137,12 +153,6 @@ iPhone设备上有`root` 和 `mobile`两个用户。mobile是普通权限账户�
 动态调试: 对运行中的APP进行代码调试，debugserver/LLDB
 代码编写: 注入代码到APP中，必要时还可能需要重新签名，打包ipa
 ```
-
-## 提供工作效率的软件
-Alfred: 便捷搜索，工作流
-XtraFinder: 增强型Finder
-iTerm2: 完爆Terminal的命令行工具
-Go2Shell: 从Finder快速定位到命令行工具
 
 ## 逆向相关论坛
 * [iOS逆向论坛](https://iosre.com/)

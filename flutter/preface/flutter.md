@@ -66,6 +66,8 @@ Android studio 自动补全插件`Flutter snipets`,AS可以在保存代码的时
 交换代码位置 | `option + 上下键`
 快速复制当前行 | `option + shift + 上下键`
 
+使用VSCode开发Flutter时，如果开启语法检查，导出都是蓝色的波浪线，看着头疼，在`pubspec.yaml`文件中把`flutter_lints: ^1.0.0`注释掉可关闭语法检查。
+
 >如果是Windows系统，将 command 换成 Ctrl , option 换成 Alt 即可。VS Code工具自动补全同样可以使用`Flutter snippets`插件
 
 

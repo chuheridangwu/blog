@@ -144,6 +144,12 @@ PKCS#1和PKCS#8的主要区别，从本质上说，PKCS#8格式增加验证数�
 
 [苹果内购测试流程](https://developer.apple.com/documentation/storekit/in-app_purchase/testing_in-app_purchases_with_sandbox)
 
+## MAC中提高工作效率的几个软件
+* Alfred: 便捷搜索，工作流
+* XtraFinder: 增强型Finder
+* iTerm2: 完爆Terminal的命令行工具
+* Go2Shell: 从Finder快速定位到命令行工具
+
 ## 常见问题
 1. 使用自动打包时一直提示输入管理员账号和密码
 `钥匙串 -> 找到对应的证书秘钥 -> 选择对应的秘钥 -> 双击 -> 选择属性控制 -> 允许所有应用程序访问此程序`
