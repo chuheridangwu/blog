@@ -33,7 +33,7 @@ iPhone设备上有`root` 和 `mobile`两个用户。mobile 是普通权限账户
 
 通常情况下，通过Cydia安装的安装包是`deb`格式(结合软件包管理工具apt)，如果通过Cydia源安装deb失败，可以先从网上下载deb格式的安装包，然后将deb安装包放到`/var/root/Media/Cydia/AutoInstall`路径下，重启手机，Cydia就会自动安装deb。由于目前都是非完美越狱，手机重启之后越狱会消失，所以这种方法暂时没试过，并且Media文件夹下也没有看到Cydia路径，当前信息只做一个保留，方便以后遇到时进行尝试。
 
-## 越狱后的文件路径
+## 越狱后文件路径 和 常见指令
 手机越狱后，使用 iFunbox 连接手机，查看文件系统时，会发现左下角显示的是`Device`,文件也比未越狱时要多了很多，这里说一下常见的文件的位置。
 ```markdown
 * /var/root    root用户文件位置
@@ -43,9 +43,19 @@ iPhone设备上有`root` 和 `mobile`两个用户。mobile 是普通权限账户
 * /etc/ssh/ssh_host_rsa_key.pub   公钥，客户端连接之后才会有
 * /etc/ssh/ssh_host_rsa_key     私钥,客户端连接之后才会有
 * /var/root/.ssh/authorized_keys    客户端rsa登录授权文件，只有客户端使用密钥登录的时候才会有当前路径
-* /var/containers/Bundle/Application/xxxx      手机内安装的应用对应着xxx目录
+* /var/containers/Bundle/Application/xxxx      手机内安装的应用对应的目录
 * /usr/lib/cycript0.9/      Cycript插件对应的目录，封装的cy文件可以放到当前目录下
 ```
+
+常见的指令:
+
+指令 | 含义
+------- | -------
+`killall SpringBoard` | 重启iPhone桌面
+`reboot` | 重启手机
+`ssh root@192.168.16.119` | 通过SSH登录iPhone
+`scp ~/.ssh/id_rsa.pub root@ip地址:~/.ssh` | 拷贝文件到iPhone
+`scp -P 10010 ~/.ssh/id_rsa.pub root:localhost:~/.ssh` | 如果开启了USB端口转发，使用此命令拷贝文件到iPhone
 
 ## 代码判断手机是否越狱
 判断手机是否越狱主要是通过判断手机是否有越狱后的文件夹和文件变量进行判断的。有以下几种方式:
