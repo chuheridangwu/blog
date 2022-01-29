@@ -51,5 +51,7 @@
   *  [02-SSH](ios/jailbreak/02-ssh.md)
   *  [03-Cycript](ios/jailbreak/03-cycript.md)
   *  [04-Reveal](ios/jailbreak/04-reveal.md)
+  *  [05-逆向思路](ios/jailbreak/05-逆向思路.md)
+  *  [06-Mach-O文件](ios/jailbreak/06-mach-o.md)
 * 第六章: Swift
   *  [01-Swift跟其他语言混编](ios/swift/01-swift混编.md)

@@ -33,7 +33,7 @@ iPhone设备上有`root` 和 `mobile`两个用户。mobile 是普通权限账户
 
 通常情况下，通过Cydia安装的安装包是`deb`格式(结合软件包管理工具apt)，如果通过Cydia源安装deb失败，可以先从网上下载deb格式的安装包，然后将deb安装包放到`/var/root/Media/Cydia/AutoInstall`路径下，重启手机，Cydia就会自动安装deb。由于目前都是非完美越狱，手机重启之后越狱会消失，所以这种方法暂时没试过，并且Media文件夹下也没有看到Cydia路径，当前信息只做一个保留，方便以后遇到时进行尝试。
 
-## 越狱后文件路径 和 常见指令
+## 越狱后常见文件路径 和 指令
 手机越狱后，使用 iFunbox 连接手机，查看文件系统时，会发现左下角显示的是`Device`,文件也比未越狱时要多了很多，这里说一下常见的文件的位置。
 ```markdown
 * /var/root    root用户文件位置
@@ -45,9 +45,12 @@ iPhone设备上有`root` 和 `mobile`两个用户。mobile 是普通权限账户
 * /var/root/.ssh/authorized_keys    客户端rsa登录授权文件，只有客户端使用密钥登录的时候才会有当前路径
 * /var/containers/Bundle/Application/xxxx      手机内安装的应用对应的目录
 * /usr/lib/cycript0.9/      Cycript插件对应的目录，封装的cy文件可以放到当前目录下
+* /System/Library/Caches/com.apple.dyld/dyld_shared_cache_armXXX      UI库对应的文件
+* /usr/lib/dyld/      加载动态库的文件,APP中的可执行文件由它进行加载
+* /Library/MobileSubstrate/DynamicLibraries/      动态库插件位置
 ```
 
-常见的指令:
+常见的指令有:
 
 指令 | 含义
 ------- | -------
@@ -155,15 +158,6 @@ iPhone设备上有`root` 和 `mobile`两个用户。mobile 是普通权限账户
     }
 ```
 
-## 逆向App的思路
-逆向App的思路可以分为四步,分析界面、分析代码、动态调试、代码编写。
-```markdown
-界面分析: 使用Cycript、Reveal
-代码分析: 对Mach-O文件的静态分析,使用MachOView、class-dump、Hopper、Disassembler、ida等
-动态调试: 对运行中的APP进行代码调试，debugserver/LLDB
-代码编写: 注入代码到APP中，必要时还可能需要重新签名，打包ipa
-```
-
-## 逆向相关论坛
+## 相关论坛
 * [iOS逆向论坛](https://iosre.com/)
 * [看雪论坛](https://www.kanxue.com/)

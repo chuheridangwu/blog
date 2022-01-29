@@ -11,19 +11,20 @@ xcode常见的一些配置，平时经常遇到找不到库、找不到头文件
 * ${PODS_ROOT}  : 项目使用cocoapods，pod文件目录
 * $(inherited)：添加目录的时候写上 “$(inherited)” 就是表示路径自己从frameworks里面读取。 默认的情况下路径配置是不被 Targets 继承的，只有当Targets的设置加入了$(inherited)时才被继承，继承来自更高一级的配置。
 
+Xcode中关于多个架构的设置，如下图：
+![](../imgs/ios_img_95.png)
+```markdown
+* $(ARCHS_STANDARD): Xcode内置的环境变量，默认是`armv7` 和`arm64`
+* Excluded Architetures:  如果不需要那种架构就写上去
+```
 
 ## 路径
-Framework Search Paths
-附加到项目中的framework 的搜索路径。
-
-Library Search Paths
-附加到项目中的第三方Library的搜索路径。
-
-Header Search Path
-头文件的搜索路径。
-
-User Header Search Paths
-只有在Always Search User Paths为Yes时才会被搜索。
+设置 | 含义
+------- | -------
+Framework Search Paths | 附加到项目中的framework 的搜索路径。
+Library Search Paths | 附加到项目中的第三方Library的搜索路径。
+Header Search Path | 头文件的搜索路径。
+User Header Search Paths | 只有在Always Search User Paths为Yes时才会被搜索。
 
 ## 查看汇编代码的两种方式
 * 进入断点查看汇编的方式 `Debug -> Debug Workflow -> Always show Disassembly`，进入断点时会显示汇编代码

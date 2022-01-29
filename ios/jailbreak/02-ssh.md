@@ -66,7 +66,7 @@ SSH 连接过程可以分为三步:
 在我们第一次连接`ssh root@192.168.160.53`时，服务端将自己的公钥等信息发送给客户端，提示我们是否将服务器公钥信息保存在本地`~/.ssh/known_hosts`,输入 yes 同意保存之后,需要再输入服务端的密码，服务端校验通过后才会建立连接。如下图:
 ![](../imgs/ios_img_80.png)
 我们可以查看`known_hosts`文件保存的信息，文件内保存有 IP 和对应的 公钥信息。
-```markdown
+```shell
 192.168.160.53 ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC6ejv2Ef1AKz5ZRAJ4rCoOvb3atuUhEyY7PT03ay7NVwnDaPJywcN18G73P7Dvo576jpxrfgZsLQBZPHXp7XZXW1VnGaDPc/L6FlVEhrNXIRJeqfrPr7hsFS4lyJVvGkz5m3iSbGQImgJFoNZ+ck3RYSBjU9nc958Tau9sdk2IoDSqvGGiRUSnhJLUGsLRZioP1mor5La9PmEYPmxBdvqm+8Ap9ryX8hr7IY3WG/XzyQROK4LtEyHuAPYdG7fEboep3tQJ2epkbUrV35WDFHO9WiOuuyQLJSbnIuTxCbkJSZe9i4QQxsntYASTLKUzYw1ewOJmpl8JuDhsf+Nb3gyeAnlfVNRxDAQnjj1hFaH0LEKNVA2I0XhtcG6EUCu245Nx0oLRbPnVgih0VrdCqO85+/sUreWjvTPbmGQ2xnFAV8bMS4w6ofNyPqCAHq4QAVUgK4zelYH7zBAjt6PP5GGt+XhtT0FeAM7CUl6ws7lmaH5bsCX9ymZx3CARxdg5BiE=
 ```
 
@@ -107,10 +107,17 @@ iPhone默认使用22端口进行SSH通信,可以在`etc/ssh/sshd_config`查看 P
 ![](../imgs/ios_img_82.png)
 
 使用方式如下:
-```markdwon
+```markdown
 1. 下载[usbmuxd工具包](https://cgit.sukimashita.com/usbmuxd.git/snapshot/usbmuxd-1.0.8.tar.gz),主要使用里面的`tcprelay.py`脚本。`tcprelay.py`文件中有依赖`usbmux.py`文件
 2. 使用`python tcprelay.py -t 22:10010`开启端口映射,将iPhone的22端口映射到Mac本地的10010端口，加上 -t 参数是为了能够同时支持多个 ssh 连接
 3. 开启端口映射后，当前脚本需要持续监听,新开命令行使用`ssh root@localhost -p 10010`登录到iPhone
+```
+
+也可以使用`brew`的方式进行安装，如下:
+```markdown
+1. `brew install usbmuxd` 安装usbmuxd
+2. `iproxy 10010 22` 开启端口映射
+3. `ssh root@localhost -p 10010` 登录iPhone
 ```
 选择使用USB登录手机之后，如果是拷贝文件，同样需要转到10010端口，比如`scp -P 10010 ~/.ssh/id_rsa.pub root:localhost:~/.ssh`
 
