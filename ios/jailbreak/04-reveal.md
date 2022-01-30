@@ -36,3 +36,12 @@
 
 以上内容来自于:
 * [iOS 逆向编程（十八）Reveal 详细安装](https://blog.csdn.net/zz00008888/article/details/111631716)
+
+## Xcode附加进程
+除了用Reveal查看界面外，还可以使用Xcode附加进程的方式查看手机中的应用界面。
+1. 首先需要手机打开对应的应用
+2. 打开Xcode选中手机，选择`Debug -> Attach to Process -> 选择调试的应用`
+3. 或者选择`Debug -> Attch to Process by PID or Name -> 输入应用的名字或者端口`,端口可以在Mac中的控制台进行查看
+
+![](../imgs/ios_img_102.png)
+![](../imgs/ios_img_103.png)

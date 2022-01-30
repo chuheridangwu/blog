@@ -153,6 +153,24 @@ PKCS#1和PKCS#8的主要区别，从本质上说，PKCS#8格式增加验证数�
 ## MAC添加终端指令
 我们在MAC电脑上敲一些指令时,比如`cd`/`curl`/`clang`/`file`等指令，它是在`/usr/bin`目录下。从Mac10.11开始,`/usr/bin`目录就不能写了，即使有管理员权限也不行。如果想增加一些指令需要放在`/usr/local/bin`目录中。
 
+## mac 添加环境变量
+Mac电脑的环境变量配置在`~/.bash_profile`环境下,通过`vim ~/.bash_profile`编辑当前文件.
+```shell
+export PATH=~/Desktop/flutter/bin:$PATH
+export THEOS=~/theos
+export PATH=~/theos/bin:$PATH
+```
+终端中的`cd`/`curl`/`clang`/`file`等指令之所以能找到，是因为它们都在`/usr/bin`或者`/usr/local/bin`目录下，为什么在这个目录下就能找到了，因为电脑的环境变量`PATH`配置了当前目录。我们通过`echo $PATH`打印看一下：
+```shell
+/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin:/Users/mlive/Desktop/flutter/bin:~/usr/local/Cellar/
+```
+所以如果我们有一些指令不想放在电脑的bin目录中时，可以通过修改PATH的值来新增路径
+```markdown
+* `export THEOS=~/theos`表示新增了一个变量 THEOS，值是 ~/theos
+* `export PATH=~/theos/bin:$PATH`表示PATH新增一个`~/theos/bin`目录，我们不能直接将PATH的值更改掉，还要它以前的值,`:$PATH`表示引用环境变量的值。
+```
+修改好之后，使用`source ~/.bash_profile`使当前环境变量生效。
+
 
 ## 常见问题
 1. 使用自动打包时一直提示输入管理员账号和密码

@@ -63,6 +63,14 @@ Xcode 提供了一个迁移工具，可以自动将MRC代码转换为ARC代码�
  `Write Link Map File`  开启LinkMap
 可借助第三方工具解析LinkMap文件： https://github.com/huanxsd/LinkMap
 
+## Xcode附加进程
+除了用Reveal查看界面外，还可以使用Xcode附加进程的方式查看手机中的应用界面。
+1. 首先需要手机打开对应的应用
+2. 打开Xcode选中手机，选择`Debug -> Attach to Process -> 选择调试的应用`
+3. 或者选择`Debug -> Attch to Process by PID or Name -> 输入应用的名字或者端口`,端口可以在Mac中的控制台进行查看
+
+![](../imgs/ios_img_102.png)
+![](../imgs/ios_img_103.png)
 
 ## 图片拉伸
 图片拉伸有三种方法,使用代码或者放到项目中进行拉伸
