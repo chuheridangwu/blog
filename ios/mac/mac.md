@@ -171,6 +171,9 @@ export PATH=~/theos/bin:$PATH
 ```
 修改好之后，使用`source ~/.bash_profile`使当前环境变量生效。
 
+>从 macOS 版本开始，使用`zsh`替换bash用做默认的shell工具，我们在 `~/.bash_profile` 中配置环境变量, 每次重启终端后配置不生效。需要重新执行 `source ~/.bash_profile`,这是因为zsh加载的是 `~/.zshrc`文件,**我们需要在`~/.zshrc`文件最后，增加一行：
+`source ~/.bash_profile`**
+
 
 ## 常见问题
 1. 使用自动打包时一直提示输入管理员账号和密码
