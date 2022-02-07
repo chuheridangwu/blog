@@ -209,3 +209,72 @@ creatAppIcon() {
 # 首先执行函数，填写1024图片的路径赋值
 getImagePath
 ```
+
+## IPA重签名工具
+我们可以通过 shell 脚本执行重签名操作,将`embedded.mobileprovision`、`entitlements.plist`、ipa、shell文件放到同一个目录下。cd 到对应文件下，输入`sh xxx.sh xx.ipa`运行脚本即可。
+
+如果项目内有多个动态库和扩展库的签名文件，都会进行重新签名。相关的shell脚本代码如下:
+```shell
+#!/bin/sh
+
+if ! ([ -f "$1" ]); then
+echo ----- \"${1}\"IPA文件不存在
+exit
+fi
+
+ipaName=${1%.ipa}
+
+if [ "$ipaName" = "$1" ]; then
+echo ----- \"${1}\"error 不是ipa文件
+exit
+fi
+
+## 证书名称
+signName="iPhone Distribution: Hirich xxx Company Limited"
+
+## step 1 解压ipa
+echo "step 1 解压ipa"
+unzip ${ipaName}.ipa
+
+## step 2 删除旧签名文件
+echo "step 2 删除旧签名文件 $app_path"
+rm -rf Payload/*.app/_CodeSignature/
+
+## step 3 拷贝证书配置和权限文件
+echo "step 3 拷贝证书配置和权限文件"
+cp embedded.mobileprovision Payload/*.app/embedded.mobileprovision
+
+## step 4  重签frammework
+echo "step 4 重签frammework"
+framework_path=Payload/*.app/Frameworks
+#判断有没有这个文件夹
+if [ -e $framework_path ]
+then
+    for f in ${framework_path}/*
+    do
+        codesign -fs "${signName}" "${f}"
+    done
+fi
+
+## step 5  重签 推送扩展
+echo "step 5 重签 推送扩展"
+extension_path=Payload/*.app/PlugIns
+#判断有没有这个文件夹
+if [ -e $extension_path ]
+then
+    for f in ${extension_path}/*
+    do
+        codesign -fs "${signName}" "${f}"
+    done
+fi
+
+## step 6 重签名,这里要用到entitlements.plist文件，签名不对会安装失败
+echo "step 6 重签名整个包"
+/usr/bin/codesign -f -s "$signName" --entitlements entitlements.plist Payload/*.app/
+
+## step 7 打包
+echo --- "开始打包"
+zip -r ${ipaName}_resign.ipa Payload/
+rm -rf Payload/
+rm -rf __MACOSX/
+```
