@@ -86,3 +86,6 @@ joinView.snp.makeConstraints { make in
 ```
 
 PCH 文件中添加了定义结构体，在swift中调用对应的类时，会提示`expected a type`,找不到定义的结构体
+
+
+* [技术分享-swift防御编程](https://blog.csdn.net/yong_19930826/article/details/122493668?spm=1001.2014.3001.5502)
