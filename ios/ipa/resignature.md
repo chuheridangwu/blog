@@ -6,10 +6,12 @@ MacBook-Pro ~ % file ~/Desktop/123.ipa
 ```
 可以看到它本质还是一个压缩文件。在项目中，我们编译之后在`Product`文件下就有一个`xxx.app`的文件，创建一个 `Payload`文件夹，将xxx.app放到`Payload`文件夹中，将`Payload`文件夹进行压缩之后将后缀名 zip 改成 ipa 即可。
 
->如果是使用超级签的方式分发APP，可以使用一个未付费的苹果账号，手动将`xxx.app`转成`xxx.ipa`,超级签需要对IPA进行重签名，这样就省一个苹果账号😁。
+>注意: 安装包中的可执行文件必须是经过脱壳的，重签名才会有效。重签名后，在安装过程中，可以通过Mac电脑中的控制台查看安装中的出错信息。
+
+如果是使用超级签的方式分发APP，可以使用一个未付费的苹果账号，手动将`xxx.app`转成`xxx.ipa`,超级签需要对IPA进行重签名，这样就省一个苹果账号😁。
 
 ## 重签名原理
-重签名的原理是将IPA安装包内原有的签名进行删除,使用`codesign`签名工具对项目资源、权限文件、静态库 使用自己的证书进行重新签名。需要修改的地方有`_CodeSignature`文件、`embedded.mobileprovision`文件、第三方库内的签名文件、推送扩展的签名文件。
+重签名的原理是将IPA安装包内原有的签名进行删除,使用`codesign`签名工具对项目资源、权限文件、静态库 使用自己的证书进行重新签名。需要修改的文件有`_CodeSignature`文件、`embedded.mobileprovision`文件。需要重签名的有**所有的动态库(.framework/.dyllib)、AppExtension(PlugIns文件夹，扩展名是appex)、WatchApp(Watch文件夹)都需要重新签名**
 ```markdown
 * `_CodeSignature/CodeResources`是一个plist文件，可用文本查看，内容就是程序包中（不包括Frameworks）所有文件的签名。注意是所有文件。意味着你的程序一旦签名，就不能更改其中任何的东西，包括资源文件和可执行文件本身。iOS系统会检查这些签名
 * `embedded.mobileprovision`文件包含`.cer证书 + devices + AppID + entitlements权限`信息
@@ -176,6 +178,86 @@ PlistBuddy 是 Mac电脑自带的操作 plist 文件的工具,文件路径`/usr/
 # 需要先切换到对应的目录下
 /usr/libexec/PlistBuddy  -c 'Merge a.plist' example.plist 
 ```
+
+## 重签名tweak项目
+tweak别人项目的代码如果想安装在非越狱的设备上，也需要对动态库进行签名。比现在的重签名多了注入动态库和修改动态库中的依赖路径。
+
+我们知道tweak的原理是在程序启动时，Cydia 在`/Devcie/Library/MobileSubstrate/DynamicLibraries/xxx`路径下加载对应的tweak动态库。如果是非越狱手机，本身就没有 Cydia 商店，应该怎么弄呢？
+
+可以通过对可执行文件注入tweak动态库，并且重新签名的方式安装。步骤如下:
+```markdown
+1. 首先需要通过`otool -l | grep cry`确定应用是否需要脱壳，应用重签名必须脱壳。
+2. 开发tweak代码，`make package && make install`安装tweak动态库,使用 iFunbox 将动态库从手机拷贝到Mac设备上。路径是`Devcie/Library/MobileSubstrate/DynamicLibraries/xxx`
+3. 使用`otool -L xxx.dylib`查看tweak动态库依赖的其他动态库,将手机中的`CydiaSubstrate`和`CydiaSubstrate`依赖的`libsubstitute.0.dylib`动态库都复制到Mac中。
+4. 将tweek动态库、`CydiaSubstrate`、`libsubstitute.0.dylib`放在应用中的`xxx.app`文件夹中
+5. 使用`insert_dylib @executable_path/xxx.dylib Mach-O文件 --all-yes --weak`指令将tweak动态库注入到应用的可执行文件中
+6. 使用`install_name_tool -change  旧地址  新地址  Mach-O文件`指令修改tweek动态库依赖的其他动态库路径，同样需要修改`CydiaSubstrate`依赖的动态库路径。
+7. 使用`codesign -fs  证书ID  动态库`指令对动态库进行重新签名
+8. 对IPA进行重新签名
+```
+在 注入动态库 和 修改动态库中的其他动态库路径时，用到了`@executable_path` 和 `@loader_path`，它们分别表示不同的含义:
+```markdown
+* `@executable_path`: 代表可执行文件所在的目录
+* `@loader_path`: 代表动态库所在的目录
+```
+
+#### tweak动态库重签名详细过程
+1. 通过`otool -l | grep cry`确定应用是否需要脱壳，重签名应用必须脱壳。脱壳工具可以使用 frida。步骤如下:
+```markdown
+   1. 手机打开应用,使用`frida-ps -Ua`查看应用的`Bundle ID`
+   2. 开启端口映射，将手机通过usb连接到电脑，使用`iproxy 2222 22`进行端口映射
+   3. 使用`python3 dump.py -H 127.0.0.1 -p 2222 -u root -P alpine com.bigo.live`指令对应用进行脱壳
+```
+2. 开发应用tweak代码，使用`make clean && make && make package && make install`安装tweak动态库。通过 iFunBox 在手机路径`Devcie/Library/MobileSubstrate/DynamicLibraries/xxx`下将动态库复制到Mac电脑中。
+    ![](../imgs/ios_img_108.png)
+3. 使用`otool -L xxx.dylib`查看tweak动态库依赖的其他动态库。如下图:
+   ![](../imgs/ios_img_107.png)
+   tweek动态库依赖`CydiaSubstrate`动态库,`CydiaSubstrate`依赖`libsubstitute.0.dylib`动态库,将它们都复制到Mac设备中。
+4. 将tweek动态库、`CydiaSubstrate`、`libsubstitute.0.dylib`这三个动态库放在应用中的`xxx.app`文件夹中,跟APP可执行文件在同一个目录下.
+5. [点击下载insert_dylib](https://github.com/Tyilo/insert_dylib),编译之后将`insert_dylib`命令行工具放在`/usr/local/bin`目录下,通过`insert_dylib`指令将tweak动态库注入到应用的可执行文件中
+```shell
+cd XinGaiNian1.app 
+insert_dylib @executable_path/tweeksxgn.dylib XinGaiNian1 --all-yes --weak 
+```
+回车后会发现重新生成一个新的可执行文件,文件名为`xxx_patched`，如果你不希望生成一个新的文件，在指令后添加可执行文件的名字,比如:
+```shell
+insert_dylib  @executable_path/tweeksxgn.dylib  XinGaiNian1  --all-yes --weak XinGaiNian1
+```
+指令后可选参数代表的含义是:
+```markdown
+    * `--all-yes` : 指令敲出后全部选择yes
+    * `--weak` : 弱引用动态库，当注入的动态库找不到时不至于崩溃
+```
+我们通过 MachOView 或者`otool -L`指令对比注入前后的可执行文件，会发现可执行文件多了一个`tweeksxgn.dylib`动态库，如下图:
+
+![](../imgs/ios_img_109.png ":size=300")
+![](../imgs/ios_img_110.png ":size=300")
+
+6. 我们在第三步的时候通过`otool - L`指令知道tweak动态库依赖于`CydiaSubstrate`,我们将它们拷贝到`xxx.app`包中,现在需要修改tweak动态库中的依赖路径,使用`install_name_tool -change  旧地址  新地址  Mach-O文件`指令进行修改:
+```shell
+install_name_tool -change /Library/Frameworks/CydiaSubstrate.framework/CydiaSubstrate @loader_path/CydiaSubstrate  tweeksxgn.dylib
+```
+修改前后的路径对比，如下图:
+![](../imgs/ios_img_111.png)
+同样,我们也需要修改`CydiaSubstrate`动态库中关于`libsubstitute.0.dylib`的依赖路径
+```shell
+install_name_tool -change /usr/lib/libsubstitute.0.dylib @loader_path/libsubstitute.0.dylib CydiaSubstrate 
+```
+7. 使用`codesign -fs  证书ID  动态库`指令对动态库进行重新签名
+```markdown
+    1. 使用`security find-identity -p codesigning -v` 命令查看有效的开发者证书
+    2. `codesign -fs 证书ID  tweeksxgn.dylib`对tweek动态库进行签名
+    3. `codesign -fs 证书ID  CydiaSubstrate` 对CydiaSubstrate动态库进行签名
+    4. `codesign -fs 证书ID  libsubstitute.0.dylib` 对libsubstitute.0.dylib动态库进行签名
+```
+8. 通过上面的 shell 脚本对IPA进行重新签名,使用 iFunBox 安装过程中可以通过控制台查看安装信息
+
+#### tweak动态库重签名可能出现的问题
+1. 在重签名后,使用 iFunBox 依旧不能安装IPA,这时我们可以通过Mac中的控制台查看安装错误信息,打开控制台，搜索`installd`。如果出现安装错误时，挨个查看控制台中的installd信息，可以看到错误信息，如下图:
+    ![](../imgs/ios_img_112.png)
+如果出现上面的安装错误时，说明在设备列表不支持当前设置，删除`info.plist`文件中的`UISupportedDevices`信息,对IPA进行重新签名。
+2. IPA可以安装成功，但是打开APP就会出现闪退.可以通过`Xcode -> Window -> Devices and Simulators -> View Device Logs`查看手机的崩溃日志，确定崩溃原因。如下图:
+    ![](../imgs/ios_img_113.png)
 
 ## 参考网址
 * [iOS软件包ipa重签名详解](https://www.jianshu.com/p/609109d41628)
