@@ -56,5 +56,6 @@
   *  [07-IPA脱壳](ios/jailbreak/07-IPA脱壳.md)
   *  [08-theos](ios/jailbreak/08-theos.md)
   *  [09-命令行工具](ios/jailbreak/09-命令行工具.md)
+  *  [10-动态调试](ios/jailbreak/10-debugserver和LLDB.md)
 * 第六章: Swift
   *  [01-Swift跟其他语言混编](ios/swift/01-swift混编.md)

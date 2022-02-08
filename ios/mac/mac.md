@@ -63,13 +63,16 @@ Shift-Command-N | 创建一个新的应用
 `killall Finder `   |  重启Finer
 `zip -e ~/Desktop/a.zip  ~/Desktop/file.text` | 单个文件加密成zip
 `zip -er ~/Desktop/a.zip  ~/Desktop/相册` | 文件加密成zip
-otool -L ../sbin/nginx   |  查看可执行文件链接的库
+`otool -L ../sbin/nginx`   |  查看可执行文件链接的库
 
 ## 路径信息
 文件位置 | 具体路径
 ------- | -------
 Mac设置文件位置 | `/System/Library/PreferencePanes/Keyboard.prefPane`
 iOS描述文件位置 | `~/Library/MobileDevice/Provisioning Profiles`
+Liunx指令路径 | 隐藏文件夹`/bin/sh`
+Liunx指令路径 | 用户不能添加指令到当前文件夹`/usr/bin`
+Liunx添加的指令路径 | `/usr/local/bin`
 
 ## 修改图片hash值的办法
 使用 ImageMagick 对png图片做轻量压缩，并且不损失图片质量，又可以改变图片文件的hash值

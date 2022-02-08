@@ -48,6 +48,7 @@ iPhone设备上有`root` 和 `mobile`两个用户。mobile 是普通权限账户
 * /System/Library/Caches/com.apple.dyld/dyld_shared_cache_armXXX      UI库对应的文件
 * /usr/lib/dyld/      加载动态库的文件,APP中的可执行文件由它进行加载
 * /Library/MobileSubstrate/DynamicLibraries/      动态库插件位置
+* /Developer/usr/bin/debugserver      调试工具，和截屏工具`ScreenShotr`的位置
 ```
 
 常见的指令有:
