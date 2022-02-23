@@ -39,6 +39,7 @@ git checkout -b dev //创建并切换到dev分支，相当于一次执行上面�
 git branch          //查看当前分支
 git branch -d dev   //删除dev分支
 git merge dev       //将dev分支跟主分支进行合并
+git remote update origin -p   //刷新远程仓库分支，适用于看不到新添加的远程仓库
 ```
 >当分支合并发生冲突时，使用`git status`可以告诉我们冲突的文件，Git的用`<<<<<<<，=======，>>>>>>>`标记出不同分支的内容，我们需要修改后重新合并
 
@@ -46,6 +47,8 @@ git merge dev       //将dev分支跟主分支进行合并
 * `git cherry-pick 提交commitHash` 合并单次提交到当前分支
 * `git cherry-pick 分支名` 合并分支的最新提交到当前分支
 * `git cherry-pick A..B`  合并A到B的提交到当前分支
+
+> SourceTree刷新远程仓库分支列表没有看到已存在的分支，使用`git remote update origin -p`刷新本地项目的远程仓库分支
 
 ## 文件管理
 ```shell

@@ -54,10 +54,11 @@ Swift分为值类型和引用类型.值类型中又分为枚举和结构体。�
 * 整数的最大值和最小值: `UInt8.max`/`UInt16.min`，一般情况下直接使用Int即可
 ```
 浮点类型`Float`32位，精度只有6位。Doouble是64位，精度至少15位。如果是两个整数运行时想要获取到小数，首先需要将两个整数转变为Float类型。类型转换如下图:
-![](../imgs/swift/ios_swift_4.png)
+
+![](../imgs/swift/ios_swift_4.png ":size=500")
 
 布尔、字符串、数组、字典的一些写法如下，字符类型必须要在后面标上类型:`Character`。
-![](../imgs/swift/ios_swift_5.png)
+![](../imgs/swift/ios_swift_5.png ":size=500")
 
 关于元组的一些写法:
 ```swift
@@ -70,3 +71,142 @@ let HTTP200Status = (code:200,msg:"success")
 ```
 
 ## 流程控制
+流程控制有`if-else`、`while`、`for`循环、`switch`。
+
+`if-else`和`while`没什么好说的, if后面的条件可以省略小括号,**需要注意`if后面的条件只能是Bool类型`**比如`if age {}`这样是错误的。
+
+`repeat-while`相当于C语言中的`do-while`,需要注意:从Swift3开始，去除了自增（++）、自减（--）运算符。
+
+-----
+
+`for`循环可以使用`闭区间运算符`、`半开区间运算符`。它们分别代表不同的含义。如下图：
+![](../imgs/swift/ios_swift_6.png ":size=500")
+```markdown
+* 闭区间运算符：`a...b`,作用是`a <= 取值 <= b`
+* 半开区间运算符：`a..<b`,注意是2个点,一个小于号。作用是`a <= 取值 < b`,不包含B
+* 单侧区间：让区间朝一个方向尽可能的远,比如`names[2...]`，只要数组内大于等于2的值都会被取出来
+```
+区间运算符也可以使用在数组的取值中，使用for循环的方式对数组进行取值。如下图：
+![](../imgs/swift/ios_swift_7.png ":size=500")
+如果需要使用带有所有的for循环，使用一下代码：
+```swift
+let  ans = [1,2,3,4,5]
+for (index, item) in ans.enumerated() {
+    print("在 index = \(index) 位置上的值为 \(item)")
+}
+```
+
+-----
+
+`switch`的`case、default`后面不能写大括号`{}`,默认可以不写`break`，并不会贯穿到后面的条件。如果我们想使用oc中的贯穿效果，可以使用`fallthrough`达到贯穿效果。如下面的代码:
+```swift
+// 除了 fallthrough,也可以使用 switch 10,20:
+let number = 10
+switch number {
+case 10:
+    print("number is 10")
+    fallthrough
+case 20:
+    print("number is 20")
+case 30:
+    print("number is 30")
+default:
+    break
+}
+```
+>switch需要注意的是必须要保证能处理所有情况。`case、default`后面至少要有一条语句,如果不想做任何事，加个`break`即可。如果能保证已处理所有情况，也可以不必使用`default`
+
+----
+
+switch也支持`Character`、`String`类型,也可以使用符复合条件的方式将两个条件放在一起，满足其中一个就会运行。比如下面的代码:
+```swift
+let string = "jack"
+switch string {
+case "jack":
+    fallthrough
+case "rose":
+    print("Right person")
+default:
+    break
+}
+
+// 复合条件的方式
+let character: Character = "b"
+switch character{
+case "a","A":
+    print("the letter A")
+default:
+    print("Not the letter A")
+}
+```
+也可以使用`switch`进行区间匹配和元祖匹配，比如比较某个点是否在某个区间。如果我们用不到某个值可以使用`下划线 _ `进行忽略。关于case匹配问题，属于`模式匹配（Pattern Matching）`,如下图：
+
+![](../imgs/swift/ios_swift_9.png ":size=500")
+
+----
+
+switch值绑定的方式,如果需要用到某个值时可以使用这个方式，必要时let也可以改为var。如下面的代码：
+```swift
+let point = (2, 0)
+switch point {
+    case (let x, 0):
+        print("on the x-axis with an x value of \(x)")
+    case (0, let y):
+        print("on the y-axis with a y value of \(y)")
+    case let (x, y):
+        print("somewhere else at (\(x), \(y))")
+} // on the x-axis with an x value of 2
+```
+
+## where 添加过滤条件
+使用switch时也可以加上`where`过滤条件，满足条件才允许进入大括号。比如下面的代码：
+```swift
+let point = (1, -1)
+switch point {
+    case let (x, y) where x == y:
+        print("on the line x == y")
+    case let (x, y) where x == -y:
+        print("on the line x == -y")
+    case let (x, y):
+        print("(\(x), \(y)) is just some arbitrary point")
+} // on the line x == -y
+```
+for 循环也可以使用where进行条件过滤，比如下面的代码，只有大于0的值才会被添加进去
+```swift
+// 将所有正数加起来
+var numbers = [10, 20, -10, -20, 30, -30]
+var sum = 0
+for num in numbers where num > 0 { // 使用where来过滤num
+    sum += num
+}
+print(sum) // 60
+```
+
+## 标签语句 outer:
+如果有两个循环嵌套，里面的循环想控制外面的循环时，可以使用标签语句。
+```swift
+outer: for i in 1...4 {
+    for k in 1...4 {
+        if k == 3 {
+            continue outer
+        }
+        if i == 3 {
+            break outer
+        }
+        print("i == \(i), k == \(k)")
+    }
+}
+```
+
+## 区间运算符的类型
+区间运算符也是分类型的，不同的区间是不同的类型。字符和字符串也可以使用区间运算符，但是默认不能在for-in中。如下图:
+![](../imgs/swift/ios_swift_8.png ":size=500")
+可以使用带间隔的区间值：
+```swift
+let hours = 11
+let hourInterval = 2
+// tickMark的取值：从4开始，累加2，不超过11
+for tickMark in stride(from: 4, through: hours, by: hourInterval) {
+print(tickMark)
+} // 4 6 8 10
+```

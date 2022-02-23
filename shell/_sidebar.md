@@ -11,7 +11,7 @@
     * [文件引用](/shell/quote.md)
     * [特殊字符](/shell/character.md)
 * 工具类
-    * [shell常用工具](/shell/tool.md) 
+    * [shell脚本](/shell/tool.md) 
 
 
 
