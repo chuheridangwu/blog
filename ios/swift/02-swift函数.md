@@ -2,6 +2,7 @@
 Swift中函数的表达式是`func 方法名(形参: 形参类型) -> 返回类型`,在调用方法时,如果想不添加形参名，可以使用`func 方法名(_ 形参: 形参类型) -> 返回类型`的形参进行忽略。
 
 函数一般分为有返回值、无返回值、有参数、没有参数的方式。在Swift中需要注意的是，可以通过返回元组的当时返回多个返回值。Swift 中方法的注释如下图,也可以参考[Swift设计准则](https://www.swift.org/documentation/api-design-guidelines/)：
+
 ![](../imgs/swift/ios_swift_10.png ":size=500")
 
 ## 隐式返回（Implicit Return）
@@ -192,6 +193,7 @@ forward(false)(3) // 2
 ```
 
 ## typealias 起别名
+typealias 可以给函数或者类型起别名，当做一种新的类型。在函数传参的时候直接使用别名当做类名。
 ![](../imgs/swift/ios_swift_12.png)
 
 ## 嵌套函数（Nested Function）

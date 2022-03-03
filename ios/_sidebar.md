@@ -64,3 +64,5 @@
   *  [01-Swift跟其他语言混编](ios/swift/01-swift混编.md)
   *  [01-Swift基础语法](ios/swift/01-swift基础语法.md)
   *  [02-Swift函数语法](ios/swift/02-swift函数.md)
+  *  [03-Swift枚举](ios/swift/03-swift枚举.md)
+  *  [04-Swift可选项](ios/swift/04-swift可选项.md)

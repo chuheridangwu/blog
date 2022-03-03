@@ -45,3 +45,13 @@
 
 ## 遇到的问题
 1. 在使用xib编程，给对应的View设置圆角时，`遇到只有左边是圆角，右边不显示圆角的情况`，这是因为你在设置圆角的时候，**View的宽度还是你在xib中使用模拟器的宽度，并不是它真实屏幕的宽度。**
+
+
+## 在Xcode，手机iOS15中，遇到过的适配问题
+1. Must translate autoresizing mask into constraints to have _setHostsLayoutEngine:YES Xcode 13
+
+仅在 iOS 15 上的 Xcode 13.0 也发生了同样的事情，需要将cell视图设置为Layout: `Autoresizing Mask `，如下图：
+![](../imgs/xib/ios_xib_1.png)
+
+
+2. 仅在 iOS 15 上的 Xcode 13.0 ，使用stacke时，需要注意它默认是有背景的。

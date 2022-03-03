@@ -1,6 +1,8 @@
 ## FFmpeg
 使用`brew install ffmpeg`命令进行安装，视频文件本身其实是一个容器（container），里面包括了视频和音频，也可能有字幕等其他内容。
 
+使用`brew`下载ffmpeg时，遇到错误`Error: No such file or directory @ rb_sysopen`,原来是一个依赖包下载不成功`（harfbuzz-3.1.1.arm64_monterey）`,可以先单独针对这个包进行下载`brew install harfbuzz`。
+
 ## 编码器
 编码器（encoders）是实现某种编码格式的库文件。只有安装了某种格式的编码器，才能实现该格式视频/音频的编码和解码。以下是一些 FFmpeg 内置的视频编码器:
 ```

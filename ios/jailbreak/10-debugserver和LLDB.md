@@ -101,3 +101,32 @@ codesign -fs- --entitlements debugserver.entitlements debugserver
 
 ## LLDB
 
+含义 | 指令 
+------- | ------- 
+读取寄存器的值 |  `register read 寄存器名称`,例如`register read rax`
+修改寄存器的值 |  `register write 寄存器名称 数值`,例如`register write rax 10`
+读取内存中的值 |  `x/数量-格式-字节大小 内存地址`,例如 `x/3xw 0x0000010`
+修改内存中的值 |  `memory write 内存地址 数值`,例如`memory write 0x0000010 10`
+
+在读取内存中的值对应的3xw含义：
+```markdown
+3: 代表打印的数量
+x: 代表显示的格式 x->以16进制显示,   f->浮点数,  d->十进制
+w: 代表字节数   b->byte 1个字节,  h ->half word 2字节,  w ->word 4字节, g ->giant word 8字节
+```
+#### LLDB 断点调试
+
+含义 | 指令
+------- | -------
+单步运⾏，把子函数当做整体⼀步执⾏（源码级别） | thread step-over、next、n
+单步运⾏，遇到子函数会进⼊子函数（源码级别） | thread step-in、step、s
+单步运⾏，把子函数当做整体⼀步执⾏（汇编级别） | thread step-inst-over、nexti、ni
+单步运⾏，遇到子函数会进⼊子函数（汇编级别） | thread step-inst、stepi、si
+直接执⾏完当前函数的所有代码，返回到上一个函数（遇到断点会卡住） | thread step-out、finish
+
+内存地址相关规律:
+```markdown
+* 内存地址格式为：`0x4bdc(%rip)`，一般是全局变量，全局区（数据段）
+* 内存地址格式为：`-0x78(%rbp)`，一般是局部变量，栈空间
+* 内存地址格式为：`0x10(%rax)`，一般是堆空间
+```
