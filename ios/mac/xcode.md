@@ -3,28 +3,29 @@ Xcode是iOS开发必备的开发工具，在项目中，经常会遇到各种配
 
 ## 配置
 xcode常见的一些配置，平时经常遇到找不到库、找不到头文件，可能都是这些配置导致的
-
-* ${SRCROOT}：代表的是项目根目录下
-* ${PROJECT_DIR}：代表的是整个项目
-* ${PROJECT_FILE_PATH}表示project的当前路径，相当于$(PROJECT_DIR)/$(PROJECT_NAME).xcodeproj
-* $(PROJECT_NAME) ： 项目名字
-* ${PODS_ROOT}  : 项目使用cocoapods，pod文件目录
-* $(inherited)：添加目录的时候写上 “$(inherited)” 就是表示路径自己从frameworks里面读取。 默认的情况下路径配置是不被 Targets 继承的，只有当Targets的设置加入了$(inherited)时才被继承，继承来自更高一级的配置。
+```markdown
+* `${SRCROOT}`：代表的是项目根目录下
+* `${PROJECT_DIR}`：代表的是整个项目
+* `${PROJECT_FILE_PATH}`: 表示project的当前路径，相当于$(PROJECT_DIR)/$(PROJECT_NAME).xcodeproj
+* `$(PROJECT_NAME)` ： 项目名字
+* `${PODS_ROOT}`  : 项目使用cocoapods，pod文件目录
+* `$(inherited)`：添加目录的时候写上 “$(inherited)” 就是表示路径自己从frameworks里面读取。 默认的情况下路径配置是不被 Targets 继承的，只有当Targets的设置加入了$(inherited)时才被继承，继承来自更高一级的配置。
+```
 
 Xcode中关于多个架构的设置，如下图：
 ![](../imgs/ios_img_95.png)
 ```markdown
-* $(ARCHS_STANDARD): Xcode内置的环境变量，默认是`armv7` 和`arm64`
-* Excluded Architetures:  如果不需要那种架构就写上去
+* `$(ARCHS_STANDARD)`: Xcode内置的环境变量，默认是`armv7` 和`arm64`
+* `Excluded Architetures`:  如果项目不需要哪种架构就写上去
 ```
 
-## 路径
+## Build Setting
 设置 | 含义
 ------- | -------
-Framework Search Paths | 附加到项目中的framework 的搜索路径。
-Library Search Paths | 附加到项目中的第三方Library的搜索路径。
-Header Search Path | 头文件的搜索路径。
-User Header Search Paths | 只有在Always Search User Paths为Yes时才会被搜索。
+`Framework Search Paths` | 附加到项目中的framework 的搜索路径。
+`Library Search Paths` | 附加到项目中的第三方Library的搜索路径。
+`Header Search Path` | 头文件的搜索路径。
+`User Header Search Paths` | 只有在Always Search User Paths为Yes时才会被搜索。
 
 ## 查看汇编代码的两种方式
 * 进入断点查看汇编的方式 `Debug -> Debug Workflow -> Always show Disassembly`，进入断点时会显示汇编代码
@@ -105,3 +106,20 @@ image = [image stretchableImageWithLeftCapWidth:image.size.width *0.5topCapHeigh
 
 ## M1芯片 Xcode 关闭 Rosetta
 打开访达->应用->Xcode->右键点击Xcode->显示简介->勾选使用Rosetta 打开，关闭Xcode，重新打开。 现在可以正常打包了
+
+## LLDB查看寄存器和汇编地址
+
+含义 | 指令 
+------- | ------- 
+读取寄存器的值 |  `register read 寄存器名称`,例如`register read rax`
+修改寄存器的值 |  `register write 寄存器名称 数值`,例如`register write rax 10`
+读取内存中的值 |  `x/数量-格式-字节大小 内存地址`,例如 `x/3xw 0x0000010`
+读取内存中的值 |  `memory read 数量格式字节数 内存地址`,例如 `memory read/3xg 0x100552c00`
+修改内存中的值 |  `memory write 内存地址 数值`,例如`memory write 0x0000010 10`
+
+在读取内存中的值对应的3xw含义：
+```markdown
+3: 代表打印的数量
+x: 代表显示的格式 x->以16进制显示,   f->浮点数,  d->十进制
+w: 代表字节数   b->byte 1个字节,  h ->half word 2字节,  w ->word 4字节, g ->giant word 8字节
+```

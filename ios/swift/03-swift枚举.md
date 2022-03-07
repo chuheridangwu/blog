@@ -102,7 +102,7 @@ calculate(difference)
 ```
 
 ## MemoryLayout 获取类型占用的大小
-c 语言中使用`sizeof()`获取类型的大小，Swift中可以使用`MemoryLayout`获取数据类型占用的内存大小。比如我们想知道枚举占用的内存大小
+c 语言中使用`sizeof()`获取类型的大小，Swift中可以使用`MemoryLayout`获取对象在堆内存占多大空间。比如我们想知道枚举占用的内存大小
 ```swift
 enum Password {
     case number(Int, Int, Int, Int)

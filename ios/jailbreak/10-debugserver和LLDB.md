@@ -106,6 +106,7 @@ codesign -fs- --entitlements debugserver.entitlements debugserver
 读取寄存器的值 |  `register read 寄存器名称`,例如`register read rax`
 修改寄存器的值 |  `register write 寄存器名称 数值`,例如`register write rax 10`
 读取内存中的值 |  `x/数量-格式-字节大小 内存地址`,例如 `x/3xw 0x0000010`
+读取内存中的值 |  `memory read 数量格式字节数 内存地址`,例如 `memory read/3xg 0x100552c00`
 修改内存中的值 |  `memory write 内存地址 数值`,例如`memory write 0x0000010 10`
 
 在读取内存中的值对应的3xw含义：

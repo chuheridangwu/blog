@@ -1,4 +1,5 @@
 # Git基础命令
+在GitHub上搜索的技巧,比如`https://github.com/search?l=Swift&q=MQTT&type=Repositories`,网址中的`l=Swift`表示编程语言是Swift，`q=MQTT`表示搜索MQTT插件
 
 ## 初始化
 
