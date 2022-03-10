@@ -68,3 +68,4 @@
   *  [03-Swift枚举](ios/swift/03-swift枚举.md)
   *  [04-Swift可选项](ios/swift/04-swift可选项.md)
   *  [05-Swift结构体和类](ios/swift/05-swift结构体和类.md)
+  *  [06-Swift闭包](ios/swift/06-swift闭包.md)

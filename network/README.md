@@ -10,7 +10,7 @@
 MAC | Window | 作用
 ------- | ------- | -------
 `traceroute` | `tracert` | 查看当前主机到目标主机经过的路径  
-`nslookup` | `nslookup ` | 可以查到DNS记录的生存时间，还可以指定使用哪个DNS服务器进行解释
+`nslookup` | `nslookup ` | 可以查到DNS记录的生存时间，还可以指定使用哪个DNS服务器进行解析
 `netstat -an` | `netstat -an` | 查看被占用的端口
 `netstat -anb` | `netstat -anb` | 查看被占用的端口、占用端口的应用程序
 `telnet 主机 端口` | `telnet 主机 端口` | 查看是否可以访问主机的某个端口

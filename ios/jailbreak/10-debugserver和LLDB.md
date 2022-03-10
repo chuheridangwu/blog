@@ -124,6 +124,7 @@ w: 代表字节数   b->byte 1个字节,  h ->half word 2字节,  w ->word 4字�
 单步运⾏，把子函数当做整体⼀步执⾏（汇编级别） | thread step-inst-over、nexti、ni
 单步运⾏，遇到子函数会进⼊子函数（汇编级别） | thread step-inst、stepi、si
 直接执⾏完当前函数的所有代码，返回到上一个函数（遇到断点会卡住） | thread step-out、finish
+显示函数调用栈 | bt
 
 内存地址相关规律:
 ```markdown
