@@ -69,3 +69,6 @@
   *  [04-Swift可选项](ios/swift/04-swift可选项.md)
   *  [05-Swift结构体和类](ios/swift/05-swift结构体和类.md)
   *  [06-Swift闭包](ios/swift/06-swift闭包.md)
+  *  [07-Swift属性/方法/下标](ios/swift/07-swift属性.md)
+  *  [08-Swift继承](ios/swift/08-swift继承.md)
+  *  [06-Swift闭包](ios/swift/06-swift闭包.md)

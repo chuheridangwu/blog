@@ -108,6 +108,8 @@ swift中的一些关键字作用
 ## @discardableResult  可以消除：函数调用后返回值未被使用的警告⚠
 ## subscript    可以给任意类型（枚举、结构体、类）增加下标功能
 ## override     重写父类方法
+## final    被final修饰的类、方法、属性、下标禁止被继承和重写
+
 
 
 

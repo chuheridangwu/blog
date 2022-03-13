@@ -25,13 +25,12 @@ switch date {
 }
 ```
 ## 原始值（Raw Values）
-枚举成员可以使用相同类型的默认值预先对应，这个默认值叫做：`原始值（Raw Values）`。代码如下:
+枚举成员可以使用相同类型的默认值预先对应，这个默认值叫做：`原始值（Raw Values）`,本质是只读计算属性。代码如下:
 ```swift
 enum Grade : String {
-case perfect = "A"
-case great = "B"
-case good = "C"
-case bad = "D"
+    case perfect = "A"
+    case great = "B"
+    case good = "C"
 }
 var suit = Grade.good
 print(suit) // good
