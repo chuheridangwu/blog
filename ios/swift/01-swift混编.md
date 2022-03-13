@@ -99,6 +99,15 @@ swift中的一些关键字作用
 ## typealias  给当前类型起别名
 ## where 添加过滤条件
 ## guard 条件不成立时执行大括号的语句，大括号内必须包含return 或者break
+## lazy  定义延迟存储属性
+## willSet  属性观察器，var定义的属性值即将改变,会传递新值，默认叫newValue
+## didSet  属性观察器，var定义的属性值即已经改变,会传递旧值，默认叫oldValue
+## set  计算属性set方法
+## get  计算属性get方法，如果计算属性只有get没有set属于只读计算属性
+## mutating   允许结构体和枚举在实例方法中修改成员属性
+## @discardableResult  可以消除：函数调用后返回值未被使用的警告⚠
+## subscript    可以给任意类型（枚举、结构体、类）增加下标功能
+## override     重写父类方法
 
 
 
