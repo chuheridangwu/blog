@@ -27,9 +27,8 @@ NSLog(@"%p  %p -- %@",[NSRunLoop currentRunLoop],CFRunLoopGetCurrent(),[NSRunLoo
 ## Runloop和线程之间的关系
 1. 每条线程都有唯一的一个与之对应的RunLoop对象
 2. RunLoop保存在一个全局的Dictionary里，线程作为key，RunLoop作为value
-3. 线程刚创建时并没有RunLoop对象，RunLoop会在第一次获取它时创建
-4. RunLoop会在线程结束时销毁
-5. 主线程的RunLoop已经自动获取（创建），子线程默认没有开启RunLoop
+3. 线程刚创建时并没有RunLoop对象，RunLoop会在第一次获取它时创建,在线程结束时销毁
+4. 主线程的RunLoop已经自动获取（创建），子线程默认没有开启RunLoop
 
 知道了Runloop和线程之间的关系，我们再通过源码确认一下上面的说法是否正确，从获取当前Runloop的`CFRunLoopGetCurrent`方法入手。代码片段来自`CF-1153.18`
 ```c

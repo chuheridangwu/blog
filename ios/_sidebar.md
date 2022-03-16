@@ -71,4 +71,5 @@
   *  [06-Swift闭包](ios/swift/06-swift闭包.md)
   *  [07-Swift属性/方法/下标](ios/swift/07-swift属性.md)
   *  [08-Swift继承](ios/swift/08-swift继承.md)
-  *  [06-Swift闭包](ios/swift/06-swift闭包.md)
+  *  [09-Swift初始化/可选链](ios/swift/09-swift初始化.md)
+  *  [10-Swift协议](ios/swift/10-swift协议.md)
