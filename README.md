@@ -34,6 +34,7 @@
   * 蓝湖: UI素材上传和产品文档编写
   * 禅道:  Bug管理工具
   * [数据存储-Bmob后端云](https://www.bmob.cn/)可以免费存储一些数据，通过他们的SDK查询对应的数据库
+  * [数据存储-leancloud](https://www.leancloud.cn/pricing/)
   * [蓝奏云](https://www.lanzou.com/) 可以将apk上传到网盘，将链接进行分享
   * [FaskMock](https://www.fastmock.site/#/)将请求根地址指向到模拟地址可实现接口模拟，自定义json数据
 ---
@@ -71,6 +72,8 @@
   * [制作APP图标](https://www.bufanapp.com/tool/icon)
   * [蒲公英-制作App图标](https://www.pgyer.com/tools/appIcon)
   * [图标工厂-生成对应大小的APP图标](https://icon.wuruihong.com/)
+  * [App颜色搭配](http://tool.c7sky.com/webcolor/)
+  * [App颜色搭配](https://www.materialpalette.com/orange/deep-orange)
 ---
 * 论坛
   * [V2ex](https://v2ex.com/)

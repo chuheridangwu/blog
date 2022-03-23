@@ -9,7 +9,7 @@
         export PATH=$THEOS/bin:$PATH
     2.3 让环境变量立即生效 `source ~/.bash_profile`。或者重启终端
     2.4 编辑在`~/.zshrc`文件,在最后增加一行：`source ~/.bash_profile`，这样每次电脑重启都会有效
-3. 在`$THEOS`目录下载代码，也就是刚配置的`~/theos`目录 `git clone --recursive https://github.com/theos.git $THEOS`。`git clone --recursive`是递归下载，会下载所有依赖的模块
+3. 在`$THEOS`目录下载代码，也就是刚配置的`~/theos`目录 `git clone --recursive https://github.com/theos/theos.git $THEOS`。`git clone --recursive`是递归下载，会下载所有依赖的模块
 ```
 
 ## 创建tweak项目

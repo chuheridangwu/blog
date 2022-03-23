@@ -275,15 +275,41 @@ int main(int argc, const char * argv[]) {
         Method m1 = class_getInstanceMethod(cls, @selector(setObject:forKeyedSubscript:));
         Method m2 = class_getInstanceMethod(cls, @selector(xb_setObject:forKeyedSubscript:));
         method_exchangeImplementations(m1, m2);
+        
+        Method m3 = class_getInstanceMethod(cls, @selector(setObject:forKey:));
+        Method m4 = class_getInstanceMethod(cls, @selector(xb_setObject:forKey:));
+        method_exchangeImplementations(m3, m4);
+        
+        Method m5 = class_getInstanceMethod(cls, @selector(removeObjectForKey:));
+        Method m6 = class_getInstanceMethod(cls, @selector(xb_removeObjectForKey:));
+        method_exchangeImplementations(m5, m6);
+    
     });
+    
 }
 
 - (void)xb_setObject:(id)obj forKeyedSubscript:(id<NSCopying>)key{
-    if (!key) return;
+    if (!key ||
+        [obj isKindOfClass:[NSNull class]] ||
+        obj == nil ) return;
+    if (obj == nil) {
+        NSLog(@"-----");
+    }
     [self xb_setObject:obj forKeyedSubscript:key];
 }
-@end
 
+- (void)xb_setObject:(id)obj forKey:(id<NSCopying>)key{
+    if (!key ||
+        [obj isKindOfClass:[NSNull class]] ||
+        obj == nil) return;
+    [self xb_setObject:obj forKey:key];
+}
+
+- (void)xb_removeObjectForKey:(id<NSCopying>)key{
+    if (key == nil || !key) return;
+    [self xb_removeObjectForKey:key];
+}
+@end
 ```
 
 方法交换的本质:就是**交换`method_t`中的IMP**，方法交换之后系统会删除方法缓存，通过源码查看`method_exchangeImplementations`方法的实现，代码片段来自`objc4-818.2`

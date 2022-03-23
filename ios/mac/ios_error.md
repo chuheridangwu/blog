@@ -77,3 +77,69 @@ bug描述： 项目接入腾讯播放器后，iOS13之前的系统不能播放�
 
 ## 多语言
 添加多语言适配报错`Localizable.strings” couldn’t be copied to “zh-Hans.lproj” because an item with the same name already`,原因是之前添加过，但是没有删干净。
+
+## iOS15 适配
+设置系统导航栏背景颜色无效
+```swift
+navigationBar.setBackgroundImage(UIColor.clear.image, for: .default)
+// 导航栏背景，主题色是绿色
+navigationBar.barTintColor = UIColor.theme
+// 默认不透明
+navigationBar.isTranslucent = false
+// 着色，让返回按钮图片渲染为白色
+navigationBar.tintColor = UIColor.white
+// 导航栏文字
+navigationBar.titleTextAttributes = [
+     NSAttributedString.Key.font: UIFont.systemFont(ofSize: 18),
+     NSAttributedString.Key.foregroundColor: UIColor.white
+]
+```
+
+iOS15 navigationBar的相关属性设置要通过实例`UINavigationBarAppearance`来实现，UINavigationBarAppearance是iOS13更新的API，应该有人已经在用，我们的应用兼容iOS10以上，对于导航栏的设置还没有使用UINavigationBarAppearance，如今在iOS15上失效，所以对于呈现的问题，做如下适配
+```swift
+if #available(iOS 15, *) {
+    let app = UINavigationBarAppearance.init()
+    app.configureWithOpaqueBackground()  // 重置背景和阴影颜色
+    app.titleTextAttributes = [
+        NSAttributedString.Key.font: UIFont.systemFont(ofSize: 18),
+        NSAttributedString.Key.foregroundColor: UIColor.white
+    ]
+    app.backgroundColor = UIColor.theme  // 设置导航栏背景色
+    app.shadowImage = UIColor.clear.image  // 设置导航栏下边界分割线透明
+    navigationBar.scrollEdgeAppearance = app  // 带scroll滑动的页面
+    navigationBar.standardAppearance = app // 常规页面
+}
+```
+
+## UITabbar
+tabbar的问题和navigationBar的问题属于同一类，tabbar背景颜色设置失效，字体设置失效，阴影设置失效问题，旧代码
+```swift
+self.tabBar.backgroundImage = UIColor.white.image
+self.tabBar.shadowImage = UIColor.init(0xEEEEEE).image
+item.setTitleTextAttributes(norTitleAttr, for: .normal)
+item.setTitleTextAttributes(selTitleAttr, for: .selected)
+```
+新代码
+```swift
+if #available(iOS 15, *) {
+    let bar = UITabBarAppearance.init()
+    bar.backgroundColor = UIColor.white
+    bar.shadowImage = UIColor.init(0xEEEEEE).image
+    let selTitleAttr = [
+        NSAttributedString.Key.font: itemFont,
+        NSAttributedString.Key.foregroundColor: UIColor.theme
+    ]
+    bar.stackedLayoutAppearance.selected.titleTextAttributes = selTitleAttr // 设置选中attributes
+    self.tabBar.scrollEdgeAppearance = bar
+    self.tabBar.standardAppearance = bar
+}
+```
+
+## UITableView
+iOS15对于tableview，新增了sectionHeaderTopPadding作为列表每个部分标题上方的填充，它的默认值是UITableViewAutomaticDimension，所以我们要将他设置为0，否则当我们的列表设置了section高度的列表会出现head高度增加的情况，适配方式：
+
+```swift
+if #available(iOS 15, *) {
+    tableView.sectionHeaderTopPadding = 0
+}
+```

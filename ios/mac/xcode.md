@@ -123,3 +123,6 @@ image = [image stretchableImageWithLeftCapWidth:image.size.width *0.5topCapHeigh
 x: 代表显示的格式 x->以16进制显示,   f->浮点数,  d->十进制
 w: 代表字节数   b->byte 1个字节,  h ->half word 2字节,  w ->word 4字节, g ->giant word 8字节
 ```
+
+## 编译器优化
+Xcode中设置debug模式和release模式编译出来的汇编是不一样的，这是因为Release模式开启了编译器优化，选择`Target -> Build Settings`,搜索 `Optimization Level`。
