@@ -154,8 +154,8 @@ make[2]: Nothing to be done for `internal-library-compile'.
 ```
 这是因为之前已经编译过有缓存导致的，clean一下即可。
 
-## theos代码编写的细节
-1.使用 self 调用方法，需要前向声明。self 在此处会被认为是 id 类型，而 `numberOfSectionsInTableView:` 方法属于 `WCTableViewManager` 类的方法，如果不对 `WCTableViewManager `进行前向声明，会出现以下错误：
+## theos代码编写常见错误
+1. 使用 `self` 调用方法，需要前向声明。`self `在此处会被认为是 id 类型，而 `numberOfSectionsInTableView:` 方法属于 `WCTableViewManager` 类的方法，如果不对 `WCTableViewManager `进行前向声明，会出现以下错误：
 ```objc
 Tweak.x:12:18: error: receiver type 'WCTableViewManager' for instance message is a forward declaration
         if (section == [self numberOfSectionsInTableView:tableView] - 1) {
@@ -169,7 +169,7 @@ Tweak.x:24:8: note: forward declaration of class here
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView;
 @end
 ```
-2.未导入了 <UIKit/UIKit.h> 编译失败，如果hook的代码有使用UIKit控件，需要配置UIKit库，不然会报以下错误：
+2. 未导入了 <UIKit/UIKit.h> 编译失败，如果hook的代码有使用UIKit控件，需要配置UIKit库，不然会报以下错误：
 ```objc
 ==> Linking tweak WechatTweak (armv7)…
 ld: warning: building for iOS, but linking in .tbd file (/opt/theos/vendor/lib/CydiaSubstrate.framework/CydiaSubstrate.tbd) built for iOS Simulator
@@ -182,7 +182,7 @@ ld: symbol(s) not found for architecture armv7
 clang: error: linker command failed with exit code 1 (use -v to see invocation)
 ```
 需要在 `Makefile` 文件中，指定要导入的 `Framework`,项目名称_FRAMEWORKS ：
-```objc
+```
 TARGET := iphone:clang:latest:10.0
 INSTALL_TARGET_PROCESSES = SpringBoard
 
@@ -193,6 +193,13 @@ TWEAK_NAME = WechatTweak
 WechatTweak_FILES = Tweak.x
 WechatTweak_CFLAGS = -fobjc-arc
 WechatTweak_FRAMEWORKS = UIKit
+
+ARCHS = arm64 //  指定架构
+```
+3. 提示找不到 NSLog函数 或者 UIKit框架的控件 是因为没有在编译文件中导入对应的头文件
+```objc
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 ```
 
 ## logos语法
@@ -226,7 +233,6 @@ WechatTweak_FRAMEWORKS = UIKit
 * 删除`-（void）.cxx_desture{%log ;%orig;}`方法
 * 替换`HBLogDebug(@" = 0x%x",(unsigned int)r)`为`HBLogDebug(@" = 0x%@",r)`,删除`(unsigned int)`
 ```
-
 
 ## theos添加图片
 在 theos 中添加图片资源，需要在当前目录下创建`layout`文件夹, layout 文件夹可以看做手机的根路径，我们最好将图片资源放到`layout/Library/PreferenceLoader/Preferences/xx项目名/`下，使用时根据路径进行加载,比如:

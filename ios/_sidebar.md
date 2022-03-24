@@ -58,7 +58,7 @@
   *  [09-命令行工具](ios/jailbreak/09-命令行工具.md)
   *  [10-动态调试/LLDB](ios/jailbreak/10-debugserver和LLDB.md)
   *  [11-ASLR](ios/jailbreak/11-aslr.md)
-  *  [12-hook项目过程](ios/jailbreak/12-hook新概念的过程.md)
+  *  [12-hook新概念项目](ios/jailbreak/12-hook新概念的过程.md)
   *  [13-LLVM和代码混淆](ios/jailbreak/13-llvm.md)
   *  [14-汇编](ios/jailbreak/14-汇编.md)
 * 第六章: Swift
