@@ -45,16 +45,8 @@ Swift和OC代码进行混编，需要注意的地方有:
 * [Swift扩展1](https://github.com/JoanKing/JKSwiftExtension)
 * [Swift扩展2](https://github.com/JoanKing/JKSwiftExtension)
 
-练习项目:
-* [有妖气漫画](https://github.com/spicyShrimp/U17)
 
 Object-C 代码转 swift ，使用[SWIFTIFY](https://swiftify.com/converter/code/),苹果商店搜索  Swiftify for Xcode
-
-## Swift中的第三方
-第三方中的SnapKit简单用法
-```
-
-```
 
 
 swift中的懒加载
@@ -116,6 +108,14 @@ swift中的一些关键字作用
 ## convenience      便捷初始化器
 ## required  修饰指定初始化器，表明其所有子类都必须实现该初始化器（通过继承或者重写实现）
 ## deinit   反初始化器，类似于C++的析构函数、OC中的dealloc方法
+
+## AnyObject  所有类都隐式遵守的协议,表示类  // print(AnyObject.self) // Prints: AnyObject
+## AnyClass   所有类的类型，比如Int的类型是Int.type  // print(AnyClass.self) // Prints: AnyObject.Type
+## Any  可以表示任何类型的实例，包括函数类型、结构体、类
+## any  
+
+* [swift关键字含义](https://www.jianshu.com/p/8ba6d1513141)
+* [swift博客信息](https://www.avanderlee.com/category/swift/)
 
 ##  carthage 使用
 现在很多第三方使用carthage进行管理，相对cocoapods来说更加轻量级，它会先将第三方打包成静态库，添加到项目中进行管理，不好的就是不能修改第三方的源码
