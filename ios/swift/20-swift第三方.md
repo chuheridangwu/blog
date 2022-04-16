@@ -83,7 +83,8 @@
 [MBProgressHUD](https://github.com/jdg/MBProgressHUD) | 弹窗提示
 [MJRefresh](https://github.com/CoderMJLee/MJRefresh) | mj刷新
 [TZImagePickerController](https://github.com/banchichen/TZImagePickerController) | 一个支持多选、选原图和视频的图片选择器，同时有预览功能
-[FDFullscreenPopGesture](https://github.com/forkingdog/FDFullscreenPopGesture)  全局侧滑手势
+[FDFullscreenPopGesture](https://github.com/forkingdog/FDFullscreenPopGesture) | 全局侧滑手势
+[NinePatchKit](https://github.com/zxinsunshine/NinePatchKit) | iOS中使用.9图
 
 
 ## SnapKit
@@ -108,3 +109,6 @@ greaterThanOrEqualTo() | 设置属性大于或等于某个数值
 lessThanOrEqualTo() 设置属性小于或等于某个数值
 multipliedBy() | 设置属性乘以因子后的值
 multipliedBy() | 设置属性除以因子后的值
+
+## swift加密解密
+* [Swift加密解密](https://atreey.github.io/2018/01/08/Swift%E5%8A%A0%E5%AF%86%E7%9B%B8%E5%85%B3/)

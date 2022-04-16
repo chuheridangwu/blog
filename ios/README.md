@@ -49,7 +49,9 @@ Testflight 分内部测试和外部测试:
 ```
 ![](imgs/ios_img_69.jpg)
 
-### 辅助工具
+----
+
+### 马甲包辅助工具
 * [LSUnusedResources](https://github.com/tinymind/LSUnusedResources) 清除没有使用的图片
 * [imageoptim](https://imageoptim.com/mac) 图片压缩工具
 * [ChangeInterfaceBuilderColor](https://github.com/fabcz/ChangeInterfaceBuilderColor) 一键替换 Xib 颜色
@@ -57,3 +59,8 @@ Testflight 分内部测试和外部测试:
 * [Images Extractor](https://github.com/devcxm/iOS-Images-Extractor/releases) 从 IPA 中读取图片
 * [Apple Configurator 2](https://apps.apple.com/us/app/apple-configurator-2/id1037126344?mt=12) 获取手机上安装的IPA
 * [ipatool](https://github.com/majd/ipatool) 获取手机上安装过的IPA，直接与 iTunes 和 App Store 通信。
+
+---- 
+
+* [屏幕分辨率备忘单](https://devhints.io/resolutions)
+* [iPhone备忘单](https://www.ios-resolution.com/)

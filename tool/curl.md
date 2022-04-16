@@ -3,6 +3,29 @@
 
 `curl` 是一个命令行工具，用来请求 `Web` 服务器。不带有任何参数时，curl 就是发出 GET 请求。例如`curl https://www.example.com`,表示向www.example.com发出 GET 请求，服务器返回的内容会在命令行输出。
 
+## 常见的请求方式
+1. get 请求
+```shell
+curl http://www.baidu.com
+```
+2. post 请求
+    * `-H` 表示是Header请求头信息
+    * `-d` 表示是Body体 请求体信息
+```shell
+curl -H "token:tokenValue"  -d 'name=emma＆id_card=4102000029550' http://www.baidu.con
+```
+3. 表单提交
+表单提交可以使用-f 添加图片,例如
+```shell
+curl -H "token:tokenValue" -f "pic=@/Users/mlive/Desktop/123.jpg filename='Screensho1t.jpg'"  -f "pic=@/Users/mlive/Desktop/123.jpg filename='Screensho1t.jpg'"  http://www.baidu.com
+```
+如果请求体中也需要其他参数，使用`-d`添加请求体
+```shell
+curl -H "token:tokenValue" -d "pic=@/Users/mlive/Desktop/123.jpg filename='Screensho1t.jpg'"  -d "pic=@/Users/mlive/Desktop/123.jpg filename='Screensho1t.jpg'" -d 'name=emma＆id_card=4102000029550' http://www.baidu.com
+```
+
+
+
 ## curl参数表格
 参数 | 参数含义 | 举例
 ------- | ------- | -------

@@ -38,7 +38,7 @@
     * [05-视频画中画](ios/api/画中画.md)
     * [06-NFC功能](ios/api/nfc.md)
     * [07-客户端搭建本地服务器](ios/api/server.md)
-    * [08-Storyboard](ios/api/storyboard.md)
+    * [08-Xib/Storyboard](ios/api/storyboard.md)
 * 第四章: MAC工具
     * [01-Mac电脑](ios/mac/mac.md)
     * [02-Xcode](ios/mac/xcode.md)

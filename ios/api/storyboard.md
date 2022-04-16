@@ -1,6 +1,12 @@
 # Storyboard
 本章主要记录可视化编程的一些问题，以及如何解决这些问题。附带可视化编程的一些技巧。
 
+
+xib的一些技巧：
+Xib设置类时如果从当前控件切换到`File’s Owner`，需要将以前的连线去掉。
+* [Xib文件使用（二）——关联变量](https://blog.csdn.net/xunyn/article/details/8521194)
+* [Xib的使用：设置File‘s Owner的Class和view的Class的区别](https://blog.csdn.net/az44yao/article/details/110836006?spm=1001.2101.3001.6661.1&utm_medium=distribute.pc_relevant_t0.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7ERate-1.pc_relevant_default&depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7ERate-1.pc_relevant_default&utm_relevant_index=1)
+
 ## 添加自定义颜色
 选择自定义颜色`Custom`，在第二个选项"颜色滑块"中选择`RGB Sliders`，在底部可以输入十六进制颜色
 ![](../imgs/ios_img_56.jpg 'size:100')
@@ -21,13 +27,19 @@
 ```
 
 ## UIScrollView
-在Xib中使用UIScrollView的时候，需要注意在iOS11之后，UIScrollView增加了`framelayoutGuide`和`contentLayoutGuide`.
+在Xib中使用UIScrollView的时候，需要注意在iOS11之后，UIScrollView增加了`framelayoutGuide`和`contentLayoutGuide`。
+
 ```markdown
 * `framelayoutGuide:` 框架布局指南，就是指框架本身，这里的框架就是UIScrollView
 * `contentLayoutGuide:` 内容布局指南，滚动视图内容的布局指南，指的UIScrollView里面的布局
 ```
-
-
+iOS11以上以下步骤进行添加：
+```markdown
+1. xib中添加scrollview，添加对父控件约束
+2. ScrollView内部添加UIView，设置四周边距跟`contentLayoutGuide`相等，设置完成后，修改比例为1
+3. 设置UIView的宽或者高跟`framelayoutGuide`相等，设置好之后会报错，先给View对应的宽或者高一个固定值，防止报错
+4. 如果是宽相等，纵向滑动，如果是高相等，横向滑动。 
+```
 
 
 如果是 iOS11 以下在XIB中使用UIScrollView按照以下的步骤:
@@ -35,12 +47,23 @@
 ```markdown
 1. xib中添加scrollview，添加对父控件约束
 2. scrollview取消 Content Layout Guides 按钮，取消后，不再使用 framelayoutGuide 和 contentLayoutGuide
-3. scrollview内部添加UIview，设置四周边距，如果上下滑动设置跟scrollview等宽，这个时候还会报错，不管它
+3. scrollview内部添加UIView，设置四周边距，如果上下滑动设置跟scrollview等宽，这个时候还会报错，不管它
 4. 在UIview上 设置 我们想要添加的控件，注意要设置顶部跟底部跟UIview的约束
 5. 注意CongtentView的宽度，设置跟ScrollView的宽度一致，
 6. 删除ContentView约束上的固定宽高约束
 ```
 
+在利用xib绘制UIScrollerView时，全屏时页面总是出现偏移一个状态栏高度。设置`Content Insets`为`Never`或者代码中设置:
+```objc
+if (@available(iOS 11.0, *)){
+    [[UIScrollView appearance] setContentInsetAdjustmentBehavior:UIScrollViewContentInsetAdjustmentNever];
+    [UITableView appearance].estimatedRowHeight = 0;
+    [UITableView appearance].estimatedSectionHeaderHeight = 0;
+    [UITableView appearance].estimatedSectionFooterHeight = 0;
+}
+```
+
+* [Xcode11 在Xib中进行UIScrollView布局](https://juejin.cn/post/6844904042452238344)
 
 
 ## 遇到的问题
@@ -55,3 +78,18 @@
 
 
 2. 仅在 iOS 15 上的 Xcode 13.0 ，使用stacke时，需要注意它默认是有背景的。
+
+
+## 修改比例约束
+```objc
+// self.logoAspect 是比例约束
+//修改图片宽度比
+[NSLayoutConstraint deactivateConstraints:@[self.logoAspect]];
+self.logoAspect = [NSLayoutConstraint constraintWithItem:self.logoImageView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:self.logoImageView attribute:NSLayoutAttributeHeight multiplier:1.0 constant:0];
+[NSLayoutConstraint activateConstraints:@[self.logoAspect]];
+```
+
+## 修改约束
+```objc
+_heightConstraint.constant = 12;
+```
