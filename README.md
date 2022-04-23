@@ -1,5 +1,7 @@
 # 土狗🐕
 
+[点击测试下载](itms-services://?action=download-manifest&url=https://raw.githubusercontent.com/chuheridangwu/company/master/manifest.plist)
+
 > 为什么搭建这个文档
 
 搭建这个文档只是为了更方便的查询笔记。有时候改过的一些bug，学过的一些知识，在经过一段时间之后又忘的干干净净，做这个博客文档只是自己的一个工具，方便自己快速查询。
