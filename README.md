@@ -1,6 +1,4 @@
-# 土狗🐕
-
-[点击测试下载](itms-services://?action=download-manifest&url=https://raw.githubusercontent.com/chuheridangwu/company/master/manifest.plist)
+# 🍺🍺🍺🍺
 
 > 为什么搭建这个文档
 
@@ -33,12 +31,14 @@
 * 团队中常用的工具
   * ShowDoc: 可以当做接口文档进行使用
   * GitLab: 代码仓库，可使用CI/CD做自动化打包
+  * Coding: 腾讯代码仓库
   * 蓝湖: UI素材上传和产品文档编写
   * 禅道:  Bug管理工具
   * [数据存储-Bmob后端云](https://www.bmob.cn/)可以免费存储一些数据，通过他们的SDK查询对应的数据库
   * [数据存储-leancloud](https://www.leancloud.cn/pricing/)
   * [蓝奏云](https://www.lanzou.com/) 可以将apk上传到网盘，将链接进行分享
   * [FaskMock](https://www.fastmock.site/#/)将请求根地址指向到模拟地址可实现接口模拟，自定义json数据
+  * [Markdown语法](https://markdown.com.cn/basic-syntax/line-breaks.html)写文档时使用`Markdown`语法进行书写
 ---
 * 谷歌浏览器中常用插件
   * Adblock Plus: 广告拦截器

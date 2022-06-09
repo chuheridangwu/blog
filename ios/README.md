@@ -64,3 +64,4 @@ Testflight 分内部测试和外部测试:
 
 * [屏幕分辨率备忘单](https://devhints.io/resolutions)
 * [iPhone备忘单](https://www.ios-resolution.com/)
+* [蓝奏云](https://pandaboy.lanzoub.com/) 蓝奏云可以直接安装IPA

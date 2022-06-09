@@ -43,7 +43,14 @@ Mac M1在终端使用rvictl命令后会出现`Starting device 00008020-0015091E0
 6. 重启后进入系统，打开偏好设置面板，此时面板里按钮变成了`允许`,点击允许重启电脑
 ![](./imgs/wireshark_07.png)
 
+-----
+遇到报错没权限：`The capture session could not be initiated on interface 'rvi0' (You don't have permission to capture on that device)`
 
+方案1、关闭wireshark，在命令行输入
+`sudo /Applications/Wireshark.app/Contents/MacOS/Wireshark`
+
+方案3、给网卡赋777权限，允许对网卡进行操作
+`sudo chmod 777 /dev/bpf*`
 
 ### wireshark抓取rtmp的地址
 抓取rtmp地址主要通过关注connect和play两个消息。 从connect中的`tcUrl`获取流的域名

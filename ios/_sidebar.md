@@ -30,6 +30,7 @@
     * [05-xcodebuild自动化打包工具](ios/ipa/xcodebuild打包工具.md)
     * [06-Windows生成iOS证书及p12文件](ios/ipa/window系统生成证书.md)
     * [07-IPA分发](ios/ipa/ipa分发.md)
+    * [08-ips崩溃分析](ios/ipa/ips崩溃分析.md)
 * 第三章:API
     * [01-NSArray](ios/api/nsarray.md)
     * [02-NSString](ios/api/nsstring.md)
@@ -39,6 +40,7 @@
     * [06-NFC功能](ios/api/nfc.md)
     * [07-客户端搭建本地服务器](ios/api/server.md)
     * [08-Xib/Storyboard](ios/api/storyboard.md)
+    * [09-蓝牙](ios/api/蓝牙.md)
 * 第四章: MAC工具
     * [01-Mac电脑](ios/mac/mac.md)
     * [02-Xcode](ios/mac/xcode.md)
@@ -61,17 +63,3 @@
   *  [12-hook新概念项目](ios/jailbreak/12-hook新概念的过程.md)
   *  [13-LLVM和代码混淆](ios/jailbreak/13-llvm.md)
   *  [14-汇编](ios/jailbreak/14-汇编.md)
-* 第六章: Swift
-  *  [01-Swift跟其他语言混编](ios/swift/01-swift混编.md)
-  *  [01-Swift基础语法](ios/swift/01-swift基础语法.md)
-  *  [02-Swift函数语法](ios/swift/02-swift函数.md)
-  *  [03-Swift枚举](ios/swift/03-swift枚举.md)
-  *  [04-Swift可选项](ios/swift/04-swift可选项.md)
-  *  [05-Swift结构体和类](ios/swift/05-swift结构体和类.md)
-  *  [06-Swift闭包](ios/swift/06-swift闭包.md)
-  *  [07-Swift属性/方法/下标](ios/swift/07-swift属性.md)
-  *  [08-Swift继承](ios/swift/08-swift继承.md)
-  *  [09-Swift初始化/可选链](ios/swift/09-swift初始化.md)
-  *  [10-Swift协议](ios/swift/10-swift协议.md)
-  *  [11-Swift错误处理](ios/swift/11-swift错误处理.md)  
-  *  [12-Swift泛型](ios/swift/12-swift泛型.md)

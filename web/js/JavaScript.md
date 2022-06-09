@@ -262,38 +262,69 @@ function sum(){
 ## Javascript 中调用网络请求
 
 ```javascript
-var xhr = new XMLHttpRequest();
-url = "http://www.baidu.com"
-xhr.open("GET", url, true);
-xhr.send();
+<script>
 
-// 加载成功
-xhr.onload = function () {
-    // 输出接收到的文字数据
-    console.log(xhr.responseText)
-    // 解析成json数据
-    var json = JSON.parse(xhr.responseText);
-    var list = json["data"]["images"]
-    // 根据类名查询到对应的节点，因为类名是可以有多个重复的，所以获取的是一个数组
-    var body = document.getElementsByClassName("content")[0];
-    for (var dict of list) {
-        // 生成节点，把节点添加到content节点下
-        var img = document.createElement("img")
-        body.appendChild(img)
+var first = 1
+var skip = 1
+request()
+mounted()
+
+// 网络请求
+function request(){
+    url = "http://service.picasso.adesk.com/v1/vertical/category/4e4d610cdf714d2966000007/vertical?limit=30&adult=false&first=" + first + "&order=new&skip=" + skip 
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", url, true);
+    // 设置请求头,必须在open方法后面设置
+    xhr.setRequestHeader("User-Agent","Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1");
+    xhr.send();
+
+    // 加载成功
+    xhr.onload = function () {
+        // 输出接收到的文字数据
+        console.log(xhr.responseText)
+        // 解析成json数据
+        var json = JSON.parse(xhr.responseText);
+        var list = json["res"]["vertical"]
+        // 根据类名查询到对应的节点，因为类名是可以有多个重复的，所以获取的是一个数组
+        var body = document.getElementsByClassName("content")[0];
+        for (var dict of list) {
+            // 生成节点，把节点添加到content节点下
+            var img = document.createElement("img")
+            img.src = dict["img"]
+            // img.width = 100
+            img.height = 550
+            body.appendChild(img)
+        }
     }
 
+    // 加载失败 
+    xhr.onerror = function () {
+        document.getElementById("demo").innerHTML="请求出错";
+    }
 }
 
-// 加载失败 
-xhr.onerror = function () {
-    document.getElementById("demo").innerHTML="请求出错";
+// 监听页面滚动,判断是否加载到下一个页面了
+function mounted () {
+    var that = this
+    window.addEventListener("scroll", function () {
+        console.log(document.body.scrollHeight,window.screen.height,document.body.scrollTop)
+        if(document.body.scrollHeight <= window.screen.height + document.documentElement.scrollTop){
+            first += 1
+            skip += 30
+            request()
+        }else{
+
+        }
+    })
 }
+
+</script>
 ```
 
 ## Map
 
 Map的 常用方法
-```
+```javascript
 var map = new Map();
 //设值
 map.set("A","aaaa");
