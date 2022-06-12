@@ -145,3 +145,15 @@ sh -x ~/Desktop/test.sh
 128+x | 使用Linux信号x的致命错误。
 130 | 使用Ctrl-C终止的命令
 255 | 规范外的退出状态
+
+## shell脚本判断是否安装了jq
+#判断是否安装 json解析工具“jq”
+```shell
+if [ `command -v jq` ];then
+    echo 'jq 已经安装'
+else
+    echo 'jq 未安装,开始安装json解析工具'
+#安装jq
+    brew install jq
+fi
+```

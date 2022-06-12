@@ -7,5 +7,6 @@
 * [Git用法](tool/git.md)
 * [FFmpeg常用方法](tool/ffmpeg.md)
 * [SQLite常用方法](tool/sqlite.md)
+* [brew](tool/brew.md)
 * [日常工作](tool/job.md)
 

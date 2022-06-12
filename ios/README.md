@@ -59,6 +59,8 @@ Testflight 分内部测试和外部测试:
 * [Images Extractor](https://github.com/devcxm/iOS-Images-Extractor/releases) 从 IPA 中读取图片
 * [Apple Configurator 2](https://apps.apple.com/us/app/apple-configurator-2/id1037126344?mt=12) 获取手机上安装的IPA
 * [ipatool](https://github.com/majd/ipatool) 获取手机上安装过的IPA，直接与 iTunes 和 App Store 通信。
+* [Microsoft Remote Desktop Beta](https://docs.microsoft.com/en-us/windows-server/remote/remote-desktop-services/clients/remote-desktop-mac)  连接远程window的工具，点击文档中的`Microsoft Remote Desktop for Mac`进行下载
+
 
 ---- 
 

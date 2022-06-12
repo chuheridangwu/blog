@@ -31,6 +31,7 @@
     * [06-Windows生成iOS证书及p12文件](ios/ipa/window系统生成证书.md)
     * [07-IPA分发](ios/ipa/ipa分发.md)
     * [08-ips崩溃分析](ios/ipa/ips崩溃分析.md)
+    * [09-ideviceinstaller与iOS设备通信](ios/ipa/ideviceinstaller.md)
 * 第三章:API
     * [01-NSArray](ios/api/nsarray.md)
     * [02-NSString](ios/api/nsstring.md)

@@ -181,3 +181,10 @@ export PATH=~/theos/bin:$PATH
 ## 常见问题
 1. 使用自动打包时一直提示输入管理员账号和密码
 `钥匙串 -> 找到对应的证书秘钥 -> 选择对应的秘钥 -> 双击 -> 选择属性控制 -> 允许所有应用程序访问此程序`
+
+2. 怎么判断有没有安装对应的指令
+在命令行使用`command -v brew`，如果有安装对应的工具，则会返回对应的安装路径，如果没有安装，返回空的字符串
+```shell
+mlive@mlivedeMacBook ~ % command -v brew 
+/opt/homebrew/bin/brew
+```
