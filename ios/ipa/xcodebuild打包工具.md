@@ -103,3 +103,4 @@ Error Domain=IDEProfileLocatorErrorDomain Code=1 "No profiles for 'com.elephan22
 * [iOS开发-自动打包初步探究](http://zhangzr.cn/2018/07/27/iOS%E5%BC%80%E5%8F%91-%E8%87%AA%E5%8A%A8%E6%89%93%E5%8C%85%E5%88%9D%E6%AD%A5%E6%8E%A2%E7%A9%B6/)
 * [使用 Xcode Server 持续集成](https://blog.wskfz.com/index.php/archives/82/)
 * [Xcode Server教程](https://www.jianshu.com/p/167fb1dbe489)
+* [iOS自动化打包 ---- xcodebuild 命令详解](https://juejin.cn/post/7083754961921638414)

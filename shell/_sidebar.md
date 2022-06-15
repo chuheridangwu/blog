@@ -4,6 +4,7 @@
     * [运算符](/shell/operador.md)
     * [流程控制](/shell/process.md)
     * [函数](/shell/function.md)
+    * [shell命令行颜色](/shell/color.md)
 * 字典、数组
     * [数组](/shell/array.md)
     * [liunx](/liunx/README.md)

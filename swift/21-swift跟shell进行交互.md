@@ -140,7 +140,7 @@ func readContent(){
 }
 ```
 
-
 ## 参考网址
 * [如何使用Swift来实现一个命令行工具](https://juejin.cn/post/6844904158269702151)
 * [stackoverflow](https://stackoverflow.com/questions/26971240/how-do-i-run-a-terminal-command-in-a-swift-script-e-g-xcodebuild)
+* [swift - 在命令行应用程序中从键盘输入](https://www.itranslater.com/qa/details/2325869775827764224)
