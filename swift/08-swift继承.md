@@ -24,7 +24,7 @@ class Dog{
 
 ## 重写实例方法/类型方法/属性
 子类可以重写父类的方法,重写必须加上`override`关键字。
-![](../imgs/swift/ios_swift_28.png)
+![](./imgs/swift/ios_swift_28.png)
 
 >⚠️ `static`修饰的类型方法，不允许被子类重写,`class`修饰的类型方法，允许被子类重写。
 
@@ -132,4 +132,4 @@ anim.speak()
 anim = Dog()
 anim.speak()
 ```
-![](../imgs/swift/ios_swift_29.png)
+![](./imgs/swift/ios_swift_29.png)

@@ -157,3 +157,28 @@ else
     brew install jq
 fi
 ```
+
+## echo单行和多行文字定向写入到文件中
+如果是单行写入,直接使用`echo  写入内容 >  abc.text`。如果是多行写入,参考一下代码:
+```shell
+cat>abc.text<<EOF
+这是一个由shell创建的文件
+this is a file created by shell.
+we want to make a good world.
+EOF
+```
+
+`<<EOF` 表示当遇到EOF时结束输入，`cat>abc.text<<EOF` 这中间没有空格,如果想追加写入abc.text文件，可使用`cat>>test<<EOF 方式`
+
+
+## unzip 解压
+
+指令 | 含义
+------- | -------
+`unzip test.zip` | 把文件解压到当前目录下
+`unzip -d /temp test.zip` | 如果要把文件解压到指定的目录下，需要用到-d参数。
+`unzip -n test.zip` | 解压的时候，有时候不想覆盖已经存在的文件，那么可以加上-n参数
+`unzip -l test.zip` | 只看一下zip压缩包中包含哪些文件，不进行解压缩
+`unzip -v test.zip` | 查看显示的文件列表还包含压缩比率
+`unzip -t test.zip ` | 检查zip文件是否损坏
+`unzip -o test.zip -d /tmp/` | 将压缩文件test.zip在指定目录tmp下解压缩，如果已有相同的文件存在，要求unzip命令覆盖原先的文件

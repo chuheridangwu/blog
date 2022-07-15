@@ -6,9 +6,9 @@
 ```
 ## swift编译流程
 编译分为前端、中间代码、后端,我们之前使用c/oc编写代码是使用`Clang编译器`编译成前端代码，Swift则是使用`swiftc编译器`进行编译。如下图:
-![](../imgs/swift/ios_swift_1.png)
+![](./imgs/swift/ios_swift_1.png)
 Swift代码编译时首先生成AST语法树，然后生成Swift特有的中间代码，然后对中间代码优化生成简洁的Swift中间代码，之后生成LLVM IR中间代码，然后是汇编代码，最后是可执行文件。过程如下图:
-![](../imgs/swift/ios_swift_2.png)
+![](./imgs/swift/ios_swift_2.png)
 
 Swift使用`swiftc编译器`进行编译，它的位置存放在Xcode内部 `Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin`文件中，对应的指令有:
 ```markdown
@@ -16,6 +16,36 @@ Swift使用`swiftc编译器`进行编译，它的位置存放在Xcode内部 `Con
 * 生成最简洁的SIL代码: `swiftc -emit-sil main.swift` 
 * 生成LLVM IR代码: `swiftc -emit-ir main.swift -o main.ll` 
 * 生成汇编代码: `swiftc -emit-assembly main.swift -o main.s`
+* 生成可执行文件:  `swiftc -emit-executable /xxx/*.swift -o  ~/Desktop/main`
+```
+
+我们可以通过`swiftc -h`查看帮助，常用的指令有以下这些：
+```markdown
+  -dump-ast             语法和类型检查，打印AST语法树
+  -dump-parse           语法检查，打印AST语法树
+  -dump-pcm             转储有关预编译Clang模块的调试信息
+  -dump-scope-maps <expanded-or-list-of-line:column>
+                         Parse and type-check input file(s) and dump the scope map(s)
+  -dump-type-info        Output YAML dump of fixed-size types from all imported modules
+  -dump-type-refinement-contexts
+                         Type-check input file(s) and dump type refinement contexts(s)
+  -emit-assembly         Emit assembly file(s) (-S)
+  -emit-bc               输出一个LLVM的BC文件
+  -emit-executable       输出一个可执行文件
+  -emit-imported-modules 展示导入的模块列表
+  -emit-ir               展示IR中间代码
+  -emit-library          输出一个dylib动态库
+  -emit-object           输出一个.o机器文件
+  -emit-pcm              Emit a precompiled Clang module from a module map
+  -emit-sibgen           输出一个.sib的原始SIL文件
+  -emit-sib              输出一个.sib的标准SIL文件
+  -emit-silgen           展示原始SIL文件
+  -emit-sil              展示标准的SIL文件
+  -index-file            为源文件生成索引数据
+  -parse                 解析文件
+  -print-ast             解析文件并打印（漂亮/简洁的）语法树
+  -resolve-imports       解析import导入的文件
+  -typecheck             检查文件类型
 ```
 
 ## 关于Playground
@@ -47,7 +77,7 @@ let age = getAge()
 ```
 
 Swift分为值类型和引用类型.值类型中又分为枚举和结构体。如下图:
-![](../imgs/swift/ios_swift_3.png)
+![](./imgs/swift/ios_swift_3.png)
 ```markdown
 * 整数类型有：Int8、Int16、Int32、Int64、UInt8、UInt16、UInt32、UInt64
 * 在32bit平台，Int等价于Int32，在64bit平台，Int等价于Int64
@@ -55,10 +85,10 @@ Swift分为值类型和引用类型.值类型中又分为枚举和结构体。�
 ```
 浮点类型`Float`32位，精度只有6位。Doouble是64位，精度至少15位。如果是两个整数运行时想要获取到小数，首先需要将两个整数转变为Float类型。类型转换如下图:
 
-![](../imgs/swift/ios_swift_4.png ":size=500")
+![](./imgs/swift/ios_swift_4.png ":size=500")
 
 布尔、字符串、数组、字典的一些写法如下，字符类型必须要在后面标上类型:`Character`。
-![](../imgs/swift/ios_swift_5.png ":size=500")
+![](./imgs/swift/ios_swift_5.png ":size=500")
 
 关于元组的一些写法:
 ```swift
@@ -80,14 +110,14 @@ let HTTP200Status = (code:200,msg:"success")
 -----
 
 `for`循环可以使用`闭区间运算符`、`半开区间运算符`。它们分别代表不同的含义。如下图：
-![](../imgs/swift/ios_swift_6.png ":size=500")
+![](./imgs/swift/ios_swift_6.png ":size=500")
 ```markdown
 * 闭区间运算符：`a...b`,作用是`a <= 取值 <= b`
 * 半开区间运算符：`a..<b`,注意是2个点,一个小于号。作用是`a <= 取值 < b`,不包含B
 * 单侧区间：让区间朝一个方向尽可能的远,比如`names[2...]`，只要数组内大于等于2的值都会被取出来
 ```
 区间运算符也可以使用在数组的取值中，使用for循环的方式对数组进行取值。如下图：
-![](../imgs/swift/ios_swift_7.png ":size=500")
+![](./imgs/swift/ios_swift_7.png ":size=500")
 如果需要使用带有所有的for循环，使用一下代码：
 ```swift
 let  ans = [1,2,3,4,5]
@@ -141,7 +171,7 @@ default:
 ```
 也可以使用`switch`进行区间匹配和元祖匹配，比如比较某个点是否在某个区间。如果我们用不到某个值可以使用`下划线 _ `进行忽略。关于case匹配问题，属于`模式匹配（Pattern Matching）`,如下图：
 
-![](../imgs/swift/ios_swift_9.png ":size=500")
+![](./imgs/swift/ios_swift_9.png ":size=500")
 
 ----
 
@@ -200,7 +230,7 @@ outer: for i in 1...4 {
 
 ## 区间运算符的类型
 区间运算符也是分类型的，不同的区间是不同的类型。字符和字符串也可以使用区间运算符，但是默认不能在for-in中。如下图:
-![](../imgs/swift/ios_swift_8.png ":size=500")
+![](./imgs/swift/ios_swift_8.png ":size=500")
 可以使用带间隔的区间值：
 ```swift
 let hours = 11
@@ -210,3 +240,6 @@ for tickMark in stride(from: 4, through: hours, by: hourInterval) {
 print(tickMark)
 } // 4 6 8 10
 ```
+
+## 推荐网址
+* [swift编译成可执行文件过程](https://www.jianshu.com/p/730389bb587d)

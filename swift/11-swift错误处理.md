@@ -142,7 +142,7 @@ func divide(_ v1: Int, _ v2: Int) -> Int {
 print(divide(20, 0))
 ```
 增加Swift Flags修改断言的默认行为： `-assert-config Release`：强制关闭断言。 `-assert-config Debug：` 强制开启断言
-![](../imgs/swift/ios_swift_32.png)
+![](./imgs/swift/ios_swift_32.png)
 
 ## fatalError
 如果遇到严重问题，希望结束程序运行时，可以直接使用`fatalError`函数抛出错误（这是无法通过`do-catch`捕捉的错误）。

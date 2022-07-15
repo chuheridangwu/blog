@@ -2,7 +2,7 @@
 [ideviceinstaller](https://github.com/libimobiledevice/libimobiledevice) 应用程序允许与 iOS 设备的应用程序安装服务进行交互。它利用了神话般的libimobiledevice 库，允许与 iOS 设备进行通信。通过`brew install ideviceinstaller`进行安装。
 
 ## ideviceinstaller  管理IPA
-ideviceinstaller 可以直接安装IPA到手机上，如果需要在指定的手机上进行安装，加上可选参数`-u`，指定手机的UUID。
+ideviceinstaller 可以直接安装IPA到手机上，如果需要在指定的手机上进行安装，加上可选参数`-u`，指定手机的UDID。
 
 指令 | 含义
 ------- | -------
@@ -14,7 +14,7 @@ ideviceinstaller 可以直接安装IPA到手机上，如果需要在指定的手
 `ideviceinstaller -l -o list_all` | 查看设备安装的所有应用
 
 ## idevicediagnostics 管理设备状态 - 重启、关机、睡眠
-如果需要在指定的手机上进行安装，加上可选参数`-u`，指定手机的UUID。
+如果需要在指定的手机上进行安装，加上可选参数`-u`，指定手机的UDID。
 
 指令 | 含义
 ------- | -------
@@ -24,7 +24,7 @@ ideviceinstaller 可以直接安装IPA到手机上，如果需要在指定的手
 
 
 ## Ideviceinfo 获取设备信息
-Ideviceinfo 如果需要在指定的手机上进行安装，加上可选参数`-u`，指定手机的UUID。
+Ideviceinfo 如果需要在指定的手机上进行安装，加上可选参数`-u`，指定手机的UDID。
 
 指令 | 含义
 ------- | -------
@@ -54,15 +54,16 @@ Ideviceinfo 如果需要在指定的手机上进行安装，加上可选参数`-
 * 文件操作
 ```
 
-使用方法：
-```markdwon
+使用方法，如果需要在指定手机安装需要指定udid：
+```markdown
 1. 安装 tidevice 使用`pip3 install -U "tidevice[openssl]" `如果提示安装失败，使用`pip3 install -U tidevice`（不过这种方法安装，配对功能就没有了，因为没有办法进行签名）
 2. tidevice version   查看版本
 3. tidevice pair   配对设备
 4. tidevice unpair   取消配对设备
 5. tidevice list   列出连接设备
-6. tidevice relay 8100 8100   转发请求到手机，类似于iproxy
-7. tidevice relay -x 8100 8100   转发并把传输的内容用hexdump的方法print出来
+6. tidevice list --json   以json的形式列出连接设备
+7. tidevice relay 8100 8100   转发请求到手机，类似于iproxy
+8. tidevice relay -x 8100 8100   转发并把传输的内容用hexdump的方法print出来
 ```
 
 应用管理

@@ -53,7 +53,7 @@ class Student: Person{
     }
 }
 ```
-![](../imgs/swift/ios_swift_30.png ":size=500")
+![](./imgs/swift/ios_swift_30.png ":size=500")
 
 ## 类的初始化过程
 Swift在编码安全方面是煞费苦心，为了保证初始化过程的安全，设定了`两段式初始化`、 `安全检查`两个阶段。
@@ -70,7 +70,7 @@ Swift在编码安全方面是煞费苦心，为了保证初始化过程的安全
     * ② 初始化器现在能够使用self（访问、修改它的属性，调用它的实例方法等等）
     * ③ 最终，链中任何便捷初始化器都有机会定制实例以及使用self
 ``` 
-![](../imgs/swift/ios_swift_31.png)
+![](./imgs/swift/ios_swift_31.png)
 
 安全检查:
 ```markdown
