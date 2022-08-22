@@ -10,6 +10,9 @@ xcode常见的一些配置，平时经常遇到找不到库、找不到头文件
 * `$(PROJECT_NAME)` ： 项目名字
 * `${PODS_ROOT}`  : 项目使用cocoapods，pod文件目录
 * `$(inherited)`：添加目录的时候写上 “$(inherited)” 就是表示路径自己从frameworks里面读取。 默认的情况下路径配置是不被 Targets 继承的，只有当Targets的设置加入了$(inherited)时才被继承，继承来自更高一级的配置。
+* `${EXECUTABLE_NAME}` : 执行程序名，默认与 PRODUCT_NAME 一致
+* `${PRODUCT_NAME}` : 显示到用户屏幕上的 App 名称
+* `$(PRODUCT_BUNDLE_IDENTIFIER)` : App的唯一标识 Bundle ID
 ```
 
 Xcode中关于多个架构的设置，如下图：

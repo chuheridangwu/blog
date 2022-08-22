@@ -148,5 +148,68 @@ liunx系统定时器，
 给予dirname一个路径名时，它会删除最后一个斜线（'/'）后的任何后缀，并返回结果。主要用于shell脚本
 ```shell
 dirname /usr/home/carpetsmoker/dirname.wiki
-/usr/home/carpetsmoker     # 返回结果
+/usr/home/carpetsmoker     # 结果
+```
+
+## basename
+basename获取文件名 + 后缀
+```shell
+basename /root/test.txt
+test.txt   # 输出结果，文件名+扩展名
+
+basename /root/test.txt .txt
+test  # 输出结果 文件名
+
+path=/root/test.txt
+echo "${path%%.*}" 
+/root/test  # 输出结果 路径+文件名  不包含后缀
+```
+
+## 文件名获取
+
+上面两个命令是shell提供的，难免有些限制，我们可以使用`${}`来灵活获取，而且`${}`可以用来做shell的字符子串提取。
+```shell
+var='/dir1/dir2/dir3/a.b.c.d'
+echo ${var%%.*} #### 右起，找到最后一个'.'字符，返回开始到该字符的内容（不含'/'）=> /dir1/dir2/dir3/a
+echo ${var%/*}  ## 右起，找到第一个'/'字符，返回开始到该字符的内容（不含'/'）=> /dir1/dir2/dir3
+echo ${var#*/}  ## 左起，找到第一个'/'字符，返回其后面的内容（不含'/'） => dir1/dir2/dir3/a.b.c.d
+echo ${var##*/} ## 左起，找到最后一个'/'字符，返回其后面的内容（不含'/'） => a.b.c.d
+```
+
+对`${}`的总结：
+
+```markdown
+* #代表左起，%代表右起。两个符号代表最后一个字符，一个符号代表第一个字符
+* #：左起第一个
+* ##： 左起最后一个
+* %：右起第一个
+* %%：右起最后一个
+```
+
+```shell
+FILE="example.tar.gz"
+echo "${FILE%%.*}" #取头 => example
+echo "${FILE##*.}" #取尾 => gz
+echo "${FILE#*.}"  #去头 => tar.gz
+echo "${FILE%.*}"  #去尾 => example.tar
+
+FILE="xxx/xx/example.tar.gz"
+echo "${FILE%%.*}" #取头 => xxx/xx/example
+echo "${FILE##*.}" #取尾 => gz
+echo "${FILE#*.}"  #去头 => tar.gz
+echo "${FILE%.*}"  #去尾 => xxx/xx/example.tar
+```
+
+在shell中的示例:
+```shell
+fullfile=/mnt/cos2/venus_gram/ROM/leadcore_haige/leadcore_haige_AutoTag201608311742/cos-rom_1.2.-Leadcore_haige-201608311742.zip
+
+filename=$(basename "$fullfile")
+echo $filename  # cos-rom_1.2.-Leadcore_haige-201608311742.zip
+
+extension="${filename##*.}"
+echo $extension # zip
+
+filename="${filename%.*}"
+echo $filename # cos-rom_1.2.-Leadcore_haige-201608311742
 ```

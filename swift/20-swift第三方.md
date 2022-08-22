@@ -1,6 +1,7 @@
 # iOS三方库
 记录iOS中的一些三方库,记录OC和Swift中一些第三方和使用方法。
 
+
 ## Swift第三方库
 第三方名称 | 功能
 ------- | -------
@@ -72,6 +73,7 @@
 [SwifterSwift](https://github.com/SwifterSwift/SwifterSwift) | Swift类扩展
 [Reusable](https://github.com/AliSoftware/Reusable) |  xib的扩展，快速创建cell和view
 [ParallaxHeader](https://github.com/romansorochak/ParallaxHeader) | 滚动视图上面增加一个背景图
+[PLPlayerKit](https://github.com/pili-engineering/PLPlayerKit) |  七牛拉流库SDK
 
 
 ## OC第三方库
@@ -104,11 +106,39 @@ imageView.snp.makeConstraints { make in
 ### 约束关系
 方法 | 含义
 ------- | -------
-equalTo() | 设置属性等于某个数值
-greaterThanOrEqualTo() | 设置属性大于或等于某个数值
-lessThanOrEqualTo() 设置属性小于或等于某个数值
-multipliedBy() | 设置属性乘以因子后的值
-multipliedBy() | 设置属性除以因子后的值
+`equalTo()` | 设置属性等于某个数值
+`greaterThanOrEqualTo()` | 设置属性大于或等于某个数值
+`lessThanOrEqualTo()` 设置属性小于或等于某个数值
+`multipliedBy()` | 设置属性乘以因子后的值
+
 
 ## swift加密解密
 * [Swift加密解密](https://atreey.github.io/2018/01/08/Swift%E5%8A%A0%E5%AF%86%E7%9B%B8%E5%85%B3/)
+
+
+## Swift 第三方
+
+```pod
+source 'https://github.com/CocoaPods/Specs.git'
+target 'KoreaVideo' do
+  use_frameworks!
+  pod 'Moya', '~> 15.0'   #网络请求
+  pod 'KeychainAccess', '~> 4.1'  #Keychain封装
+  pod 'Kingfisher', '~> 6.3.1'  #网络图片
+  pod "KingfisherWebP"  #webp图片
+  pod 'SnapKitExtend', '~> 1.1.0'  #SnapKit扩展
+  pod 'IQKeyboardManagerSwift', '~> 6.5.0'  #键盘管理
+  pod 'HandyJSON', '~> 5.0.2'  #JSON解析
+  pod 'MBProgressHUD', '~> 1.2.0' #遮盖
+  pod 'MJRefresh', '~>3.7.5'  #下拉刷新
+  pod 'SwifterSwift', '~>5.2.0'  #分类扩展
+  pod 'Reusable', '~> 4.1.2'  #单元格注册
+  pod 'EmptyDataSet-Swift'  #空数据
+  pod 'JKSwiftExtension'  #遮盖
+  pod 'Then'
+  pod 'FDFullscreenPopGesture'  #侧滑手势
+  pod 'ZLPhotoBrowser'  #图片选择器
+  pod 'CryptoSwift'  #加密算法
+  pod 'PLPlayerKit'  #七牛播放SDK
+end
+```

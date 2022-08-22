@@ -1,5 +1,6 @@
 * [首页](/)
 * [调试技巧](tool/skill.md)
+* [MAC电脑](tool/mac.md)
 * [VSCode工具](tool/vscode.md)
 * [抓包工具](tool/package.md)
 * [curl用法](tool/curl.md)

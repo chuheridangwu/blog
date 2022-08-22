@@ -42,13 +42,13 @@
     * [07-客户端搭建本地服务器](ios/api/server.md)
     * [08-Xib/Storyboard](ios/api/storyboard.md)
     * [09-蓝牙](ios/api/蓝牙.md)
-* 第四章: MAC工具
-    * [01-Mac电脑](ios/mac/mac.md)
-    * [02-Xcode](ios/mac/xcode.md)
-    * [03-Automator 自动化工具](ios/mac/automator.md)
-    * [04-AppleScript](ios/mac/applescript.md)
-    * [05-LLVM](ios/mac/llvm.md)
-    * [06-iOS中常见错误](ios/mac/ios_error.md)
+    * [10-sms扩展](ios/api/sms扩展.md)
+* 第四章: 开发工具
+    * [01-Xcode](ios/mac/xcode.md)
+    * [02-Automator 自动化工具](ios/mac/automator.md)
+    * [03-AppleScript](ios/mac/applescript.md)
+    * [04-LLVM](ios/mac/llvm.md)
+    * [05-iOS中常见错误](ios/mac/ios_error.md)
 * 第五章: 逆向相关
   *  [01-准备工作](ios/jailbreak/01-ready.md)
   *  [02-SSH](ios/jailbreak/02-ssh.md)

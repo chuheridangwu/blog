@@ -13,8 +13,7 @@
 *  [11-Swift错误处理](swift/11-swift错误处理.md)  
 *  [12-Swift泛型](swift/12-swift泛型.md)
 *  [20-Swift第三方](swift/20-swift第三方.md)
-*  [21-Swift调用shell](swift/21-swift调用shell.md)
-
-
-
+*  [21-Swift跟shell交互](swift/21-swift跟shell进行交互.md)
+* API
+    * [String](swift/string.md)
 

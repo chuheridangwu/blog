@@ -1,29 +1,22 @@
-# String.md
+# String
+关于Swift中String的各种用法，拼接、查找、删除、转字典、转数组、转URL、文件后缀。文件扩展名等等。
 
 1. 删除前后多余的空格
 ```swift
-//原始字符串
-let str1 = "   欢迎访问 hangge.com   "
-//除去前后空格
-let str2 = str1.trimmingCharacters(in: .whitespaces)
- 
-//打印结果
-print("新字符串：\(str2)") //欢迎访问 hangge.com
+let str1 = "   欢迎访问 hangge.com   " //原始字符串
+let str2 = str1.trimmingCharacters(in: .whitespaces) //除去前后空格
+print("新字符串：\(str2)") //打印结果 欢迎访问 hangge.com
 ```
 
-2，删除前后指定的字符,下面代码将 String 字符串前后的尖括号给去除掉
+2. 删除前后指定的字符,下面代码将 String 字符串前后的尖括号给去除掉
 ```swift
-//原始字符串
-let str1 = "<<hangge.com>>"
-//删除前后<>
-let characterSet = CharacterSet(charactersIn: "<>")
+let str1 = "<<hangge.com>>" //原始字符串
+let characterSet = CharacterSet(charactersIn: "<>") //删除前后<>
 let str2 = str1.trimmingCharacters(in: characterSet)
- 
-//打印结果
-print("新字符串：\(str2)")  //hangge.com
+print("新字符串：\(str2)")  //打印结果 hangge.com
 ```
 
-## `CharacterSet` 里各个枚举类型的含义如下：
+`CharacterSet` 里各个枚举类型的含义如下：
 ```markdown
 * controlCharacters：控制符
 * whitespaces：空格
@@ -105,6 +98,19 @@ extension String {
 let urlStr = "http://hanggge.com?name=航歌&key=!*'();:@&=+$,/?%#[]"
 print("转义后的url：\(urlStr.urlEncoded())")
 print("还原后的url：\(urlStr.urlEncoded().urlDecoded())")
+```
+
+## 字符串获取文件路径
+字符串对路径和文件名称的处理
+```swift
+let path = "/Users/xxx/2013_50.zip"
+let url = URL.init(fileURLWithPath: path) //将字符串转成url，才好处理路径
+
+print("文件路径(不包含文件名) =>" + url.deletingLastPathComponent().path) //Users/xxx
+print("文件路径(包含文件名) =>" + url.deletingPathExtension().path) //Users/xxx/2013_50
+print("文件扩展名 =>" + url.pathExtension) //zip
+print("文件名称(不包含扩展名) =>" + url.deletingPathExtension().lastPathComponent) //2013_50
+print("文件名带扩展名 =>" + url.lastPathComponent) //2013_50.zip
 ```
 
 ## 推荐网址

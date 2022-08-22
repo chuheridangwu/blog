@@ -97,7 +97,7 @@ $ convert image.png -resize x100 out.png
 ```
 
 ### sips命令
-在 Mac 电脑中，默认有 sips 命令可以裁剪和转换图片格式
+在 Mac 电脑中，默认有 sips 命令可以裁剪和转换图片格式,使用`sips --formats`查看sips支持的格式。
 
 **转换格式**
 ```shell
@@ -128,6 +128,7 @@ sips -f vertical ~/*.jpg           ##垂直翻转
 sips -s format jpeg test.HEIC --out test.jpg  ## HEIC 转换成jpg图片
 
 for i in *.jpg; do sips -Z 600 "${i}" --out "600_${i%}"; done ## 批量指定宽度为600像素，并且文件名前面加600_
+for mshk in *; do name="${mshk%%.*}"; sips -s format png $mshk --out $name.png;done  ##批量将文件夹内图片转换成png图片
 
 ```
 

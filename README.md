@@ -91,9 +91,19 @@
 ---
 * 收藏的网址
   * [MacWk](https://www.macwk.com/bibei) MAC电脑软件
+  * [MSDN](https://msdn.itellyou.cn/) Window电脑镜像
+  * [TinyPNG](https://tinify.cn/) 压缩webp、jpg、png
 ---
 * 娱乐
   * [思古影视](https://www.siguyy.com/)
-  * [天狼影视](https://www.tqyy.cc/)
+  * [天狼影视](https://www.tqyy.net/)
   * [努努影院](https://www.nunuyy.cc/)
   * [大师兄影视](https://tv.ci/)
+---
+* 视频测试地址
+```markdown
+* flv: `http://sf1-hscdn-tos.pstatp.com/obj/media-fe/xgplayer_doc_video/flv/xgplayer-demo-360p.flv`
+* mp4: `http://sf1-hscdn-tos.pstatp.com/obj/media-fe/xgplayer_doc_video/mp4/xgplayer-demo-360p.mp4`
+* mp4: `http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4`
+* m3u8: `http://devimages.apple.com/iphone/samples/bipbop/bipbopall.m3u8`
+```
