@@ -3,8 +3,11 @@
 * 项目
     * [Android](/Android/)
     * [iOS](/ios/)
+    * [Swift](/swift/)
     * [网络篇](/network/)
-    * [Flutter](/flutter)
+    * [工具](/tool/)
+    * [Flutter](/flutter/)
     * [Python](/python/)
+    * [shell](/shell/)
     * [前端](/web/)
     * [PhotoShop](/photoshop/)
