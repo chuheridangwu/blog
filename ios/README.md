@@ -56,14 +56,25 @@ Testflight 分内部测试和外部测试:
 * [imageoptim](https://imageoptim.com/mac) 图片压缩工具
 * [ChangeInterfaceBuilderColor](https://github.com/fabcz/ChangeInterfaceBuilderColor) 一键替换 Xib 颜色
 * [MD5Change app](https://pan.baidu.com/s/1OALSZfFssUPXOSsXhJXgYw)  批量修改图片的MD5，上传到自己的百度云盘了`6hs1`
-* [Images Extractor](https://github.com/devcxm/iOS-Images-Extractor/releases) 从 IPA 中读取图片
+* [Images Extractor](https://github.com/devcxm/iOS-Images-Extractor/releases) 从 IPA 中读取图片，直接添加IPA，点击start
 * [Apple Configurator 2](https://apps.apple.com/us/app/apple-configurator-2/id1037126344?mt=12) 获取手机上安装的IPA
 * [ipatool](https://github.com/majd/ipatool) 获取手机上安装过的IPA，直接与 iTunes 和 App Store 通信。
-* [Microsoft Remote Desktop Beta](https://docs.microsoft.com/en-us/windows-server/remote/remote-desktop-services/clients/remote-desktop-mac)  连接远程window的工具，点击文档中的`Microsoft Remote Desktop for Mac`进行下载
-
+* [Microsoft Remote Desktop Beta](https://docs.microsoft.com/en-us/windows-server/remote/remote-desktop-services/clients/remote-desktop-mac)  连接远程window的工具，点击文档中的`Microsoft Remote Desktop for Mac`进行下载 
+* [蓝奏云](https://pandaboy.lanzoub.com/) 蓝奏云可以直接在线安装IPA
 
 ---- 
 
+### 逆向相关工具
+* [Reveal](https://www.macwk.com/soft/reveal)  iOS界面分析
+* [Hopper Disassembler](https://www.hopperapp.com/)  分析可执行文件
+* [MachOview](https://github.com/fangshufeng/MachOView)  分析可执行文件
+
+---- 
+### 手机分辨率
 * [屏幕分辨率备忘单](https://devhints.io/resolutions)
 * [iPhone备忘单](https://www.ios-resolution.com/)
-* [蓝奏云](https://pandaboy.lanzoub.com/) 蓝奏云可以直接安装IPA
+
+### 开发工具
+* [JSONConverter](https://github.com/vvkeep/JSONConverter) Swift语言JSON转模型应用
+* [Charles](https://www.macwk.com/soft/charles) 抓包工具
+* [Downie](https://www.macwk.com/soft/downie) 视频下载工具

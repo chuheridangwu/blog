@@ -49,6 +49,7 @@
     * [03-AppleScript](ios/mac/applescript.md)
     * [04-LLVM](ios/mac/llvm.md)
     * [05-iOS中常见错误](ios/mac/ios_error.md)
+    * [06-上架准备工作](ios/mac/ready.md)
 * 第五章: 逆向相关
   *  [01-准备工作](ios/jailbreak/01-ready.md)
   *  [02-SSH](ios/jailbreak/02-ssh.md)
