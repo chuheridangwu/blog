@@ -94,7 +94,7 @@ Testflight 分内部测试和外部测试:
 ```
 
 
-### 生成企业包
+### 2.1 生成企业包
 1. 在打包时勾选 `Include manifest for over-the-air installation`选项,如果不勾选就需要我们手动创建`manifest.plist`文件了
 ![](../imgs/ios_img_70.png ':size=600')
 2. 填写对应的下载地址，因为目前我们还不知道上传到仓库的地址，可以随便写
@@ -102,7 +102,7 @@ Testflight 分内部测试和外部测试:
 3. 打包成功后会生成 IPA 和 `manifest.plist`文件
 ![](../imgs/ios_img_72.png ':size=600')
 
-### 上传仓库
+### 2.2 上传仓库
 1. 将 IPA 和 manifest.plist 文件上传到Github仓库，另外需要创建 `57x57`和`512x512`的Logo图片,在安装的时候会在桌面显示对应的图标。
 ![](../imgs/ios_img_73.png ':size=600')
 2. 修改文件的下载路径, 点开仓库对应的 `ipa -> 找到Download按钮 -> 右键，选择复制链接`
@@ -114,7 +114,7 @@ Testflight 分内部测试和外部测试:
 当前网页上的地址就是`manifest.plist`文件的链接
 ![](../imgs/ios_img_77.png)
 
-### itms-services 协议格式
+### 2.3 itms-services 协议格式
 我们使用的是`itms-services://`协议进行下载，它的格式是`itms-services://?action=download-manifest&url=manifest.plist文件路径`。
 
 在Github仓库中我们找到了`manifest.plist`文件的真实下载地址,只要把它拼接到上面的路径就可以了。比如:
@@ -122,7 +122,7 @@ Testflight 分内部测试和外部测试:
 itms-services://?action=download-manifest&url=https://raw.githubusercontent.com/chuheridangwu/company/master/manifest.plist
 ```
 
-### 网页测试
+### 2.4 网页测试
 我们可以简单的写一个网页,点击按钮时跳转的地址为`itms-services://`的地址，点击按钮就可以达到下载的目的了，或者直接复制URL在浏览器中打开也可以达到相同的效果。
 ```javascript
 <!DOCTYPE html>
@@ -136,6 +136,9 @@ itms-services://?action=download-manifest&url=https://raw.githubusercontent.com/
 </body>
 </html>
 ```
+
+## 使用蓝奏云进行分发
+IPA分发可以直接将签名过的IPA包发送到[蓝奏云网盘](https://www.lanzou.com/)，用户通过下载地址可以直接安装。必须是企业签名的IPA,非会员对包的大小有限制，需要100M以下。
 
 ## 来源
 * [iOS 如何利用github进行企业应用ipa分发](https://my.oschina.net/u/2473136/blog/1550018)

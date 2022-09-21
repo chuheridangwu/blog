@@ -90,6 +90,11 @@ Swift分为值类型和引用类型.值类型中又分为枚举和结构体。�
 布尔、字符串、数组、字典的一些写法如下，字符类型必须要在后面标上类型:`Character`。
 ![](./imgs/swift/ios_swift_5.png ":size=500")
 
+```swift
+let num1 = 12345
+let str = String(format: "%.2f", Float(num1)/1000) // Swift保留2位小数
+```
+
 关于元组的一些写法:
 ```swift
 // 元组初始化,获取value时使用 HTTP404Error.0 / HTTP404Error.1
@@ -98,6 +103,14 @@ let HTTP404Error = (404,"Not Found")
 let (code,msg) = HTTP404Error
 // 初始化时给值一个名称,获取value时使用 HTTP200Status.code
 let HTTP200Status = (code:200,msg:"success")
+```
+
+## 运算符
+```
+算术运算符: +  -  *  /  %
+比较运算符: ==  !=  >  <   >=  =>
+逻辑运算符: && ||  !
+位运算符: &,|,^分别为取反，按位与与，按位与或，按位与异或运算
 ```
 
 ## 流程控制
@@ -243,3 +256,4 @@ print(tickMark)
 
 ## 推荐网址
 * [swift编译成可执行文件过程](https://www.jianshu.com/p/730389bb587d)
+* [Swift运算符](https://www.runoob.com/swift/swift-operators.html)

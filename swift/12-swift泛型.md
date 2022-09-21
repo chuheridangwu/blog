@@ -171,3 +171,21 @@ class Person {
 > some给人的感觉比较鸡肋，既然只能返回一种类型，为什么不直接返回对应的类型就好了，还要使用some。比如这样一种场景，在调用函数时，如果你不想让别人知道你里面的具体实现的真实类型，可以使用这种方法
 
 ## 可选项的本质
+可选项的本质是`enum`类型:
+```swift
+public enum Optional<Wrapped> : ExpressibleByNilLiteral {
+    case none
+    case some(Wrapped)
+    public init(_ some: Wrapped)
+}
+```
+比如下面的代码是等价的
+```swift
+var age: Int? = 10
+var age0: Optional<Int> = Optional<Int>.some(10)
+var age1: Optional<Int> = .some(10)
+var age2 = Optional.some(10)
+var age3 = Option(10)
+age = nil
+age3 = .none
+```

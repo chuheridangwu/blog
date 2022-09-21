@@ -27,6 +27,7 @@
   * ClearMyMac X: 电脑垃圾清理工具
   * XMind、MindNode: 思维导图
   * Postman、ApiPost、curl: 接口调试工具
+  * Sip: 取色器
 ---
 * 团队中常用的工具
   * ShowDoc: 可以当做接口文档进行使用
@@ -39,6 +40,7 @@
   * [蓝奏云](https://www.lanzou.com/) 可以将apk上传到网盘，将链接进行分享
   * [FaskMock](https://www.fastmock.site/#/)将请求根地址指向到模拟地址可实现接口模拟，自定义json数据
   * [Markdown语法](https://markdown.com.cn/basic-syntax/line-breaks.html)写文档时使用`Markdown`语法进行书写
+  * [Zealot](https://github.com/tryzealot)  iOS内测分发平台，需要https
 ---
 * 谷歌浏览器中常用插件
   * Adblock Plus: 广告拦截器

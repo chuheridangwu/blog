@@ -129,7 +129,6 @@ let output = try shellOut(to: "cat File", at: "~/CurrentFolder/NewFolder")
 print(output) // Hello again
 ```
 
-
 ## 跟命令行进行交互
 通过`readLine()`函数可以跟shell进行交互,比如`let num1 = readLine()`读取在命令行输入的内容并赋值给对应的变量。
 ```swift

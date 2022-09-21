@@ -1,6 +1,14 @@
 # String
 关于Swift中String的各种用法，拼接、查找、删除、转字典、转数组、转URL、文件后缀。文件扩展名等等。
 
+多语言带参数变量：
+```swift
+// Localizable.strings 文件中
+"welcome %@ enterRoom" = "欢迎 %1$@ 进入直播间";
+
+textLabel.text = String(format: NSLocalizedString("welcome %@ enterRoom", comment: "欢迎xxx进入直播间"), showText)
+```
+
 1. 删除前后多余的空格
 ```swift
 let str1 = "   欢迎访问 hangge.com   " //原始字符串
