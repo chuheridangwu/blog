@@ -82,6 +82,7 @@ Swift分为值类型和引用类型.值类型中又分为枚举和结构体。�
 * 整数类型有：Int8、Int16、Int32、Int64、UInt8、UInt16、UInt32、UInt64
 * 在32bit平台，Int等价于Int32，在64bit平台，Int等价于Int64
 * 整数的最大值和最小值: `UInt8.max`/`UInt16.min`，一般情况下直接使用Int即可
+* Double和Float转Int类型时，会有精度丢失的问题，四舍五入可以使用函数`lroundf(23.50)`进行转换
 ```
 浮点类型`Float`32位，精度只有6位。Doouble是64位，精度至少15位。如果是两个整数运行时想要获取到小数，首先需要将两个整数转变为Float类型。类型转换如下图:
 

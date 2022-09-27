@@ -1,6 +1,5 @@
 * [首页](/)
 * 基础语法
-  *  [01-Swift跟其他语言混编](swift/01-swift混编.md)
   *  [01-Swift基础语法](swift/01-swift基础语法.md)
   *  [02-Swift函数语法](swift/02-swift函数.md)
   *  [03-Swift枚举](swift/03-swift枚举.md)
@@ -14,12 +13,15 @@
   *  [11-Swift错误处理](swift/11-swift错误处理.md)  
   *  [12-Swift泛型](swift/12-swift泛型.md)
   *  [13-高级运算符](swift/13-高级运算符.md)
-  *  [14-扩展](swift/14-扩展.md)
+  *  [14-扩展和字面量](swift/14-扩展.md)
   *  [15-访问控制](swift/15-访问控制.md)
   *  [16-内存管理](swift/16-内存管理.md)
+  *  [17-模式匹配](swift/17-模式匹配.md)
+  *  [18-从OC到Swift](swift/18-oc到swift.md)
   *  [20-Swift第三方](swift/20-swift第三方.md)
 * API
   *  [01-String](swift/api/01-string.md)
-  *  [02-Swift跟Shell交互](swift/api/02-shell交互.md)
+  *  [02-多线程](swift/api/02-多线程.md)
   *  [03-指针](swift/api/03-指针.md)
+  *  [04-Swift跟Shell交互](swift/api/02-shell交互.md)
 

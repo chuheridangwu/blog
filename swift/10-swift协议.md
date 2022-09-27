@@ -121,24 +121,24 @@ class Student : Person, Livable {
 * 协议中定义的init?、init!，可以用init、init?、init!去实现
 * 协议中定义的init，可以用init、init!去实现
 ```swift
-protocol Livable {
-    init()
-    init?(age: Int)
-    init!(no: Int)
-}
+    protocol Livable {
+        init()
+        init?(age: Int)
+        init!(no: Int)
+    }
 
-class Person : Livable {
-    required init() {}
-    // required init!() {}
+    class Person : Livable {
+        required init() {}
+        // required init!() {}
 
-    required init?(age: Int) {}
-    // required init!(age: Int) {}
-    // required init(age: Int) {}
+        required init?(age: Int) {}
+        // required init!(age: Int) {}
+        // required init(age: Int) {}
 
-    required init!(no: Int) {}
-    // required init?(no: Int) {}
-    // required init(no: Int) {}
-}
+        required init!(no: Int) {}
+        // required init?(no: Int) {}
+        // required init(no: Int) {}
+    }
 ```
 
 ## 协议的继承
