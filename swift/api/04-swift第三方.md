@@ -19,8 +19,6 @@
 3. swift 项目中通过pod导入OC项目, 使用`use_frameworks`，在桥接文件里加上`#import "AFNetworking/AFNetworking.h"`, 不使用frameworks，桥接文件加上`#import "AFNetworking.h"`
 ```
 
-
-
 ## Swift第三方库
 第三方名称 | 功能
 ------- | -------
@@ -119,10 +117,9 @@ SnapKit 和 Masonry 一样,是布局中常用的三方库，主要记录一些�
 imageView.snp.makeConstraints { make in
     make.edges.equalToSuperview()
 }
-
 ```
 
-### 约束关系
+#### 约束关系
 方法 | 含义
 ------- | -------
 `equalTo()` | 设置属性等于某个数值
@@ -131,64 +128,8 @@ imageView.snp.makeConstraints { make in
 `multipliedBy()` | 设置属性乘以因子后的值
 
 
-## swift加密解密
-* [Swift加密解密](https://atreey.github.io/2018/01/08/Swift%E5%8A%A0%E5%AF%86%E7%9B%B8%E5%85%B3/)
+## HandJSON
 
-
-## Swift 第三方
-
-```pod
-source 'https://github.com/CocoaPods/Specs.git'
-target 'KoreaVideo' do
-  use_frameworks!
-  pod 'Moya', '~> 15.0'   #网络请求
-  pod 'KeychainAccess', '~> 4.1'  #Keychain封装
-  pod 'Kingfisher', '~> 6.3.1'  #网络图片
-  pod "KingfisherWebP"  #webp图片
-  pod 'SnapKitExtend', '~> 1.1.0'  #SnapKit扩展
-  pod 'IQKeyboardManagerSwift', '~> 6.5.0'  #键盘管理
-  pod 'HandyJSON', '~> 5.0.2'  #JSON解析
-  pod 'MBProgressHUD', '~> 1.2.0' #遮盖
-  pod 'MJRefresh', '~>3.7.5'  #下拉刷新
-  pod 'SwifterSwift', '~>5.2.0'  #分类扩展
-  pod 'Reusable', '~> 4.1.2'  #单元格注册
-  pod 'EmptyDataSet-Swift'  #空数据
-  pod 'JKSwiftExtension'  #遮盖
-  pod 'Then'
-  pod 'FDFullscreenPopGesture'  #侧滑手势
-  pod 'ZLPhotoBrowser'  #图片选择器
-  pod 'CryptoSwift'  #加密算法
-  pod 'PLPlayerKit'  #七牛播放SDK
-end
-```
-
-##  carthage 使用
-现在很多第三方使用carthage进行管理，相对cocoapods来说更加轻量级，它会先将第三方打包成静态库，添加到项目中进行管理，不好的就是不能修改第三方的源码
-1. 安装 `brew install carthage`
-2. 项目中创建`Cartfile`文件,liunx命令`touch Cartfile`
-3. 编辑Cartfile文件，添加第三方对应的下载地址。例如`github "SVProgressHUD/SVProgressHUD" ~> 1.0`。
-4. 下载对应文件，打包成静态库 `carthage update --platform iOS`
-5. 在项目下的`Carthage -> Build -> xxx.xcframework`会看到对应的静态库，直接拖到`target -> General -> Frameworks,Libraries, and Embeddeb Content`中，可以直接在项目中引用
-
-#### Cartfile文件格式
-Carthage支持两种类型的源，一个是github，另一个是git。
-```markdown
-* `github` 表示依赖源，告诉Carthage去哪里下载文件。依赖源之后跟上要下载的库，格式为Username/ProjectName
-* `git` 关键字后面跟的是资料库的地址，可以是远程的URL地址。例如`git://xxx`, `http://xxx`, `ssh://xxx`，或者是本地资料库地址。
-```
-告诉Carthage使用哪个版本，这是可选的，不写默认使用最新版本
-```markdown
-* `== 1.0` 表示使用1.0版本
-* `>= 1.0` 表示使用1.0或更高的版本
-* `~> 1.0` 表示使用版本1.0以上但是低于2.0的最新版本，如1.2，1.6
-* `branch名称 / tag名称 / commit名称`，意思是使用特定的分支/标签/提交，比如可以是分支名master，也可以是提交5c8a74a。
-```
-
-在使用`carthage update --platform iOS`时如果遇到报错arm64架构错误`Building universal frameworks with common architectures is not possible`。
-
-使用`carthage update --platform iOS --use-xcframeworks`指令生成对应的静态库
-
-* [Cartahge 更新报错](https://blog.csdn.net/iOS_MingXing/article/details/118526112)* [Carthage的安装和使用](https://www.jianshu.com/p/a734be794019)
 
 
 ## 参考网址
@@ -196,3 +137,4 @@ Carthage支持两种类型的源，一个是github，另一个是git。
 * [从预编译的角度理解Swift与Objective-C及混编机制](https://tech.meituan.com/2021/02/25/swift-objective-c.html)
 * [Swift扩展1](https://github.com/JoanKing/JKSwiftExtension)
 * [技术分享-swift防御编程](https://blog.csdn.net/yong_19930826/article/details/122493668?spm=1001.2014.3001.5502)
+* [Swift加密解密](https://atreey.github.io/2018/01/08/Swift%E5%8A%A0%E5%AF%86%E7%9B%B8%E5%85%B3/)

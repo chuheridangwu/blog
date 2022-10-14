@@ -1,8 +1,20 @@
 # Swift
-文档内容主要是Swift的基础语法和常用的第三方及使用方法，包含常用的API。对于位掩码，Swift 给出的方案是：选项集合 `OptionSet`
+文档内容主要是Swift的基础语法和常用的第三方及使用方法，包含常用的API。
+
+对于位掩码，Swift 给出的方案是：选项集合 `OptionSet`
 ```markdown
 * objc是 `UIRectCornerTopLeft | UIRectCornerTopRight`
 * swift是 `[.topLeft,.topRight]`
+```
+当第三方库的方法跟自己的方法冲突时，调用第三方方法时使用`库名.方法`调用
+
+Swift中没有PCH文件，可以在桥接文件中导入常用的库,当做PCH文件使用
+```swift
+#import <Alamofire/Alamofire-Swift.h>
+#import <HandyJSON/HandyJSON-Swift.h>
+#import <Kingfisher/Kingfisher-Swift.h>
+#import <MJRefresh/MJRefresh.h>
+#import <SnapKit/SnapKit-Swift.h>
 ```
 
 ### Swift关键字
@@ -36,6 +48,36 @@
 ## Self  当前类型，一般作为返回值类型
 ## @escaping  表明当前闭包是一个逃逸闭包(闭包脱离了当前函数的作用范围到外部去调用就是逃逸闭包)
 ## @_silgen_name 解决Swift和C语言方法冲突，对C语言函数重命名
+```
+
+### Swift中常用的第三方
+```pod
+source 'https://github.com/CocoaPods/Specs.git'
+target 'KoreaVideo' do
+    use_frameworks!
+    pod 'Moya', '~> 15.0'   #网络请求
+    pod 'KeychainAccess', '~> 4.1'  #Keychain封装
+    pod 'Kingfisher', '~> 6.3.1'  #网络图片
+    pod "KingfisherWebP"  #webp图片
+    pod 'SnapKitExtend', '~> 1.1.0'  #SnapKit扩展
+    pod 'IQKeyboardManagerSwift', '~> 6.5.0'  #键盘管理
+    pod 'HandyJSON', '~> 5.0.2'  #JSON解析
+    pod 'SwiftJSON',  #JSON解析
+    pod 'MBProgressHUD', '~> 1.2.0' #遮盖
+    pod 'MJRefresh', '~>3.7.5'  #下拉刷新
+    pod 'SwifterSwift', '~>5.2.0'  #分类扩展
+    pod 'Reusable', '~> 4.1.2'  #单元格注册
+    pod 'EmptyDataSet-Swift'  #空数据
+    pod 'JKSwiftExtension'  #遮盖
+    pod 'Then'
+    pod 'FDFullscreenPopGesture'  #侧滑手势
+    pod 'ZLPhotoBrowser'  #图片选择器
+    pod 'CryptoSwift'  #加密算法
+    pod 'PLPlayerKit'  #七牛播放SDK
+    pod 'Reachability' # 网络检测
+    pod 'GYSide' #抽屉，可能存在问题
+    pod 'FSPagerView' #轮播图
+end
 ```
 
 #### 推荐网站
