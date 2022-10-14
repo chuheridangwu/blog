@@ -189,6 +189,35 @@ class Dog: NSObject {
 }
 ```
 
+## 序列化和反序列化
+如果要将一个对象持久化，需要把这个对象序列化。过去的做法是实现 `NSCoding` 协议，但实现 `NSCoding` 协议的代码写起来很繁琐，尤其是当属性非常多的时候。
+Swift4 中引入了 `Codable` 协议，可以大大减轻了我们的工作量。我们只需要让需要序列化的对象符合 `Codable` 协议即可，不用再写任何其他的代码。
+```swift
+struct Mode: Codable {
+    var name: String
+}
+struct Language: Codable {
+    var name: String
+    var version: Int
+    var mode: Mode
+}
+```
+#### `Encode` 操作 
+可以直接把符合了 `Codable` 协议的对象 `encode` 成 `JSON` 或者 `PropertyList`。
+```swift
+let swift = Language(name: "Swift", version: 4,mode: Mode(name: "test"))
+//encoded对象
+guard let encodedData = try? JSONEncoder().encode(swift) else {return}
+//从encoded对象获取String
+let jsonString = String(data: encodedData, encoding: .utf8)
+print(jsonString ?? "00")
+```
+#### Decode 操作
+```swift
+guard let decodedData = try? JSONDecoder().decode(Language.self, from: encodedData) else {return}
+print(decodedData.name, decodedData.mode.name)
+```
+
 ## KVC\KVO
 Swift 支持 `KVC \ KVO` 的条件,属性所在的类、监听器最终继承自 `NSObject`,用 `@objc dynamic` 修饰对应的属性。
 ```swift
@@ -228,6 +257,47 @@ var p = Person()
 p.age = 20 // Optional(20)
 p.setValue(25, forKey: "age") // Optional(25)
 ```
+* 通过KVO获取WKWebView的高度
+```swift
+override func viewDidLoad() {
+    super.viewDidLoad()
+    webView.addObserver(self, forKeyPath: "scrollView.contentSize" , options: [.new, .old], context: nil)
+}
+override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+    // 通过KVO监听
+    let newValue = change?[NSKeyValueChangeKey.newKey] as? CGSize ?? .zero
+    print(newValue)
+}
+override func viewDidDisappear(_ animated: Bool) {
+    super.viewDidDisappear(animated)
+    removeObserver(self, forKeyPath: "scrollView.contentSize")
+}
+```
+
+在Swift4，官方推荐了另外Key-value Oberservation的实现方式。简单来说，就是创建一个变量observation、给obervation赋值。赋值实现了既添加观察者又实现响应通知的功能。最后在不需要观察时，直接把observation设置为nil即可。
+```swift
+var obervation: NSKeyValueObservation?
+
+override func viewDidLoad() {
+    super.viewDidLoad()
+    obervation = observe(\.webView.estimatedProgress,options: [.new], changeHandler: { _, change in
+        print(change.newValue)
+    })
+}
+override func viewDidDisappear(_ animated: Bool) {
+    super.viewDidDisappear(animated)
+    obervation = nil
+}
+```
+* `#keyPath()`
+使用 `#keyPath()` 写法，可以避免我们因为拼写错误而引发问题,返回的是一个字符串。
+```swift
+webView.addObserver(self, forKeyPath: #keyPath(WKWebView.scrollView.contentSize), options: [.new, .old], context: nil)
+// 移除监听
+removeObserver(self, forKeyPath: #keyPath(WKWebView.scrollView.contentSize))
+```
+>这里的`keyPath`与上文中的`keyPath`接收的参数类型不同。这里是KeyPath类型，而上面addObserver方法中的keyPath是字符串。写法是`\.property`，这里的property是相对于receiver的，所以当receiver是controller时，keyPath就是`\.webView.estimatedProgress`；而当receiver是webView时，keyPath则是`\.estimatedProgress`
+
 
 ## 关联对象（Associated Object）
 在Swift中，`class`依然可以使用关联对象,默认情况，`extension`不可以增加存储属性,借助关联对象，可以实现类似`extension`为`class`增加存储属性的效果。
@@ -315,3 +385,6 @@ enum R {
 ```
 * [R.Swift](https://github.com/mac-cain13/R.swift)
 * [SwiftGen](https://github.com/SwiftGen/SwiftGen)
+* [Objective-C与Swift混编tips](https://www.jianshu.com/p/dcf69f53ced1)
+* [理解KVO - 用Swift在WKWebView中添加进度条](https://www.jianshu.com/p/919fefa588c2)
+* [Swift - Swift4新特性介绍1（Key Paths新语法、类与协议的组合类型）](https://www.hangge.com/blog/cache/detail_1823.html)

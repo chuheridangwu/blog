@@ -50,6 +50,47 @@ print(substr3.base) // 最初的String，1_2_3_4_5
 var str2 = String(substr3) // Substring -> String
 ```
 
+*  字符串截取
+```swift
+let welcome = "hello world"
+// h
+print(welcome[welcome.startIndex])
+// e
+print(welcome[welcome.index(after: welcome.startIndex)])
+// d
+print(welcome[welcome.index(before: welcome.endIndex)])
+// l
+let someIndex = welcome.index(welcome.startIndex, offsetBy: 3)
+print(welcome[someIndex])
+// r
+let anotherIndex = welcome.index(welcome.endIndex, offsetBy: -3)
+print(welcome[anotherIndex])
+```
+* 字符串遍历
+```swift
+let welcome = "123456"
+// 基于EnumeratedSequence的遍历
+for (i,c) in welcome.enumerated() {
+    print(i,c)
+}
+//基于索引的正序遍历
+for i in 0..<welcome.count {
+    let char: Character = welcome[welcome.index(welcome.startIndex, offsetBy: i)]
+    print("swift-string ergodic\(i): \(char)")
+}
+// foy in 逆序
+var index = welcome.count
+for char in welcome.reversed() {
+    index -= 1
+    print("The results of the ergodic:\(index)=\(char)")
+}
+//基于索引的逆序遍历
+for i in stride(from: welcome.count - 1, through: 0, by: -1) {
+    let char: Character = welcome[welcome.index(welcome.startIndex, offsetBy: i)]
+    print("swift-string ergodic\(i): \(char)")
+}
+```
+
 > Substring和它的base，共享字符串数据,Substring发生修改 或者 转为String时，会分配新的内存存储字符串数据
 
 * 多行String
@@ -188,3 +229,4 @@ extension String {
 ## 推荐网址
 * [Swift - 去除字符串前后的空白（trim方法）](https://www.hangge.com/blog/cache/detail_1649.html)
 * [Swift - 实现URL字符串的编码与解码（urlEncoded、urlDecoded）](https://www.hangge.com/blog/cache/detail_1583.html)
+* [iOS开发 - 「Swift 学习」String索引、遍历](https://www.jianshu.com/p/4eceac9f8e6f)

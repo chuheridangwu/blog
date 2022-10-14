@@ -63,6 +63,8 @@ if (@available(iOS 11.0, *)){
 }
 ```
 
+>⚠️注意这里有个坑: 在iOS16的系统中，也就是iPhone14的设备。在拥有系统导航栏的时候，UIViewController的高度是整体屏幕的高度，在iOS16之前的设备上，UIViewController的高度是 `屏幕高度 - 导航栏高度 - 状态栏高度`。
+
 * [Xcode11 在Xib中进行UIScrollView布局](https://juejin.cn/post/6844904042452238344)
 
 

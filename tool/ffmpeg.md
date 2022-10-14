@@ -66,11 +66,14 @@ output.mp4
 
 6. **提取音频:**
 
-```
+```shell
 ffmpeg \
 -i input.mp4 \
 -vn -c:a copy \
 output.aac
+
+# 视频提取mp3
+ffmpeg -i  ~/Desktop/test.mp4  -vn  ~/Desktop/test.mp3
 ```
 
 7. **为音频添加封面:** 有些视频网站只允许上传视频文件。如果要上传音频文件，必须为音频添加封面，将其转为视频，然后上传。下面命令可以将音频文件，转为带封面的视频文件。

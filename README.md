@@ -105,8 +105,8 @@
 * 视频测试地址
 
 ```markdown
-* flv: `http://sf1-hscdn-tos.pstatp.com/obj/media-fe/xgplayer_doc_video/flv/xgplayer-demo-360p.flv`
-* mp4: `http://sf1-hscdn-tos.pstatp.com/obj/media-fe/xgplayer_doc_video/mp4/xgplayer-demo-360p.mp4`
-* mp4: `http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4`
-* m3u8: `http://devimages.apple.com/iphone/samples/bipbop/bipbopall.m3u8`
+* `flv`: http://sf1-hscdn-tos.pstatp.com/obj/media-fe/xgplayer_doc_video/flv/xgplayer-demo-360p.flv
+* `mp4`: http://sf1-hscdn-tos.pstatp.com/obj/media-fe/xgplayer_doc_video/mp4/xgplayer-demo-360p.mp4
+* `mp4`: http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4
+* `m3u8`: http://devimages.apple.com/iphone/samples/bipbop/bipbopall.m3u8
 ```

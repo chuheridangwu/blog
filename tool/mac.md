@@ -189,3 +189,30 @@ export PATH=~/theos/bin:$PATH
 mlive@mlivedeMacBook ~ % command -v brew 
 /opt/homebrew/bin/brew
 ```
+
+## iPhone手机投屏到Mac电脑
+如果想将 iPhone 手机屏幕投射到 Mac 屏幕上，有两种方式：
+* `QuickTime Player`
+  * 第一步 首先使用USB数据线将iPhone和Mac进行连接
+  * 第二步 打开系统自带软件`QuickTime Player`,在菜单栏【文件】里面找到【新建影片录制】
+  * 第三步 在【QuickTime Player】录制界面中找到红色的【录制按钮】，点击旁边的【小箭头】，选择手机设备
+* 将 Mac 设置为隔空播放接收器
+  * 第一步 iPhone 和  Mac设备处于同一局域网中
+  * 第二步 Mac中 选择 【系统偏好设置】，点按【共享】 ,左侧服务列表中选择【隔空播放接收器】
+  * 第三步  选择可以使用“隔空播放”将内容流播放到此 Mac 的设备。选择 同一网络中的任何人
+
+参考苹果官网：[将 Mac 设置为隔空播放接收器](https://support.apple.com/zh-cn/guide/mac-help/mchleee00ec8/mac)
+
+## 局网内文件共享
+1. 在 Mac 上打开文件共享，并且将其设置为与 Windows 用户共享文件。
+2. 准备好 Mac 上用于 Windows 共享的用户帐户的名称和密码。
+3. 在 Windows 电脑上，打开“文件资源管理器”，点按“网络”，然后找到您想要连接到的 Mac。
+4. 连按 Mac，然后输入用户帐户的帐户名称和密码。**Windows 电脑可能要花一些时间以在网络中显示该 Mac。**
+
+如果在Windows电脑的网络中找不到 Mac 电脑,可以参考下面的方式:
+1. Mac电脑共享文件，点击`设置` -> `共享`-> `文件共享`-> 右侧`选项`-> `允许账号，设置密码`
+2. 到 Windows 系统的网上邻居 或是 按键盘`winodws键和R键`打开运行窗口，输入 `\\192.168.1.10`（192.168.1.10是苹果系统的ip地址）按回车键.
+3. 会提示你输入苹果系统的账户和密码，进入后就可以访问传输文件了。
+
+参考苹果官网：[从 Windows 电脑连接到 Mac](https://support.apple.com/zh-cn/guide/mac-help/mchlp1658/12.0/mac/12.0)
+参考博客：[windows电脑怎么访问苹果电脑共享文件夹](https://www.my607.com/hulianwang/2022-03-21/443426.html)
