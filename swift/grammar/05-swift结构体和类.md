@@ -1,6 +1,6 @@
 # 结构体
 Swift分为值类型和引用类型.值类型中又分为枚举和结构体。如下图:
-![](./imgs/swift/ios_swift_3.png)
+![](../imgs/swift/ios_swift_3.png)
 在 Swift 标准库中，绝大多数的公开类型都是结构体，而枚举和类只占很小一部分。比如`Bool、Int、Double、 String、Array、Dictionary`等常见类型都是结构体。另外**在枚举、结构体、类中都可以定义方法.**
 
 ## 结构体的初始化
@@ -78,7 +78,7 @@ class Point{
 
 ## 结构体与类的本质区别
 结构体是值类型`（枚举也是值类型）`，类是引用类型`（指针类型）`。值类型的数据是在栈空间,引用类型的数据是在堆空间。如下图:
-![](./imgs/swift/ios_swift_22.png)
+![](../imgs/swift/ios_swift_22.png)
 图中的Size类共占用32个字节,其中前8个字节指向类型信息,8~16的字节指向引用计数，另外16个字节是成员变量。
 
 通过下面的代码进行分析：
@@ -136,13 +136,13 @@ class_getInstanceSize(Size.self) /
 
 ## 值类型和引用类型的区别
 值类型赋值给`var`、`let`或者给函数传参，是直接将所有内容拷贝一份,类似于对文件进行copy、paste操作，产生了全新的文件副本。属于深拷贝`（deep copy）`。如下图:
-![](./imgs/swift/ios_swift_23.png)
+![](../imgs/swift/ios_swift_23.png)
 在Swift标准库中，为了提升性能，String、Array、Dictionary、Set采取了`Copy On Write`的技术
 。比如仅当有“写”操作时，才会真正执行拷贝操作。对于标准库值类型的赋值操作，Swift 能确保最佳性能，所有没必要为了保证最佳性能来避免赋值。建议：**不需要修改的，尽量定义成let**
 --------
 
 引用类型赋值给`var`、`let`或者给函数传参，是将内存地址拷贝一份,类似于制作一个文件的替身（快捷方式、链接），指向的是同一个文件。属于浅拷贝`（shallow copy）`.如下图:
-![](./imgs/swift/ios_swift_24.png)
+![](../imgs/swift/ios_swift_24.png)
 
 
 ## 嵌套类型

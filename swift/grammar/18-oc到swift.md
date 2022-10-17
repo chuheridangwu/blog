@@ -1,4 +1,4 @@
-# 从OC到Swift
+# OC到Swift
 这里主要说明从OC转到Swift语言，需要注意的一些地方，比如Swift中的注释:
 ```swift
 // MARK: 类似于OC中的 #pragma mark
@@ -26,7 +26,7 @@
 添加自定义的条件编译宏，选择`TARGETS -> Build Settings ->swift compiler - Custom Flags`。
 * `Active Compilation Conditions` 中间加空格
 * `Other Swift Flags` 使用`-D 空格 宏`
-![](./imgs/swift/ios_swift_33.png)
+![](../imgs/swift/ios_swift_33.png)
 
 ## 打印
 DEBUG模式时打印具体信息，RELEASE模式时不打印。
@@ -218,6 +218,44 @@ guard let decodedData = try? JSONDecoder().decode(Language.self, from: encodedDa
 print(decodedData.name, decodedData.mode.name)
 ```
 
+## 获取属性列表
+只有`@objc`的属性,才能被发现,因为`class_copyPropertyList`是oc的runtime方法。可以使用`@objcMembers`标记类，这样就不用每个属性都使用`@objc`进行标记了。
+```swift
+func getClassPropertieNames(_ clsType:AnyClass){
+    var prosCount:UInt32 = 0
+    //获取属性列表,注意只有@objc的属性,才能被发现,因为class_copyPropertyList是oc的runtime方法
+    let pros:UnsafeMutablePointer<objc_property_t>! =  class_copyPropertyList(clsType.self, &prosCount)
+    let count:Int = Int(prosCount);
+    //遍历属性名字
+    for i in 0..<count {
+        let pro: objc_property_t = pros[i]
+        let proName:String = String(cString: property_getName(pro))
+        print("属性名:",proName)
+    }
+    free(pros)
+}
+```
+> 模型里面的嵌套模型不能被遍历不出来
+
+## UIViewController 自定义初始化器
+```swift
+
+class PwdController: UIViewController {
+    convenience init(_ title: String){
+        self.init(nibName: nil, bundle: nil)
+        self.title = title
+    }
+    
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+```
+
 ## KVC\KVO
 Swift 支持 `KVC \ KVO` 的条件,属性所在的类、监听器最终继承自 `NSObject`,用 `@objc dynamic` 修饰对应的属性。
 ```swift
@@ -388,3 +426,4 @@ enum R {
 * [Objective-C与Swift混编tips](https://www.jianshu.com/p/dcf69f53ced1)
 * [理解KVO - 用Swift在WKWebView中添加进度条](https://www.jianshu.com/p/919fefa588c2)
 * [Swift - Swift4新特性介绍1（Key Paths新语法、类与协议的组合类型）](https://www.hangge.com/blog/cache/detail_1823.html)
+* [使用Mirror自动比较Swift Class, Struct的尝试](https://www.jianshu.com/p/157db4e8da5e)

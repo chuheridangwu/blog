@@ -19,6 +19,205 @@
 3. swift 项目中通过pod导入OC项目, 使用`use_frameworks`，在桥接文件里加上`#import "AFNetworking/AFNetworking.h"`, 不使用frameworks，桥接文件加上`#import "AFNetworking.h"`
 ```
 
+## SnapKit
+SnapKit 和 Masonry 一样,是布局中常用的三方库，主要记录一些常用方法。
+```swift
+.equalTo // 等于
+.lessThanOrEqualTo // 小于等于
+.greaterThanOrEqualTo //大于等于
+
+// 跟父类大小一样
+imageView.snp.makeConstraints { make in
+    make.edges.equalToSuperview()
+}
+```
+
+#### 约束关系
+方法 | 含义
+------- | -------
+`equalTo()` | 设置属性等于某个数值
+`greaterThanOrEqualTo()` | 设置属性大于或等于某个数值
+`lessThanOrEqualTo()` 设置属性小于或等于某个数值
+`multipliedBy()` | 设置属性乘以因子后的值
+
+
+## Moya
+
+#### Moya图片上传、文档上传、下载文档
+```swift
+// 第一步
+enum InterfaceAPI {
+    // 获取想要存储的文件路径
+    var localLocation: URL {
+        switch self {
+        case .download(_, let fileName):
+            let filePath = FileManager.default.temporaryDirectory
+            return filePath.appendingPathComponent(fileName)
+        default:
+            return URL(string: "")!
+        }
+    }
+    // 封装下下载路径
+    var downloadDestination: DownloadDestination {
+        // `createIntermediateDirectories` will create directories in file path
+        return { _, _ in return (self.localLocation, [.removePreviousFile, .createIntermediateDirectories]) }
+    }
+
+    case uploadImg(files: [UIImage], name: String)
+    case documentationTranslation(files: [URL], name: String, transType: String)
+    case download(filePath: String, fileName: String)
+}
+```
+第二步
+```swift
+extension InterfaceAPI: TargetType {
+    var baseURL: URL {
+        switch self {
+        case let .download(filePath, _):
+            return URL(string: filePath)!
+        default:
+            return URL(string: InterfaceUrl)!
+        }
+    }
+
+    var method: Moya.Method {
+        switch self {
+        case .download:
+            return .get
+        default:
+            return .post
+        }
+    }
+    var path: String {
+        switch self {
+        case .uploadImg
+            return "/assist/UploadImg"
+        case .documentationTranslation:
+            return "/translate/DocumentationTranslation"
+        case .download:
+            return ""
+        }
+    }
+}
+```
+第三部
+```swift
+var task: Task {
+    // 公共参数
+    var params: [String: Any] = [:]
+    // 收集参数
+    switch self {
+    case let .uploadImg(files, name):
+        var formDatas = [MultipartFormData]()
+        for image in files {
+            let imageData = image.pngData()
+            let fileName = "iOS\(Date().millisecondsSince1970).png"
+            let formData = MultipartFormData(provider: .data(imageData!), name: name, fileName: fileName, mimeType: "image/png")
+                formDatas.append(formData)
+            }
+        return .uploadMultipart(formDatas)
+    case let .documentationTranslation(fileUrls, name, transType):
+        var formDatas = [MultipartFormData]()
+        for fileUrl in fileUrls {
+            do {
+                let data = try Data(contentsOf: fileUrl, options: .alwaysMapped)
+                let fileName = fileUrl.absoluteString.components(separatedBy: "/").last?.toString
+                let formData = MultipartFormData(provider: .data(data), name: name, fileName: fileName, mimeType: "multipart/form-data")
+                    
+                formDatas.append(formData)
+            }
+            catch{
+                    
+            }
+        }
+        params["transType"] = transType
+        return .uploadCompositeMultipart(formDatas, urlParameters: params)
+    case .download:
+        return .downloadDestination(downloadDestination)
+}
+```
+
+## HandJSON
+模型需要继承自`HandJSON`,结构体和类都可以
+```swift
+class Info: HandyJSON {
+    var age: Int = 0
+    required init() {}
+}
+
+class User: HandyJSON{
+    var name: String?
+    var infos: [Info]?  // 数组
+    var first: Info?  // 嵌套模型
+    
+    required init() {}
+    
+    //方法映射,把解析到的json数据,映射给其他的变量,
+    func mapping(mapper: HelpingMapper) {
+        mapper <<< self.first <-- "info"  //把info 转换为模型中的 first
+    }
+}
+```
+数据解析成模型
+```swift
+let jsonString = """
+    {
+        "name":"user111",
+        "infos":[ {"age":"18"},
+                { "age":"14"}
+    ],
+        "info":{
+            "age":"19"
+        }
+    }
+    """
+
+// 这里是两个重名方法，可以传入json字符串和字典
+let u = User.deserialize(from: jsonString)
+let u1 = JSONDeserializer<User>.deserializeFrom(json: jsonString) // 这样也可以转
+
+// 模型转换成字典，属性为nil的不显示，映射的键不会改成属性名
+u.toJSON()
+
+// 模型转换成字符串，属性为nil的不显示，映射的键不会改成属性名
+u.toJSONString()
+
+// 从json下一个子节点进行解析
+let dict = u?.toJSON()
+let i = Info.deserialize(from: dict, designatedPath: "info")
+
+// 解析数组
+let jsonAryString: String? = "[{\"age\":\"20\"}, {\"age\":\"21\"},{\"age\":\"22\"}]"
+let infos = [Info].deserialize(from: jsonAryString)
+```
+支持枚举类型
+```swift
+enum AnimalType: String, HandyJSONEnum {
+    case Cat = "cat"
+    case Dog = "dog"
+    case Bird = "bird"
+}
+
+struct Animal: HandyJSON {
+    var name: String?
+    var type: AnimalType?
+}
+
+let jsonString = "{\"type\":\"cat\",\"name\":\"Tom\"}"
+if let animal = Animal.deserialize(from: jsonString) {
+    print(animal.type?.rawValue)
+}
+```
+
+## 参考网址
+* [Swift 教程中文版](https://swiftgg.gitbook.io/swift/swift-jiao-cheng/20_extensions)
+* [从预编译的角度理解Swift与Objective-C及混编机制](https://tech.meituan.com/2021/02/25/swift-objective-c.html)
+* [Swift扩展1](https://github.com/JoanKing/JKSwiftExtension)
+* [技术分享-swift防御编程](https://blog.csdn.net/yong_19930826/article/details/122493668?spm=1001.2014.3001.5502)
+* [Swift加密解密](https://atreey.github.io/2018/01/08/Swift%E5%8A%A0%E5%AF%86%E7%9B%B8%E5%85%B3/)
+* [HandyJSON文档](https://github.com/alibaba/HandyJSON/blob/master/README_cn.md)
+
+
 ## Swift第三方库
 第三方名称 | 功能
 ------- | -------
@@ -91,6 +290,7 @@
 [Reusable](https://github.com/AliSoftware/Reusable) |  xib的扩展，快速创建cell和view
 [ParallaxHeader](https://github.com/romansorochak/ParallaxHeader) | 滚动视图上面增加一个背景图
 [PLPlayerKit](https://github.com/pili-engineering/PLPlayerKit) |  七牛拉流库SDK
+[GYSide](https://github.com/yuan-gao/GYSide)  侧边栏
 
 
 ## OC第三方库
@@ -104,37 +304,3 @@
 [TZImagePickerController](https://github.com/banchichen/TZImagePickerController) | 一个支持多选、选原图和视频的图片选择器，同时有预览功能
 [FDFullscreenPopGesture](https://github.com/forkingdog/FDFullscreenPopGesture) | 全局侧滑手势
 [NinePatchKit](https://github.com/zxinsunshine/NinePatchKit) | iOS中使用.9图
-
-
-## SnapKit
-SnapKit 和 Masonry 一样,是布局中常用的三方库，主要记录一些常用方法。
-```swift
-.equalTo // 等于
-.lessThanOrEqualTo // 小于等于
-.greaterThanOrEqualTo //大于等于
-
-// 跟父类大小一样
-imageView.snp.makeConstraints { make in
-    make.edges.equalToSuperview()
-}
-```
-
-#### 约束关系
-方法 | 含义
-------- | -------
-`equalTo()` | 设置属性等于某个数值
-`greaterThanOrEqualTo()` | 设置属性大于或等于某个数值
-`lessThanOrEqualTo()` 设置属性小于或等于某个数值
-`multipliedBy()` | 设置属性乘以因子后的值
-
-
-## HandJSON
-
-
-
-## 参考网址
-* [Swift 教程中文版](https://swiftgg.gitbook.io/swift/swift-jiao-cheng/20_extensions)
-* [从预编译的角度理解Swift与Objective-C及混编机制](https://tech.meituan.com/2021/02/25/swift-objective-c.html)
-* [Swift扩展1](https://github.com/JoanKing/JKSwiftExtension)
-* [技术分享-swift防御编程](https://blog.csdn.net/yong_19930826/article/details/122493668?spm=1001.2014.3001.5502)
-* [Swift加密解密](https://atreey.github.io/2018/01/08/Swift%E5%8A%A0%E5%AF%86%E7%9B%B8%E5%85%B3/)

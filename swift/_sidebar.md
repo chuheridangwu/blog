@@ -17,7 +17,7 @@
   *  [15-访问控制](swift/grammar/15-访问控制.md)
   *  [16-内存管理](swift/grammar/16-内存管理.md)
   *  [17-模式匹配](swift/grammar/17-模式匹配.md)
-  *  [18-从OC到Swift](swift/grammar/18-oc到swift.md)
+  *  [18-OC到Swift](swift/grammar/18-oc到swift.md)
   *  [19-函数式编程](swift/grammar/19-函数式编程.md)
   *  [20-面向协议编程](swift/grammar/20-面向协议编程.md)
 * API
@@ -28,5 +28,8 @@
   *  [05-Swift跟Shell交互](swift/api/05-shell交互.md)
   *  [06-UI相关技巧](swift/api/06-UI.md)
   *  [07-carthage](swift/api/07-carthage.md)
+  *  [08-Xib/Storyboard](swift/api/08-xib.md)
+  *  [09-UIDevice](swift/api/09-UIDevice.md)
+  *  [10-URLSession](swift/api/10-URLSession.md)
 
 

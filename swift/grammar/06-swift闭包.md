@@ -112,9 +112,9 @@ func getFn() -> Fn {
 
 ## 通过汇编对闭包进行分析
 我们对下面两段代码进行汇编分析。第一段代码，只嵌套函数，不在嵌套函数内部捕获变量，我们可以根据汇编明显看到比较简单。
-![](./imgs/swift/ios_swift_25.png)
+![](../imgs/swift/ios_swift_25.png)
 第二段代码，在嵌套函数内部捕获栈空间的局部变量,看汇编时明显看到`swift_allocObject`分配内存空间。
-![](./imgs/swift/ios_swift_26.png)
+![](../imgs/swift/ios_swift_26.png)
 
 只有这些还是不够的，我们针对下面的代码做进一步的分析:
 ```swift
@@ -134,7 +134,7 @@ print(fn(4)) //7
 ```
 断点下在`return plus`,查看汇编代码,在`getFn`汇编中`swift_allocObject`的下一行下断点,通常`%rax`、`x0`寄存器存储的是堆空间的返回地址，这里肯定是闭包的地址，我们通过`register read x0`读取寄存器中的地址，然后通过`x/4xg 0x0000000100513880`查看从当前内存开始的32字节内存地址，以16进制显示。再将断点下在`return num`处，这样每次`num += 1`的时候，我们都可以直接查看内存中的值变化。如下图:
 
-![](./imgs/swift/ios_swift_27.png ":size=500")
+![](../imgs/swift/ios_swift_27.png ":size=500")
 
 如果我们想知道给堆分配了多少空间，可以猜测`swift_allocObject`方法中会有一个分配内存大小的参数，然后通过查看寄存器x1中的值就知道了
 ```

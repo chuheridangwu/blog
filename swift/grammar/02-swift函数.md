@@ -3,7 +3,7 @@ Swift中函数的表达式是`func 方法名(形参: 形参类型) -> 返回类�
 
 函数一般分为有返回值、无返回值、有参数、没有参数的方式。在Swift中需要注意的是，可以通过返回元组的当时返回多个返回值。Swift 中方法的注释如下图,也可以参考[Swift设计准则](https://www.swift.org/documentation/api-design-guidelines/)：
 
-![](./imgs/swift/ios_swift_10.png ":size=500")
+![](../imgs/swift/ios_swift_10.png ":size=500")
 
 ## 隐式返回（Implicit Return）
 如果整个函数体是一个单一表达式，那么函数会隐式返回这个表达式,也就是不需要写return了。如下面的代码:
@@ -147,7 +147,7 @@ func sum(a: Int, b: Int) -> Int {
 ##  内联函数（Inline Function）
 如果开启了编译器优化（Release模式默认会开启优化），编译器会自动将某些函数变成内联函数
 也就是将函数调用展开成函数体。
-![](./imgs/swift/ios_swift_11.png)
+![](../imgs/swift/ios_swift_11.png)
 函数体比较长、包含递归调用、包含动态派发等这些函数不会被自动内联
 
 ## 函数类型（Function Type）
@@ -194,7 +194,7 @@ forward(false)(3) // 2
 
 ## typealias 起别名
 typealias 可以给函数或者类型起别名，当做一种新的类型。在函数传参的时候直接使用别名当做类名。
-![](./imgs/swift/ios_swift_12.png)
+![](../imgs/swift/ios_swift_12.png)
 
 ## 嵌套函数（Nested Function）
 函数嵌套是将函数定义在函数内部。

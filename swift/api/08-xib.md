@@ -9,7 +9,7 @@ Xib设置类时如果从当前控件切换到`File’s Owner`，需要将以前�
 
 ## 添加自定义颜色
 选择自定义颜色`Custom`，在第二个选项"颜色滑块"中选择`RGB Sliders`，在底部可以输入十六进制颜色
-![](../imgs/ios_img_56.jpg 'size:100')
+![](../imgs/ios_xib_2.png 'size:100')
 
 ## 在xib中添加自定义属性
 `@IBDesignable`和`@IBInspectable`是iOS8的新特性，可以实时渲染在`interface builder`上，直接对值进行修改视能实时发生变化。`layer.borderWidth、borderColor、cornerRadius`这些属性在xib上是不能直接设置的，@IBDesignable和@IBInspectable利用运行时机制，可以把这些属性映射到xib上，同时还可以映射自定义的属性。
@@ -94,4 +94,27 @@ self.logoAspect = [NSLayoutConstraint constraintWithItem:self.logoImageView attr
 ## 修改约束
 ```objc
 _heightConstraint.constant = 12;
+```
+
+## UIButton 技巧
+UIButton的常见布局左边是按钮，右边是文字,我们经常会遇到右边是按钮，左边是文字的情况，可以通过给分类添加方法的方式解决，也可以在Xib右侧面板选中`Semantic`属性选择`Right-To-Left`的方式来解决，这样就文字在左边，图片在右边
+```markdown
+* Unspecified: 视图的默认值，当从左到右和从右到左的布局进行切换时，视图被翻转。
+* Playback: 表示播放控制的视图，如播放，倒带或快进按钮或播放头清洗器。在从左到右和从右到左的布局之间切换时，这些视图不会翻转。
+* Force Left-To_Right: 始终使用从左到右布局显示的视图。
+* Force Right-To-Left: 始终使用从右到左的布局显示的视图。
+```
+
+文字和图片的间隔技巧，有时候我们需要一些选中按钮，图片和文字之间是有间隔的，我们又不想给Button宽度，希望它自适应。我们可以通过以下操作达成目标
+```markdown
+1. 给出按钮居中和侧边的间距，不设置宽度，可以设置高度扩大按钮的点击范围
+2. 在Xib中设置按钮的`Image Insets`右侧的间距，比如我们设置距离文字的间距是`5`
+3. 在`viewDidLayoutSubviews`或者`layoutSubviews`方法中设置Button的宽度是原来的`宽度 + 间距`，**注意同样需要修改x的值**。这样就可以达成我们的目标，
+    ```swift
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        selBtn.mj_x -= 10
+        selBtn.mj_w += 10
+    }
+    ```
 ```

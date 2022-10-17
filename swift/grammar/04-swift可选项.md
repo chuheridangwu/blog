@@ -18,7 +18,7 @@ print(get(4)) // nil
 
 ## 强制解包（Forced Unwrapping）
 可选项是对其他类型的一层包装，可以将它理解为一个盒子,如果为`nil`，那么它是个空盒子。如果不为nil，那么盒子里装的是被包装类型的数据。如下图:
-![](./imgs/swift/ios_swift_13.png)
+![](../imgs/swift/ios_swift_13.png)
 如果要从可选项中取出被包装的数据（将盒子里装的东西取出来），需要使用感叹号` ! `进行强制解包。比如下面的代码:
 ```swift
 var age: Int? = 10
@@ -187,11 +187,11 @@ print("My age is \(age ?? 0)")// My age is 10
 
 ## 多重可选项
 可选项为`单个问号`？，多重可选项为`多个问号??`,如下图：
-![](./imgs/swift/ios_swift_14.png)
+![](../imgs/swift/ios_swift_14.png)
 >可以使用lldb指令 `frame variable –R` 或者` fr v –R xxx`查看区别
 
 多重可选项如果是nil的情况如下图:
-![](./imgs/swift/ios_swift_15.png)
+![](../imgs/swift/ios_swift_15.png)
 
 ## 推荐网址
 * [使用 guard 的正确姿势](https://swift.gg/2016/02/14/swift-guard-radix/)

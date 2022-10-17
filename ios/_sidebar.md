@@ -40,9 +40,8 @@
     * [05-视频画中画](ios/api/画中画.md)
     * [06-NFC功能](ios/api/nfc.md)
     * [07-客户端搭建本地服务器](ios/api/server.md)
-    * [08-Xib/Storyboard](ios/api/storyboard.md)
-    * [09-蓝牙](ios/api/蓝牙.md)
-    * [10-sms扩展](ios/api/sms扩展.md)
+    * [08-蓝牙](ios/api/蓝牙.md)
+    * [19-sms扩展](ios/api/sms扩展.md)
 * 第四章: 开发工具
     * [01-Xcode](ios/mac/xcode.md)
     * [02-Automator 自动化工具](ios/mac/automator.md)
