@@ -1,4 +1,15 @@
 * [首页](/)
+* API
+  *  [01-String](swift/api/01-string.md)
+  *  [02-多线程](swift/api/02-多线程.md)
+  *  [03-指针](swift/api/03-指针.md)
+  *  [04-第三方](swift/api/04-第三方.md)
+  *  [05-跟Shell交互](swift/api/05-shell交互.md)
+  *  [06-UI相关技巧](swift/api/06-UI.md)
+  *  [07-carthage](swift/api/07-carthage.md)
+  *  [08-Xib/Storyboard](swift/api/08-xib.md)
+  *  [09-UIDevice](swift/api/09-UIDevice.md)
+  *  [10-URLSession](swift/api/10-URLSession.md)
 * 基础语法
   *  [01-Swift基础语法](swift/grammar/01-swift基础语法.md)
   *  [02-Swift函数语法](swift/grammar/02-swift函数.md)
@@ -20,16 +31,5 @@
   *  [18-OC到Swift](swift/grammar/18-oc到swift.md)
   *  [19-函数式编程](swift/grammar/19-函数式编程.md)
   *  [20-面向协议编程](swift/grammar/20-面向协议编程.md)
-* API
-  *  [01-String](swift/api/01-string.md)
-  *  [02-多线程](swift/api/02-多线程.md)
-  *  [03-指针](swift/api/03-指针.md)
-  *  [04-Swift第三方](swift/api/04-swift第三方.md)
-  *  [05-Swift跟Shell交互](swift/api/05-shell交互.md)
-  *  [06-UI相关技巧](swift/api/06-UI.md)
-  *  [07-carthage](swift/api/07-carthage.md)
-  *  [08-Xib/Storyboard](swift/api/08-xib.md)
-  *  [09-UIDevice](swift/api/09-UIDevice.md)
-  *  [10-URLSession](swift/api/10-URLSession.md)
 
 
