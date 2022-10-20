@@ -69,7 +69,9 @@
 
 ---
 * 素材网站
-  * [Mac软件地址](https://www.macwk.com/)
+  * [Mac软件xclient地址](https://xclient.info)
+  * [Mac软件macbl地址](https://www.macbl.com/)
+  * [Mac软件macyy地址](https://www.macyy.cn/)
   * [素材网站-觅元素](http://www.51yuansu.com/)
   * [素材网站-花瓣](https://huaban.com/home/)
   * [素材网站-图精灵](http://616pic.com/tupian/katongshuiguo.html)

@@ -14,18 +14,6 @@ Xib设置类时如果从当前控件切换到`File’s Owner`，需要将以前�
 ## 在xib中添加自定义属性
 `@IBDesignable`和`@IBInspectable`是iOS8的新特性，可以实时渲染在`interface builder`上，直接对值进行修改视能实时发生变化。`layer.borderWidth、borderColor、cornerRadius`这些属性在xib上是不能直接设置的，@IBDesignable和@IBInspectable利用运行时机制，可以把这些属性映射到xib上，同时还可以映射自定义的属性。
 
-## XIB创建TableViewCell
-```oc
-// 创建cell
-[_tableView registerNib:[UINib nibWithNibName:@"PersonMessageCell" bundle:nil] forCellReuseIdentifier:@"PersonMessageCell"];
-
-// 使用
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    PersonMessageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PersonMessageCell"];
-    return cell;
-}
-```
-
 ## UIScrollView
 在Xib中使用UIScrollView的时候，需要注意在iOS11之后，UIScrollView增加了`framelayoutGuide`和`contentLayoutGuide`。
 
@@ -68,6 +56,38 @@ if (@available(iOS 11.0, *)){
 * [Xcode11 在Xib中进行UIScrollView布局](https://juejin.cn/post/6844904042452238344)
 
 
+## UITableView
+#### 注册xib创建的UITableViewCell
+* OC版本注册cell
+```objc
+[_tableView registerNib:[UINib nibWithNibName:@"PersonMessageCell" bundle:nil] forCellReuseIdentifier:@"PersonMessageCell"];
+```
+* Swift版本注册cell
+```swift
+tableView.register(UINib(nibName: "TableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "TableViewCell")
+``` 
+
+#### tableHeaderView 自适应高度
+需要完成一个需求: tableview的headView中有一个可换行的label, 需要headview写入数据时, tableview的headView的高度自适应. 不手动计算字符串的高度;
+
+1. 在headview的操作:
+    *  headview 的 xib,所有的控件约束要保证是正确的,从上到下的约束要确保有,并且是正确的.
+    * 在headview的.m文件中,要设置高度变化label允许显示的最大宽度:`contentL.preferredMaxLayoutWidth = UIScreen.main.bounds.size.width - 100`,设置`numberofline = 0`,这个label就可以自动计算出自身的高度了
+2. 在 controller 中对 headview 进行赋值,赋值之后需要重置 headView 的 frame:
+    ```swift
+    //使表视图的高度自适应
+    func layoutHeadView(){
+        //利用systemLayoutSizeFittingSize:计算出真实高度，当前方法计算的时间开销是十分大的
+        let height = tableView.tableHeaderView?.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).height ?? 0.0
+        guard var rect = tableView.tableHeaderView?.frame else {return}
+        rect.size.height = height
+        //修改tableHeaderView的frame
+        self.tableView.tableHeaderView?.frame = rect
+    }
+    ```
+这样 headView 作为 tableview 的头部视图就可以根据内容自适应高度了。**在每一次headView的数据更改之后, 都记得要调用layoutHeadView方法**
+
+
 ## 遇到的问题
 1. 在使用xib编程，给对应的View设置圆角时，`遇到只有左边是圆角，右边不显示圆角的情况`，这是因为你在设置圆角的时候，**View的宽度还是你在xib中使用模拟器的宽度，并不是它真实屏幕的宽度。**
 
@@ -96,7 +116,7 @@ self.logoAspect = [NSLayoutConstraint constraintWithItem:self.logoImageView attr
 _heightConstraint.constant = 12;
 ```
 
-## UIButton 技巧
+## UIButton 图标和文字间距技巧
 UIButton的常见布局左边是按钮，右边是文字,我们经常会遇到右边是按钮，左边是文字的情况，可以通过给分类添加方法的方式解决，也可以在Xib右侧面板选中`Semantic`属性选择`Right-To-Left`的方式来解决，这样就文字在左边，图片在右边
 ```markdown
 * Unspecified: 视图的默认值，当从左到右和从右到左的布局进行切换时，视图被翻转。
@@ -120,3 +140,23 @@ UIButton的常见布局左边是按钮，右边是文字,我们经常会遇到�
 ```
 
 > iOS16 在XIB中使用 `DatePicker` 时,需要将 Preferred Style 设置为 Whells
+
+
+## UILabel内容显示优先级
+`intrinsicContentSize`:固有大小。意思就是如果没有指定大小，控件就按照这个大小来。 像`UILabel`、`UIImageView`、`UIButton`等这些组件都有 `Intrinsic Content Size` 属性。
+
+> 当我们设置UILabel时，只要给它位置就可以，它自己会计算大小
+
+当一行有两个UILable的时候，如果不给他们设置优先级，就会造成`Intrinsic冲突`。因为当两个label显示的内容超过一行时，它们不知道要优先显示谁。需要用到下面的属性:
+* `Content Hugging Priority`:内容拥抱优先级,默认是251。**优先级越大，当前控件大小保持不变，另一个控件进行拉伸或压缩**
+    ```swift
+    open func contentHuggingPriority(for axis: NSLayoutConstraint.Axis) -> UILayoutPriority
+    open func setContentHuggingPriority(_ priority: UILayoutPriority, for axis: NSLayoutConstraint.Axis)
+    ```
+* `Content Compression Resistance Priority`: 内容压缩阻力优先级。**优先级越大,视图中的内容越难被压缩**
+    ```swift
+    open func contentCompressionResistancePriority(for axis: NSLayoutConstraint.Axis) -> UILayoutPriority
+    open func setContentCompressionResistancePriority(_ priority: UILayoutPriority, for axis: NSLayoutConstraint.Axis)
+    ```
+
+>如果只是两个UILabel冲突的时候，只要将不想被压缩内容的控件`Content Compression Resistance Priority`优先级调大即可
