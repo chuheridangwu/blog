@@ -1,18 +1,67 @@
-# Storyboard
-本章主要记录可视化编程的一些问题，以及如何解决这些问题。附带可视化编程的一些技巧。
+# Xib
+本章主要记录可视化编程的一些问题，以及如何解决这些问题。附带可视化编程的一些技巧。比如在XIB添加自定义属性、设置按钮的选中状态、设置等比例控件等等
 
+使用xib进行开发时，经常需要设置文字颜色、控制器背景色、主题颜色等，通过在`Assets`中添加自定义颜色可以让我们开发过程中快速选择，加快开发进度。
 
-xib的一些技巧：
-Xib设置类时如果从当前控件切换到`File’s Owner`，需要将以前的连线去掉。
-* [Xib文件使用（二）——关联变量](https://blog.csdn.net/xunyn/article/details/8521194)
-* [Xib的使用：设置File‘s Owner的Class和view的Class的区别](https://blog.csdn.net/az44yao/article/details/110836006?spm=1001.2101.3001.6661.1&utm_medium=distribute.pc_relevant_t0.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7ERate-1.pc_relevant_default&depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7ERate-1.pc_relevant_default&utm_relevant_index=1)
+在xib中添加自定义颜色，选择`Background`最后的`Custom`自定义颜色，在第二个选项"颜色滑块"中选择`RGB Sliders`，在底部可以输入十六进制颜色，如下图:
 
-## 添加自定义颜色
-选择自定义颜色`Custom`，在第二个选项"颜色滑块"中选择`RGB Sliders`，在底部可以输入十六进制颜色
-![](../imgs/ios_xib_2.png 'size:100')
+![](../imgs/xib/ios_xib_2.png ':size=120')
 
-## 在xib中添加自定义属性
-`@IBDesignable`和`@IBInspectable`是iOS8的新特性，可以实时渲染在`interface builder`上，直接对值进行修改视能实时发生变化。`layer.borderWidth、borderColor、cornerRadius`这些属性在xib上是不能直接设置的，@IBDesignable和@IBInspectable利用运行时机制，可以把这些属性映射到xib上，同时还可以映射自定义的属性。
+```markdown
+* iOS16 在XIB中使用 `DatePicker` 时,需要将 Preferred Style 设置为 Whells
+* iOS15之后，系统对 UIButton 做了优化，添加`UIButton.Configuration`配置,如果还是想适配iOS15之前的系统需要把`style`设置成`Default`,不然按钮一直显示文字
+```
+
+## @IBInspectable 添加自定义属性
+`@IBDesignable`和`@IBInspectable`是iOS8的新特性，可以实时渲染在`interface builder`上，直接对值进行修改视能实时发生变化。[参考文档](https://nshipster.cn/ibinspectable-ibdesignable/)
+
+比如`layer.borderWidth、borderColor、cornerRadius`这些属性在xib上是不能直接设置的。`@IBInspectable`利用运行时机制,可以把这些属性映射到xib上，同时还可以映射自定义的属性。举例说明:
+```swift
+@@IBDesignable  //@IBDesignable关键字用来声明一个类是可以被设计的，可以实时渲染在interface builder 上
+class SpaceButton: UIButton{
+    //@IBInspectable关键字用来声明一个属性，可以在interface builder上修改该属性，就可以实时渲染border的变化
+    @IBInspectable var space: CGFloat = 10.0
+
+    override var intrinsicContentSize: CGSize{
+        let size = super.intrinsicContentSize
+        return CGSize(width: size.width + space, height: size.height)
+    }
+}
+```
+
+> 使用`@IBInspectable`添加属性时，需要给类型显式加上类型标识，不然XIB里面不显示。
+
+## 获取View真实宽度
+使用xib编程，在`viewDidLoad`或者`awakeFromNib`方法中给 View 设置圆角时，遇到只有左边是圆角，右边不显示圆角的情况。
+
+原因是在设置圆角时，**View的宽度还是你在xib中使用模拟器的宽度，并不是它真实屏幕的宽度。**，解决方案是在`layoutSubViews`或者`viewDidLayoutSubviews`方法里设置圆角。或者是通过`@IBInspectable`在xib上添加View属性，进行直接赋值。
+
+UITbaleView的 HeaderView 使用 xib 开发时，在`tableView.tableHeaderView = headerView`这句话之前我们需要对 headerView 的 frame 进行重新设置，不然`headView`的高度就是xib模拟器中的高度
+
+UITableViewCell 在xib中获取到的宽度，一直是320。在一种分区圆角的界面中，需要在 代理方法`tableview: willDisplay: forRowAt:`方法中获取到cell内部控件的真实宽度。 可以使用约束，在`layoutSubViews`里面对内部控件的 frame 进行重新赋值。
+
+## 修改约束值
+* 修改比例约束值
+```objc
+// aspect 是比例约束  修改图片宽度比
+NSLayoutConstraint.deactivate([aspect])
+aspect = NSLayoutConstraint(item: logoView, attribute: .width, relatedBy: .equal, toItem: logoView, attribute: .height, multiplier: 1.5, constant: 0)
+NSLayoutConstraint.activate([aspect])
+```
+
+* 修改固定宽高约束值
+```objc
+_heightConstraint.constant = 12;
+```
+
+## iOS 15 系统遇到过的适配问题
+1. Must translate autoresizing mask into constraints to have _setHostsLayoutEngine:YES Xcode 13
+
+仅在 iOS 15 上的 Xcode 13.0 也发生了同样的事情，需要将cell视图设置为Layout: `Autoresizing Mask `，如下图：
+![](../imgs/xib/ios_xib_1.png)
+
+仅在 iOS 15 上的 Xcode 13.0 ，使用stacke时，需要注意它默认是有背景的。
+
 
 ## UIScrollView
 在Xib中使用UIScrollView的时候，需要注意在iOS11之后，UIScrollView增加了`framelayoutGuide`和`contentLayoutGuide`。
@@ -28,7 +77,6 @@ iOS11以上以下步骤进行添加：
 3. 设置UIView的宽或者高跟`framelayoutGuide`相等，设置好之后会报错，先给View对应的宽或者高一个固定值，防止报错
 4. 如果是宽相等，纵向滑动，如果是高相等，横向滑动。 
 ```
-
 
 如果是 iOS11 以下在XIB中使用UIScrollView按照以下的步骤:
 
@@ -88,36 +136,8 @@ tableView.register(UINib(nibName: "TableViewCell", bundle: Bundle.main), forCell
 这样 headView 作为 tableview 的头部视图就可以根据内容自适应高度了。**在每一次headView的数据更改之后, 都记得要调用layoutHeadView方法**
 
 
-## 遇到的问题
-1. 在使用xib编程，给对应的View设置圆角时，`遇到只有左边是圆角，右边不显示圆角的情况`，这是因为你在设置圆角的时候，**View的宽度还是你在xib中使用模拟器的宽度，并不是它真实屏幕的宽度。**
-
-
-## 在Xcode，手机iOS15中，遇到过的适配问题
-1. Must translate autoresizing mask into constraints to have _setHostsLayoutEngine:YES Xcode 13
-
-仅在 iOS 15 上的 Xcode 13.0 也发生了同样的事情，需要将cell视图设置为Layout: `Autoresizing Mask `，如下图：
-![](../imgs/xib/ios_xib_1.png)
-
-
-2. 仅在 iOS 15 上的 Xcode 13.0 ，使用stacke时，需要注意它默认是有背景的。
-
-
-## 修改比例约束
-```objc
-// self.logoAspect 是比例约束
-//修改图片宽度比
-[NSLayoutConstraint deactivateConstraints:@[self.logoAspect]];
-self.logoAspect = [NSLayoutConstraint constraintWithItem:self.logoImageView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:self.logoImageView attribute:NSLayoutAttributeHeight multiplier:1.0 constant:0];
-[NSLayoutConstraint activateConstraints:@[self.logoAspect]];
-```
-
-## 修改约束
-```objc
-_heightConstraint.constant = 12;
-```
-
-## UIButton 图标和文字间距技巧
-UIButton的常见布局左边是按钮，右边是文字,我们经常会遇到右边是按钮，左边是文字的情况，可以通过给分类添加方法的方式解决，也可以在Xib右侧面板选中`Semantic`属性选择`Right-To-Left`的方式来解决，这样就文字在左边，图片在右边
+## UIButton 
+UIButton的默认布局左边是图片，右边是文字。我们经常会遇到右边是图片，左边是文字的情况，可以通过给分类添加方法的方式解决，也可以在Xib右侧面板选中`Semantic`属性选择`Right-To-Left`的方式来解决，这样就文字在左边，图片在右边
 ```markdown
 * Unspecified: 视图的默认值，当从左到右和从右到左的布局进行切换时，视图被翻转。
 * Playback: 表示播放控制的视图，如播放，倒带或快进按钮或播放头清洗器。在从左到右和从右到左的布局之间切换时，这些视图不会翻转。
@@ -125,22 +145,27 @@ UIButton的常见布局左边是按钮，右边是文字,我们经常会遇到�
 * Force Right-To-Left: 始终使用从右到左的布局显示的视图。
 ```
 
-文字和图片的间隔技巧，有时候我们需要一些选中按钮，图片和文字之间是有间隔的，我们又不想给Button宽度，希望它自适应。我们可以通过以下操作达成目标
-```markdown
-1. 给出按钮居中和侧边的间距，不设置宽度，可以设置高度扩大按钮的点击范围
-2. 在Xib中设置按钮的`Image Insets`右侧的间距，比如我们设置距离文字的间距是`5`
-3. 在`viewDidLayoutSubviews`或者`layoutSubviews`方法中设置Button的宽度是原来的`宽度 + 间距`，**注意同样需要修改x的值**。这样就可以达成我们的目标，
+**设置UIButton 文字 和 图片 的间隔技巧**，有时候我们需要一些选中按钮，图片和文字之间是有间隔的，我们又希望 Button 的宽度自适应。可以通过自定义按钮，重写`intrinsicContentSize`属性设置图标和文字的间距。
+````markdown
+1. 设置UIButton居中和侧边约束，不设置按钮宽度，使宽度自适应，可以设置高度扩大按钮的点击范围
+2. 在Xib中设置按钮的`Image Insets`右侧的间距，比如我们设置距离文字的间距是`10`
+3. 自定义`SpaceButton`,XIB中使用此按钮,设置`space`间距
     ```swift
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        selBtn.mj_x -= 10
-        selBtn.mj_w += 10
+    class SpaceButton: UIButton{
+        // 图标和文字的间距
+        @IBInspectable var space: CGFloat = 10.0
+
+        override var intrinsicContentSize: CGSize{
+            let size = super.intrinsicContentSize
+            return CGSize(width: size.width + space, height: size.height)
+        }
     }
     ```
-```
+````
 
-> iOS16 在XIB中使用 `DatePicker` 时,需要将 Preferred Style 设置为 Whells
+> 在一种左右是半圆，中间是文字的Label标签中，也可以自定义UILabel的方式扩大UILabel的真实宽度
 
+> iOS15之后，UIButton多了`UIButton.Configuration`配置，不需要再搞这样的技巧了，iOS15可以直接在xib上配置按钮图片和文字的间距、图片的位置、按钮的边框、前置颜色、圆角等等
 
 ## UILabel内容显示优先级
 `intrinsicContentSize`:固有大小。意思就是如果没有指定大小，控件就按照这个大小来。 像`UILabel`、`UIImageView`、`UIButton`等这些组件都有 `Intrinsic Content Size` 属性。
@@ -160,3 +185,7 @@ UIButton的常见布局左边是按钮，右边是文字,我们经常会遇到�
     ```
 
 >如果只是两个UILabel冲突的时候，只要将不想被压缩内容的控件`Content Compression Resistance Priority`优先级调大即可
+
+## 相关文档
+* [Xib文件使用（二）——关联变量](https://blog.csdn.net/xunyn/article/details/8521194)
+* [Xib的使用：设置File‘s Owner的Class和view的Class的区别](https://blog.csdn.net/az44yao/article/details/110836006?spm=1001.2101.3001.6661.1&utm_medium=distribute.pc_relevant_t0.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7ERate-1.pc_relevant_default&depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7ERate-1.pc_relevant_default&utm_relevant_index=1)

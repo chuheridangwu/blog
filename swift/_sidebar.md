@@ -7,7 +7,7 @@
   *  [05-跟Shell交互](swift/api/05-shell交互.md)
   *  [06-UI相关技巧](swift/api/06-UI.md)
   *  [07-carthage](swift/api/07-carthage.md)
-  *  [08-Xib/Storyboard](swift/api/08-xib.md)
+  *  [08-Xib](swift/api/08-xib.md)
   *  [09-UIDevice](swift/api/09-UIDevice.md)
   *  [10-URLSession](swift/api/10-URLSession.md)
 * 基础语法

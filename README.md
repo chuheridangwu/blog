@@ -98,12 +98,6 @@
   * [MSDN](https://msdn.itellyou.cn/) Window电脑镜像
   * [TinyPNG](https://tinify.cn/) 压缩webp、jpg、png
 ---
-* 娱乐
-  * [思古影视](https://www.siguyy.com/)
-  * [天狼影视](https://www.tqyy.net/)
-  * [努努影院](https://www.nunuyy.cc/)
-  * [大师兄影视](https://tv.ci/)
----
 * 视频测试地址
 
 ```markdown

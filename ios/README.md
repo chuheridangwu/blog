@@ -49,6 +49,9 @@ Testflight 分内部测试和外部测试:
 ```
 ![](imgs/ios_img_69.jpg)
 
+* OTA: 让开发者能够脱离 Appstore，实现从服务器下载并安装 iOS 应用。用户只需要在 iOS 设备的浏览器中，打开 `itms-services://` 协议链接，就可以直接安装App。
+* MDM技术：`Mobile Device Management` 移动设备管理,超级签上主要体现是：添加UDID->生成描述文件->重新签名APP 过程自动化
+
 ----
 
 ### 马甲包辅助工具
@@ -76,5 +79,3 @@ Testflight 分内部测试和外部测试:
 
 ### 开发工具
 * [JSONConverter](https://github.com/vvkeep/JSONConverter) Swift语言JSON转模型应用
-* [Charles](https://www.macwk.com/soft/charles) 抓包工具
-* [Downie](https://www.macwk.com/soft/downie) 视频下载工具
