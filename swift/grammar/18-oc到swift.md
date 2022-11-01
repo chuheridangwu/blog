@@ -334,9 +334,12 @@ override func observeValue(forKeyPath keyPath: String?, of object: Any?, change:
     let newValue = change?[NSKeyValueChangeKey.newKey] as? CGSize ?? .zero
     print(newValue)
 }
+// 这里注意📢：KVO的addObserver和removeObserver需要是成对的，如果重复remove则会导致NSRangeException类型的Crash，如果忘记remove则会在观察者释放后再次接收到KVO回调时Crash。
 override func viewDidDisappear(_ animated: Bool) {
     super.viewDidDisappear(animated)
-    removeObserver(self, forKeyPath: "scrollView.contentSize")
+    if isViewLoaded {
+        webView.removeObserver(self, forKeyPath: "scrollView.contentSize")
+    }
 }
 ```
 

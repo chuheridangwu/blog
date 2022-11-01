@@ -5,6 +5,19 @@ enum Direction {
     case north, south, east, west
 }
 ```
+## 嵌套枚举(Nesting Enums)
+例如人都有身高和年纪，学生拥有特定的成绩属性。
+```swift
+enum Person{
+    enum Student{
+        case score
+    }
+    case age
+    case height
+}
+let score = Person.Student.score
+let age = Person.age
+```
 
 ## 关联值
 在oc中最常用的就是枚举对应整数类型的值，在Swift中也有`关联值（Associated Values）`。可以在一个枚举中关联多种类型。比如：
@@ -31,6 +44,14 @@ enum Grade : String {
     case perfect = "A"
     case great = "B"
     case good = "C"
+    // 可以使用计算属性或者方法
+    var description: String {
+        switch self {
+        case let .perfect: return "A"
+        case let .great: return "B"
+        case let .good: return "C"
+        }
+    }
 }
 var suit = Grade.good
 print(suit) // good
@@ -64,6 +85,22 @@ print(Season.summer.rawValue) // 2
 print(Season.autumn.rawValue) // 4
 print(Season.winter.rawValue) // 5
 ```
+## 遍历枚举
+`CaseIterable`协议通常用于没有关联值的枚举，用来访问所有的枚举值，只需要对应的枚举遵守该协议即可，然后通过`allCases`获取所有枚举值.
+```swift
+// 1、定义无关联值枚举，并遵守协议
+enum Weak: String{
+    case MON, TUE, WED, THU, FRI, SAT, SUN
+}
+extension Weak: CaseIterable{}
+
+// 2、通过for循环遍历
+var allCase = Weak.allCases
+for c in allCase{
+    print(c)
+}
+```
+
 ## 递归枚举（Recursive Enumeration）
 递归枚举是指在枚举中也要使用到当前的枚举，必须使用到关键字`indirect`。代码如下：
 ```swift

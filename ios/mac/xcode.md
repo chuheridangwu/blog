@@ -22,6 +22,14 @@ Xcode中关于多个架构的设置，如下图：
 * `Excluded Architetures`:  如果项目不需要哪种架构就写上去
 ```
 
+* 找到编译路径
+*`${BUILD_DIR}`build文件的路径
+*`$(CONFIGURATION)`build文件下的product的路径
+* 找到build文件的完整路径`CONFIGURATION_BUILD_DIR`,等于`$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/*`
+
+[配置文件官方文档](https://developer.apple.com/documentation/xcode/adding-a-build-configuration-file-to-your-project?changes=_8)
+
+
 ## Build Setting
 设置 | 含义
 ------- | -------
@@ -129,3 +137,41 @@ w: 代表字节数   b->byte 1个字节,  h ->half word 2字节,  w ->word 4字�
 
 ## 编译器优化
 Xcode中设置debug模式和release模式编译出来的汇编是不一样的，这是因为Release模式开启了编译器优化，选择`Target -> Build Settings`,搜索 `Optimization Level`。
+
+## COCOAPODS
+使用cocoapods时会生成几个`Pods-ReusableDemo iOS.debug`配置文件，这里对应的是Xcode项目的配置。
+```xml
+ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES
+CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO
+FRAMEWORK_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/Reusable-iOS"
+GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
+HEADER_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/Reusable-iOS/Reusable.framework/Headers"
+LD_RUNPATH_SEARCH_PATHS = $(inherited) /usr/lib/swift '@executable_path/Frameworks' '@loader_path/Frameworks'
+LIBRARY_SEARCH_PATHS = $(inherited) "${DT_TOOLCHAIN_DIR}/usr/lib/swift/${PLATFORM_NAME}" /usr/lib/swift
+OTHER_LDFLAGS = $(inherited) -framework "Reusable" -framework "UIKit"
+OTHER_SWIFT_FLAGS = $(inherited) -D COCOAPODS
+PODS_BUILD_DIR = ${BUILD_DIR}
+PODS_CONFIGURATION_BUILD_DIR = ${PODS_BUILD_DIR}/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)
+PODS_PODFILE_DIR_PATH = ${SRCROOT}/.
+PODS_ROOT = ${SRCROOT}/Pods
+PODS_XCFRAMEWORKS_BUILD_DIR = $(PODS_CONFIGURATION_BUILD_DIR)/XCFrameworkIntermediates
+USE_RECURSIVE_SCRIPT_INPUTS_IN_SCRIPT_PHASES = YES
+```
+比如`ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES`对应的是Xcode中的`Always Embed Swift Standard Libraries`。`FRAMEWORK_SEARCH_PATHS`对应的是Xcode配置中的`Framework Search Paths`。`PODS`开头的几个key是自定义的，通过[xcodebuildsettings](https://xcodebuildsettings.com/)这个网站可以搜索。
+
+## Xcode想输出内容到命令行
+Xcode想输出内容到命令行，可以创建`run Script`,在命令行中输入`tty`会显示软连接地址，比如`/dev/ttys003`，在`run Script`中 输入`echo "123" > /dev/ttys003`这样项目编译完成后就会显示在命令行了
+
+比如在编译完成后输出 mach-o 文件的信息到 命令行
+```swift
+nm -pa "${CONFIGURATION_BUILD_DIR}/${PROJECT_NAME}" > /dev/ttys003
+```
+* `${CONFIGURATION_BUILD_DIR}` 项目编译的文件夹路径，一直到`build`文件的目录
+* `${PROJECT_NAME}`项目的名字，生成的 mach-o 文件名字一般都是项目名字
+
+做的外包项目正好可以用到，编译完成后直接复制 mach-o 文件到桌面的`Payload`文件，然后压缩成zip，修改名字为ipa即可
+```shell
+cp "${CONFIGURATION_BUILD_DIR}/${PROJECT_NAME}" ~/Desktop/Payload
+cd ~/Desktop
+zip -r xxx.ipa  Payload
+```

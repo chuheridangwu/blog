@@ -10,6 +10,7 @@
   *  [08-Xib](swift/api/08-xib.md)
   *  [09-UIDevice](swift/api/09-UIDevice.md)
   *  [10-URLSession](swift/api/10-URLSession.md)
+  *  [11-UICollectionView](swift/api/11-UICollectionView.md)
 * 基础语法
   *  [01-Swift基础语法](swift/grammar/01-swift基础语法.md)
   *  [02-Swift函数语法](swift/grammar/02-swift函数.md)

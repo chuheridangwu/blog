@@ -62,7 +62,8 @@ Shift-Command-N | 创建一个新的应用
 `defaults write com.apple.finder AppleShowAllFiles -bool false` | 隐藏文件
 `killall Finder `   |  重启Finer
 `zip -e ~/Desktop/a.zip  ~/Desktop/file.text` | 单个文件加密成zip
-`zip -er ~/Desktop/a.zip  ~/Desktop/相册` | 文件加密成zip
+`zip -er ~/Desktop/a.zip  ~/Desktop/相册` | 文件夹加密成zip
+`zip -r ~/Desktop/a.zip  ~/Desktop/相册` | 文件夹压缩成zip
 `otool -L ../sbin/nginx`   |  查看可执行文件链接的库
 
 ## 路径信息
@@ -216,3 +217,14 @@ mlive@mlivedeMacBook ~ % command -v brew
 
 参考苹果官网：[从 Windows 电脑连接到 Mac](https://support.apple.com/zh-cn/guide/mac-help/mchlp1658/12.0/mac/12.0)
 参考博客：[windows电脑怎么访问苹果电脑共享文件夹](https://www.my607.com/hulianwang/2022-03-21/443426.html)
+
+## 其他软件想输出信息到命令行
+1. 在命令行输入`tty`显示软连接地址
+   ```shell
+   mlive@mlivedeMacBook-Pro-2 ~ % tty
+    /dev/ttys003
+   ```
+2. 在其他软件上输入 `echo "123" > /dev/ttys003`就会显示在当前命令行上
+
+## 参考文章
+* [iOS工程化「一」Xcode工程分析](https://juejin.cn/post/7125456510817140749)

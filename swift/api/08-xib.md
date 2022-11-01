@@ -12,6 +12,115 @@
 * iOS15之后，系统对 UIButton 做了优化，添加`UIButton.Configuration`配置,如果还是想适配iOS15之前的系统需要把`style`设置成`Default`,不然按钮一直显示文字
 ```
 
+## File's Owner
+使用Xib自定义View的时候有两种方式，使用用`File's Owner`或者直接定义View。它们之间的区别在于:
+* `File's Owner`: self 是自定义类型的一个实例, 要将 View 拉为约束添加在 self,  可以直接添加在 storyboard/xib 上使用, 在代码中使用时, 要使用对象方法, Bundle.main.loadNibNamed 方法中 owner 为 self。
+* `View`: self 是自定义类型, 类型不能直接添加在 storyboard/xib 上, 代码中使用时要使用类型方法,  Bundle.main.loadNibNamed 方法中 owner 为 nil
+![](../imgs/xib/ios_xib_3.png)
+
+#### File's Owner  加载方式
+* 通过 init 方法加载
+```swift
+    @IBOutlet var contentView: UIView!//xib 中的 View 拉为约束 contentView
+    
+    //代码创建, 执行此方法, 不执行 init?(coder aDecoder: NSCoder)
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        awakeFromNib()
+    }
+    
+    //添加在 storyboard 上, 执行此方法
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        setupContentView()
+    }
+    
+    func setupContentView() {
+    //owner 一定要为 self, 不能为 nil
+        let contentView = Bundle.main.loadNibNamed("CustomView_Fileowner", owner: self, options: nil)?.first as! UIView
+        contentView.frame = self.bounds
+        contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        addSubview(contentView)
+    }
+```
+* 通过协议的方式加载
+```swift
+    protocol NibLoadableProtocol { }
+    extension NibLoadableProtocol where Self : UIView {
+        //设置 File's Owner 的 CustomClass
+        //实例方法
+        func loadNibFileOwner(_ nibNmae: String? = nil) -> UIView {
+            //获取实例的类型
+            let object: AnyObject = object_getClass(self)!
+            //"\(object)": AntennaParameters.XXXXXX
+            //获取真正的类型名
+            let className = type(of: object).description().components(separatedBy: ".").last
+            
+            let contentView = Bundle.main.loadNibNamed(nibNmae ?? className!, owner: self, options: nil)?.first as! UIView
+            contentView.frame = self.bounds
+            contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+            addSubview(contentView)
+            return contentView
+        }
+    }
+ 
+    //让 CustomView_Fileowner 服从协议
+    class: CustomView_Fileowner, NibLoadableProtocol
+        @IBOutlet var contentView: UIView!
+        
+        //代码创建, 执行此方法, 不执行 init?(coder aDecoder: NSCoder)
+        override init(frame: CGRect) {
+            super.init(frame: frame)
+            awakeFromNib()
+        }
+        
+        //添加在 storyboard 上, 执行此方法
+        required init?(coder aDecoder: NSCoder) {
+            super.init(coder: aDecoder)
+        }
+    
+        override func awakeFromNib() {
+            super.awakeFromNib()
+            //协议方法
+            contentView = loadNibFileOwner()
+        }
+    }
+```
+
+#### View 加载方式
+* 自定义协议,自定义类遵守协议
+```swift
+    protocol NibLoadableProtocol { }
+    extension NibLoadableProtocol where Self : UIView {
+        //类型方法
+        static func loadNib(_ nibNmae: String? = nil) -> Self {
+            return Bundle.main.loadNibNamed(nibNmae ?? "\(self)", owner: nil, options: nil)?.first as! Self
+        }
+    }
+    
+    extension CustomView: NibLoadableProtocol { } // 自定义类遵守协议
+```
+* 或者定义类方法直接加载
+```swift
+    //View 中, 类方法
+    class func newInstance() -> CustomView {
+        //owner 为 nil
+        return Bundle.main.loadNibNamed("CustomView", owner: nil, options: nil)?.first as! CustomView
+    }
+
+    //使用类型方法创建
+    let viewView = CustomView.newInstance()
+    viewView.frame = CGRect(x: 50, y: 400, width: 200, height: 100)
+    view.addSubview(viewView)
+```
+
+>Swift可使用第三方`pod 'Reusable', '~> 4.1.2'`,只要继承相关协议就可以直接调用。
+
+
 ## @IBInspectable 添加自定义属性
 `@IBDesignable`和`@IBInspectable`是iOS8的新特性，可以实时渲染在`interface builder`上，直接对值进行修改视能实时发生变化。[参考文档](https://nshipster.cn/ibinspectable-ibdesignable/)
 
@@ -189,3 +298,4 @@ UIButton的默认布局左边是图片，右边是文字。我们经常会遇到
 ## 相关文档
 * [Xib文件使用（二）——关联变量](https://blog.csdn.net/xunyn/article/details/8521194)
 * [Xib的使用：设置File‘s Owner的Class和view的Class的区别](https://blog.csdn.net/az44yao/article/details/110836006?spm=1001.2101.3001.6661.1&utm_medium=distribute.pc_relevant_t0.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7ERate-1.pc_relevant_default&depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7ERate-1.pc_relevant_default&utm_relevant_index=1)
+* [Swift 4 Xib 关联 File's Owner 和 View 的区别](https://blog.csdn.net/LeeCSDN77/article/details/82501005)

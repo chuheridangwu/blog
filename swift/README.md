@@ -83,6 +83,30 @@ target 'KoreaVideo' do
 end
 ```
 
+### 第三方登录
+* [Google登录官网](https://developers.google.com/identity/)
+* [Google登录官方快速入门文档](https://developers.google.com/identity/sign-in/android/start)
+* [GoogleApi控制台](https://console.cloud.google.com/apis/credentials)
+* [Facebook登录](https://developers.facebook.com/docs/facebook-login/ios)
+* [Swift實作Facebook、Google、Apple ID第三方登入功能](https://www.tpisoftware.com/tpu/articleDetails/2478)
+  
+```swift
+    // Facebook 获取个人信息，这里获取的头像大小是50
+    GraphRequest.init(graphPath: "me", parameters: ["fields": "id, name, email,picture"]).start { connection, result, error in
+        guard let result = result as? Dictionary<String,Any> else {return}
+        
+        let json = JSON(result)
+        let fbid = json["id"].stringValue
+        let name = json["name"].stringValue
+        let picturl = json["picture"]["data"]["url"].stringValue
+        
+        // 这里获取的头像大小是180
+        GraphRequest(graphPath: fbid + "/picture", parameters: ["type": "large","redirect": "0"], httpMethod: HTTPMethod.get).start { connection, result, error in
+            print(result)
+        }
+    }
+```
+
 #### 推荐网站
 * [OC代码转Swift](https://swiftify.com/converter/code/) 只能转部分代码
 * [SwiftTips](https://swifter.tips/) 王巍的100个swift示例，资料有点老了

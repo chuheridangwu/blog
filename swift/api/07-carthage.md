@@ -27,5 +27,24 @@ Carthage支持两种类型的源，一个是github，另一个是git。
 使用`carthage update --platform iOS --use-xcframeworks`指令生成对应的静态库
 
 
+
+
+## Swift Package Manager
+Xcode中使用Swift Package有两种方式:
+1. Xcode 工程中选中`当前 Project 名称` -> `选择 Swift Packages` -> `点击 + 图标添加`
+2. 在 Xcode 中，点击 `File（文件）`>  `Add Package`（添加软件包依赖项）,在出现的对话框中，输入存储库网址,比如 `https://github.com/facebook/facebook-ios-sdk`
+
+
+选择好要依赖的 Package 后。我们可以指定 Package 的版本号范围，规则如下，与 CocoaPods 类似：
+* `Up to Next Major`: 当前指定的版本号到下一个大版本号之间的最新版本，例如 2.0.0 ~ 3.0.0（不包含 3.0.0）
+* `Up to Next Minor`: 当前指定的版本号到下一个次版本号之间的最新版本，例如 2.0.0 ~ 2.1.0（不包含 2.1.0）
+* `Range`: 指定的两个版本号之间的最新版本，例如 2.1.0 ~ 2.7.2（不包含 2.7.2）
+* `Exact`: 指定使用某一具体的版本号
+
+
+
 ## 参考文档
 * [Cartahge 更新报错](https://blog.csdn.net/iOS_MingXing/article/details/118526112)* [Carthage的安装和使用](https://www.jianshu.com/p/a734be794019)
+
+* [在 Xcode 中使用 Swift Package](https://www.jianshu.com/p/99aa983e3d89)
+* [如何使用Swift Package Manager](https://www.jianshu.com/p/d75c1752955a)
