@@ -15,6 +15,7 @@
   *  [02-Cartahge](swift/sdk/02-Cartahge.md) 
   *  [03-常用的三方库](swift/sdk/03-常用的三方库.md) 
   *  [04-三方库使用方法](swift/sdk/04-三方库使用方法.md) 
+  *  [05-静态库](swift/sdk/05-静态库.md) 
 * 基础语法
   *  [01-Swift基础语法](swift/grammar/01-swift基础语法.md)
   *  [02-Swift函数语法](swift/grammar/02-swift函数.md)

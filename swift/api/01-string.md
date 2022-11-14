@@ -19,6 +19,16 @@ str = "\(str)_5" // \()插值    1_2_3_4_5
 // Localizable.strings 文件中
 "welcome enterRoom" = "欢迎 %1$@ 进入直播间";
 textLabel.text = String(format: NSLocalizedString("welcome enterRoom", comment: "欢迎xxx进入直播间"), showText)
+// 保留两位小数 3.00
+let s = String(format:"%02d",3) //3.00
+// int类型,不足2位前面补0  03
+let s = String(format:"%02d",3) //03
+// 转成十六进制格式字符串 
+let i = 255
+print(String(format: "%x",i)) //ff
+// 转成十六进制格式字符串,不足六位前面补0
+let i = 255
+let s:String = String(format:"%06x",i) //0000ff
 ```
 
 * String的插入和删除

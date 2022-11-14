@@ -55,7 +55,8 @@ Testflight 分内部测试和外部测试:
 ----
 
 ### 马甲包辅助工具
-* [LSUnusedResources](https://github.com/tinymind/LSUnusedResources) 清除没有使用的图片
+* [LSUnusedResources](https://github.com/tinymind/LSUnusedResources) 清除没有使用的图片，如果是多语言图片，不建议直接删除
+* [FengNiao](https://github.com/onevcat/FengNiao) 清除没有使用的图片，不建议直接删除
 * [imageoptim](https://imageoptim.com/mac) 图片压缩工具
 * [ChangeInterfaceBuilderColor](https://github.com/fabcz/ChangeInterfaceBuilderColor) 一键替换 Xib 颜色
 * [MD5Change app](https://pan.baidu.com/s/1OALSZfFssUPXOSsXhJXgYw)  批量修改图片的MD5，上传到自己的百度云盘了`6hs1`

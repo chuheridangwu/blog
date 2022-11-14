@@ -156,7 +156,9 @@ PKCS#1和PKCS#8的主要区别，从本质上说，PKCS#8格式增加验证数�
 * Go2Shell: 从Finder快速定位到命令行工具
 
 ## MAC添加终端指令
-我们在MAC电脑上敲一些指令时,比如`cd`/`curl`/`clang`/`file`等指令，它是在`/usr/bin`目录下。从Mac10.11开始,`/usr/bin`目录就不能写了，即使有管理员权限也不行。如果想增加一些指令需要放在`/usr/local/bin`目录中。
+我们在MAC电脑上敲一些指令时,比如`cd`/`curl`/`clang`/`file`等指令，是在`/usr/bin`目录下。从Mac10.11开始,`/usr/bin`目录就不能写了，即使有管理员权限也不行。
+
+如果想增加一些指令需要放在`/usr/local/bin`目录中。同时需要给与它权限`chmod +x /usr/local/bin/xxx`
 
 ## mac 添加环境变量
 Mac电脑的环境变量配置在`~/.bash_profile`环境下,通过`vim ~/.bash_profile`编辑当前文件.

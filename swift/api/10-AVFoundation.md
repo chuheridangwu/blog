@@ -16,6 +16,7 @@ Privacy - Microphone Usage Description
 ```markdown
     * `AVCaptureSession` // 捕捉会话
     * `AVCaptureDevice` // 捕捉设备(摄像头、摄像头光圈、麦克风、闪光灯)
+    * `AVCaptureDeviceDiscoverySession` //  监视可用捕获设备的查询
     * `AVCaptureDeviceInput` // 捕捉设备输入
     * AVCaptureOutput// 捕捉设备输出 (抽象类,声音or视频，使用子类实现)
         * `AVCapturePhotoOutput`  //静态图片
@@ -26,6 +27,16 @@ Privacy - Microphone Usage Description
     * `AVCaptureVideoPreviewLayer` //捕捉预览
     * AVCaptureDevicePosition //捕捉预览
 ```
+
+## AVCaptureDeviceDiscoverySession
+用于查找、监视可用捕获设备的查询。匹配指定类型的设备(如麦克风和广角相机)。支持媒体类型采集(如音频、视频、或音视频同时)，和位置(如前置摄像头、后置摄像头)。
+当创建一个采集设备发现会话(对该类进行实例化，获取一个对象)，你可以检查它的设备数组（即其devices属性，符合会话标准的一系列当前可用设备集合）
+
+```swift
+// 获取所有的摄像头
+AVCaptureDevice.DiscoverySession.init(deviceTypes: [.builtInWideAngleCamera], mediaType: .video, position: .unspecified).devices
+```
+
 
 ## AVCaptureVideoPreviewLayer 捕捉预览
 ```swift
@@ -47,7 +58,45 @@ func layerPointConverted(fromCaptureDevicePoint captureDevicePointOfInterest: CG
 7、`SPS、PPS`：h.264解码参数信息；IDR：h.264视频流I帧；
 ```
 
+保存图片：
+```swift
+//MARK:- save image
+func WM_FUNC_saveImage(_ image:UIImage) -> Void {
+    UIImageWriteToSavedPhotosAlbum(image, self, #selector(image(_:didFinishSavingWithError:contextInfo:)), nil)
+}
+@objc func image(_ image: UIImage, didFinishSavingWithError error: NSError?, contextInfo: UnsafeRawPointer) {
+    if let error = error {
+        // we got back an error!
+        let ac = UIAlertController(title: "Save error", message: error.localizedDescription, preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "OK", style: .default))
+        present(ac, animated: true)
+    } else {
+        let ac = UIAlertController(title: "Saved!", message: "Your altered image has been saved to your photos.", preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "OK", style: .default))
+        present(ac, animated: true)
+    }
+}
+```
+
+保存视频：
+```swift
+//MARK:- save video
+func WM_FUNC_saveVideo(_ urlStr:String) -> Void {
+    UISaveVideoAtPathToSavedPhotosAlbum(urlStr, self, #selector(videoSaveStatus(_:didFinishSavingWithError:contextInfo:)), nil)
+}
+@objc func videoSaveStatus(_ urlstr: String, didFinishSavingWithError error: NSError?, contextInfo: UnsafeRawPointer){
+    if error != nil {
+    //error
+    }else{
+    //success
+    }
+}
+```
+
+## 参考网址
 [AVFoundation官方文档](https://developer.apple.com/av-foundation/)
 [AVFoundation框架解析（二）—— 实现视频预览录制保存到相册](https://www.jianshu.com/p/81d17b92fb1b)
 [直接显示CMSampleBufferRef的视图AVSampleBufferDisplayLayer](https://blog.csdn.net/Xoxo_x/article/details/84039012)
 [iOS硬解码H264视频流](https://www.jianshu.com/p/a716dce3b862)
+[AVFoundation](https://juejin.cn/post/7018816531425394719)
+[iOS获取设备摄像头——视频采集](https://www.jianshu.com/p/320d73482c35)

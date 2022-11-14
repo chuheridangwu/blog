@@ -26,6 +26,7 @@ git reset --hard b957a5f    //hard:强制回退  b957a5f:提交过的版本号
 git checkout --file         //撤销文件内的修改过 file为文件
 git checkout .              //撤销全部文件的修改内容
 git rm file //删除文件，如果文件没有提交到版本库，使用rm file 就可以， file: 文件名
+git push -f origin master  //强制用本地的代码去覆盖掉远程仓库的代码
 ```
 
 ## 分支管理
