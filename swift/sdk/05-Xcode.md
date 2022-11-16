@@ -1,7 +1,7 @@
 # Xcode
-Xcode是iOS开发必备的开发工具，在项目中，经常会遇到各种配置和路径问题，在这里做一下讲解。
+Xcode是iOS开发必备的开发工具，在项目中，经常会遇到各种配置和路径问题，这里主要说一下Xcode的一些常见配置
 
-## 配置
+## Xcode常见路径
 xcode常见的一些配置，平时经常遇到找不到库、找不到头文件，可能都是这些配置导致的
 ```markdown
 * `${SRCROOT}`：代表的是项目根目录下
@@ -15,22 +15,15 @@ xcode常见的一些配置，平时经常遇到找不到库、找不到头文件
 * `$(PRODUCT_BUNDLE_IDENTIFIER)` : App的唯一标识 Bundle ID
 ```
 
-Xcode中关于多个架构的设置，如下图：
-![](../imgs/ios_img_95.png)
+* 编译相关的路径
+
 ```markdown
-* `$(ARCHS_STANDARD)`: Xcode内置的环境变量，默认是`armv7` 和`arm64`
-* `Excluded Architetures`:  如果项目不需要哪种架构就写上去
+* `${BUILD_DIR}`build文件的路径
+* `$(CONFIGURATION)`build文件下的product的路径
+*  找到build文件的完整路径`CONFIGURATION_BUILD_DIR`,等于`$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/*`
 ```
 
-* 找到编译路径
-*`${BUILD_DIR}`build文件的路径
-*`$(CONFIGURATION)`build文件下的product的路径
-* 找到build文件的完整路径`CONFIGURATION_BUILD_DIR`,等于`$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/*`
-
-[配置文件官方文档](https://developer.apple.com/documentation/xcode/adding-a-build-configuration-file-to-your-project?changes=_8)
-
-
-## Build Setting
+##  Build Setting
 设置 | 含义
 ------- | -------
 `Framework Search Paths` | 附加到项目中的framework 的搜索路径。
@@ -38,7 +31,15 @@ Xcode中关于多个架构的设置，如下图：
 `Header Search Path` | 头文件的搜索路径。
 `User Header Search Paths` | 只有在Always Search User Paths为Yes时才会被搜索。
 
-## 查看汇编代码的两种方式
+* Xcode多个架构设置
+
+![](../imgs/sdk/ios_sdk_9.png ':size=600')
+```markdown
+* `$(ARCHS_STANDARD)`: Xcode内置的环境变量，默认是`armv7` 和`arm64`
+* `Excluded Architetures`:  如果项目不需要哪种架构就写上去
+```
+
+## 查看汇编代码
 * 进入断点查看汇编的方式 `Debug -> Debug Workflow -> Always show Disassembly`，进入断点时会显示汇编代码
 * 通过将.m文件转成汇编文件的方式 `Product -> Perform Action -> Assemble 文件名.m`,会将对应的文件转成汇编文件。如果想看具体的行号，搜索`m:行号`
 
@@ -46,7 +47,7 @@ Xcode中关于多个架构的设置，如下图：
 有时候程序在某个时间运行很慢，通过Time Profiler工具可以对耗时代码进行排查，比如我在做PK时，需要使用YY_Image加载webp动画，webp动画解码的时候特别耗时，通过`Time Profiler`工具可以直接定位到代码。
 打开方式：`Instruments` -> `Time Profiler`
 
-![](./imgs/ios_img_43.jpg)
+![](../imgs/sdk/ios_sdk_12.png ':size=600')
 
 * `Separate by State :` 线程分离，状态分开显示 ，例如：Running状态，
 * `Separate by Thread :` 线程分离, 每个线程分开显示，只有这样 才能在调用路径中能够清晰看到占用CPU耗时最大的线程.(默认勾选)
@@ -81,8 +82,9 @@ Xcode 提供了一个迁移工具，可以自动将MRC代码转换为ARC代码�
 2. 打开Xcode选中手机，选择`Debug -> Attach to Process -> 选择调试的应用`
 3. 或者选择`Debug -> Attch to Process by PID or Name -> 输入应用的名字或者端口`,端口可以在Mac中的控制台进行查看
 
-![](../imgs/ios_img_102.png)
-![](../imgs/ios_img_103.png)
+![](../imgs/sdk/ios_sdk_10.png ':size=600')
+
+![](../imgs/sdk/ios_sdk_11.png ':size=600')
 
 ## M1芯片 Xcode 关闭 Rosetta
 打开访达->应用->Xcode->右键点击Xcode->显示简介->勾选使用Rosetta 打开，关闭Xcode，重新打开。 现在可以正常打包了
@@ -107,28 +109,7 @@ w: 代表字节数   b->byte 1个字节,  h ->half word 2字节,  w ->word 4字�
 ## 编译器优化
 Xcode中设置debug模式和release模式编译出来的汇编是不一样的，这是因为Release模式开启了编译器优化，选择`Target -> Build Settings`,搜索 `Optimization Level`。
 
-## COCOAPODS
-使用cocoapods时会生成几个`Pods-ReusableDemo iOS.debug`配置文件，这里对应的是Xcode项目的配置。
-```xml
-ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES
-CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO
-FRAMEWORK_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/Reusable-iOS"
-GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
-HEADER_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/Reusable-iOS/Reusable.framework/Headers"
-LD_RUNPATH_SEARCH_PATHS = $(inherited) /usr/lib/swift '@executable_path/Frameworks' '@loader_path/Frameworks'
-LIBRARY_SEARCH_PATHS = $(inherited) "${DT_TOOLCHAIN_DIR}/usr/lib/swift/${PLATFORM_NAME}" /usr/lib/swift
-OTHER_LDFLAGS = $(inherited) -framework "Reusable" -framework "UIKit"
-OTHER_SWIFT_FLAGS = $(inherited) -D COCOAPODS
-PODS_BUILD_DIR = ${BUILD_DIR}
-PODS_CONFIGURATION_BUILD_DIR = ${PODS_BUILD_DIR}/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)
-PODS_PODFILE_DIR_PATH = ${SRCROOT}/.
-PODS_ROOT = ${SRCROOT}/Pods
-PODS_XCFRAMEWORKS_BUILD_DIR = $(PODS_CONFIGURATION_BUILD_DIR)/XCFrameworkIntermediates
-USE_RECURSIVE_SCRIPT_INPUTS_IN_SCRIPT_PHASES = YES
-```
-比如`ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES`对应的是Xcode中的`Always Embed Swift Standard Libraries`。`FRAMEWORK_SEARCH_PATHS`对应的是Xcode配置中的`Framework Search Paths`。`PODS`开头的几个key是自定义的，通过[xcodebuildsettings](https://xcodebuildsettings.com/)这个网站可以搜索。
-
-## Xcode想输出内容到命令行
+## Xcode输出内容到命令行
 Xcode想输出内容到命令行，可以创建`run Script`,在命令行中输入`tty`会显示软连接地址，比如`/dev/ttys003`，在`run Script`中 输入`echo "123" > /dev/ttys003`这样项目编译完成后就会显示在命令行了
 
 比如在编译完成后输出 mach-o 文件的信息到 命令行
@@ -144,3 +125,80 @@ cp "${CONFIGURATION_BUILD_DIR}/${PROJECT_NAME}" ~/Desktop/Payload
 cd ~/Desktop
 zip -r xxx.ipa  Payload
 ```
+
+## 推荐文档
+* [配置文件官方文档](https://developer.apple.com/documentation/xcode/adding-a-build-configuration-file-to-your-project?changes=_8)
+
+
+## Xcode多项目配置 - Build Configuration
+如果做多环境配置，除了多个 Target 之外还可以使用多个Scheme的方式，配置多个`Configuration Settings File` 文件。
+
+Xcode编译默认有 Release 和 Debug 两种模式，可以自己添加一种编译模式，通过在Xcode中添加自定义配置达到多环境配置。比如配置不同的URL：
+1. 添加 Beta  Configuration
+
+![](../imgs/sdk/ios_sdk_1.png ':size=600')
+
+2. 在 Xcode 中添加自定义配置
+
+![](../imgs/sdk/ios_sdk_2.png ':size=600')
+
+3. 在 info.plist 文件中使用变量
+
+![](../imgs/sdk/ios_sdk_3.png ':size=600')
+
+4. 通过切换编译模式可以获取不同的值
+
+![](../imgs/sdk/ios_sdk_4.png ':size=600')
+
+当我们使用 Cocoapods 导入第三方的时候，Cocoapods 会给我们创建2个配置文件。
+
+![](../imgs/sdk/ios_sdk_5.png ':size=600')
+
+对应的就是Xcode中的自定义宏。
+
+![](../imgs/sdk/ios_sdk_6.png ':size=600')
+
+也就是说`Xcode -> Target -> Build Settings`里的信息，我们可以直接通过文件进行配置。这样的话我们就可以通过自定义 Configuration 文件来达到我们刚才的目的
+1. 首先创建两个 `Configuration Settings File` 文件，一个 Debug 模式，一个 Release 模式。文件内写入:
+```
+HTTP_URL = "www.debug.com"
+```
+2. 在对应的模式下使用对应的 Configuration 文件
+
+![](../imgs/sdk/ios_sdk_7.png ':size=600')
+3. 在 `info.plist` 文件中使用变量,通过切换编译模式可以获取不同的值
+
+#### Configuration 文件
+
+Configuration 文件中还可以配置其他的Xcode选项，比如常用的`Other Linker Flags`可以通过文件进行配置：
+```xml
+// key-value
+OTHER_LDFLAGS = -framework "AFNetworking"
+```
+
+`OTHER_LDFLAGS` 是`Other Linker Flags`的缩写，通过[xcodebuildsettings](https://xcodebuildsettings.com/)这个网站可以找到Xcode配置中的缩写，比如`System Header Search Paths`：
+![](../imgs/sdk/ios_sdk_8.png ':size=600')
+
+> 注意有部分变量不能通过`xcconfig`配置到`Build Settings`中，例如`PRODUCT_BUNDLE_IDENTIFIER`,配置之后不起作用
+
+#### 导入其他的 `Configuration`文件
+如果有多个`Configuration`文件,在Xcode中配置时只能配置一个，可以选择在一个`Configuration`文件中导入其他的`Configuration`文件。比如
+```
+#include "pod/Target Support Files/Pods-SDemo/Pods-SDemo.debug.xcconfig"
+```
+如果两个文件中有同样的 key 比如`OTHER_LDFLAGS` ,后面导入的文件会重置之前文件的变量。如果防止这种现象，使用`$(inherited)`。它会将你导入的其他文件的 value 传递过来，类似继承
+```xcconfig
+#include "pod/Target Support Files/Pods-SDemo/Pods-SDemo.debug.xcconfig"
+
+OTHER_LDFLAGS = $(inherited) -framework "AVFoundation"
+```
+
+`Configuration`文件还可以指定的模式，比如
+```xml
+OTHER_LDFLAGS[config=Debug][sdk=iphonesimulator*][arch=x86_64] = $(inherited) -framework "AVFoundation"
+```
+在Xcode11.4之后，可以使用`default`指定变量为空时的默认值
+```xml
+$(BUILD_SETTING_NAME:default=value)
+```
+

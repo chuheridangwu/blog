@@ -43,12 +43,11 @@
     * [08-蓝牙](ios/api/蓝牙.md)
     * [09-sms扩展](ios/api/sms扩展.md)
 * 第四章: 开发工具
-    * [01-Xcode](ios/mac/xcode.md)
-    * [02-Automator 自动化工具](ios/mac/automator.md)
-    * [03-AppleScript](ios/mac/applescript.md)
-    * [04-LLVM](ios/mac/llvm.md)
-    * [05-iOS中常见错误](ios/mac/ios_error.md)
-    * [06-上架准备工作](ios/mac/ready.md)
+    * [01-Automator 自动化工具](ios/mac/automator.md)
+    * [02-AppleScript](ios/mac/applescript.md)
+    * [03-LLVM](ios/mac/llvm.md)
+    * [04-iOS中常见错误](ios/mac/ios_error.md)
+    * [05-上架准备工作](ios/mac/ready.md)
 * 第五章: 逆向相关
   *  [01-准备工作](ios/jailbreak/01-ready.md)
   *  [02-SSH](ios/jailbreak/02-ssh.md)

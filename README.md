@@ -97,6 +97,8 @@
   * [MacWk](https://www.macwk.com/bibei) MAC电脑软件
   * [MSDN](https://msdn.itellyou.cn/) Window电脑镜像
   * [TinyPNG](https://tinify.cn/) 压缩webp、jpg、png
+  * [alltoall](https://www.alltoall.net/) 背景抠图和各种转换工具
+  * [在线文件转换工具](https://cn.office-converter.com/)  在线各种文件转换工具
 ---
 * 视频测试地址
 

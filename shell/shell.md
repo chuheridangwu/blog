@@ -193,3 +193,57 @@ echo "a" | xxd -ps  #将字符转换成16进制 61
 ```
 
 >需要注意的是，我们不能直接使用`xxd -r 0x313233`，原因是**xxd后面只能接文件!**而echo 123，并用管道连接，其实就是创建了一个临时文件交给xxd来处理
+
+## ar 指令
+ar 查看或者修改静态库文件
+
+## strip
+strip具体就是从特定文件中剥掉一些符号信息和调试信息。定义 main.c 文件
+```c
+#include <stdio.h>
+  
+int add(int x, int y)
+{
+    return x + y;
+}
+  
+int aaa;
+int bbb = 1;
+char szTest[] = "good";
+  
+int main()
+{
+    int ccc = 2;
+    return 0;
+}
+```
+gcc指令生成编译文件,查看编译的结果
+```shell
+xxxxxMacBook-Pro-2 Desktop % gcc main.c
+xxxxxMacBook-Pro-2 Desktop % file a.out
+a.out: Mach-O 64-bit executable arm64
+xxxxxMacBook-Pro-2 Desktop % nm a.out   
+0000000100000000 T __mh_execute_header
+000000010000400c S _aaa
+0000000100003f7c T _add
+0000000100004000 D _bbb
+0000000100003f9c T _main
+0000000100004004 D _szTest
+xxxxxMacBook-Pro-2 Desktop % ls -l a.out
+-rwxr-xr-x  1 mlive  staff  33490 Nov  9 15:11 a.out
+```
+通过`ls -l` 命令可知， a.out的大小是 33490 个字节；
+
+通过`file`命令可知， a.out是可执行文件， 且是`not stripped`, 也就是说没有脱衣服。
+
+通过`nm`命令， 可以读出 a.out 中的符号信息。使用 strip 剥掉一些符号信息
+```
+xxxxxMacBook-Pro-2 Desktop % strip a.out
+xxxxxMacBook-Pro-2 Desktop % ls -l a.out
+-rwxr-xr-x  1 mlive  staff  33384 Nov  9 15:14 a.out
+xxxxxMacBook-Pro-2 Desktop % nm a.out
+0000000100000000 T __mh_execute_header
+```
+通过`ls -l` 命令可知， a.out的大小是 33384 个字节
+
+>strip不仅仅可以针对可执行文件， 还能针对目标文件和动态库等。

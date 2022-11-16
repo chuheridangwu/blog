@@ -10,12 +10,14 @@
   *  [08-URLSession](swift/api/08-URLSession.md)
   *  [09-UICollectionView](swift/api/09-UICollectionView.md)
   *  [10-AVFoundation](swift/api/10-AVFoundation.md)
-* SDK
+* 工具
   *  [01-CocoaPods](swift/sdk/01-CocoaPods.md) 
   *  [02-Cartahge](swift/sdk/02-Cartahge.md) 
   *  [03-常用的三方库](swift/sdk/03-常用的三方库.md) 
   *  [04-三方库使用方法](swift/sdk/04-三方库使用方法.md) 
-  *  [05-静态库](swift/sdk/05-静态库.md) 
+  *  [05-Xcode](swift/sdk/05-Xcode.md) 
+  *  [06-编译命令](swift/sdk/06-编译命令.md) 
+  *  [07-库文件](swift/sdk/07-库文件.md) 
 * 基础语法
   *  [01-Swift基础语法](swift/grammar/01-swift基础语法.md)
   *  [02-Swift函数语法](swift/grammar/02-swift函数.md)
