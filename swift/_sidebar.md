@@ -17,7 +17,8 @@
   *  [04-三方库使用方法](swift/sdk/04-三方库使用方法.md) 
   *  [05-Xcode](swift/sdk/05-Xcode.md) 
   *  [06-编译命令](swift/sdk/06-编译命令.md) 
-  *  [07-库文件](swift/sdk/07-库文件.md) 
+  *  [07-静态库](swift/sdk/07-静态库.md) 
+  *  [08-动态库](swift/sdk/08-动态库.md) 
 * 基础语法
   *  [01-Swift基础语法](swift/grammar/01-swift基础语法.md)
   *  [02-Swift函数语法](swift/grammar/02-swift函数.md)
