@@ -1,27 +1,60 @@
 # Xcode
 Xcode是iOS开发必备的开发工具，在项目中，经常会遇到各种配置和路径问题，这里主要说一下Xcode的一些常见配置
 
-## Xcode常见路径
-xcode常见的一些配置，平时经常遇到找不到库、找不到头文件，可能都是这些配置导致的
-```markdown
-* `${SRCROOT}`：代表的是项目根目录下
-* `${PROJECT_DIR}`：代表的是整个项目
-* `${PROJECT_FILE_PATH}`: 表示project的当前路径，相当于$(PROJECT_DIR)/$(PROJECT_NAME).xcodeproj
-* `$(PROJECT_NAME)` ： 项目名字
-* `${PODS_ROOT}`  : 项目使用cocoapods，pod文件目录
-* `$(inherited)`：添加目录的时候写上 “$(inherited)” 就是表示路径自己从frameworks里面读取。 默认的情况下路径配置是不被 Targets 继承的，只有当Targets的设置加入了$(inherited)时才被继承，继承来自更高一级的配置。
-* `${EXECUTABLE_NAME}` : 执行程序名，默认与 PRODUCT_NAME 一致
-* `${PRODUCT_NAME}` : 显示到用户屏幕上的 App 名称
-* `$(PRODUCT_BUNDLE_IDENTIFIER)` : App的唯一标识 Bundle ID
-```
+## Xcode内置变量
+在编写Xcode脚本的时候，我们通常需要一些内置变量，比如说编译路径，当前项目名称等等。 我们可以通过 `export` 指令打印出Xcode内置变量。首先需要新增 Run Script
+![](../imgs/sdk/ios_sdk_28.png)
+通过`commond + B`编译一下，项目编译完成之后会自动运行脚本，在刚才的编译任务 log 中可以看到内置的环境变量
+![](../imgs/sdk/ios_sdk_29.png)
+
+* 常用到的内置变量
+
+内置变量  |  含义  |  示例
+------- | ------- | -----
+`${SRCROOT}`  | 根目录 | `/Users/mlive/Desktop/wecash`
+`${PROJECT_DIR}`  |  项目目录 | `/Users/mlive/Desktop/wecash`
+`${PROJECT_NAME}`  |  项目名字 | `loan`
+`${PROJECT_FILE_PATH}` | 项目文件路径,相当于`$(PROJECT_DIR)/$(PROJECT_NAME).xcodeproj` | `/Users/mlive/Desktop/wecash/loan.xcodeproj`
+`${EXECUTABLE_NAME}`  |  可执行文件名称 | `loan`
+`${PRODUCT_NAME}`  |  产品名称 | `loan`
+`$(PRODUCT_BUNDLE_IDENTIFIER)`  |  Bundle ID | `com.xxx.xxx`
+`$(inherited)`  |  允许继承来自更高一级的配置 | 
+`$(PUBLIC_HEADERS_FOLDER_PATH)`  |  共有头文件路径 | `loan.app/Headers`
+`$(SCRIPTS_FOLDER_PATH)`  |  脚本路径 | `loan.app/Scripts`
+`$(FRAMEWORKS_FOLDER_PATH)`  |  frameworks文件夹路径 | `loan.app/Frameworks`
+`$(PLUGINS_FOLDER_PATH)`  |  插件文件夹路径 | `loan.app/PlugIns`
+`$(ARCHS)`  |  当前项目架构 | `arm64`
+`$(USER_LIBRARY_DIR)`  |  用户库路径  | 默认为：`~/Library`
+`$(COMPRESS_PNG_FILES)`  |   是否压缩PNG文件  | 默认为YES
+
+* Xcode证书相关变量 `build setting` 中的配置 
+
+内置变量  |  含义  |  示例
+------- | ------- | -----
+`CODE_SIGN_ENTITLEMENTS`  | `entitlements`文件 | `xxxLive/xx.entitlements`
+`CODE_SIGN_IDENTITY`  | 身份 | `iPhone Developer`
+`CODE_SIGN_IDENTITY[sdk=iphoneos*]`  |  描述文件`dev`还是`Release` | `iPhone Distribution`
+`CODE_SIGN_STYLE`  | 签名方式 | `Manual` 或者 `Automatic`
 
 * 编译相关的路径
 
-```markdown
-* `${BUILD_DIR}`build文件的路径
-* `$(CONFIGURATION)`build文件下的product的路径
-*  找到build文件的完整路径`CONFIGURATION_BUILD_DIR`,等于`$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/*`
-```
+内置变量  |  含义  |  示例
+------- | ------- | -----
+`${BUILD_DIR}`  | build文件的路径 | `/Users/mlive/Library/Developer/Xcode/DerivedData/loan-dmnqkzmjvvadlyamxlyhxztvlhsp/Build/Products`
+`${BUILT_PRODUCTS_DIR}` | 构建产品路径 | `/Users/mlive/Library/Developer/Xcode/DerivedData/loan-dmnqkzmjvvadlyamxlyhxztvlhsp/Build/Products/Debug-iphonesimulator`
+`${TARGET_BUILD_DIR}` | 目标构建目录 | `/Users/mlive/Library/Developer/Xcode/DerivedData/loan-dmnqkzmjvvadlyamxlyhxztvlhsp/Build/Products/Debug-iphonesimulator`
+`$(CONFIGURATION)`  |  配置模式 | `Debug` 或者 `Release`
+`$(CODESIGNING_FOLDER_PATH)`  |  编译`*.app`完整路径 | `/Users/mlive/Library/Developer/Xcode/DerivedData/loan-dmnqkzmjvvadlyamxlyhxztvlhsp/Build/Products/Debug-iphonesimulator/loan.app`
+`${EFFECTIVE_PLATFORM_NAME}`  |  平台名称 | `-iphonesimulator`
+
+* Pod相关变量,使用CocoaPods管理第三方，会增加下面几个变量
+
+Pod变量  |  含义  |  示例
+------- | ------- | -----
+`${PODS_ROOT}`  | Pod文件的路径 | `${SRCROOT}/Pods`
+`${PODS_PODFILE_DIR_PATH}`  | `Podfile`文件路径 | `${SRCROOT}/.`
+`${PODS_BUILD_DIR}`  | Pod编译文件路径 | `${BUILD_DIR}`
+`${PODS_CONFIGURATION_BUILD_DIR}`  | 项目构建路径 | `${PODS_BUILD_DIR}/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)`
 
 ##  Build Setting
 设置 | 含义
@@ -121,7 +154,7 @@ nm -pa "${CONFIGURATION_BUILD_DIR}/${PROJECT_NAME}" > /dev/ttys003
 
 做的外包项目正好可以用到，编译完成后直接复制 mach-o 文件到桌面的`Payload`文件，然后压缩成zip，修改名字为ipa即可
 ```shell
-cp "${CONFIGURATION_BUILD_DIR}/${PROJECT_NAME}" ~/Desktop/Payload
+cp -r "${CONFIGURATION_BUILD_DIR}/${PROJECT_NAME}" ~/Desktop/Payload
 cd ~/Desktop
 zip -r xxx.ipa  Payload
 ```
@@ -177,6 +210,7 @@ OTHER_LDFLAGS = -framework "AFNetworking"
 ```
 
 `OTHER_LDFLAGS` 是`Other Linker Flags`的缩写，通过[xcodebuildsettings](https://xcodebuildsettings.com/)这个网站可以找到Xcode配置中的缩写，比如`System Header Search Paths`：
+
 ![](../imgs/sdk/ios_sdk_8.png ':size=600')
 
 > 注意有部分变量不能通过`xcconfig`配置到`Build Settings`中，例如`PRODUCT_BUNDLE_IDENTIFIER`,配置之后不起作用
