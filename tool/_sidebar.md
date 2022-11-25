@@ -10,5 +10,5 @@
 * [SQLite常用方法](tool/sqlite.md)
 * [brew](tool/brew.md)
 * [Mac破解Wifi](tool/破解wifi.md)
-* [日常工作](tool/job.md)
+* [Ruby](tool/ruby.md)
 

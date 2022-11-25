@@ -100,6 +100,13 @@
   * [alltoall](https://www.alltoall.net/) 背景抠图和各种转换工具
   * [在线文件转换工具](https://cn.office-converter.com/)  在线各种文件转换工具
 ---
+* 远程控制
+  * [ToDesk](https://www.todesk.com/download.html?h=2) ToDesk
+  * [向日葵](https://sunlogin.oray.com/) 向日葵
+  * 屏幕共享 : 苹果自带的远程控制，需要在电脑上登录苹果账号，开启iCloud，很卡
+  * [teamviewer](https://www.teamviewer.cn/cn/) 有设备限制，而且限制的莫名其妙。
+  * [Microsoft Remote Desktop Beta](https://docs.microsoft.com/en-us/windows-server/remote/remote-desktop-services/clients/remote-desktop-mac) Mac电脑远程连接Windows，点击文档中的`Microsoft Remote Desktop for Mac`进行下载 
+---
 * 视频测试地址
 
 ```markdown

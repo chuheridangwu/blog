@@ -3,27 +3,54 @@
 
 手册： 如果不知道命令都有什么参数，可以使用`man  对应的命令`来查询，比如`man  ls`
 
-linux常见命令
+## linux常见命令
 
-命令    含义    示例
-column0 | column1 | column2
+命令  |  含义  |  示例
 ------- | ------- | -------
 cd | 切换到对应路径 | `cd xxx`
 ls | 查看当前文件下目录 | `ls`
-cat | 查看当前文件内容 | `cat xxx`
-pwd | 查看当前路径 | `pwd`
+cat | 查看当前文件内容 | `cat 1.txt 2.txt >> 3.txt`,单独使用是查看文件。一个`>`表示覆盖，两个`>>`表示追加。
+pwd | 查看当前路径 | `/Users/xxx/Desktop`
 mkdir | 创建文件件 | `mkdir xxx`
-rmdir | 删除文件夹 | `rmdir xxx`
+rmdir | 删除文件夹,只能是空文件夹 | `rmdir xxx`
 touch | 创建文件 | `touch xxx`
 rm | 删除文件 | `rm xxx`
-mv | 移动文件位置 | `mv xxx ~/xxx`
-find | 查找文件 | `find xxx`
+mv | 移动文件位置 | `mv 移动的文件地址  目标地址`
+find | 在指定目录下查找文件 | `find  [目标路径]`
+grep | 查找文件里符合条件的字符串 | `grep xxx` 
 file | 查看文件具体类型，比如ipa其实就是zip文件。只是后缀改了 | `file xxx`
+export |  列出当前的环境变量值 | `export`
+env |  列出当前电脑设置的环境变量 | `env`
+pushd  | 向栈内添加一个目录，相当于cd过去 | `pushd xxx`
+popd | 返回上一个目录
+echo | 打印  | `echo xxx > /dev/tty001`，重定向
+tty | 当前终端位置  | `/dev/ttys005`
+cp | 拷贝文件,`cp -R`才能拷贝整个目录，目标路径必须存在，否则会替换 | `cp [参数] [原路径] [目标路径]`
+scp | 跨服务器拷贝文件或者文件夹 | `scp [参数] [原路径] [目标路径]`
+zip | 压缩文件 | `zip  [参数] [原路径] [目标路径]`
+unzip | 解压缩文件 | `unzip  [参数] [原路径] [目标路径]`
+chmod | 控制用户对文件的权限 | `chmod +x  目标文件地址`
+vim | 编辑文件 | `vim  目标文件地址`
+awk | 处理文本文件的语言 | ` awk '{print $1,$4}' log.txt` 每行按空格或TAB分割，输出文本中的1、4项
+sed | 利用脚本来处理文本文件 | `sed -e 4a\newLine testfile `在第四行后添加一行文字newLive
+cmp | 比较两个文件是否有差异 | `cmp [原路径] [目标路径]`
+diff | 以逐行的方式，比较文本文件的异同处 | `diff [原路径] [目标路径]`
+cut | 显示每行从开头算起 num1 到 num2 的文字 | `cut [参数] [长度]`
+who | 显示系统中有哪些使用者以及使用者信息 | 
+cut | 显示每行从开头算起 num1 到 num2 的文字 | `cut [参数] [长度]`
+killall | 杀死指定名字的所有进程 | `killall [进程名]`
+last | 显示用户最近登录信息。会读取位于 `/var/log/`目录下名称为 `wtmp` 的文件 | `last`
+open | 打开文件或文件夹 | `open [目标路径]`
+openssl | ssl证书
+ssh | 登录到远程主机 | `ssh -l jsmith remotehost.example.com`
+script  |  记录输出到终端的记录 | `script` 开启
+ftp  |  连接ftp服务器 | `ftp 192.168.42.77`
+sort  |  将文本文件内容加以排序 | `sort [目标路径]` 
+uniq  |  检查及删除文本文件中重复出现的行列，一般与 sort 命令结合使用 | `sort  [目标路径] | uniq `
+wall  |  将讯息传给所有终端 | `wall [消息]` 结束时需加上 EOF (通常用Ctrl+D)
+zipinfo  |  列出压缩文件信息 | `zipinfo [目标路径]`
 
-cd ls cat pwd  mkdir rmdir  touch  cp  rm mv find  file
-
-## ls 查看文件
-* ls  查看当前文件
+## ls - 查看当前文件夹
 
 |  快捷键   | 含义  |
 |  ----  | ----  |
@@ -32,18 +59,15 @@ cd ls cat pwd  mkdir rmdir  touch  cp  rm mv find  file
 | `ls -2* ` | 搜索2开头的文件 |
 | `ls -2?` | 文件详情 |
 
-## ln
+## ln - 软连接
 * ln -s 文件名
 * ln -s
 
 ln -s  属于软连接快捷方式
 ln 属于硬链接快捷键
 
-## cat
-查看当前文件内容,一个`>`表示覆盖，两个`>>`表示追加。
-cat 1.txt 2.txt >> 3.txt : 把1.txt  和 2.txt的内容合并到3.txt中
 
-## grep
+## grep - 文本搜索工具
 grep 是一种强大的文本搜索工具，它能使用正则表达式搜索文本，并把匹配的行打印出来，grep 全称是 Global Regular Expression Print 表示全局正则表达式版本，使用权限是所有用户。
 
   快捷键   | 含义  |
@@ -73,7 +97,7 @@ a$ 查找以a结尾的文件
  -f 批量显示多个文件的文件类型file -f 文件列表
  -F 更改显示的时候的分隔符，默认是':"。file -F "==" -L软链接指向的原始文件的类型file -L 软链接`
 
-## sort
+## sort -  从标准输入中读取数据
 命令从标准输入中读取数据，然后安装字符串内容进行排序
 
 符号 | 含义
@@ -86,7 +110,7 @@ a$ 查找以a结尾的文件
 -r | 反向排序
 -R | 打乱排序
 
-## uniq
+## uniq - 去除重复的行
 去除重复的行，前提是重复的行是连续的
 
 column0 | column1
@@ -95,8 +119,7 @@ column0 | column1
 -d | 仅显示重复过的行
 -u | 仅显示不曾重复的行
 
-
-## wc
+## wc 统计行数
 
 column0 | column1
 ------- | -------
@@ -104,7 +127,7 @@ column0 | column1
 -c | 统计字节数
 -w | 统计单词数
 
-## find
+## find - 查找文件
 
 符号 | 含义
 ------- | -------
@@ -129,7 +152,7 @@ f | 普通文件 |
 xargs 的作用是将查找到的内容输出到一行，主要用来配合其他命令。比如查找对应的文件并移动到某个目录下
 `find . -name "*.txt" | xargs -I{} mv {}  xxx/`。-I{} 指定一个替换字符串作为参数替换。
 
-## sed
+## sed - 以行为单位处理文本
 sed以行为单位处理文本。
 
 符号 | 含义
@@ -144,14 +167,14 @@ s | substitution替换
 ## crontab
 liunx系统定时器，
 
-## dirname
+## dirname - 获取文件路径
 给予dirname一个路径名时，它会删除最后一个斜线（'/'）后的任何后缀，并返回结果。主要用于shell脚本
 ```shell
 dirname /usr/home/carpetsmoker/dirname.wiki
 /usr/home/carpetsmoker     # 结果
 ```
 
-## basename
+## basename - 文件名处理
 basename获取文件名 + 后缀
 ```shell
 basename /root/test.txt

@@ -154,8 +154,10 @@ nm -pa "${CONFIGURATION_BUILD_DIR}/${PROJECT_NAME}" > /dev/ttys003
 
 做的外包项目正好可以用到，编译完成后直接复制 mach-o 文件到桌面的`Payload`文件，然后压缩成zip，修改名字为ipa即可
 ```shell
-cp -r "${CONFIGURATION_BUILD_DIR}/${PROJECT_NAME}" ~/Desktop/Payload
+rm -rf ~/Desktop/Payload/*/
+cp -R ${CODESIGNING_FOLDER_PATH} ~/Desktop/Payload
 cd ~/Desktop
+rm -rf ~/Desktop/xxx.ipa
 zip -r xxx.ipa  Payload
 ```
 
