@@ -69,9 +69,6 @@
 
 ---
 * 素材网站
-  * [Mac软件xclient地址](https://xclient.info)
-  * [Mac软件macbl地址](https://www.macbl.com/)
-  * [Mac软件macyy地址](https://www.macyy.cn/)
   * [素材网站-觅元素](http://www.51yuansu.com/)
   * [素材网站-花瓣](https://huaban.com/home/)
   * [素材网站-图精灵](http://616pic.com/tupian/katongshuiguo.html)
@@ -106,6 +103,15 @@
   * 屏幕共享 : 苹果自带的远程控制，需要在电脑上登录苹果账号，开启iCloud，很卡
   * [teamviewer](https://www.teamviewer.cn/cn/) 有设备限制，而且限制的莫名其妙。
   * [Microsoft Remote Desktop Beta](https://docs.microsoft.com/en-us/windows-server/remote/remote-desktop-services/clients/remote-desktop-mac) Mac电脑远程连接Windows，点击文档中的`Microsoft Remote Desktop for Mac`进行下载 
+---
+* Mac软件
+  * [xclient](https://xclient.info)
+  * [麦氪搜](https://www.imacso.com/)
+  * [佛系软件](https://foxirj.com/)
+  * [Cmacked](https://cmacked.com/)
+  * [macbl](https://www.macbl.com/)
+  * [macyy](https://www.macyy.cn/)
+  * [奇迹秀](https://www.qijishow.com/down/efficiency.html)
 ---
 * 视频测试地址
 

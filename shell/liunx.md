@@ -49,6 +49,7 @@ sort  |  将文本文件内容加以排序 | `sort [目标路径]`
 uniq  |  检查及删除文本文件中重复出现的行列，一般与 sort 命令结合使用 | `sort  [目标路径] | uniq `
 wall  |  将讯息传给所有终端 | `wall [消息]` 结束时需加上 EOF (通常用Ctrl+D)
 zipinfo  |  列出压缩文件信息 | `zipinfo [目标路径]`
+type  |  显示指定命令的类型 | `type [-afptP] name [name ...]`,比如`type -p grep`返回grep指令的路径
 
 ## ls - 查看当前文件夹
 
@@ -236,3 +237,15 @@ echo $extension # zip
 filename="${filename%.*}"
 echo $filename # cos-rom_1.2.-Leadcore_haige-201608311742
 ```
+
+## type - 显示指定命令的类型
+```
+-a：在环境变量PATH中查找并显示所有包含name的可执行文件路径；当'-p'选项没有同时给出时，如果在别名、关键字，函数，内建的信息中存在name，则一并显示。
+-f：排除对shell函数的查找。
+-p：如果name在执行'type -t name'返回的不是'file'，那么什么也不返回；否则会在环境变量PATH中查找并返回可执行文件路径。
+-P：即使要查找的name是别名、内建、函数中的一个，仍然会在环境变量PATH中查找并返回可执行文件路径。
+-t：根据name的类型返回一个单词（别名，关键字，函数，内建，文件），否则返回空值。
+```
+
+## 参考文档
+* [Liunx指令](https://wangchujiang.com/linux-command/c/ls.html)
