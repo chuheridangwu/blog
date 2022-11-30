@@ -11,7 +11,7 @@ cd | 切换到对应路径 | `cd xxx`
 ls | 查看当前文件下目录 | `ls`
 cat | 查看当前文件内容 | `cat 1.txt 2.txt >> 3.txt`,单独使用是查看文件。一个`>`表示覆盖，两个`>>`表示追加。
 pwd | 查看当前路径 | `/Users/xxx/Desktop`
-mkdir | 创建文件件 | `mkdir xxx`
+mkdir | 创建文件夹 | `mkdir xxx`
 rmdir | 删除文件夹,只能是空文件夹 | `rmdir xxx`
 touch | 创建文件 | `touch xxx`
 rm | 删除文件 | `rm xxx`

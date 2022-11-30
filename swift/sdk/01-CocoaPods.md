@@ -50,6 +50,55 @@ target "Demo" do
 end
 ```
 
+## CocoaPods源码和`Podfile`文件调试
+1. 创建一个新的iOS项目，创建一个Podfile文件
+```
+  platform :ios, '11.0'
+  source 'https://github.com/CocoaPods/Specs.git'
+  target "DemoX" do
+    use_frameworks!
+    pod 'AFNetworking'
+  end
+```
+
+2. [下载CocoaPods源码](https://github.com/CocoaPods/CocoaPods),将`CocoaPods`源码和iOS项目放到同一目录下，并在该目录下新建一个`Gemfile`文件,并运行`bundle install`。`Gemfile`文件内容
+```
+  source 'https://rubygems.org'
+  # 指定本地CocoaPods路径
+  gem 'cocoapods', path: './CocoaPods'
+```
+
+3. 创建 `launch.json` 文件，调试 rb 文件时可以选择是否创建 `launch.json`文件，修改部分内容
+```json
+  {
+      // 悬停以查看现有属性的描述。欲了解更多信息，请访问: https://marketplace.visualstudio.com/items?itemName=KoichiSasada.vscode-rdbg
+      "version": "0.2.0",
+      "configurations": [
+          {
+              "type": "rdbg",
+              "name": "Debug current file with rdbg",
+              "request": "launch",
+              // 指定使用的pod解释文件。
+              "script": "${workspaceRoot}/CocoaPods/bin/pod",
+              // pod 命令执行的路径。会在该路径下寻找Podfile文件。
+              "cwd": "${workspaceFolder}/DemoX",
+              // 执行的命令参数，在这里执行的是 pod install
+              "args": ["install"],
+              "askParameters": true
+          },
+          {
+              "type": "rdbg",
+              "name": "Attach with rdbg",
+              "request": "attach"
+          }
+      ]
+  }
+```
+
+4. 在`CocoaPods -> lib -> cocoapods -> command -> install.rb`文件中打断点,进行调试即可
+
+5. iOS项目中的`Podfile`文件内容使用的也是ruby语法,也可以在`pod xxx`中打断点进行调试。
+
 ## 参考文章
 https://www.jianshu.com/p/08e5f06dd31d
 https://www.cnblogs.com/sundaysme/p/13698463.html  检查pod版本及更新pod
