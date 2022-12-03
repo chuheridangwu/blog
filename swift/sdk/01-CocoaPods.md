@@ -5,16 +5,17 @@
 ------- | -------
 `pod search AFNetworking` | 在Cocoapods中搜索当前库信息
 `pod install` | 安装
+`pod --version` | pod版本
 
 
 * 指定仓库地址
-```
+```ruby
 pod 'BRPickerView', :git => 'https://github.com/91renb/BRPickerView.git'
 ```
 
 
 * Swift使用第三方时，有些库需要证书签名。解决方案在`Podfile`文件下添加一下方法
-```swift
+```ruby
 platform :ios, '11.0'
 source 'https://github.com/CocoaPods/Specs.git'
 target 'xxx' do
@@ -30,10 +31,22 @@ post_install do |installer|
 end
 ```
 
+## 指定版本号
+```ruby
+pod 'AFNetworking', '2.0'  #只使用2.0版本
+pod "AFNetworking", '> 2.0' #使用高于2.0的版本
+pod "AFNetworking", '>= 2.0' #使用大于或等于2.0的版本
+pod "AFNetworking", '< 2.0' #使用小于2.0的版本
+pod "AFNetworking", '<= 2.0' #使用小于或等于2.0的版本
+pod "AFNetworking", '~> 0.1.2' #使用大于等于0.1.2但小于0.2的版本
+pod "AFNetworking", '~> 0.1' #使用大于等于0.1但小于1.0的版本
+pod "AFNetworking", '~> 0' #使用最新版本，不写 `~> 0` 也是使用最新版本
+```
+
 ## 指定workspace
 当有多个workspace,对主workspace进行指定，并且对不同的 target 导入相同的动态库,项目结构如下图:
 ![](../imgs/sdk/ios_sdk_27.png)
-```
+```ruby
 platform :ios, '11.0'
 source 'https://github.com/CocoaPods/Specs.git'
 
@@ -52,7 +65,7 @@ end
 
 ## CocoaPods源码和`Podfile`文件调试
 1. 创建一个新的iOS项目，创建一个Podfile文件
-```
+```ruby
   platform :ios, '11.0'
   source 'https://github.com/CocoaPods/Specs.git'
   target "DemoX" do
@@ -62,7 +75,7 @@ end
 ```
 
 2. [下载CocoaPods源码](https://github.com/CocoaPods/CocoaPods),将`CocoaPods`源码和iOS项目放到同一目录下，并在该目录下新建一个`Gemfile`文件,并运行`bundle install`。`Gemfile`文件内容
-```
+```ruby
   source 'https://rubygems.org'
   # 指定本地CocoaPods路径
   gem 'cocoapods', path: './CocoaPods'
@@ -99,12 +112,36 @@ end
 
 5. iOS项目中的`Podfile`文件内容使用的也是ruby语法,也可以在`pod xxx`中打断点进行调试。
 
+## 关于`Podfile`文件
+`Podfile`文件写入的是ruby语法，像我们常用的一些 pod 命令,并不是可执行文件，通过`file pod`查看其实也是文本文件。
+```shell
+file /Users/xxx/Desktop/aaaa/CocoaPods/bin/pod 
+/Users/xxx/Desktop/aaaa/CocoaPods/bin/pod: Ruby script text executable, ASCII text
+```
+
+在`Podfile`文件文件中，可以 hook pod中的一些方法，比如`post_install`和`pre_install`
+* `pre_install`: Pod下载之后再安装之前对Pod进行任何更改
+* `post_install`: 将生成的Xcode项目写入磁盘之前，对其进行最后的更改
+
+一些常用的比如`pod install`,install 也是一个 ruby 文件。运行`pod install`时，需要先将`Podfile`文件解析成DSL语法树,可以在 target 中运行 shell 脚本，比如:
+```ruby
+target "DemoX" do
+  use_frameworks!
+  pod 'AFNetworking'
+  # 创建 Xcode shell脚本,在Xcode -> Build Phases 中可以看到新创建的脚本
+  script_phase :name => 'Run Cat Build Script' #脚本名称
+    :script => "echo Cat1237" #脚本命令
+    :input_files => [] #对哪些文件进行使用
+    :execution_position => :before_compile #执行时机
+end
+```
+
 ## 参考文章
-https://www.jianshu.com/p/08e5f06dd31d
+
 https://www.cnblogs.com/sundaysme/p/13698463.html  检查pod版本及更新pod
-https://blog.csdn.net/qq_22625011/article/details/79930426  podfile里指定版本号，指定区间版本号，指定最小版本号，指定最大版本号
 https://www.jianshu.com/p/d6a592d6fced  使用私有Cocoapods仓库 中高级用法
 
 * [ruby官网](https://rubygems.org/gems/cocoapods) 
 * [CocoaPods官网](https://cocoapods.org/) 
 * [把玩CocoaPods post_install 和 pre_install](https://www.jianshu.com/p/d8eb397b835e?from=timeline&isappinstalled=0)
+* [CocoaPods 入门指北](https://juejin.cn/post/7010724727320739877)

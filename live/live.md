@@ -66,6 +66,11 @@ E秒贷 - 银行贷款  年化率4.8% - 14.8%  具体利率和贷款金额需要
 中国银行
 中E贷  年化率 3.9%
 
+## 获取抖音视频真实地址
+1. 分享到网页
+2. 调用接口  `https://www.iesdouyin.com/web/api/v2/aweme/iteminfo/?item_ids=7090934591594302759`,更换  item_ids 的值
+3. 查看key `play_addr`的值
+
 
 ## 彩票店入住
 * [浙江阳光邀约](https://www.zjlottery.com/zhengzhao/)

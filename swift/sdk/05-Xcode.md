@@ -26,6 +26,10 @@ Xcode是iOS开发必备的开发工具，在项目中，经常会遇到各种配
 `$(ARCHS)`  |  当前项目架构 | `arm64`
 `$(USER_LIBRARY_DIR)`  |  用户库路径  | 默认为：`~/Library`
 `$(COMPRESS_PNG_FILES)`  |   是否压缩PNG文件  | 默认为YES
+`${INFOPLIST_KEY_CFBundleDisplayName}` | App的名称，需要在info.plist中加入`CFBundleDisplayName` | 对应`Xcode -> TARGETS -> General -> Identity -> Display Name`，必须填写才有值
+`${TARGET_DEVICE_PLATFORM_NAME}` | 目标设备名称,如果选择构建,这个值为空 | 真机是`iphoneos`,模拟器是`iphonesimulator`
+`${MARKETING_VERSION}` | APP发布版本 | 1.0.0
+
 
 * Xcode证书相关变量 `build setting` 中的配置 
 
@@ -152,13 +156,15 @@ nm -pa "${CONFIGURATION_BUILD_DIR}/${PROJECT_NAME}" > /dev/ttys003
 * `${CONFIGURATION_BUILD_DIR}` 项目编译的文件夹路径，一直到`build`文件的目录
 * `${PROJECT_NAME}`项目的名字，生成的 mach-o 文件名字一般都是项目名字
 
-做的外包项目正好可以用到，编译完成后直接复制 mach-o 文件到桌面的`Payload`文件，然后压缩成zip，修改名字为ipa即可
+做的项目正好可以用到，编译完成后直接复制 mach-o 文件到桌面的`Payload`文件，然后压缩成zip，修改名字为ipa即可
 ```shell
-rm -rf ~/Desktop/Payload/*/
-cp -R ${CODESIGNING_FOLDER_PATH} ~/Desktop/Payload
-cd ~/Desktop
-rm -rf ~/Desktop/xxx.ipa
-zip -r xxx.ipa  Payload
+rm -rf ~/Desktop/Payload/*/ #删除Payload文件夹内的文件
+rm -rf ~/Desktop/${INFOPLIST_KEY_CFBundleDisplayName}.ipa  #删除同名ipa
+if [ -z ${TARGET_DEVICE_PLATFORM_NAME}];then  #如果没有证明在构建
+    cp -R ${CODESIGNING_FOLDER_PATH} ~/Desktop/Payload #拷贝到桌面文件
+    cd ~/Desktop
+    zip -r "${INFOPLIST_KEY_CFBundleDisplayName}"_"${MARKETING_VERSION}".ipa  Payload #压缩成zip
+fi
 ```
 
 ## 推荐文档

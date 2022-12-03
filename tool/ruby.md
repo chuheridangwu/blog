@@ -14,7 +14,7 @@ ruby 3.1.0p0 (2021-12-25 revision fb4df44d16) [arm64-darwin20]
 Bundler 能够跟踪并安装所需的特定版本的 gem，以此来为 Ruby 项⽬提供⼀
 致的运⾏环境。
 ![](./imgs/ruby_02.png)
-```
+```ruby
 source 'https://rubygems.org'
 gem 'rails', '4.1.0.rc2'
 gem ‘debug'
@@ -57,7 +57,7 @@ rdbg --command --open --stop-at-load --sock-path=/var/folders/tv/b9rpcj011w110tj
 ```
 
 launch.json 中各项设置的含义如下。
-```
+```json
 "name": "Debug Rails"此配置的名称
 "type": "rdbg"此配置的类型（要使用的扩展）
 "request": "launch"“开始调试”中的设置
@@ -70,7 +70,7 @@ launch.json 中各项设置的含义如下。
 
 ## CocoaPods源码调试
 1. 创建一个新的iOS项目，创建一个Podfile文件
-```
+```ruby
   platform :ios, '11.0'
   source 'https://github.com/CocoaPods/Specs.git'
   target "DemoX" do
@@ -80,7 +80,7 @@ launch.json 中各项设置的含义如下。
 ```
 
 2. [下载CocoaPods源码](https://github.com/CocoaPods/CocoaPods),将`CocoaPods`源码和iOS项目放到同一目录下，并在该目录下新建一个`Gemfile`文件,并运行`bundle install`。`Gemfile`文件内容
-```
+```ruby
   source 'https://rubygems.org'
   # 指定本地CocoaPods路径
   gem 'cocoapods', path: './CocoaPods'
@@ -116,6 +116,171 @@ launch.json 中各项设置的含义如下。
 4. 在`CocoaPods -> lib -> cocoapods -> command -> install.rb`文件中打断点,进行调试即可
 
 5. iOS项目中的`Podfile`文件内容使用的也是ruby语法,也可以在`pod xxx`中打断点进行调试。
+
+## Ruby修改Mach-O文件
+Ruby 修改 MachO 文件需要用到第三方`ruby-macho`,[仓库地址](https://github.com/Homebrew/ruby-macho)。
+1. 创建 gem 文件
+```ruby
+source 'https://rubygems.org'
+gem 'ruby-macho'
+```
+2. 创建rb文件,将rb文件和gem文件放在同一文件夹下,VSCode 打开文件夹，创建`launch.json` 文件,调用`bundle install`加载ruby-macho
+3. `ruby-macho`的一些方法
+```ruby
+require 'macho'
+macho_path_exec = '../ipas/Cat' #可执行文件路径
+file_exec = MachO::MachOFile.new(macho_path_exec)
+# 确认Mach-O是否是可执行文件
+puts file_exec.executable?
+# 查看MachO文件的header信息
+puts file_exec.header.to_h
+# 查看commands段
+file_exec.load_commands.each do |lc|
+    puts "#{lc.type}: offset #{lc.offset}, size: #{lc.cmdsize}"
+end
+# 查看某个段的个数
+puts file_exec[:LC_LOAD_DYLIB].count
+## 添加rpath
+lc_rpath = MachO::LoadCommands::LoadCommand.create(:LC_RPATH,"test")
+file_exec.add_command lc_rpath
+file_exec.write! # 调用后会修改源文件
+## 移除 LC_LOAD_DYLIB 段
+file_exec.delete_command file_exec[:LC_LOAD_DYLIB].first until file_exec[:LC_LOAD_DYLIB].empty?    
+```
+
+#### Ruby修改动态库
+ruby 在修改可执行文件时，是对二进制直接做修改。`tools.rb`方法中可以对 Mach-O 文件进行
+```ruby
+require 'macho'
+require 'fileutils'
+
+macho_path_exec = '../ipas/Alamofire'
+macho_copy_path_exec = '../ipas/Alamofire_copy'
+
+#拷贝可执行文件
+FileUtils.cp macho_path_exec, macho_copy_path_exec
+
+# ruby是直接修改的二进制文件
+file_dylibs = MachO::Tools.dylibs(macho_path_exec)
+file_dylibs.each do |dylib|
+    puts dylib
+end
+
+puts "--------"
+
+# 修改dylib_id
+MachO::Tools.change_dylib_id(macho_copy_path_exec,"test_copy")
+# 记载Mach-O文件
+copy = MachO::MachOFile.new(macho_copy_path_exec)
+origin = MachO::MachOFile.new(macho_path_exec)
+# 打印 dylib_id
+puts "copy dylib_id: #{copy.dylib_id}    ---origin---: #{origin.dylib_id}"
+
+puts "--------"
+
+## 添加rpath
+puts "copy rpath: #{copy.rpaths}    ---origin---: #{origin.rpaths}"
+MachO::Tools.add_rpath(macho_copy_path_exec, '@loader_path/Frameworks/cat/cat')
+copy = MachO::MachOFile.new(macho_copy_path_exec)
+puts "copy rpath: #{copy.rpaths}    ---origin---: #{origin.rpaths}"
+
+puts "--------"
+
+# 删除rpath
+MachO::Tools.delete_rpath(macho_copy_path_exec, '@loader_path/Frameworks/cat/cat')
+copy = MachO::MachOFile.new(macho_copy_path_exec)
+puts "copy rpath: #{copy.rpaths}    ---origin---: #{origin.rpaths}"
+```
+
+#### 合并Mach-O
+```ruby
+require 'macho'
+
+# armV7 arm64
+macho_path_arm_dylib = './bin/libAFNetworking_arm.dylib'
+# x86_64
+macho_path_dylib = './bin/libAFNetworking.dylib'
+
+# 合并后的文件
+macho_path_merge_dylib = './bin/libAFNetworking_copy_merge.dylib'
+# 合并之后动态库 macho headers 
+filenames = [macho_path_dylib, macho_path_arm_dylib]
+MachO::Tools.merge_machos(macho_path_merge_dylib, *filenames)
+
+# 打印 Mach-O 支持的架构类型 cputype
+file = MachO::FatFile.new(macho_path_merge_dylib)
+file.machos.each { |macho|
+    puts macho.cputype
+}
+puts file.header.to_h
+```
+
+## xcodeproj
+xcodeproj是 CocoaPods 官方开发用来管理Xcode项目的，
+使用`gem info xcodeproj`查看详情，[源码地址](https://github.com/CocoaPods/Xcodeproj)
+```ruby
+xcodeproj (1.22.0, 1.21.0, 1.19.0)
+    Author: Eloy Duran
+    Homepage: https://github.com/cocoapods/xcodeproj
+    License: MIT
+    Installed at (1.22.0): /opt/homebrew/lib/ruby/gems/3.1.0
+                 (1.21.0): /opt/homebrew/lib/ruby/gems/3.1.0
+                 (1.19.0): /opt/homebrew/lib/ruby/gems/3.1.0
+
+    Create and modify Xcode projects from Ruby.
+```
+
+xcodeproj的用法,[查看相关API](https://www.rubydoc.info/gems/xcodeproj/Xcodeproj/Constants)
+```ruby
+require 'xcodeproj'
+
+app_project_path = './DemoX/DemoX.xcodeproj'
+app_workspace_path = './DemoX/DemoX.xcworkspace'
+
+# 生成workspace对象
+workspace = Xcodeproj::Workspace.new_from_xcworkspace(app_workspace_path)
+puts workspace
+
+# workspace管理schemes
+workspace.schemes.each do |s|
+    puts s
+end
+
+# 生成project对象
+project = Xcodeproj::Project.open(app_project_path)
+# project管理target
+project.targets.each do |target|
+    puts target.name
+end
+
+puts "------"
+
+# 查看 项目中可编译的文件，只查找.m .mm .swift文件
+files = project.targets.first.source_build_phase.files.to_a.map do |pbx_build_file|
+    pbx_build_file.file_ref.real_path.to_s
+end.select do |path|
+    path.end_with?('.m', '.mm', '.swift')
+end
+puts files
+
+# 生成 xcconfig 文件
+ab_path = File.dirname(__FILE__) + './DemoX/Test.release.xcconfig'
+xc_ref = project.new_file(ab_path)
+## 使用 xcconfig 文件
+project.targets.first.build_configurations.first.base_configuration_reference = xc_ref
+puts project.targets.first.build_configurations.first.base_configuration_reference
+# 项目保存
+project.save
+
+# 修改bundle id
+project.targets.each do |target|
+    target.build_configurations.each do |config|
+       config.build_settings["PRODUCT_BUNDLE_IDENTIFIER"] = "com.test.test" if name = "DEBUG"
+    end
+end
+project.save
+```
+
 
 ## Symbol
 Ruby 是⼀个强⼤的⾯向对象脚本语⾔，⼀切皆是对象。 在 Ruby 中 `Symbol` 表示“名字”，⽐如字符串的名字，标识符的名字。
