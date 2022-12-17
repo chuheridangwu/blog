@@ -14,7 +14,7 @@
 * [Lesson 25 Mrs. Smiths Kitchen](/xgn/1/25.md)
 * [Lesson 27 Mrs. Smiths living room](/xgn/1/27.md)
 * [Lesson 29 Come in, Amy.](/xgn/1/29.md)
-* [Lesson 31 Wheres Sally?](/xgn/1/31md)
+* [Lesson 31 Wheres Sally?](/xgn/1/31.md)
 * [Lesson 33 A fine day](/xgn/1/33.md)
 * [Lesson 35 Our village](/xgn/1/35.md)
 * [Lesson 37 Making a bookcase](/xgn/1/37.md)

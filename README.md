@@ -107,13 +107,11 @@
   * [Microsoft Remote Desktop Beta](https://docs.microsoft.com/en-us/windows-server/remote/remote-desktop-services/clients/remote-desktop-mac) Mac电脑远程连接Windows，点击文档中的`Microsoft Remote Desktop for Mac`进行下载 
 ---
 * Mac软件
-  * [xclient](https://xclient.info)
-  * [麦氪搜](https://www.imacso.com/)
-  * [佛系软件](https://foxirj.com/)
-  * [Cmacked](https://cmacked.com/)
-  * [macbl](https://www.macbl.com/)
   * [macyy](https://www.macyy.cn/)
-  * [奇迹秀](https://www.qijishow.com/down/efficiency.html)
+  * [Cmacked](https://cmacked.com/)
+  * [苹果系统之家](https://macoshome.com/windows)
+  * [macbl](https://www.macbl.com/)
+  * [appstorrent](https://appstorrent.ru/)
 ---
 * 视频测试地址
 
@@ -123,3 +121,7 @@
 * `mp4`: http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4
 * `m3u8`: http://devimages.apple.com/iphone/samples/bipbop/bipbopall.m3u8
 ```
+---
+* 牛逼的网址
+  * [ChatGPT](https://chat.openai.com/chat): 很厉害的一个AI项目，可以直接编写代码
+  * [Midjourney](https://discord.com/channels/662267976984297473/1008571246654533692): AI绘图,根据英文描述智能生成图片。[相关教程](https://www.cnyisai.com/122482.html)

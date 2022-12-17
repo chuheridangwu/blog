@@ -173,6 +173,21 @@ for name in dirList:
 | os.O_NOFOLLOW: | 不追踪软链接| 
 
 
+## 获取文件名前后缀
+
+```python
+# -*- coding: UTF-8 -*-
+import os
+file = "Hello.py"
+
+# 获取前缀（文件名称）
+print(os.path.splitext(file)[0])  # "Hello"
+# 获取后缀（文件类型）
+print(os.path.splitext(file)[-1])  # ".py"
+print(os.path.splitext(file)[-1][1:])  # "py"
+```
+
+
 ## os.walk(path)函数
 ```python
 # -*- coding: utf-8 -*

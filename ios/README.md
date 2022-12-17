@@ -83,7 +83,7 @@ Testflight 分内部测试和外部测试:
 * [ipatool](https://github.com/majd/ipatool) 获取手机上安装过的IPA，直接与 iTunes 和 App Store 通信。
 * [Microsoft Remote Desktop Beta](https://docs.microsoft.com/en-us/windows-server/remote/remote-desktop-services/clients/remote-desktop-mac)  连接远程window的工具，点击文档中的`Microsoft Remote Desktop for Mac`进行下载 
 * [蓝奏云](https://pandaboy.lanzoub.com/) 蓝奏云可以直接在线安装IPA
-
+* [Parallels Desktop](https://cmacked.com/parallels-desktop-18/)安装Window系统，破解需要[下载此shell文件](https://git.icrack.day/somebasj/ParallelsDesktopCrack)，在Macos13.0系统需要给命令行工具完全权限，设置->隐式与安全->完全磁盘访问权限
 ---- 
 
 ### 逆向相关工具

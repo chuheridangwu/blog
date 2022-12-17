@@ -295,6 +295,19 @@ UIButton的默认布局左边是图片，右边是文字。我们经常会遇到
 
 >如果只是两个UILabel冲突的时候，只要将不想被压缩内容的控件`Content Compression Resistance Priority`优先级调大即可
 
+## xib中使用动画
+在xib中使用动画，首先需要将约束添加为属性。然后修改属性的值，在动画方法中调用`layoutIfNeeded`方法
+```swift
+@objc func dismissView(){
+    cententY.constant = 120
+    UIView.animate(withDuration: 0.3) { [weak self] in
+        self?.layoutIfNeeded()
+    } completion: { isfinish in
+        self.removeFromSuperview()
+    }
+}
+```
+
 ## 相关文档
 * [Xib文件使用（二）——关联变量](https://blog.csdn.net/xunyn/article/details/8521194)
 * [Xib的使用：设置File‘s Owner的Class和view的Class的区别](https://blog.csdn.net/az44yao/article/details/110836006?spm=1001.2101.3001.6661.1&utm_medium=distribute.pc_relevant_t0.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7ERate-1.pc_relevant_default&depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7ERate-1.pc_relevant_default&utm_relevant_index=1)

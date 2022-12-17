@@ -247,3 +247,26 @@ if __name__ == '__main__':
             html = get_content(url)
             result = get_data(html)
 ```
+
+## 指定行插入文字
+```python
+# -*- coding: utf-8 -*
+
+import os
+#  遍历文件夹下的文件
+for (root, dirs, files) in os.walk("/Users/xxx/Desktop/Lean/xgn/1"):
+    for file_name in files:
+        print('-----fileName-------' + file_name)
+        print(os.path.splitext(file_name)[0]) # 获取文件名 xxx.txt 获取xxx
+        lines=[]
+        f=open(os.path.join(root, file_name), 'r')  #your path!
+        for line in f:
+            lines.append(line)
+        f.close()
+        lines.insert(2,"23232")
+        s=''.join(lines)
+        f=open(os.path.join(root, file_name), 'w+') #重新写入文件
+        f.write(s)
+        f.close()
+        del lines[:]
+```
