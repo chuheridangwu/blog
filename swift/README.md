@@ -51,6 +51,7 @@ Swift中没有PCH文件，可以在桥接文件中导入常用的库,当做PCH�
 ## @escaping  表明当前闭包是一个逃逸闭包(闭包脱离了当前函数的作用范围到外部去调用就是逃逸闭包)
 ## @_silgen_name 解决Swift和C语言方法冲突，对C语言函数重命名
 ## MemoryLayout 获取当前类型系统分配的真实大小 `MemoryLayout<Int64>.size`
+## fallthrough  Switch中使用，匹配 case 成功后使用可向下穿透 
 ```
 
 ### Swift中常用的第三方

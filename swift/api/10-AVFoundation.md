@@ -109,3 +109,4 @@ func WM_FUNC_saveVideo(_ urlStr:String) -> Void {
 [iOS硬解码H264视频流](https://www.jianshu.com/p/a716dce3b862)
 [AVFoundation](https://juejin.cn/post/7018816531425394719)
 [iOS获取设备摄像头——视频采集](https://www.jianshu.com/p/320d73482c35)
+[CVPixelBuffer](https://juejin.cn/post/7064214474130980878)

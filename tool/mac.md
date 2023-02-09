@@ -181,6 +181,15 @@ export PATH=~/theos/bin:$PATH
 >从 macOS 版本开始，使用`zsh`替换bash用做默认的shell工具，我们在 `~/.bash_profile` 中配置环境变量, 每次重启终端后配置不生效。需要重新执行 `source ~/.bash_profile`,这是因为zsh加载的是 `~/.zshrc`文件,**我们需要在`~/.zshrc`文件最后增加一行：
 `source ~/.bash_profile`**
 
+## Mac下pip安装包之后无法在命令行使用解决方法
+当mac上安装pip或pip3之后，使用pip3包安装shodan或者wafw00f的时候，命令行没法执行访问时，解决方案是
+1. 修改`bash_profile`文件，使用指令`vim .bash_profile`
+2. 在`bash_profile`文件中添加以下路径,需要修改对应的电脑名称和python版本
+```shell
+export PATH="/Users//Library/Python/3.9/bin:$PATH"
+```
+3. 使用`source ~/.bash_profile`使路径立即生效
+
 
 ## 常见问题
 1. 使用自动打包时一直提示输入管理员账号和密码

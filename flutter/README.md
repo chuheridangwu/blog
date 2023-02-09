@@ -31,7 +31,8 @@ Flutter是谷歌的移动UI框架，可以快速在iOS和Android上构建高质�
 Flutter的控件和iOS中的控件概念上是不一样的，在Flutter中万物皆是 Widget ,即使是一些功能组件也是Widget,跟iOS中的View有很大的区别，理解起来很快，但是在使用上思想上转变比较慢。
 
 ### 推荐网址
-* [Flutter实战电子书](https://book.flutterchina.club/#%E7%BC%98%E8%B5%B7) 讲解的比较细，查看一些控件的使用可以从这里看。这本书写的比较早，很多API都过时了，仅作为参考。
+* [《Flutter实战·第二版》](https://book.flutterchina.club/) 讲解的比较细，查看一些控件的使用可以从这里看。这本书写的比较早，很多API都过时了，仅作为参考。
+* [Flutter 新建一个App](https://www.yuque.com/weiza1026/zprvt8/hu5xpq)
 * [Flutter系列教程](https://mp.weixin.qq.com/mp/appmsgalbum?__biz=Mzg5MDAzNzkwNA==&action=getalbum&album_id=1566028536430247937&scene=173&from_msgid=2247483692&from_itemidx=1&count=3&nolastread=1#wechat_redirect) coderwhy的公众号教程
 * [Flutter官方中文网](https://flutter.cn/docs/cookbook)
 * [Flutter中文网](https://flutterchina.club/get-started/install/) 用户搭建的Flutter中文社区

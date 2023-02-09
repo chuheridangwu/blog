@@ -282,7 +282,7 @@ UIButton的默认布局左边是图片，右边是文字。我们经常会遇到
 > 当我们设置UILabel时，只要给它位置就可以，它自己会计算大小
 
 当一行有两个UILable的时候，如果不给他们设置优先级，就会造成`Intrinsic冲突`。因为当两个label显示的内容超过一行时，它们不知道要优先显示谁。需要用到下面的属性:
-* `Content Hugging Priority`:内容拥抱优先级,默认是251。**优先级越大，当前控件大小保持不变，另一个控件进行拉伸或压缩**
+* `Content Hugging Priority`:内容拥抱优先级,默认是251。**如果组件的此属性优先级比另一个组件此属性优先级高的话，那么这个组件就保持不变，另一个可以在需要拉伸的时候拉伸**
     ```swift
     open func contentHuggingPriority(for axis: NSLayoutConstraint.Axis) -> UILayoutPriority
     open func setContentHuggingPriority(_ priority: UILayoutPriority, for axis: NSLayoutConstraint.Axis)

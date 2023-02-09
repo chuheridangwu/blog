@@ -22,4 +22,3 @@
   * [股票](live/券商.md)
 * 英语
   * [单词](live/keyword.md)
-  * [新概念](../xgn/)

@@ -11,3 +11,4 @@
     * [shell](/shell/)
     * [前端](/web/)
     * [PhotoShop](/photoshop/)
+    * [新概念](/xgn/)

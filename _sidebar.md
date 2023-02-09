@@ -12,3 +12,4 @@
 * [Photoshop](photoshop/)
 * [工具文档](tool/)
 * [生活](live/)
+* [新概念](/xgn/)
