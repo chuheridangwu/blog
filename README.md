@@ -28,7 +28,6 @@
 * Mac电脑中常用软件
   * Wireshark、Charles: 抓包工具
   * Xcode、Android Studio、VSCode、WebStorm: 开发工具
-  * iFunBox: IPA安装工具
   * Apple Configurator2: 获取苹果商店IPA
   * Alfred: 快捷命令，支持快捷搜索
   * Downie4: 视频下载工具 
@@ -40,8 +39,10 @@
   * Cornerstone: SVN图形工具
   * ClearMyMac X: 电脑垃圾清理工具
   * XMind、MindNode: 思维导图
-  * Postman、ApiPost、curl: 接口调试工具
+  * Postman、Apifox、curl: 接口调试工具
   * Sip: 取色器
+  * [M1芯片安卓模拟器](https://github.com/google/android-emulator-m1-preview/releases/tag/0.3)
+  * [IPA-to-App-M1](https://github.com/Mila432/IPA-to-App-M1) IPA转m1芯片的APP
 ---
 * 团队中常用的工具
   * ShowDoc: 可以当做接口文档进行使用
