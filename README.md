@@ -24,7 +24,6 @@
 14. 不想再活在别人的目光里了，明白吗？耗费一生，干什么都要活成别人认为的好，甚至连蘸个酱油都要蘸别人认为的好，你快乐吗？
 ```
 
-
 * Mac电脑中常用软件
   * Wireshark、Charles: 抓包工具
   * Xcode、Android Studio、VSCode、WebStorm: 开发工具
@@ -43,6 +42,7 @@
   * Sip: 取色器
   * [M1芯片安卓模拟器](https://github.com/google/android-emulator-m1-preview/releases/tag/0.3)
   * [IPA-to-App-M1](https://github.com/Mila432/IPA-to-App-M1) IPA转m1芯片的APP
+  * [localsend](https://localsend.org/) 局域网跨端传输文件
 ---
 * 团队中常用的工具
   * ShowDoc: 可以当做接口文档进行使用
