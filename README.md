@@ -43,6 +43,7 @@
   * [M1芯片安卓模拟器](https://github.com/google/android-emulator-m1-preview/releases/tag/0.3)
   * [IPA-to-App-M1](https://github.com/Mila432/IPA-to-App-M1) IPA转m1芯片的APP
   * [localsend](https://localsend.org/) 局域网跨端传输文件
+  * [xnip](https://apps.apple.com/cn/app/xnip/id1221250572?mt=12) 截图标注软件
 ---
 * 团队中常用的工具
   * ShowDoc: 可以当做接口文档进行使用
@@ -121,7 +122,8 @@
   * [teamviewer](https://www.teamviewer.cn/cn/) 有设备限制，而且限制的莫名其妙。
   * [Microsoft Remote Desktop Beta](https://docs.microsoft.com/en-us/windows-server/remote/remote-desktop-services/clients/remote-desktop-mac) Mac电脑远程连接Windows，点击文档中的`Microsoft Remote Desktop for Mac`进行下载 
 ---
-* Mac软件
+* Mac软件网址
+  * [xxmac](https://www.xxmac.com/)
   * [macyy](https://www.macyy.cn/)
   * [Cmacked](https://cmacked.com/)
   * [苹果系统之家](https://macoshome.com/windows)

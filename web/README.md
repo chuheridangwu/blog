@@ -9,13 +9,14 @@ CSS既然是装饰html，自己本身需要有一些内容可以装饰，这个�
 动画、背景、边框和轮廓、盒(框)、颜色、内容分页媒体、定位、可伸缩框、字体、生成内容、网格、超链接、行框、列表、外边距、marquee(跑马灯)、多列、内边距、分页媒体、定位、打印、变革、文本、2D/3D转换、过度、用户界面
 
 ## 相关网址
-* [HTML 元素参考](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element)
-* [点击查看对应的属性](https://www.w3school.com.cn/cssref/index.asp#userinterface)
-* [点击查看所有伪类选择器](https://developer.mozilla.org/zh-CN/docs/Web/CSS/Pseudo-classes)
+* [MDN HTML 元素参考](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element)
+* [W3C 点击查看对应的属性](https://www.w3school.com.cn/cssref/index.asp#userinterface)
+* [MDN 点击查看所有伪类选择器](https://developer.mozilla.org/zh-CN/docs/Web/CSS/Pseudo-classes)
 * [在线调整元素阴影网址](https://html-css-js.com/css/generator/box-shadow/)  
 * [在线调整文字阴影网址](https://html-css-js.com/css/generator/box-shadow/)
-* [Javascript方法查询](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript)
+* [MDN Javascript方法查询](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript)
 * [利用border或者CSS的特性做出的图形](https://css-tricks.com/the-shapes-of-css/#top-of-site)
+* [MDN JavaScript 标准内置对象](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects)
 
 
 ## VSCode相关插件
@@ -24,3 +25,5 @@ CSS既然是装饰html，自己本身需要有一些内容可以装饰，这个�
 * 文件夹图标：`VSCode Great Icons`
 * 在浏览器中打开网页：`open in browser`、`Live Sever`
 * 自动重命名标签：`auto rename tag`
+* 编写CSS时将PX转换成vw`px to vw`
+* 在react开发中会使用到的，打印语句cgl；`ES7+ React/Redux/React-Native snippets`

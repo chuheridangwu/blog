@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .active{
+            color: red;
+            font-size: 20px;
+            background-color: yellow;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="list">
+        <button data-action="new">新建</button>
+        <button data-action="search">搜索</button>
+        <button data-action="delete">删除</button>
+    </div>
+
+    <script>
+        // 每个li添加点击方法
+        var btnsEls = document.querySelector(".list")
+        btnsEls.addEventListener("click",function (svent) {
+            var action = event.target.dataset.action
+            switch (action) {
+                case "new":
+                    console.log("点击了新建按钮");
+                    break;
+                case "search":
+                    console.log("点击了搜索按钮");
+                    break;
+                case "delete":
+                    console.log("点击了删除按钮");
+                    break;
+                default:
+                    console.log("点击了其他");
+            }
+        })
+
+    </script>
+</body>
+</html>
+

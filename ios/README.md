@@ -84,6 +84,10 @@ Testflight 分内部测试和外部测试:
 * [Microsoft Remote Desktop Beta](https://docs.microsoft.com/en-us/windows-server/remote/remote-desktop-services/clients/remote-desktop-mac)  连接远程window的工具，点击文档中的`Microsoft Remote Desktop for Mac`进行下载 
 * [蓝奏云](https://pandaboy.lanzoub.com/) 蓝奏云可以直接在线安装IPA
 * [Parallels Desktop](https://cmacked.com/parallels-desktop-18/)安装Window系统，破解需要[下载此shell文件](https://git.icrack.day/somebasj/ParallelsDesktopCrack)，在Macos13.0系统需要给命令行工具完全权限，设置->隐式与安全->完全磁盘访问权限
+* [altstore](https://altstore.io/) 使用自己的苹果账号对ipa进行签名，只有7天有效
+* [decrypt](https://decrypt.day/)下载appstore的IPA
+
+
 ---- 
 
 ### 逆向相关工具
