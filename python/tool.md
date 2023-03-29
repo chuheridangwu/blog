@@ -270,3 +270,26 @@ for (root, dirs, files) in os.walk("/Users/xxx/Desktop/Lean/xgn/1"):
         f.close()
         del lines[:]
 ```
+
+## 删除视频制定前几秒后生成新的视频
+```python
+import os
+import subprocess
+
+# 设置要处理的视频文件夹路径和输出文件夹路径
+input_output_folder = '../短视频/玩转手机影像全系课'
+
+# 确保输出文件夹存在
+if not os.path.exists(os.path.join(input_output_folder, 'output')):
+    os.makedirs(os.path.join(input_output_folder, 'output'))
+
+# 遍历文件夹中的所有视频文件
+for filename in os.listdir(input_output_folder):
+    if filename.endswith('.mp4') or filename.endswith('.avi'):
+        # 构造输入和输出文件路径
+        input_path = os.path.join(input_output_folder, filename)
+        output_path = os.path.join(input_output_folder, 'output', filename)
+
+        # 使用FFmpeg裁剪前10秒并输出到新的文件
+        subprocess.run(['ffmpeg', '-i', input_path, '-ss', '00:00:12', '-c', 'copy', output_path])
+```

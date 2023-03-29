@@ -86,6 +86,7 @@ Testflight 分内部测试和外部测试:
 * [Parallels Desktop](https://cmacked.com/parallels-desktop-18/)安装Window系统，破解需要[下载此shell文件](https://git.icrack.day/somebasj/ParallelsDesktopCrack)，在Macos13.0系统需要给命令行工具完全权限，设置->隐式与安全->完全磁盘访问权限
 * [altstore](https://altstore.io/) 使用自己的苹果账号对ipa进行签名，只有7天有效
 * [decrypt](https://decrypt.day/)下载appstore的IPA
+* [ipaStore](https://ipa.store/)下载appstore的IPA
 
 
 ---- 

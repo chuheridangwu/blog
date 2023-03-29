@@ -20,6 +20,13 @@
       placeholder: '搜索', // 提示框文字
       noData: '大兄嘚，我还没有开始写呢', // 找不到结果文字提示
 
+      pagination: {
+        previousText: '上一章节',
+        nextText: '下一章节',
+        crossChapter: true,
+        crossChapterText: true,
+      },// 分页导航组件引入
+
       footer: {
         copy: '<span id="sitetime"></span><br/><span>Copyright &copy; 2020 - 至今</span><br><span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>',
         auth: ' <strong><a href="https://gitee.com/pandauser/Lean" target="_blank">Mr.Panda</a></strong>',
@@ -46,7 +53,9 @@
   <script src="https://cdn.jsdelivr.net/gh/wugenqiang/NoteBook@master/plugin/docsify-copy-code.min.js"></script>
   <!-- 字数统计 -->
   <script src="//unpkg.com/docsify-count/dist/countable.js"></script>
-
+  <!-- 分页导航插件引入 -->
+  <script src="//unpkg.com/docsify-pagination/dist/docsify-pagination.min.js"></script>
+  
   <!-- 引入代码高亮  -->
   <script src="//cdn.jsdelivr.net/npm/prismjs/components/prism-kotlin.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/prismjs/components/prism-markdown.min.js"></script>

@@ -15,6 +15,7 @@
     * [4.类和对象](/web/js/4.class.md)
     * [5.DOM Document](/web/js/5.document.md) 
     * [6.事件处理](/web/js/6.event.md) 
+    * [7.BOM](/web/js/7.bom.md) 
     * [6.Node](/web/js/6.node.md)
 * Electron   桌面端应用
 
