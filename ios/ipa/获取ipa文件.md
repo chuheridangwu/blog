@@ -11,8 +11,9 @@
 3. 使用`ipatool search 抖音 -l 1` 搜索抖音,只显示1个搜索结果，不加-l参数默认是5个
 4. 使用`ipatool download -b com.ss.xxx -o ~/Desktop/ `下载IPA到桌面,不指定下载路径默认会下载到安装位置。
 
->ipatool默认使用方式` ipatool [command]`，使用`ipatool -h`可以查看帮助，如果不知道某个参数的作用，使用`ipatool auth -h`继续查看指令含义
+ipatool默认使用方式` ipatool [command]`，使用`ipatool -h`可以查看帮助，如果不知道某个参数的作用，使用`ipatool auth -h`继续查看指令含义
 
+>如果出现`ERR error="failed to download file: license is required" success=false`错误，需要在 iOS 设备上下载该应用程序以获得它的许可证，然后才能使用`ipatool`
 
 ## Apple Configurator
 现在利用 `Apple Configurator2` 应用来进行获取。

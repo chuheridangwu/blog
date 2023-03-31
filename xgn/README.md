@@ -4,5 +4,6 @@
 
 ## 参考网址
 * [新概念一册听力](https://www.tingclass.net/list-5016-1.html)
+* [新概念一册](https://en-nce.xiao84.com/nce1/19991.html)
 
 
