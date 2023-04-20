@@ -103,3 +103,4 @@ Testflight 分内部测试和外部测试:
 
 ### 开发工具
 * [JSONConverter](https://github.com/vvkeep/JSONConverter) Swift语言JSON转模型应用
+* [sideloadly](https://sideloadly.io/) 自签名工具，使用非开发者账号进行签名。[相关教程](https://hhlw.fhsg9p.xyz/#/img)

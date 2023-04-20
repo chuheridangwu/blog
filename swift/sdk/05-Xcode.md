@@ -244,3 +244,11 @@ OTHER_LDFLAGS[config=Debug][sdk=iphonesimulator*][arch=x86_64] = $(inherited) -f
 $(BUILD_SETTING_NAME:default=value)
 ```
 
+## Xcode14打包出现问题
+xx-frameworks.sh 所在位置为：`项目所在路径/Pods/Target Support Files/Pos-xxAPP/Pods-xxAPP-frameworks.sh`
+```
+找到...-frameworks.sh 文件，替换
+    source="$(readlink "${source}")"
+    为
+    source="$(readlink -f "${source}")"
+```
