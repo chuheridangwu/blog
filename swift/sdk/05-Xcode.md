@@ -244,6 +244,30 @@ OTHER_LDFLAGS[config=Debug][sdk=iphonesimulator*][arch=x86_64] = $(inherited) -f
 $(BUILD_SETTING_NAME:default=value)
 ```
 
+## 添加代码块
+1. 选中代码鼠标右键选择`Create Code Snippet`
+2. 选择`Create Code Snippet`后出现编写框
+   1. Title - 代码片段的标题
+   2. Summary - 代码片段的描述文字
+   3. Platform - 可以使用代码片段的平台，有IOS/OS X/All三个选项
+   4. Language - 可以在哪些语言中使用该代码片段
+   5. Completion Shortcut - 代码片段的快捷方式，例：copy
+   6. Completion Scopes - 可以在哪些文件中使用当前代码片段，比如全部位置，头文件中等，当然可以添加多个支持的位置
+   7. 里面需要修改的参数可以用`<#参数名#>`形式添加,例如: `@property (nonatomic, strong) <#Class#> *<#object#>;`
+3. 常用的代码块
+   ```objc
+        @property (nonatomic, strong) <#Class#> *<#object#>; // strong
+        @property (nonatomic, weak) <#Class#> *<#object#>; // weak
+        @property (nonatomic, copy) NSString *<#string#>; // copy
+        @property (nonatomic, assign) <#Class#> <#property#>; // assign
+        @property (nonatomic, weak) id<<#protocol#>> <#delegate#>; // delegate
+        @property (nonatomic, copy) <#returnType#>(^<#blockName#>)(<#arguments#>); // block
+        #pragma mark - <#mark#> // mark
+    ```
+4. 代码块备份: 将 `~/Library/Developer/Xcode/UserData/CodeSnippets` 里面的文件全部复制到新电脑中对应的CodeSnippets文件中即可
+
+> 新装的Xcode没有`CodeSnippets`文件夹,在创建代码块时这个文件夹才创建的.也可以自己创建.
+
 ## Xcode14打包出现问题
 xx-frameworks.sh 所在位置为：`项目所在路径/Pods/Target Support Files/Pos-xxAPP/Pods-xxAPP-frameworks.sh`
 ```

@@ -1,6 +1,9 @@
 # 生活
 主要记录一些日常，或者是日记，又不太想暴露自己的隐私，先在这里空着吧，先记录一些生活常用的技能。
 
+## 转换思想的文章
+* [医生，老师，电力系统，稳定？](https://mp.weixin.qq.com/s/FhGC4vSHunrYAQvIuffVFQ)
+
 公众号的快乐
 ```markdown
 1. 要弄清楚自己的核心竞争力是什么
@@ -56,3 +59,4 @@
 * [努努影院](https://www.nunuyy.cc/)
 * [大师兄影视](https://tv.ci/)
 * [555电影网](https://www.o8tv.com/vodtype/1.html)
+
