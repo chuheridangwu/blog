@@ -136,6 +136,51 @@ target "DemoX" do
 end
 ```
 
+## 给第三方增加多语言
+如果第三方库只有中文和英文，想给第三方库增加其他语言，可以通过`Pods-项目名称-resources.sh`文件进行插入第三方那个翻译文件，比如融云
+```shell
+if [[ "$CONFIGURATION" == "Debug" ]]; then
+  install_resource "${PODS_ROOT}/RongCloudIM/RongCloudIM/RongCloud.bundle"
+  install_resource "${PODS_ROOT}/RongCloudIM/RongCloudIM/en.lproj"
+  install_resource "${PODS_ROOT}/RongCloudIM/RongCloudIM/zh-Hans.lproj"
+  install_resource "${PODS_ROOT}/RongCloudIM/RongCloudIM/ar.lproj"
+  install_resource "${PODS_ROOT}/RongCloudIM/RongCloudIM/ja.lproj" # 这个就是单独插入的
+  install_resource "${PODS_ROOT}/RongCloudIM/RongCloudIM/Emoji.plist"
+  install_resource "${PODS_ROOT}/RongCloudIM/RongCloudIM/RCColor.plist"
+  install_resource "${PODS_ROOT}/RongCloudIM/RongCloudIM/RCConfig.plist"
+fi
+if [[ "$CONFIGURATION" == "Release" ]]; then
+  install_resource "${PODS_ROOT}/RongCloudIM/RongCloudIM/RongCloud.bundle"
+  install_resource "${PODS_ROOT}/RongCloudIM/RongCloudIM/en.lproj"
+  install_resource "${PODS_ROOT}/RongCloudIM/RongCloudIM/zh-Hans.lproj"
+  install_resource "${PODS_ROOT}/RongCloudIM/RongCloudIM/ar.lproj"
+  install_resource "${PODS_ROOT}/RongCloudIM/RongCloudIM/Emoji.plist"
+  install_resource "${PODS_ROOT}/RongCloudIM/RongCloudIM/RCColor.plist"
+  install_resource "${PODS_ROOT}/RongCloudIM/RongCloudIM/RCConfig.plist"
+fi
+```
+修改脚本后，在融云库的多语言文件相同的路径下，添加一个其他语种的lproj。注意添加完多语言后， 要做下 clean ，否则可能因为缓存问题，导致访问不到。
+
+另外 pod 方案，可以通过自己写个自动脚本， new.lproj 放在自己的app 工程目录下， 每次编译时拷贝到 IMKit 指定多语言目录下， 并修改 Pods-RCIMDemo-resources.sh 脚本的内容
+
+通过Xcode -> Build Phases 中的 Run Script 执行shell文件
+
+
+## 指定Xcode使用CocoaPods时第三方库的最低版本
+使用`platform :ios, '11.0'`并不能改变Xcode项目中Pod的`Minimum Deployments`最低版本，
+参考网址： https://github.com/CocoaPods/CocoaPods/issues/9884，需要修改`Podfile`文件，增加以下代码
+```shell
+post_install do |pi|
+  pi.pods_project.targets.each do |t|
+    t.build_configurations.each do |bc|
+      if bc.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] == '8.0'
+        bc.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '9.0'
+      end
+    end
+  end
+end
+```
+
 ## 参考文章
 
 https://www.cnblogs.com/sundaysme/p/13698463.html  检查pod版本及更新pod

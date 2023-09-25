@@ -14,37 +14,40 @@
 
 ## File's Owner
 使用Xib自定义View的时候有两种方式，使用用`File's Owner`或者直接定义View。它们之间的区别在于:
-* `File's Owner`: self 是自定义类型的一个实例, 要将 View 拉为约束添加在 self,  可以直接添加在 storyboard/xib 上使用, 在代码中使用时, 要使用对象方法, Bundle.main.loadNibNamed 方法中 owner 为 self。
+* `File's Owner`: self 是自定义类型的一个实例, 要将 View 拉为约束添加在 self,  可以直接添加在 `storyboard/xib` 上使用, 在代码中使用时, 要使用对象方法, Bundle.main.loadNibNamed 方法中 owner 为 self。
 * `View`: self 是自定义类型, 类型不能直接添加在 storyboard/xib 上, 代码中使用时要使用类型方法,  Bundle.main.loadNibNamed 方法中 owner 为 nil
 ![](../imgs/xib/ios_xib_3.png)
 
 #### File's Owner  加载方式
-* 通过 init 方法加载
+* 通过 init 方法加载,`MoraSelectView `是xib文件，设置`File's Owner`的Class为 `MoraSelectView`
 ```swift
-    @IBOutlet var contentView: UIView!//xib 中的 View 拉为约束 contentView
-    
-    //代码创建, 执行此方法, 不执行 init?(coder aDecoder: NSCoder)
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        awakeFromNib()
-    }
-    
-    //添加在 storyboard 上, 执行此方法
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        setupContentView()
-    }
-    
-    func setupContentView() {
-    //owner 一定要为 self, 不能为 nil
-        let contentView = Bundle.main.loadNibNamed("CustomView_Fileowner", owner: self, options: nil)?.first as! UIView
-        contentView.frame = self.bounds
-        contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        addSubview(contentView)
+    class MoraSelectView: UIView,NibLoadable {
+
+        @IBOutlet var contentView: UIView!//xib 中的 View 拉为约束 contentView
+        
+        //代码创建, 执行此方法, 不执行 init?(coder aDecoder: NSCoder)
+        override init(frame: CGRect) {
+            super.init(frame: frame)
+            awakeFromNib()
+        }
+        
+        //添加在 storyboard 上, 执行此方法
+        required init?(coder aDecoder: NSCoder) {
+            super.init(coder: aDecoder)
+        }
+        
+        override func awakeFromNib() {
+            super.awakeFromNib()
+            setupContentView()
+        }
+        
+        func setupContentView() {
+        //owner 一定要为 self, 不能为 nil
+            let contentView = Bundle.main.loadNibNamed("MoraSelectView", owner: self, options: nil)?.first as! UIView
+            contentView.frame = self.bounds
+            contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+            addSubview(contentView)
+        }
     }
 ```
 * 通过协议的方式加载
