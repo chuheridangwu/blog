@@ -1,6 +1,12 @@
 # 获取IPA文件
 自从 iTunes 中没有苹果商店之后，获取应用的ipa相对就比较麻烦，之前可以通过降级iTunes来获取，升级苹果系统之后这种方法也不奏效。目前可以使用`Apple Configurator` 和 `ipatool`进行获取。在Mac13.0系统中，测试`Apple Configurator`也获取不到IPA了。
 
+## 通过Mac自带工具 Console 获取 bundle id
+只能查看已经装在iphone里面的 app:
+1. 用数据线连接手机和Mac.打开 Mac 应用Console 控制台.
+2. 在左侧栏Devices中，选择你的设备, 点击开始流式传输，运行你要查看的APP，然后点控制台暂停，因为信息太多了，需要慢慢筛选
+3. 控制台左上角搜索 SpringBoard， 选择搜索进程，然后输入APP名称或者`SBIconView` ,里面会显示点击APP的 bundleID
+
 ## ipatool
 1. 安装ipatool
    ```shell
