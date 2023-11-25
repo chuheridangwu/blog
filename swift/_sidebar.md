@@ -21,6 +21,7 @@
   *  [06-编译命令](swift/sdk/06-编译命令.md) 
   *  [07-静态库](swift/sdk/07-静态库.md) 
   *  [08-动态库](swift/sdk/08-动态库.md) 
+  *  [09-开发者账号](swift/sdk/09-开发者账号.md) 
 * 基础语法
   *  [01-Swift基础语法](swift/grammar/01-swift基础语法.md)
   *  [02-Swift函数语法](swift/grammar/02-swift函数.md)

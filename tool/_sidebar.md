@@ -11,4 +11,5 @@
 * [brew](tool/brew.md)
 * [Mac破解Wifi](tool/破解wifi.md)
 * [Ruby](tool/ruby.md)
+* [Windows虚拟机安装MacOS系统](tool/Windows虚拟机安装MacOS系统.md)
 
