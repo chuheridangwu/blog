@@ -32,6 +32,8 @@
     * [07-IPA分发](ios/ipa/ipa分发.md)
     * [08-ips崩溃分析](ios/ipa/ips崩溃分析.md)
     * [09-ideviceinstaller与iOS设备通信](ios/ipa/ideviceinstaller.md)
+    * [10-下载IPA历史版本](ios/ipa/下载IPA历史版本.md)
+
 * 第三章:API
     * [01-NSArray](ios/api/nsarray.md)
     * [02-NSString](ios/api/nsstring.md)
