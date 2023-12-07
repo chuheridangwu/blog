@@ -69,7 +69,7 @@
 }
 ```
 
-3. 服务端配置好之后通常需要一段时间，可以隔半个小时再进行测试
+3. 服务端配置好之后通常需要一段时间，**如果要验证链接有没有生效，使用`https://app-site-association.cdn-apple.com/a/v1/` + 你的域名就可以了，比如`https://app-site-association.cdn-apple.com/a/v1/spotify.com`**
 
 
 ## 推荐阅读

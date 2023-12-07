@@ -179,6 +179,74 @@ PlistBuddy 是 Mac电脑自带的操作 plist 文件的工具,文件路径`/usr/
 /usr/libexec/PlistBuddy  -c 'Merge a.plist' example.plist 
 ```
 
+## codesign的其他指令
+```shell
+# 签名
+codesign -s '证书名称' XXX.app
+
+# 重签名
+codesign -f -s '证书名' XXX.app
+
+# 获得app的签名信息
+codesign -vv -d XXX.app
+
+# 验证签名情况
+codesign --verify XXX.app
+```
+
+##### 授权机制（Entitlements）
+授权机制决定了系统资源在什么情况下可以被应用使用。简单地说就是沙盒的配置表，上面记录的是权限控制。
+
+授权机制的配置是以plist文件格式保存的，xcode会将这个文件作为 `--entitlements`参数的内容传给codesign。
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+        <key>application-identifier</key>
+        <string>7TPNXN7G6K.ch.kollba.example</string>
+        <key>aps-environment</key>
+        <string>development</string>
+        <key>com.apple.developer.team-identifier</key>
+        <string>7TPNXN7G6K</string>
+        <key>com.apple.developer.ubiquity-container-identifiers</key>
+        <array>
+                <string>7TPNXN7G6K.ch.kollba.example</string>
+        </array>
+        <key>com.apple.developer.ubiquity-kvstore-identifier</key>
+        <string>7TPNXN7G6K.ch.kollba.example</string>
+        <key>com.apple.security.application-groups</key>
+        <array>
+                <string>group.ch.kollba.example</string>
+        </array>
+        <key>get-task-allow</key>
+        <true/>
+</dict>
+</plist>
+```
+可以在`Xcode > Capabilities`的选项中，设置需要开启的权限。当权限开启后，Xcode就会生成一段这样的XML，并生成一个.entitlements文件。
+
+当构建App时，这个文件也会被codesign读取，作为应用授权的参考。这些授权都必须在Apple Developer相关联的App Id中开启，并包含在配置文件内。
+
+可以用下面的形式查看App的签名信息中，包含了什么授权
+```shell
+codesign -d --entitlements - XXX.app
+```
+
+#### 配置文件（Provisioning Profiles）
+配置文件将代码签名、沙盒和授权机制联系在一起。
+
+配置文件中存放了系统用于判断App是否被允许运行，是否允许App在某个特定设备上运行等的信息。
+
+配置文件可以让应用在开发设备上被运行和调试，也可以用于内部测试（Ad-Hoc）或者企业级App发布。Xcode会将项目设置的配置文件打包进应用内。
+
+配置文件并不是一个plist，而是一个根据密码信息语法（Cryptographic Message Syntax）加密的文件。
+
+可以用下面的命令来查看配置文件中的内容
+```shell
+security cms -D -i example.mobileprovision
+```
+
 ## 重签名tweak项目
 tweak别人项目的代码如果想安装在非越狱的设备上，也需要对动态库进行签名。比现在的重签名多了注入动态库和修改动态库中的依赖路径。
 
@@ -264,3 +332,4 @@ install_name_tool -change /usr/lib/libsubstitute.0.dylib @loader_path/libsubstit
 * [ipa重签名](https://segmentfault.com/a/1190000023388431)
 * [PlistBuddy](https://www.jianshu.com/p/e0d254ce9340)
 * [ios-app-signer 重签名工具](https://github.com/DanTheMan827/ios-app-signer/releases/tag/1.13.1)
+* [代码签名探析-codesign](https://objccn.io/issue-17-2/?spm=a2c6h.12873639.article-detail.7.47b04fcciDoQQS)
