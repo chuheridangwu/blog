@@ -24,7 +24,7 @@
     * [22-性能优化](ios/principle/性能优化.md)
 * 第二章:IPA相关知识
     * [01-iOS签名流程](ios/ipa/iOS签名机制.md)
-    * [02-IPA重签名](ios/ipa/resignature.md)
+    * [02-IPA重签名](ios/ipa/ipa重签名.md)
     * [03-苹果商店获取ipa文件](ios/ipa/获取ipa文件.md)
     * [04-fastlane自动化打包工具](ios/ipa/fastlane自动化打包工具.md)
     * [05-xcodebuild自动化打包工具](ios/ipa/xcodebuild打包工具.md)

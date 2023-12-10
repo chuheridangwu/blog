@@ -327,6 +327,85 @@ install_name_tool -change /usr/lib/libsubstitute.0.dylib @loader_path/libsubstit
 2. IPA可以安装成功，但是打开APP就会出现闪退.可以通过`Xcode -> Window -> Devices and Simulators -> View Device Logs`查看手机的崩溃日志，确定崩溃原因。如下图:
     ![](../imgs/ios_img_113.png)
 
+
+## 为什么重签名之后短信收不到？
+短信需要用到扩展appex和通用链接`Associated Domains`权限,重签名之后短信收不到不是appex被重签名的问题，是因为直接从`embedded.mobileprovision`导出来的`entitlements.plist`文件中通用链接没有具体的域名。
+
+获取短信中APP需要使用到`Associated Domains`权限，需要具体的域名，比如
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>com.apple.developer.associated-domains</key>
+	<array>
+		<string>messagefilter:app.dvck.xyz</string>
+	</array>
+</dict>
+</plist>
+```
+
+使用Xcode导出来的IPA会权限中会有具体的域名，比如解压IPA之后，使用`codesign -d --entitlements -  xxx.app`进行查看
+```
+[Dict]
+	[Key] application-identifier
+	[Value]
+		[String] T3PZJFX78G.comthailin.app
+	[Key] com.apple.developer.associated-domains
+	[Value]
+		[Array]
+			[String] messagefilter:app.dvck.xyz
+	[Key] com.apple.developer.team-identifier
+	[Value]
+		[String] T3PZJFX78G
+	[Key] get-task-allow
+	[Value]
+		[Bool] true
+```
+如果使用`embedded.mobileprovision`描述文件直接进行重签名，签出来的权限会缺少具体的域名
+```
+[Dict]
+	[Key] application-identifier
+	[Value]
+		[String] TQQ42NZC72.com.thaisms.app
+	[Key] com.apple.developer.associated-domains
+	[Value]
+		[String] *
+	[Key] com.apple.developer.icloud-container-development-container-identifiers
+	[Value]
+		[Array]
+	[Key] com.apple.developer.icloud-container-identifiers
+	[Value]
+		[Array]
+	[Key] com.apple.developer.icloud-services
+	[Value]
+		[String] *
+	[Key] com.apple.developer.team-identifier
+	[Value]
+		[String] TQQ42NZC72
+	[Key] com.apple.developer.ubiquity-container-identifiers
+	[Value]
+		[Array]
+	[Key] com.apple.developer.ubiquity-kvstore-identifier
+	[Value]
+		[String] TQQ42NZC72.*
+	[Key] com.apple.security.application-groups
+	[Value]
+		[Array]
+	[Key] get-task-allow
+	[Value]
+		[Bool] true
+	[Key] keychain-access-groups
+	[Value]
+		[Array]
+			[String] TQQ42NZC72.*
+			[String] com.apple.token
+```
+对比会发现直接使用描述文件进行重签名，`com.apple.developer.associated-domains`没有具体对应的值，所以在安装之后也就不能使用通用链接中配置的域名了。
+
+解决方式也很简单，在使用描述文件重签名之前导出`entitlements.plist`之后，添加上对应的域名就可以了，然后再使用`/usr/bin/codesign -f -s "证书ID" --entitlements entitlements.plist Payload/*.app/`进行重签名就没问题了。
+
+
 ## 参考网址
 * [iOS软件包ipa重签名详解](https://www.jianshu.com/p/609109d41628)
 * [ipa重签名](https://segmentfault.com/a/1190000023388431)
