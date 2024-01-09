@@ -65,3 +65,5 @@
   *  [12-hook新概念项目](ios/jailbreak/12-hook新概念的过程.md)
   *  [13-LLVM和代码混淆](ios/jailbreak/13-llvm.md)
   *  [14-汇编](ios/jailbreak/14-汇编.md)
+  *  [15-palera1n越狱](ios/jailbreak/15-palera1n.md)
+  *  [16-TrollStore](ios/jailbreak/16-TrollStore.md)

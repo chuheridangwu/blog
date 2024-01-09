@@ -120,6 +120,28 @@ export PATH=${PATH}:/Users/xxx/Desktop/flutter/bin:/Users/xxx/Library/Android/sd
 单个路径是: `export PATH=/Users/xxx/Desktop/flutter/bin:$PATH`
 多个路径使用`:`号进行区分,如果指定多个路径，结尾就不用写:`$PATH了`: `export PATH=${PATH}:/Users/xxx/Desktop/flutter/bin:/Users/xxx/Library/Android/sdk/platform-tools`
 
+## 无线调试
+要使用ADB无线调试，您需要满足以下基本要求：
+1. Android设备和PC在同一WiFi网络下：无线调试需要Android设备和PC在同一WiFi网络下。
+2. 启用开发者选项和无线调试模式：在Android设备上，您需要启用开发者选项和无线调试模式。
+3. 安装最新版本的SDK：确保您的SDK为最新版本（adb --version ≥ 30.0.0）。
+4. 配对设备：使用二维码或配对码将设备与工作站配对。
+
+要使用配对码进行ADB无线调试，您需要执行以下步骤：
+1. 启用无线调试：在手机上启用开发者模式和USB调试。同时，打开无线调试开关。
+2. 获取配对码：进一步点击无线调试选项，会进入二级菜单页面，里面会显示配对码、IP地址和端口号等信息。
+3. 配对设备：在电脑上的命令行工具中输入以下命令：`adb pair <设备IP地址>:<端口号>`。其中，`<设备IP地址>和<端口号>`是在第2步中获取的IP地址和端口号。
+4. 输入配对码：命令行工具会提示要求输入配对码，输入第2步中获取的配对码即可。
+5. 配对成功之后使用`adb connect 设备IP地址:5555`连接手机,提示`connected to 192.168.0.198:5555`代表连接手机成功
+
+如果长时间不连接可能会报错，尝试以下步骤：
+1. 重新启动TCP/IP连接：首先，将手机通过USB线连接到电脑。然后在终端执行以下命令：`adb usb`。这将会重启USB模式。然后执行：`adb tcpip 5555`。这将会重启TCP模式。
+2. 重新连接设备：在终端执行以下命令：`adb connect 192.168.160.110:5555`。这将会尝试重新连接到设备。
+
+如果以上步骤不能解决问题，可能需要检查以下几点：
+* 确保Android设备已开启USB调试。
+* 确保Android设备和PC在同一个局域网。
+* 在执行`adb tcpip 5555`后可能需要重新开启USB调试。
 
 ## 错误问题
 ### 模拟器adbd cannot run as root in production builds

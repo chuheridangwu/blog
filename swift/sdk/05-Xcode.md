@@ -276,3 +276,66 @@ xx-frameworks.sh 所在位置为：`项目所在路径/Pods/Target Support Files
     为
     source="$(readlink -f "${source}")"
 ```
+
+## Xcode编译之后桌面生成ipa
+在Xcode编译完成后，直接拷贝编译好的 xxx.app 到桌面 Plyload 文件夹，然后压缩成zip，将后缀修改成IPA，就可以直接安装在测试手机上了，避免我们再手动导出。
+
+之前是通过 `Build Phases` -> 添加新的`Script Phase`脚本，在shell脚本内进行拷贝压缩修改名字的，在Xcode15中发现这样做不行，Command + B 编译项目，运行自定义shell脚本之后，Xcode还会对包继续做签名等动作。所以需要换一种方式，使用 `Post-actions`。
+
+
+#### Post-actions
+Post-actions 的添加方式，点击`Edit Scheme`,选择`Build`并点击Build左侧三角,打开之后会看到 Post-actions ，点击左下角的 + 号，选择`New Run Script Action`,在脚本中`Provide build setting from` 选择对应的 Scheme。
+
+`Post-actions`是指在特定的scheme操作（如构建、测试、运行等）完成后自动执行的一系列任务。您可以使用`Post-actions`来执行一些清理工作、发送通知、上传归档文件到服务器或者进行其他自定义的脚本操作。
+
+例如，您可以设置一个`Post-action`来在构建完成后自动上传生成的ipa文件到测试平台，或者发送一封包含构建日志的电子邮件给团队成员。这样可以提高工作效率，自动化重复性的任务。
+
+在`Xcode Cloud workflows`中，`Post-actions`可以在所有构建、分析、测试和存档操作完成后运行，例如发送通知并使用`TestFlight`进行部署1。在本地Xcode项目中，您也可以为每个scheme配置`Post-actions`，以便在执行特定操作后自动运行脚本或命令。
+
+要配置`Post-actions`，您需要在Xcode的scheme编辑器中找到相应的操作，然后点击展开三角形来添加您的自定义脚本或命令。这些脚本可以用来执行各种自动化任务，如发送邮件通知、设置环境变量、清理临时文件等23。
+
+在Xcode中配置`Post-actions`时，您可能需要知道项目的路径和编译路径。这些路径可以通过环境变量在Xcode的`Build Phases`中访问。以下是一些常用的环境变量：
+
+`PROJECT_DIR`：这个变量包含了项目文件夹的路径。
+`SRCROOT`：这个变量通常与PROJECT_DIR相同，指向源代码的根目录。
+`BUILT_PRODUCTS_DIR`：这个变量指向编译生成的产品所在的目录，例如.app或者.ipa文件。
+`CONFIGURATION_BUILD_DIR`：这个变量指向当前配置（Debug或Release）的构建目录。
+您可以在Post-actions的脚本中使用这些变量来引用项目的路径和编译路径。例如，如果您想在Post-actions中打印出这些路径，可以添加以下脚本：
+```shell
+echo "项目路径: $PROJECT_DIR"
+echo "编译路径: $BUILT_PRODUCTS_DIR"
+```
+
+## 桌面上生成IPA的shell脚本
+```shell
+# Type a script or drag a script file from your workspace to insert its path.
+echo ">>>>>"
+echo "TARGET_DEVICE_PLATFORM_NAME的值: ${TARGET_DEVICE_PLATFORM_NAME}"
+rm -rf ~/Desktop/Payload/* #删除Payload文件夹内的文件
+rm -rf ~/Desktop/"${INFOPLIST_KEY_CFBundleDisplayName}"_"${MARKETING_VERSION}"_"$(date "+%m%d")".ipa  #删除同名ipa
+if [ -z "$TARGET_DEVICE_PLATFORM_NAME" ] && [ "${CONFIGURATION}" == "Release" ]; then
+  echo "条件满足：TARGET_DEVICE_PLATFORM_NAME 为空，且 CONFIGURATION 是 release。"
+  cp -R "${TARGET_BUILD_DIR}/${WRAPPER_NAME}" ~/Desktop/Payload #拷贝到桌面文件
+  
+  if [ "$(ls ~/Desktop/Payload)" ]; then
+    cd ~/Desktop
+    zip -r "${INFOPLIST_KEY_CFBundleDisplayName}"_"${MARKETING_VERSION}"_"$(date "+%m%d")".ipa Payload # 如果文件夹不为空，则进行压缩
+  else
+    echo "Payload 文件夹为空，不进行压缩"
+  fi
+  
+else
+  echo "条件不满足。"
+fi
+
+echo ">>>>>>>"
+
+```
+
+## Xcode14 更新到 Xcode15
+1. Xcode15最低版本需要时iOS12
+2. 需要cocoapods升级到最少1.14版本
+3. 调高MGloabl项目最低版本，最小是iOS12.0
+4. ld: Assertion failed: (u16str.size() >= 2 && u16str.back() == 0 && *(u16str.end() - 2) == 0 && "Data for UTF16 strings should consist of at least two bytes, and there should be two null-terminating bytes"), function makeUTF16String, file DynamicAtom.cpp, line 624.
+    
+C++项目会有这个错误，添加  `Build Settings -> other linker flags` 新增 "`-ld64`" 重新编译即可
