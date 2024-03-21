@@ -19,3 +19,9 @@ Markdown 相关插件:
 Flutter 相关插件:
 * `Json to Dart Model` 数据转模型插件，可以直接根据json转成对应的model
 * `Flutter Intl` 多语言插件
+
+Web 相关插件:
+* `open in browser` 右击选择浏览器打开html
+* `JS-CSS-HTML Formatter` 保存之后自动格式化代码
+* `Auto Rename Tag` 自动重命名配对的HTML/标签
+* `CSS Peek` 追踪至样式

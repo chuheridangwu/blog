@@ -12,6 +12,7 @@
   *  [10-AVFoundation](swift/api/10-AVFoundation.md)
   *  [11-本地化](swift/api/11-本地化.md)
   *  [12-阿拉伯语RTL适配](swift/api/12-阿拉伯语RTL适配.md)
+  *  [13-JSON解析](swift/api/13-JSON解析.md)
 * 工具
   *  [01-CocoaPods](swift/sdk/01-CocoaPods.md) 
   *  [02-Cartahge](swift/sdk/02-Cartahge.md) 

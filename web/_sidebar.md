@@ -16,6 +16,9 @@
     * [5.DOM Document](/web/js/5.document.md) 
     * [6.事件处理](/web/js/6.event.md) 
     * [7.BOM](/web/js/7.bom.md) 
-    * [6.Node](/web/js/6.node.md)
+    * [8.this](/web/js/8.this.md)
+    * [9.模块化](/web/js/9.模块化.md)
+    * [10.包管理工具](/web/js/10.包管理工具.md)
+    * [11.Node](/web/js/11.node.md)
 * Electron   桌面端应用
 
