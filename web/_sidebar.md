@@ -20,5 +20,16 @@
     * [9.模块化](/web/js/9.模块化.md)
     * [10.包管理工具](/web/js/10.包管理工具.md)
     * [11.Node](/web/js/11.node.md)
-* Electron   桌面端应用
+* Electron(桌面端应用)
+    * [01.基础使用](/web/electron/01-基础使用.md)
+    * [02.问题](/web/electron/02-问题.md)
+
+* Vue
+    * [01.基础使用](/web/vue/01-基础使用.md) 
+    * [02.父子传值](/web/vue/02-父子传值.md) 
+
+* Puppeteer
+    * [01.基础使用](/web/puppeteer/01-基础使用.md) 
+    * [02.查找元素](/web/puppeteer/02-查找元素.md) 
+
 

@@ -18,6 +18,26 @@ CSS既然是装饰html，自己本身需要有一些内容可以装饰，这个�
 * [利用border或者CSS的特性做出的图形](https://css-tricks.com/the-shapes-of-css/#top-of-site)
 * [MDN JavaScript 标准内置对象](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects)
 
+## Electron中常用的库
+`electron-window-state` : 保留窗口的位置和大小  `npm install electron-window-state -D`
+`electron-store` : 保存数据
+`electron-builder` : 打包
+`nodemon` : 保存之后自动刷新界面 - `npm install nodemon -D`
+`store2`: 本地存储
+`lodash`: JavaScript工具库，对常见的一些方法做封装，包含节流防抖
+`image-type`: 判断图片类型，es6
+`file-type`: 判断文件类型，es6
+`randomstring`: 生成随机字符串 -> `npm install randomstring`
+`electron-is-dev`: 是否在开发阶段 -> `npm install electron-is-dev -D`
+
+`Puppeteer`: 自动化测试,爬虫
+`concurrently`: 同时运行多个命令 -> `npm install concurrently`
+
+## Vue开发套装
+`normalize.css`: 样式重置 -> `npm install normalize.css`
+`vue-router`: 路由 -> `npm install vue-router`
+`pinia`: 状态管理 -> `npm install pinia`
+`less`: less格式解析 -> `npm install less -D`
 
 ## VSCode相关插件
 * 中文插件：`Chinese`
