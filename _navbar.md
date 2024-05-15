@@ -12,3 +12,4 @@
     * [前端](/web/)
     * [PhotoShop](/photoshop/)
     * [新概念](/xgn/)
+    * [资源](/资源/)

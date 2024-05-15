@@ -13,3 +13,4 @@
 * [Photoshop](photoshop/)
 * [生活](live/)
 * [新概念](/xgn/)
+* [资源](/onepiece/)
