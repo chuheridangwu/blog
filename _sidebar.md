@@ -2,7 +2,7 @@
 * [Android](android/)
 * [iOS](ios/)
 * [Swift](swift/)
-* [Web](web/)
+* [前端](web/)
 * [网络篇](network/)
 * [工具文档](tool/)
 * [Shell](shell/)

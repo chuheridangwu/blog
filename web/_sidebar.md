@@ -17,19 +17,20 @@
     * [6.事件处理](/web/js/6.event.md) 
     * [7.BOM](/web/js/7.bom.md) 
     * [8.this](/web/js/8.this.md)
-    * [9.模块化](/web/js/9.模块化.md)
-    * [10.包管理工具](/web/js/10.包管理工具.md)
-    * [11.Node](/web/js/11.node.md)
 * Vue
     * [01.基础使用](/web/vue/01-基础使用.md) 
-    * [02.父子传值](/web/vue/02-父子传值.md) 
-    * [03.vue-router](/web/vue/03-VueRouter.md) ]
-
+    * [02.父子组件](/web/vue/02-父子组件.md) 
+    * [03.vue-router](/web/vue/03-VueRouter.md)
 * Electron(桌面端应用)
     * [01.基础使用](/web/electron/01-基础使用.md)
     * [02.问题](/web/electron/02-问题.md)
-
-
+* Node
+  * [01-node基础介绍](/web/node/01-node基础介绍.md)  
+  * [02-模块化](/web/node/02-模块化.md)  
+  * [03-内置模块](/web/node/03-内置模块.md)  
+  * [04-包管理工具](/web/node/04-包管理工具.md)  
+  * [05-Buffer](/web/node/05-Buffer.md)  
+  * [06-Http](/web/node/06-Http.md)  
 * Puppeteer
     * [01.基础使用](/web/puppeteer/01-基础使用.md) 
     * [02.查找元素](/web/puppeteer/02-查找元素.md)
