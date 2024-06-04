@@ -33,6 +33,8 @@
   * [06-Http](/web/node/06-Http.md)  
   * [07-Express](/web/node/07-Express.md)  
   * [08-koa](/web/node/08-koa.md)  
+  * [09-MySQL](/web/node/09-MySQL.md)  
+  * [10-mysql2](/web/node/10-mysql2.md)  
 * Puppeteer
     * [01.基础使用](/web/puppeteer/01-基础使用.md) 
     * [02.查找元素](/web/puppeteer/02-查找元素.md)
