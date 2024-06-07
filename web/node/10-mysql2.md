@@ -9,6 +9,8 @@ import mysql from 'mysql2/promise';
 const connection = await mysql.createConnection({
   host: 'localhost',
   user: 'root',
+  password: 'root',
+  port: 3306,
   database: 'test',
 });
 
@@ -173,4 +175,136 @@ const result3 = await Student.create({
   age: 20
 });
 console.log(result3);
+```
+
+# 项目过程
+## 端口和账号密码登信息放到`.env`文件中，文件放在`package.json`同级目录中，在项目中使用第三方`dotenv`获取`.env`文件中的信息。
+
+<!-- tabs:start -->
+#### **.env文件内容**
+```javascript
+APP_PORT = 8000
+```
+#### **获取env文件内容**
+```javascript
+import dotenv from 'dotenv';
+dotenv.config();
+console.log(process.env.APP_PORT);
+```
+
+<!-- tabs:end -->
+
+## 动态加载所有路由
+将路由文件全部放在一个文件夹中,通过`fs`模块读取文件夹中的文件，然后通过`require`方法加载文件，然后通过`app.use`方法注册路由。
+```javascript
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+export const useRoutes = function(app) {
+    fs.readdirSync(__dirname).forEach((file) => {
+        if (file === 'index.js') return;
+        import(`./${file}`).then((module) => {
+            app.use(module.default.routes());
+            app.use(module.default.allowedMethods());
+        });
+    });
+};
+```
+
+## Cookie
+Cookie是某些网站为了辨别用户身份而存储在用户本地终端（Client Side）上的数据。浏览器会在特定的情况下携带上cookie来发送请求，我们可以通过Cookie来获取一些信息。
+
+Cookie总是保存在客户端中，按在客户端中的存储位置，Cookie可以分为内存Cookie和硬盘Cookie。没有设置过期时间，默认情况下cookie是内存cookie，在关闭浏览器时会自动删除；有设置过期时间，并且过期时间不为0或者负数的cookie，是硬盘cookie，需要手动或者到期时，才会删除；
+* 内存Cookie由浏览器维护，保存在内存中，浏览器关闭时Cookie就会消失，其存在时间是短暂的；
+* 硬盘Cookie保存在硬盘中，有一个过期时间，用户手动清理或者过期时间到时，才会被清理；
+
+cookie的生命周期：
+* 默认情况下的cookie是内存cookie，也称之为会话cookie，也就是在浏览器关闭时会自动被删除；
+* 我们可以通过设置expires或者max-age来设置过期的时间；
+    * `expires`：设置的是`Date.toUTCString()`，设置格式是`;expires=date-in-GMTString-format`；
+    * `max-age`：设置过期的秒钟，`;max-age=max-age-in-seconds` (例如一年为60*60*24*365)；
+
+cookie的作用域：（允许cookie发送给哪些URL）
+* Domain：指定哪些主机可以接受cookie, 如果不指定，那么默认是 origin，不包括子域名。 如果指定Domain，则包含子域名。例如，如果设置 `Domain=mozilla.org`，则 Cookie 也包含在子域名中（如`developer.mozilla.org`）。
+* Path：指定主机下哪些路径可以接受cookie,例如，设置 Path=/docs，则以下地址都会匹配：
+    * /docs
+    * /docs/Web/
+    * /docs/Web/HTTP
+
+
+## JWT 实现token机制
+JWT生成的Token由三部分组成：header、payload、signature。
+* header
+  * alg：采用的加密算法，默认是 HMAC SHA256（HS256），采用同一个密钥进行加密和解密；
+  * typ：JWT，固定值，通常都写成JWT即可；
+  * 将lag和typ通过base64Url进行编码；
+* payload
+  * 携带的数据，比如我们可以将用户的id和name放到payload中；
+  * 默认也会携带`iat（issued at`），令牌的签发时间；
+  * 我们也可以设置过期时间：`exp（expiration time）`； 
+  * 会通过base64Url算法进行编码
+* signature
+  * 设置一个`secretKey`，通过将前两个的结果合并后进行`HMACSHA256`的算法；`HMACSHA256(base64Url(header)+.+base64Url(payload), secretKey)`;
+  * 如果secretKey暴露是一件非常危险的事情，因为之后就可以模拟颁发token，也可以解密token；
+
+JWT的通常使用`jsonwebtoken`库来完成，使用非对称加密 RS256 生成私钥和公钥，私钥用于加密，公钥用于解密。
+
+cd切换到项目秘钥文件夹,Mac系统使用opnessl命令生成公钥和私钥
+```shell
+openssl  genrsa -out private.key 2048
+openssl  rsa -in private.key -pubout -out public.key
+```
+使用fs读取秘钥文件，将秘钥传到jwt的配置中。
+```javascript
+import koa from 'koa';
+import Router from 'koa-router';
+import jwt from 'jsonwebtoken';
+import fs from 'fs';
+
+const app = new koa();
+const fileRouter = new Router();
+
+const privateKey = fs.readFileSync('./keys/private.key');
+const publicKey = fs.readFileSync('./keys/public.key');
+
+fileRouter.get('/test', async (ctx, next) => {
+    const user = {id: 110, name: '张三李四王五马六'}
+    const token = jwt.sign(user, privateKey, {
+        expiresIn: 1000 * 60,
+        algorithm: 'RS256'
+    });
+    ctx.body = token
+})
+
+fileRouter.get('/demo', async (ctx, next) => {
+    try{
+        const authorization = ctx.headers.authorization;
+        const token = authorization.replace('Bearer ', '');
+        const result = jwt.verify(token, publicKey,{
+            algorithms: ['RS256']
+        });
+        ctx.body = result
+    }catch(err){
+        console.log(err)
+        ctx.body = err
+    }
+})
+
+app.use(fileRouter.routes());
+
+app.listen(8000,() => {
+    console.log('server is running at port 8000');
+});
+```
+
+## 浏览器打开图片地址直接下载原因
+需要设置`content-type`,不然会直接下载
+```javascript
+// 提供图片信息
+ctx.response.set('content-type',result.mimetype)
+ctx.body = fs.createReadStream(`./uploads/avatar/${result.filename}`)
 ```

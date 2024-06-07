@@ -61,25 +61,13 @@ create table if not exists user(
   );
 # 插入数据
 insert into user(name,age,sex) values('张三',18,'男');
-insert into user(name,age,sex) values('李四',19,'女');
-# 查询数据
-select * from user;
-# 删除数据
-delete from user where id=1;
-# 删除表
-drop table if exists user;
-# 删除数据库
-drop database if exists userdata;
-# 退出
-quit;
 ```
 
 ## SQL语句
 和数据库沟通的语言，这个语言就是SQL。SQL编写出来的语句，就称之为SQL语句。SQL语句的常用规范：
 * 通常关键字是大写的，比如`CREATE`、`TABLE`、`SHOW`等等；
-* 一条语句结束后，需要以 `;`` 结尾；
+* 一条语句结束后，需要以 `;` 结尾；
 * 如果遇到关键字作为表明或者字段名称，可以使用``包裹;
-
 
 常见的SQL语句我们可以分成四类：
 *  `DDL（Data Definition Language`）：数据定义语言；可以通过DDL语句对数据库或者表进行：创建、删除、修改等操作；
@@ -487,4 +475,71 @@ FROM students stu
 LEFT JOIN students_select_courses ssc ON stu.id = ssc.student_id
 LEFT JOIN courses cs ON ssc.course_id = cs.id
 GROUP BY stu.id
+```
+子查询,一张用户表,一张动态表,一张评论表,获取用户发表动态的评论个数
+```sql
+SELECT m.content content, m.id momentId , m.createAt createAt, m.updateAt updateAt,
+		JSON_OBJECT('id', u.id, 'name', u.name ) as user,
+		(SELECT COUNT(*) FROM comment c WHERE c.moment_id = m.id) commentCount
+FROM moment m
+LEFT JOIN user u ON m.user_id = u.id
+LIMIT 0,10
+```
+数组中包含对象，对象中又包含新的对象，并且mysql2如果是ONLY_FULL_GROUP_BY 模式，你可能需要包含所有非聚合列，在Navicat中可以使用，在MySQL2中一直报错让使用GROUP BY进行分组处理
+```sql
+# 获取动态的回复列表
+# 根据你的查询，m.content, m.id, m.createAt, m.updateAt 是直接从 moment 表中选择的非聚合列，它们需要被包含在 GROUP BY 子句中。user 表中的 u.id 和 u.name 通过 JSON_OBJECT 聚合，所以它们不需要在 GROUP BY 中再次指定
+SELECT m.content content, m.id momentId , m.createAt createAt, m.updateAt updateAt,
+		JSON_OBJECT('id', u.id, 'name', u.name ) as user,
+		JSON_ARRAYAGG(
+			JSON_OBJECT('id',c.id,'content',c.content,'commentId',c.comment_id,
+				'user',JSON_OBJECT('id',cu.id,'name',cu.name)
+			)
+		) as comments
+FROM moment m
+LEFT JOIN user u ON m.user_id = u.id
+LEFT JOIN comment c ON c.moment_id = m.id
+LEFT JOIN user cu ON c.user_id = cu.id
+WHERE m.id = 17
+GROUP BY 
+    m.content, m.id, m.createAt, m.updateAt;
+```
+使用if语句进行判断，如果有值，才有comments字段，如果没有值，就没有comments字段。
+```sql
+SELECT m.content content, m.id momentId , m.createAt createAt, m.updateAt updateAt,
+		JSON_OBJECT('id', u.id, 'name', u.name ) as user,
+		IF(COUNT(c.id),JSON_ARRAYAGG(
+			JSON_OBJECT('id',c.id,'content',c.content,'commentId',c.comment_id,
+				'user',JSON_OBJECT('id',cu.id,'name',cu.name)
+			)
+		),JSON_ARRAY()) as comments
+FROM moment m
+LEFT JOIN user u ON m.user_id = u.id
+LEFT JOIN comment c ON c.moment_id = m.id
+LEFT JOIN user cu ON c.user_id = cu.id
+WHERE m.id = 14
+GROUP BY  m.id;
+```
+SQL是将上一个语句的查询结果放到下一个语句中区筛选，如果查询的条件比较多，很容易出错，一些无关的尽量使用子查询
+```sql
+SELECT m.content content, m.id momentId , m.createAt createAt, m.updateAt updateAt,
+			JSON_OBJECT('id', u.id, 'name', u.name ) as user,
+		(SELECT COUNT(*) FROM moment_label ml WHERE ml.moment_id = m.id) labelCount,
+			JSON_ARRAYAGG(JSON_OBJECT('id',ml.label_id,'name',l.name)) as labels,
+		(SELECT COUNT(*) FROM comment c WHERE c.moment_id = m.id) commentCount,
+		(SELECT IF(COUNT(c.id),JSON_ARRAYAGG(
+			JSON_OBJECT('id',c.id,'content',c.content,'commentId',c.comment_id,
+				'user',JSON_OBJECT('id',cu.id,'name',cu.name)
+			)
+		),JSON_ARRAY()) FROM comment c LEFT JOIN user cu ON c.user_id = cu.id WHERE c.moment_id = m.id) as comments
+FROM moment m
+LEFT JOIN user u ON m.user_id = u.id
+LEFT JOIN moment_label ml on ml.moment_id = m.id
+LEFT JOIN label l on l.id = ml.label_id
+WHERE m.id = 17
+GROUP BY  m.id,m.content, m.createAt;
+```
+sql语句中还可以使用`CONCAT(str1,str2,...)`拼接字符串
+```sql
+SELECT JSON_ARRAYAGG(CONCAT('http://localhost:8000/moment/images/',file.filename)) FROM file
 ```

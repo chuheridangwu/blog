@@ -145,7 +145,7 @@ app.listen(8000,() => {
 });
 ```
 
-可以修改文件名称和存储路径，上传文件时如果路径不存在则会报错。
+可以修改文件名称和存储路径，必须确保文件夹或文件存在，否则会报错。
 ```javascript
 import koa from 'koa';
 import path from 'path';
@@ -156,7 +156,7 @@ const app = new koa();
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, './uploads/')
+        cb(null, 'uploads');
     },
     filename: function (req, file, cb) {
         cb(null, Date.now() + path.extname(file.originalname))
@@ -181,6 +181,7 @@ app.listen(8000,() => {
     console.log('server is running at port 8000');
 });
 ```
+> 如果你未创建文件上传需要保存的文件夹或文件，使用dest时，会根据dest配置的路径自动创建，**但是如果使用storage，必须确保文件夹或文件是否存在，否则会报错**
 
 ## 静态资源服务器
 koa并没有内置部署相关的功能，需要使用第三方库`koa-static`,部署的过程类似于express。
@@ -210,6 +211,164 @@ app.on('error',(err,ctx) => {
     ctx.status = 500;
     ctx.body = err.message;
 })
+
+app.listen(8000,() => {
+    console.log('server is running at port 8000');
+});
+```
+
+## Cookie
+Cookie是某些网站为了辨别用户身份而存储在用户本地终端（Client Side）上的数据。浏览器会在特定的情况下携带上cookie来发送请求，我们可以通过Cookie来获取一些信息。
+
+Cookie总是保存在客户端中，按在客户端中的存储位置，Cookie可以分为内存Cookie和硬盘Cookie。没有设置过期时间，默认情况下cookie是内存cookie，在关闭浏览器时会自动删除；有设置过期时间，并且过期时间不为0或者负数的cookie，是硬盘cookie，需要手动或者到期时，才会删除；
+* 内存Cookie由浏览器维护，保存在内存中，浏览器关闭时Cookie就会消失，其存在时间是短暂的；
+* 硬盘Cookie保存在硬盘中，有一个过期时间，用户手动清理或者过期时间到时，才会被清理；
+
+cookie的生命周期：
+* 默认情况下的cookie是内存cookie，也称之为会话cookie，也就是在浏览器关闭时会自动被删除；
+* 我们可以通过设置expires或者max-age来设置过期的时间；
+    * `expires`：设置的是`Date.toUTCString()`，设置格式是`;expires=date-in-GMTString-format`；
+    * `max-age`：设置过期的秒钟，`;max-age=max-age-in-seconds` (例如一年为60*60*24*365)；
+
+cookie的作用域：（允许cookie发送给哪些URL）
+* Domain：指定哪些主机可以接受cookie, 如果不指定，那么默认是 origin，不包括子域名。 如果指定Domain，则包含子域名。例如，如果设置 `Domain=mozilla.org`，则 Cookie 也包含在子域名中（如`developer.mozilla.org`）。
+* Path：指定主机下哪些路径可以接受cookie,例如，设置 Path=/docs，则以下地址都会匹配：
+    * /docs
+    * /docs/Web/
+    * /docs/Web/HTTP
+
+设置Cookie和获取Cookie的值
+```javascript
+import koa from 'koa';
+import Router from 'koa-router';
+//设置Cookie
+
+const app = new koa();
+
+const fileRouter = new Router();
+fileRouter.get('/test', async (ctx, next) => {
+    // cookie的值不使用中文,需要使用 encodeURIComponent() 进行转码
+    ctx.cookies.set("name", "hello", {
+        maxAge: 1000 * 60
+    });    
+    ctx.body = '设置cookie成功'
+})
+
+fileRouter.get('/demo', async (ctx, next) => {
+    const value = ctx.cookies.get('name');    
+    ctx.body = '获取cookie -- ' + value
+})
+
+app.use(fileRouter.routes());
+
+app.listen(8000,() => {
+    console.log('server is running at port 8000');
+});
+```
+Session是基于cookie实现机制，在koa中，需要借助于 `koa-session` 来实现session认证。
+```javascript
+import koa from 'koa';
+import Router from 'koa-router';
+import Session from 'koa-session';
+
+const app = new koa();
+
+const session = Session({
+    key: 'sessionId',
+    maxAge: 1000 * 60, //过期时间
+    httpOnly: true, //不允许通过js获取cookie
+    rolling: true, //每次响应时，刷新session的有效期
+    signed: true, //是否对cookie进行签名,防止数据篡改
+},app);
+app.keys = ['secret'];
+app.use(session);
+
+const fileRouter = new Router();
+fileRouter.get('/test', async (ctx, next) => {
+    // cookie的值不能是中文,会有转码问题
+    ctx.session.user = {
+        name: 'code',
+        age: 18
+    }  
+    ctx.body = 'session 设置成功'
+})
+fileRouter.get('/demo', async (ctx, next) => {
+    const user = ctx.session.user;    
+    ctx.body = user
+})
+app.use(fileRouter.routes());
+
+app.listen(8000,() => {
+    console.log('server is running at port 8000');
+});
+```
+
+cookie和session的方式有很多的缺点：
+* Cookie会被附加在每个HTTP请求中，所以无形中增加了流量（事实上某些请求是不需要的）；
+* Cookie是明文传递的，所以存在安全性的问题；
+* Cookie的大小限制是4KB，对于复杂的需求来说是不够的；
+* 对于浏览器外的其他客户端（比如iOS、Android），必须手动的设置cookie和session；
+* 对于分布式系统和服务器集群中如何可以保证其他系统也可以正确的解析session？
+
+## JWT 实现token机制
+JWT生成的Token由三部分组成：header、payload、signature。
+* header
+  * alg：采用的加密算法，默认是 HMAC SHA256（HS256），采用同一个密钥进行加密和解密；
+  * typ：JWT，固定值，通常都写成JWT即可；
+  * 将lag和typ通过base64Url进行编码；
+* payload
+  * 携带的数据，比如我们可以将用户的id和name放到payload中；
+  * 默认也会携带`iat（issued at`），令牌的签发时间；
+  * 我们也可以设置过期时间：`exp（expiration time）`； 
+  * 会通过base64Url算法进行编码
+* signature
+  * 设置一个`secretKey`，通过将前两个的结果合并后进行`HMACSHA256`的算法；`HMACSHA256(base64Url(header)+.+base64Url(payload), secretKey)`;
+  * 如果secretKey暴露是一件非常危险的事情，因为之后就可以模拟颁发token，也可以解密token；
+
+JWT的通常使用`jsonwebtoken`库来完成，使用非对称加密 RS256 生成私钥和公钥，私钥用于加密，公钥用于解密。
+
+cd切换到项目秘钥文件夹,Mac系统使用opnessl命令生成公钥和私钥
+```shell
+openssl  genrsa -out private.key 2048
+openssl  rsa -in private.key -pubout -out public.key
+```
+使用fs读取秘钥文件，将秘钥传到jwt的配置中。
+```javascript
+import koa from 'koa';
+import Router from 'koa-router';
+import jwt from 'jsonwebtoken';
+import fs from 'fs';
+
+const app = new koa();
+const fileRouter = new Router();
+
+const privateKey = fs.readFileSync('./keys/private.key');
+const publicKey = fs.readFileSync('./keys/public.key');
+
+fileRouter.get('/test', async (ctx, next) => {
+    const user = {id: 110, name: '张三李四王五马六'}
+    const token = jwt.sign(user, privateKey, {
+        expiresIn: 1000 * 60,
+        algorithm: 'RS256'
+    });
+    ctx.body = token
+})
+
+fileRouter.get('/demo', async (ctx, next) => {
+    try{
+        const authorization = ctx.headers.authorization;
+        const token = authorization.replace('Bearer ', '');
+        const result = jwt.verify(token, publicKey,{
+            algorithms: ['RS256']
+        });
+        ctx.body = result
+    }catch(err){
+        console.log(err)
+        ctx.body = err
+    }
+})
+
+app.use(fileRouter.routes());
 
 app.listen(8000,() => {
     console.log('server is running at port 8000');
