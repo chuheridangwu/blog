@@ -2,9 +2,9 @@
 
 * 项目
     * [Android](/Android/)
-    * [iOS](/ios/)
+    * [Objective-C](/ios/)
     * [Swift](/swift/)
-    * [网络篇](/network/)
+    * [网络](/network/)
     * [工具](/tool/)
     * [Flutter](/flutter/)
     * [Python](/python/)
