@@ -40,3 +40,28 @@ Flutter的控件和iOS中的控件概念上是不一样的，在Flutter中万物
 * [Flutter|老孟](http://laomengit.com/guide/widgets/TextField.html)
 * [Flutter官方所有的Widget](https://flutter.dev/docs/development/ui/widgets)
 * [第三方库网站](https://pub.dev/)
+
+
+### Flutter第三方
+技术框架：flutter3.19.2+dart3.3.0
+路由/状态插件：get: ^4.6.6
+缓存服务：get_storage: ^2.1.1
+图片预览插件：photo_view: ^0.14.0
+刷新加载：easy_refresh^3.3.4
+toast轻提示：toast^0.3.0
+视频套件：media_kit: ^1.1.10+1
+
+permission_handler：一个用于管理应用权限的库
+flutter_spinkit：提供多种动画加载指示器
+fluwx：一个适用于 Flutter 的微信 SDK
+cached_network_image：一个用于缓存网络图片的库
+flutter_downloader：一个用于下载文件的库
+getwidget：包含超过 100 多种可重用的 UI 组件，如进度条、对话框等，适合快速搭建用户界面
+encrypt：一个用于加密和解密的库
+
+
+视频播放：chewie: ^1.2.1
+视频缓存：video_player: ^2.3.12
+网络请求：dio: ^5.3.2
+网络图片加载：cached_network_image: ^3.2.3
+

@@ -4,6 +4,7 @@
 * [VSCode工具](tool/vscode.md)
 * [抓包工具](tool/package.md)
 * [curl用法](tool/curl.md)
+* [cursor](tool/cursor/Cursor快速上手和科学使用指南.md)
 * [docsify](tool/docsify.md)
 * [Git用法](tool/git.md)
 * [FFmpeg常用方法](tool/ffmpeg.md)

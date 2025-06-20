@@ -70,7 +70,7 @@ Shift-Command-N | 创建一个新的应用
 文件位置 | 具体路径
 ------- | -------
 Mac设置文件位置 | `/System/Library/PreferencePanes/Keyboard.prefPane`
-iOS描述文件位置 | `~/Library/MobileDevice/Provisioning Profiles`
+iOS描述文件位置 | `~/Library/Developer/Xcode/UserData/Provisioning Profiles`
 Liunx指令路径 | 隐藏文件夹`/bin/sh`
 Liunx指令路径 | 用户不能添加指令到当前文件夹`/usr/bin`
 Liunx添加的指令路径 | `/usr/local/bin`
