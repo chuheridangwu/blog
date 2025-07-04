@@ -26,6 +26,7 @@ Flutter升级 | `flutter upgrade`
 
 ##  Android Studio 快捷键
 Android studio 自动补全插件`Flutter snipets`,AS可以在保存代码的时候自动格式化，Setting>Language & Frameworks >Flutter中选中`Format Code on Save`选项。
+
 作用 | 快捷键 
 ------- | ------- 
 快速创建Widget | 输入 stf 或者 stl 出现提示后按回车
@@ -53,7 +54,7 @@ Android studio 自动补全插件`Flutter snipets`,AS可以在保存代码的时
 快读修复 | `option + .`
 方法体使用 => 方式 | 选中方法体，`option + .`
 自动生成构造函数 | `选中 final 参数，option + .`
-添加父组件、变为子组件、删除子组件 | `option + .`
+添加父组件、变为子组件、删除子组件 | `command + .`
 重新打开关闭的编辑页面 | `command + shift + T`
 通过匹配文本打开文件 | `command + T`
 代码格式化 | `command + shift + F `

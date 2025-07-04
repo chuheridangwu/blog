@@ -7,12 +7,12 @@
   * [1.5 类和对象](flutter/dart/class.md)
   * [1.6 空安全](flutter/dart/null-safety.md)
 * 第二章: Flutter开发介绍
-  * [2.1 Flutter开发工具](flutter/preface/flutter.md) 
-  * [2.2 Widget目录](flutter/preface/widgets.md)
-  * [2.3 布局原理](flutter/preface/layout.md)
-  * [2.4 关于Flutter中的Key](flutter/key.md)
-  * [2.5 获取屏幕尺寸](flutter/preface/size.md)
-  * [2.6 枚举速查表](flutter/preface/enum.md)
+  * [2.1 Flutter开发工具](flutter/preface/01-flutter.md) 
+  * [2.2 Widget目录](flutter/preface/02-widgets.md)
+  * [2.3 布局原理](flutter/preface/03-layout.md)
+  * [2.4 关于Flutter中的Key](flutter/preface/04-key.md)
+  * [2.5 获取屏幕尺寸](flutter/preface/05-size.md)
+  * [2.6 枚举速查表](flutter/preface/06-enum.md)
 * 第三章: Fluter基础组件
   * [3.1 学习Widget之前](flutter/widgets/前言.md)
   * [3.1 Container](flutter/widgets/container.md) 

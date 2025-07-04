@@ -43,6 +43,7 @@ Flutter的控件和iOS中的控件概念上是不一样的，在Flutter中万物
 
 
 ### Flutter第三方
+```
 技术框架：flutter3.19.2+dart3.3.0
 路由/状态插件：get: ^4.6.6
 缓存服务：get_storage: ^2.1.1
@@ -59,9 +60,8 @@ flutter_downloader：一个用于下载文件的库
 getwidget：包含超过 100 多种可重用的 UI 组件，如进度条、对话框等，适合快速搭建用户界面
 encrypt：一个用于加密和解密的库
 
-
 视频播放：chewie: ^1.2.1
 视频缓存：video_player: ^2.3.12
 网络请求：dio: ^5.3.2
 网络图片加载：cached_network_image: ^3.2.3
-
+```

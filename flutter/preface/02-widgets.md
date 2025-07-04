@@ -4,8 +4,6 @@ Flutter一共有很多很多很多的Widget,在本章中对它进行分类归类
 ## 常见的Widget
 主要列举一些经常用到的Widget,根据不同的作用对它们进行区分，比如 动画相关的Widget、布局相关的Widget、Text相关的Widget、Button相关的Widget、图片相关的Widget。
 
-#### Button相关的widget
-
 #### 布局相关的Widget
 布局相关的小部件可以分为:单个子元素的Widget、多个子元素的Widget、Sliver的widget。参考[Flutter官网Layout Widget](https://flutter.cn/docs/development/ui/widgets/layout)
 
@@ -20,7 +18,7 @@ Align | 一个widget，它可以将其子widget对齐，并可以根据子widget
 Center | 继承自Align,将其子widget居中显示在自身内部的widget
 AspectRatio | 一个widget,将子widget的大小指定为某个特定的长宽比，关键参数`aspectRatio`
 FittedBox | 嵌套的盒子过大时，可以按自己的大小调整其子widget的大小和位置。关键参数`fit`/`alignment`
-SizedBox | 一个特定大小的盒子。这个widget强制它的子视图有一个特定的宽度和高度。如果宽度或高度为NULL，则此widget将调整自身大小以匹配该维度中的孩子的大小。
+SizedBox | 一个特定大小的盒子。这个widget强制它的子视图有一个特定的宽度和高度。如果宽度或高度为NULL，则此widget将调整自身大小以匹配该维度中的孩子的大小。**SizedBox 是一个布局控件，默认不拦截手势，导致事件透传。**
 FractionallySizedBox | 一个比例盒子，根据参数`widthFactor`/`heightFactor`设置自身为父控件对应比例
 LimitedBox | 一个当其自身不受约束时才限制其大小的盒子,如果父控件对子控件有约束，则LimitedBox设置的约束无效，参数`maxHeight`/`maxWidth`
 OverflowBox | 对其子部件施加不同约束的widget，允许子部件溢出父级。必须设置最大宽度或者最大高度才允许子部件移除,**溢出的部分点击是无效的。**
@@ -91,17 +89,17 @@ SingleChildScrollView | 类似于iOS中的UIScrollView,只能接收一个子组�
 ListWheelScrollView | 类似于iOS中的 UIPickerView的滚动视图，常用语选择时间或者地区
 ReorderableListView | 自动拖拽子控件位置的滚动视图，在iOS中，需要使用UICollectionView进行实现
 Scrollbar   |   右边的滚动条。如果要和ListView产生对应关系，需要使用 controller将它们两个关联起来
- 
-
-
-Dismissible 滑动删除
+Dismissible | 滑动删除
 
 
 #### 弹窗相关按钮
+
+```dart
 // 从底部弹出一个界面
 showModalBottomSheet(context: context, builder: builder)
 // 苹果的Modal效果，从底部弹出一个界面
 showCupertinoModalPopup(context: context, builder: builder)
+```
 
 #### 动画相关的类
 
@@ -114,46 +112,68 @@ RichText | 富文本，文本使用 TextSpan 对象数描述。
 Text | 具有单一样式的文本。
 
 #### 手势相关的类
-GestureDetector  点击手势
-Draggable 可以拖拽的小部件
 
+Widget | 描述
+------- | -------
+GestureDetector | 点击手势
+Draggable | 可以拖拽的小部件  
+DraggableScrollableSheet | 可以滑动的小部件
 
 
 #### 其他的控件
-Divider 分割线
-RotatedBox  旋转控件,可以选择子控件
-ListTile  配合ListView进行适配，类似于iOS中的一行cell，有左侧图标、标题、副标题 右侧图标
-Visibility  设置透明度的Widget
-IgnorePointer   创建一个不能被点击的widget
-Material    添加阴影
-BottomAppBar   底部导航栏，配合悬浮按钮进行使用 
-BottomNavigationBar   底部导航栏,单个Item使用`BottomNavigationBarItem` 控件,主要参数`items`
-BottomNavigationBarItem   底部导航栏按钮
-Drawer    左右侧滑界面，在`Scaffold`部件中使用
-TextField   输入框
-InputDecoration   输入框的描述
-InputBorder   输入框的边框
-AnnotatedRegion   修改状态栏颜色
-Opacity   透明控件，`value`控制透明度
-DefaultTabController    配合TabBar和TabBarView使用
-BackdropFilter    高斯模糊效果
-RadioListTile   单选列表
-Radio   单选按钮,不能更改大小，可以使用Tran
-Switch   选择开关
-Checkbox    复选框
+Divider | 分割线
+RotatedBox  | 旋转控件,可以选择子控件
+ListTile | 配合ListView进行适配，类似于iOS中的一行cell，有左侧图标、标题、副标题 右侧图标
+Visibility | 设置透明度的Widget
+IgnorePointer  |  创建一个不能被点击的widget
+Material  | 添加阴影
+BottomAppBar |  底部导航栏，配合悬浮按钮进行使用 
+BottomNavigationBar |  底部导航栏,单个Item使用`BottomNavigationBarItem` 控件,主要参数`items`
+BottomNavigationBarItem  | 底部导航栏按钮
+Drawer  |  左右侧滑界面，在`Scaffold`部件中使用
+TextField | 输入框
+InputDecoration  | 输入框的描述
+InputBorder  | 输入框的边框
+AnnotatedRegion |  修改状态栏颜色
+Opacity  | 透明控件，`value`控制透明度
+DefaultTabController  |  配合TabBar和TabBarView使用
+BackdropFilter  |  高斯模糊效果
+RadioListTile |  单选列表
+Radio  | 单选按钮,不能更改大小，可以使用Tran
+Switch  | 选择开关
+Checkbox  |  复选框
 
 1、Flutter自带工具 DevTools
 2、使用字节开源的ume
 3、使用滴滴开源的 dokit
 
 
-
-
 #### 功能性相关的类
 ChangeNotifier
 StreamBuilder
 Listener  监听触摸事件或者鼠标事件
-
+NotificationListener  监听通知事件
+InheritedWidget  可以在子树中共享数据
+GlobalKey  可以获取到控件的位置和大小
+FocusNode  可以获取到焦点
+MediaQuery  可以获取到设备的信息
+ScaffoldMessenger  可以显示一个消息提示框
+Timer  定时器
+Animation  动画
+AnimatedWidget  动画的控件
+AnimatedBuilder  动画的构建器
+AnimatedContainer  动画的容器
+AnimatedCrossFade  动画的交叉淡入淡出
+AnimatedOpacity  动画的透明度
+AnimatedPositioned  动画的位置
+AnimatedSize  动画的大小
+AnimatedSwitcher  动画的切换器
+AnimatedList  动画的列表
+AnimatedIcon  动画的图标
+AnimatedDefaultTextStyle  动画的默认文本样式
+AnimatedTheme  动画的主题
+AnimatedAlign  动画的对齐
+AnimatedPadding  动画的内边距
 
 globalToLocal  
 locakToGlobal
@@ -526,6 +546,6 @@ class Radio<T> extends StatefulWidget {
 
 ```
 ## 推荐阅读
-* [Widget目录](https://flutterchina.club/widgets/)
+* [Widget目录](https://flutterchina.club/w  idgets/)
 * [核心Widget目录](https://flutter.cn/docs/development/ui/widgets)
 * [6.1 可滚动组件简介](https://book.flutterchina.club/chapter6/intro.html#scrollable)
