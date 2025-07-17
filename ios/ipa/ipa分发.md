@@ -92,27 +92,41 @@ Testflight 分内部测试和外部测试:
 </dict>
 </plist>
 ```
-
+>⚠️ manifest.plist文件中的包名和版本号要和IPA的包名和版本号保持一致，不然会安装失败。使用别人的重签名一定要检查。
 
 ### 2.1 生成企业包
 1. 在打包时勾选 `Include manifest for over-the-air installation`选项,如果不勾选就需要我们手动创建`manifest.plist`文件了
+
 ![](../imgs/ios_img_70.png ':size=600')
+
 2. 填写对应的下载地址，因为目前我们还不知道上传到仓库的地址，可以随便写
+
 ![](../imgs/ios_img_71.png ':size=600')
+
 3. 打包成功后会生成 IPA 和 `manifest.plist`文件
+
 ![](../imgs/ios_img_72.png ':size=600')
 
 ### 2.2 上传仓库
 1. 将 IPA 和 manifest.plist 文件上传到Github仓库，另外需要创建 `57x57`和`512x512`的Logo图片,在安装的时候会在桌面显示对应的图标。
+
 ![](../imgs/ios_img_73.png ':size=600')
+
 2. 修改文件的下载路径, 点开仓库对应的 `ipa -> 找到Download按钮 -> 右键，选择复制链接`
+
 ![](../imgs/ios_img_74.png ':size=600')
+
 3. 修改`manifest.plist`文件对应的IPA 和 图片的链接地址。下图是它们要填写的地址，没有对应的key值可以手动创建
+
 ![](../imgs/ios_img_75.png ':size=600')
+
 4. 找到`manifest.plist`的链接地址。点击 `manifest.plist文件 -> 点击 raw -> 跳转到新的链接`
-![](../imgs/ios_img_76.png)
+
+![](../imgs/ios_img_76.png ':size=600')
+
 当前网页上的地址就是`manifest.plist`文件的链接
-![](../imgs/ios_img_77.png)
+
+![](../imgs/ios_img_77.png ':size=600')
 
 ### 2.3 itms-services 协议格式
 我们使用的是`itms-services://`协议进行下载，它的格式是`itms-services://?action=download-manifest&url=manifest.plist文件路径`。
