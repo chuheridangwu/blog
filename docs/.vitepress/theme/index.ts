@@ -8,9 +8,7 @@ export default {
   Layout: () => {
     return h(DefaultTheme.Layout, null, {
       'layout-bottom': () => {
-        // 检查当前页面是否有侧边栏
         if (typeof window !== 'undefined') {
-          // 使用 nextTick 确保 DOM 已渲染
           nextTick(() => {
             const hasSidebar = document.querySelector('.VPSidebar') !== null
             const footerEl = document.querySelector('.dynamic-footer') as HTMLElement
@@ -24,10 +22,8 @@ export default {
     })
   },
   enhanceApp({ app, router, siteData }) {
-    // 注册全局组件
     app.component('DynamicFooter', DynamicFooter)
     
-    // 监听路由变化，重新检查侧边栏
     if (typeof window !== 'undefined') {
       router.onAfterRouteChanged = () => {
         nextTick(() => {
@@ -36,12 +32,18 @@ export default {
           if (footerEl) {
             footerEl.style.display = hasSidebar ? 'none' : 'block'
           }
+          
+          // 重新绑定图片点击事件
+          initImageZoom()
         })
       }
-    }
-    
-    // 滚动条显示逻辑
-    if (typeof window !== 'undefined') {
+      
+      // 初始化图片放大功能
+      nextTick(() => {
+        initImageZoom()
+      })
+      
+      // 滚动条显示逻辑
       let scrollTimer: NodeJS.Timeout | null = null
       
       const handleScroll = () => {
@@ -66,4 +68,49 @@ export default {
       }
     }
   }
+}
+
+// 图片放大功能
+function initImageZoom() {
+  const images = document.querySelectorAll('.vp-doc img')
+  
+  images.forEach(img => {
+    img.removeEventListener('click', handleImageClick)
+    img.addEventListener('click', handleImageClick)
+  })
+}
+
+function handleImageClick(e: Event) {
+  const img = e.target as HTMLImageElement
+  const overlay = document.createElement('div')
+  overlay.className = 'image-overlay'
+  
+  const clonedImg = img.cloneNode(true) as HTMLImageElement
+  overlay.appendChild(clonedImg)
+  
+  document.body.appendChild(overlay)
+  document.body.style.overflow = 'hidden'
+  
+  // 显示动画
+  requestAnimationFrame(() => {
+    overlay.classList.add('show')
+  })
+  
+  // 点击关闭
+  overlay.addEventListener('click', () => {
+    overlay.classList.remove('show')
+    setTimeout(() => {
+      document.body.removeChild(overlay)
+      document.body.style.overflow = ''
+    }, 300)
+  })
+  
+  // ESC键关闭
+  const handleKeyDown = (e: KeyboardEvent) => {
+    if (e.key === 'Escape') {
+      overlay.click()
+      document.removeEventListener('keydown', handleKeyDown)
+    }
+  }
+  document.addEventListener('keydown', handleKeyDown)
 }
