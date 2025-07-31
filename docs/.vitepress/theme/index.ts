@@ -1,3 +1,4 @@
+import googleAnalytics from 'vitepress-plugin-google-analytics'
 import DefaultTheme from 'vitepress/theme'
 import { h, nextTick } from 'vue'
 import DynamicFooter from './components/DynamicFooter.vue'
@@ -24,6 +25,10 @@ export default {
   },
   enhanceApp({ app, router, siteData }) {
     app.component('DynamicFooter', DynamicFooter)
+
+     googleAnalytics({
+      id: 'G-7KBSX9XX3Z', //跟踪ID，在analytics.google.com注册即可
+    })
     
     if (typeof window !== 'undefined') {
       router.onAfterRouteChanged = () => {
