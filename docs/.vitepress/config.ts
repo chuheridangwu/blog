@@ -36,14 +36,13 @@ export default defineConfig({
             text: '跨平台',
             items: [
               { text: 'Flutter', link: '/flutter/' },
-              { text: 'React Native', link: '/reactnative/' }
             ]
           },
           {
             text: '原生开发',
             items: [
-              { text: 'iOS 开发', link: '/ios/' },
-              { text: 'Swift 语言', link: '/swift/' },
+              { text: 'Objective-C', link: '/ios/' },
+              { text: 'Swift', link: '/swift/' },
               { text: 'Android', link: '/android/' }
             ]
           }
@@ -53,7 +52,7 @@ export default defineConfig({
         text: '🌐 前端开发',
         items: [
           { text: 'Web 前端', link: '/web/' },
-          { text: '网络技术', link: '/network/' }
+          { text: '网络篇', link: '/network/' }
         ]
       },
       {
