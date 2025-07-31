@@ -981,6 +981,11 @@ export default defineConfig({
     },
     define: {
       __VUE_PROD_DEVTOOLS__: false
+    },
+    server: {
+      fs: {
+        deny: ["**/_sidebar.md", "**/_navbar.md"],
+      },
     }
   },
 
