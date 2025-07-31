@@ -40,4 +40,4 @@ DecoratedBox(
 
 可以看到我们的剪裁成功了，但是图片所占用的空间大小仍然是60×60（红色区域），这是因为组件大小是是在layout阶段确定的，而剪裁是在之后的绘制阶段进行的，所以不会影响组件的大小，这和Transform原理是相似的。
 
-ClipPath 可以按照自定义的路径实现剪裁，它需要自定义一个CustomClipper<Path> 类型的 Clipper，定义方式和 MyClipper 类似，只不过 getClip 需要返回一个 Path，不再赘述。
+ClipPath 可以按照自定义的路径实现剪裁，它需要自定义一个`CustomClipper<Path>` 类型的 Clipper，定义方式和 MyClipper 类似，只不过 getClip 需要返回一个 Path，不再赘述。

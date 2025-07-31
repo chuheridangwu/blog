@@ -400,7 +400,7 @@
 
 /* 🔝 滚动条现代化 */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 2px;
   height: 8px;
 }
 
