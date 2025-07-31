@@ -2,6 +2,7 @@ import DefaultTheme from 'vitepress/theme'
 import { h, nextTick } from 'vue'
 import DynamicFooter from './components/DynamicFooter.vue'
 import './custom.css'
+import './style/vp-code-group.css'
 
 export default {
   ...DefaultTheme,

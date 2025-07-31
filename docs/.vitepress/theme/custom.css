@@ -208,57 +208,47 @@
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.02) 0%, transparent 100%);
 }
 
-.vp-doc {
-  padding: 32px;
+/* .vitepress/theme/style/vp-code.css */
+
+/* 代码块：增加留空边距 增加阴影 */
+.vp-doc div[class*=language-] {
+  box-shadow: 0 10px 30px 0 rgb(0 0 0 / 40%);
+  padding-top: 20px;
 }
 
-.vp-doc h1 {
-  background: var(--vp-c-gradient-primary);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  font-weight: 800;
-  margin-bottom: 24px;
+/* 代码块：添加macOS风格的小圆点 */
+.vp-doc div[class*=language-]::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  width: 12px;
+  height: 12px;
+  background-color: #ff5f56;
+  border-radius: 50%;
+  box-shadow: 20px 0 0 #ffbd2e, 40px 0 0 #27c93f;
+  z-index: 1;
 }
 
-.vp-doc h2 {
-  color: var(--vp-c-brand-1);
-  font-weight: 700;
-  margin-top: 48px;
-  margin-bottom: 16px;
-  padding-bottom: 8px;
-  border-bottom: 2px solid var(--vp-c-brand-soft);
+/* 代码块：下移行号 隐藏右侧竖线 */
+.vp-doc .line-numbers-wrapper {
+  padding-top: 40px;
+  border-right: none;
 }
 
-.vp-doc h3 {
-  color: var(--vp-c-brand-2);
-  font-weight: 600;
-  margin-top: 32px;
-  margin-bottom: 12px;
+/* 代码块：重建行号右侧竖线 */
+.vp-doc .line-numbers-wrapper::after {
+  content: "";
+  position: absolute;
+  top: 40px;
+  right: 0;
+  border-right: 1px solid var(--vp-code-block-divider-color);
+  height: calc(100% - 60px);
 }
 
-/* 🎨 代码块现代化 */
-.vp-doc div[class*='language-'] {
-  border-radius: 12px;
-  margin: 24px 0;
-  background: var(--vp-code-block-bg);
-  box-shadow: var(--vp-shadow-2);
-  border: 1px solid var(--vp-c-divider-light);
-  overflow: hidden;
-}
-
-.vp-doc div[class*='language-'] .lang {
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--vp-c-text-2);
-  background: var(--vp-c-bg-soft);
-  padding: 8px 16px;
-  border-bottom: 1px solid var(--vp-c-divider-light);
-}
-
-.vp-doc div[class*='language-'] pre {
-  padding: 20px;
-  line-height: 1.6;
+.vp-doc div[class*='language-'].line-numbers-mode {
+  margin-bottom: 20px;
 }
 
 /* 📊 表格现代化 */
