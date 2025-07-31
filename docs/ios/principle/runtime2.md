@@ -37,7 +37,7 @@ extra_rc | 里面存储的值是引用计数器减1
 has_sidetable_rc | 引用计数器是否过大无法存储在isa中。如果为1，那么引用计数会存储在一个叫SideTable的类的属性中
 
 ## 认识Class的结构
-在[isa和supperclass](ios/principle/isa和superclass.md)这篇文章中，我们粗略的讲过 Class 的结构，通过下面这张图重温一下 Class 的结构
+在[isa和supperclass](./isa和superclass.md)这篇文章中，我们粗略的讲过 Class 的结构，通过下面这张图重温一下 Class 的结构
 ![](./../imgs/ios_img_12.jpg)
 >`class_rw_ext_t`结构体中的`methods、properties、protocols`是二维数组，是可读可写的，包含了类的初始内容、分类的内容。结构体如下图：
 

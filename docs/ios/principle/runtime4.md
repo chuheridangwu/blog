@@ -39,7 +39,7 @@ NSLog(@"%d ---",[[NSObject class] isKindOfClass:[NSObject class]]); // 1
 NSLog(@"%d ---",[[Person class] isMemberOfClass:[Person class]]); // 0
 NSLog(@"%d ---",[[NSObject class] isMemberOfClass:[NSObject class]]); // 0
 ```
-为什么`[[NSObject class] isKindOfClass:[NSObject class]]`返回的是YES，我们知道`[NSObject class]`返回的是一个类对象（class），所以调用的是`+isKindOfClass`方法，通过isa，找到的是NSObject的元类对象(meta-class),根据我们之前所学，NSObject元类对象(meta-class)的父类正是NSObject类对象(class)，所以返回值为YES。[点击查看isa和superclass](ios/principle/isa和superclass.md)
+为什么`[[NSObject class] isKindOfClass:[NSObject class]]`返回的是YES，我们知道`[NSObject class]`返回的是一个类对象（class），所以调用的是`+isKindOfClass`方法，通过isa，找到的是NSObject的元类对象(meta-class),根据我们之前所学，NSObject元类对象(meta-class)的父类正是NSObject类对象(class)，所以返回值为YES。[点击查看isa和superclass](./isa和superclass.md)
 
 ## super 调用方法的本质
 我们通过打印先认识一下super是否是跟我们想象的一样。下面的代码中 Student 继承自 Person , Person 继承自 NSObject。在 Student 初始化的时候打印：
@@ -89,7 +89,7 @@ struct objc_super {
 
 我们看到`[super sayHello]`实际上是调用的`objc_msgSendSuper(struct objc_super * _Nonnull super, SEL _Nonnull op, ...)`函数。传入两个参数`struct objc_super`和`SEL`。`objc_super`结构体中有两个参数，消息接收者（self）和 它的父类(super_class),也就是当我们调用`[super sayHello]`时消息接收者是 self 自己。 `super_class` 只是起到一个标志作用，表示从它开始搜索方法。
 
-**注意：转换后的代码跟实际编译会有一定差异，在下面的面试题会讲到。实际编译时会调用[objc_msgSendSuper2()函数](ios/principle/runtime4.md?id=objc_msgsendsuper2)**
+**注意：转换后的代码跟实际编译会有一定差异，在下面的面试题会讲到。实际编译时会调用[objc_msgSendSuper2()函数](./runtime4.md?id=objc_msgsendsuper2)**
 
 > `NSObject`内部是怎么实现`class`方法
 
@@ -182,7 +182,7 @@ struct objc_super {
 
 知道了它们在内存中的位置，我们再来看一下我们是怎么获取`_name`变量的值。
 
-通过学习[OC对象的本质](ios/principle/OC对象的本质.md),我们知道Person类的本质就是一个结构体，我们只要知道了isa指针，往下偏移8个字节就能获取到 _name的值。
+通过学习[OC对象的本质](./OC对象的本质.md),我们知道Person类的本质就是一个结构体，我们只要知道了isa指针，往下偏移8个字节就能获取到 _name的值。
 ```objc
 struct Person_IMPL {
 	Class isa;

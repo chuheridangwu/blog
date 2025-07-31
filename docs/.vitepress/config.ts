@@ -13,6 +13,9 @@ export default defineConfig({
   // 启用 Git 时间戳
   ignoreDeadLinks: false,
   
+  // 屏蔽指定文件,_sidebar.md 屏蔽侧边栏文件是在原来docsify中使用的，现在的vitePress打包不支持里面的链接方式
+  srcExclude: ["**/_sidebar.md","**/_navbar.md"], // 支持 glob 模式
+
   // 头部配置
   head: [
     ['link', { rel: 'icon', href: '/favicon.ico' }],
@@ -670,17 +673,6 @@ export default defineConfig({
         }
       ],
 
-      // React Native 侧边栏
-      '/reactnative/': [
-        {
-          text: '⚛️ React Native',
-          collapsed: false,
-          items: [
-            { text: '📋 React Native 概述', link: '/reactnative/' }
-          ]
-        }
-      ],
-
       // 网络侧边栏
       '/network/': [
         {
@@ -895,18 +887,6 @@ export default defineConfig({
           ]
         }
       ],
-
-      // 资源侧边栏
-      '/onepiece/': [
-        {
-          text: '🏴‍☠️ 资源宝库',
-          collapsed: false,
-          items: [
-            { text: '📋 资源概述', link: '/onepiece/' },
-            { text: '01-影视资源宝藏', link: '/onepiece/01-video' }
-          ]
-        }
-      ]
     },
 
     // 社交链接

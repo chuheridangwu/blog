@@ -230,14 +230,14 @@ if __name__ == '__main__':
 运行python app.py，Flask自带的Server在端口5000上监听：
 
 $ python app.py 
- * Running on http://127.0.0.1:5000/
-打开浏览器，输入首页地址http://localhost:5000/：
+ * Running on `http://127.0.0.1:5000/`
+打开浏览器，输入首页地址`http://localhost:5000/：`
 
 flask-home
 
 首页显示正确！
 
-再在浏览器地址栏输入http://localhost:5000/signin，会显示登录表单：
+再在浏览器地址栏输入`http://localhost:5000/signin`，会显示登录表单：
 
 flask-signin-form
 

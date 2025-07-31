@@ -30,7 +30,7 @@
     %end
 ```
 8. 重新安装后点击目录列表不会弹出内购弹窗了，完美。
-9. 如果想安装到非越狱手机，需要对`tweek动态库`、`CydiaSubstrate`、`libsubstitute.0.dylib`放到可执行文件目录下，修改相关依赖路径，进行重新签名打包，可参考[重签名文档](/ios/ipa/resignature.md)
+9. 如果想安装到非越狱手机，需要对`tweek动态库`、`CydiaSubstrate`、`libsubstitute.0.dylib`放到可执行文件目录下，修改相关依赖路径，进行重新签名打包，可参考[重签名文档](../ipa/ipa重签名.md)
 
 ## hook播放详情界面
 在播放详情界面时，点击下一章的时候会有一个显示需要解锁的弹窗提示。

@@ -65,7 +65,7 @@ Widget并不是最终绘制在屏幕上的。Widget可以看做是一个蓝图�
 
 在上面的代码中，Widget可以看做是一棵树🌲，管理着Column,Column里面有三个Box。当 Widget Tree 发生改变时,对应的 Element Tree 也需要对应的发生变化,他们之间的对应改需如下图:
 
-![](../flutter/imgs/flutter_img_1.jpg ':size=350')
+![](../imgs/flutter_img_1.jpg ':size=350')
 
 当 Widget Tree 发生变化时,Element Tree根据**控件类型 和 Key**来确定是否发生变化的，并且Element Tree只在跟他同级的Widget Tree中查找。我们再回头来看之前的两个问题。
 
@@ -76,7 +76,7 @@ Widget并不是最终绘制在屏幕上的。Widget可以看做是一个蓝图�
 我们只是更换Box的顺序时，对Element来说，Widget Tree 是没有发生变化的，自己也不要改变。
 ```
 
-2. 使用Key之后,如果在Box外部包裹其他控件,热更新之后Box内的数字会变为0
+1. 使用Key之后,如果在Box外部包裹其他控件,热更新之后Box内的数字会变为0
 ```markdown
 问题的原因: 
 Element Tree只会在同级的Widget Tree中进行查找。

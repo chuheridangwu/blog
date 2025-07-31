@@ -3,7 +3,7 @@
 ## 基于Xcode11创建自定义UIWindow
 Xcode 11 建新工程默认会创建通过 UIScene 管理多个 UIWindow 的应用,增加了 SceneDelegate 类，这是为了实现iPadOS支持多窗口的结果。
 
-![](imgs/ios_img_57.png)
+![](../imgs/ios_img_57.png)
 ```info
 enable Multipe Windows --- 是否允许分屏
 Scene Configuratiton --- 屏幕配置项
