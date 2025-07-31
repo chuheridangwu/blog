@@ -1,3 +1,4 @@
+import 'virtual:group-icons.css'; //代码组样式
 import googleAnalytics from 'vitepress-plugin-google-analytics'
 import DefaultTheme from 'vitepress/theme'
 import { h, nextTick } from 'vue'

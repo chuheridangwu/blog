@@ -1,4 +1,5 @@
 import { defineConfig } from 'vitepress'
+import { groupIconMdPlugin, groupIconVitePlugin } from 'vitepress-plugin-group-icons'
 
 export default defineConfig({
   title: '起风了',
@@ -961,6 +962,9 @@ export default defineConfig({
       dangerLabel: '危险',
       infoLabel: '信息',
       detailsLabel: '详细信息'
+    },
+    config(md) { 
+      md.use(groupIconMdPlugin) //代码组图标
     }
   },
 
@@ -978,9 +982,12 @@ export default defineConfig({
     },
     server: {
       fs: {
-        deny: ["**/_sidebar.md", "**/_navbar.md"],
+        deny: ["**/_sidebar.md", "**/_navbar.md"], // 防止访问 _sidebar.md 和 _navbar.md
       },
-    }
+    },
+    plugins: [
+      groupIconVitePlugin() //代码组图标
+    ]
   },
 
   // 添加 transformPageData 来确保时间戳正确处理

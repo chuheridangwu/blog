@@ -38,6 +38,7 @@
     "url": "https://github.com/your-username/tech-blog"
   },
   "dependencies": {
-    "vitepress-plugin-google-analytics": "^1.0.2"
+    "vitepress-plugin-google-analytics": "^1.0.2",
+    "vitepress-plugin-group-icons": "^1.6.1"
   }
 }
