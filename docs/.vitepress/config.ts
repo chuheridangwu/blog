@@ -1,7 +1,7 @@
 import { defineConfig } from 'vitepress'
 
 export default defineConfig({
-  title: '开发者文档',
+  title: '起风了',
   description: '全栈开发技术文档',
   
   // 基础配置
@@ -26,7 +26,7 @@ export default defineConfig({
   // 主题配置
   themeConfig: {
     // 网站标题和logo
-    siteTitle: '开发者文档',
+    siteTitle: '起风了',
     logo: '/logo.svg',
     
     // 导航栏
@@ -893,12 +893,6 @@ export default defineConfig({
     socialLinks: [
       { icon: 'github', link: 'https://github.com' }
     ],
-
-    // 页脚
-    footer: {
-      message: '基于 VitePress 构建',
-      copyright: 'Copyright © 2024'
-    },
 
     // 搜索
     search: {
