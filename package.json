@@ -1,0 +1,40 @@
+{
+  "name": "tech-blog-vitepress",
+  "version": "2.0.0",
+  "description": "一起哈啤🍺 - 现代化技术博客",
+  "type": "module",
+  "scripts": {
+    "dev": "vitepress dev docs",
+    "build": "vitepress build docs",
+    "preview": "vitepress preview docs",
+    "serve": "vitepress serve docs",
+    "lint": "eslint docs --ext .md,.vue,.ts,.js",
+    "format": "prettier --write docs/**/*.{md,vue,ts,js}",
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs",
+    "fix-timestamps": "node scripts/fix-timestamps.js"
+  },
+  "devDependencies": {
+    "vitepress": "^1.0.0",
+    "@types/node": "^20.0.0",
+    "eslint": "^8.0.0",
+    "prettier": "^3.0.0",
+    "sass": "^1.69.0"
+  },
+  "keywords": [
+    "blog",
+    "tech",
+    "vitepress",
+    "vue",
+    "documentation",
+    "modern",
+    "responsive"
+  ],
+  "author": "Mr.Panda",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/tech-blog"
+  }
+}

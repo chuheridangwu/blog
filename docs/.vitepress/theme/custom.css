@@ -1,0 +1,457 @@
+/* 现代化主题样式 */
+:root {
+  /* 品牌色彩系统 */
+  --vp-c-brand-1: #646cff;
+  --vp-c-brand-2: #747bff;
+  --vp-c-brand-3: #9499ff;
+  --vp-c-brand-soft: rgba(100, 108, 255, 0.14);
+  
+  /* 渐变色彩 */
+  --vp-c-gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --vp-c-gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  --vp-c-gradient-accent: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  
+  /* 阴影系统 */
+  --vp-shadow-1: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --vp-shadow-2: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  --vp-shadow-3: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --vp-shadow-4: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  
+  /* 字体系统 */
+  --vp-font-family-base: "Inter", "Chinese Quote", -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --vp-font-family-mono: "JetBrains Mono", "Fira Code", "SF Mono", Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  
+  /* 动画系统 */
+  --vp-transition-duration: 0.25s;
+  --vp-transition-timing: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 深色模式优化 */
+.dark {
+  --vp-c-bg: #0f0f23;
+  --vp-c-bg-alt: #161b22;
+  --vp-c-bg-soft: #1a1a2e;
+}
+
+/* 🏠 首页现代化设计 */
+.VPHome {
+  background: var(--vp-c-gradient-primary);
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+.VPHome::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
+    radial-gradient(circle at 40% 40%, rgba(120, 200, 255, 0.2) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.VPHomeHero {
+  position: relative;
+  z-index: 1;
+  padding: 120px 24px 80px;
+}
+
+.VPHomeHero .container {
+  max-width: 1152px;
+  margin: 0 auto;
+}
+
+.VPHomeHero .main {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  border-radius: 24px;
+  padding: 48px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: var(--vp-shadow-4);
+  transition: transform var(--vp-transition-duration) var(--vp-transition-timing);
+}
+
+.VPHomeHero .main:hover {
+  transform: translateY(-4px);
+}
+
+.VPHomeHero .name {
+  background: linear-gradient(120deg, #bd34fe 30%, #41d1ff);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 4rem;
+  font-weight: 900;
+  line-height: 1.1;
+  margin-bottom: 16px;
+}
+
+.VPHomeHero .text {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 12px;
+}
+
+.VPHomeHero .tagline {
+  font-size: 1.125rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 32px;
+}
+
+/* 🎯 特性卡片现代化 */
+.VPHomeFeatures {
+  position: relative;
+  z-index: 1;
+  padding: 0 24px 96px;
+}
+
+.VPHomeFeatures .container {
+  max-width: 1152px;
+  margin: 0 auto;
+}
+
+.VPFeature {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  border-radius: 16px;
+  padding: 32px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all var(--vp-transition-duration) var(--vp-transition-timing);
+  height: 100%;
+}
+
+.VPFeature:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--vp-shadow-4);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.VPFeature .icon {
+  font-size: 2.5rem;
+  margin-bottom: 16px;
+  display: block;
+}
+
+.VPFeature .title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.95);
+  margin-bottom: 12px;
+}
+
+.VPFeature .details {
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.6;
+}
+
+/* 🧭 导航栏现代化 */
+.VPNav {
+  backdrop-filter: blur(20px);
+  background: rgba(255, 255, 255, 0.8);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  transition: all var(--vp-transition-duration) var(--vp-transition-timing);
+}
+
+.dark .VPNav {
+  background: rgba(15, 15, 35, 0.8);
+  border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+
+.VPNavBar .title {
+  font-weight: 700;
+  font-size: 1.125rem;
+}
+
+.VPNavBarMenu .VPNavBarMenuLink {
+  font-weight: 500;
+  transition: color var(--vp-transition-duration) var(--vp-transition-timing);
+}
+
+.VPNavBarMenu .VPNavBarMenuLink:hover {
+  color: var(--vp-c-brand-1);
+}
+
+/* 📱 侧边栏现代化 */
+.VPSidebar {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.dark .VPSidebar {
+  background: rgba(15, 15, 35, 0.95);
+  border-right-color: rgba(255, 255, 255, 0.1);
+}
+
+.VPSidebarItem .text {
+  font-weight: 500;
+  transition: all var(--vp-transition-duration) var(--vp-transition-timing);
+}
+
+.VPSidebarItem:hover .text {
+  color: var(--vp-c-brand-1);
+}
+
+.VPSidebarItem.is-active .text {
+  color: var(--vp-c-brand-1);
+  font-weight: 600;
+}
+
+/* 📄 内容区域现代化 */
+.VPContent {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.02) 0%, transparent 100%);
+}
+
+.vp-doc {
+  padding: 32px;
+}
+
+.vp-doc h1 {
+  background: var(--vp-c-gradient-primary);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 800;
+  margin-bottom: 24px;
+}
+
+.vp-doc h2 {
+  color: var(--vp-c-brand-1);
+  font-weight: 700;
+  margin-top: 48px;
+  margin-bottom: 16px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--vp-c-brand-soft);
+}
+
+.vp-doc h3 {
+  color: var(--vp-c-brand-2);
+  font-weight: 600;
+  margin-top: 32px;
+  margin-bottom: 12px;
+}
+
+/* 🎨 代码块现代化 */
+.vp-doc div[class*='language-'] {
+  border-radius: 12px;
+  margin: 24px 0;
+  background: var(--vp-code-block-bg);
+  box-shadow: var(--vp-shadow-2);
+  border: 1px solid var(--vp-c-divider-light);
+  overflow: hidden;
+}
+
+.vp-doc div[class*='language-'] .lang {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--vp-c-text-2);
+  background: var(--vp-c-bg-soft);
+  padding: 8px 16px;
+  border-bottom: 1px solid var(--vp-c-divider-light);
+}
+
+.vp-doc div[class*='language-'] pre {
+  padding: 20px;
+  line-height: 1.6;
+}
+
+/* 📊 表格现代化 */
+.vp-doc table {
+  border-collapse: separate;
+  border-spacing: 0;
+  margin: 24px 0;
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--vp-shadow-2);
+  border: 1px solid var(--vp-c-divider-light);
+}
+
+.vp-doc table th {
+  background: var(--vp-c-gradient-primary);
+  color: white;
+  font-weight: 600;
+  text-align: left;
+  padding: 16px;
+  border: none;
+}
+
+.vp-doc table td {
+  padding: 16px;
+  border-bottom: 1px solid var(--vp-c-divider-light);
+  border-right: 1px solid var(--vp-c-divider-light);
+}
+
+.vp-doc table td:last-child {
+  border-right: none;
+}
+
+.vp-doc table tr:last-child td {
+  border-bottom: none;
+}
+
+.vp-doc table tr:nth-child(even) {
+  background: var(--vp-c-bg-soft);
+}
+
+/* 💬 引用块现代化 */
+.vp-doc blockquote {
+  border-left: 4px solid var(--vp-c-brand-1);
+  padding: 20px 24px;
+  margin: 24px 0;
+  background: var(--vp-c-bg-soft);
+  border-radius: 0 12px 12px 0;
+  position: relative;
+  box-shadow: var(--vp-shadow-1);
+}
+
+.vp-doc blockquote::before {
+  content: '"';
+  position: absolute;
+  top: -10px;
+  left: 16px;
+  font-size: 3rem;
+  color: var(--vp-c-brand-1);
+  opacity: 0.3;
+  font-family: serif;
+}
+
+/* 🖼️ 图片现代化 */
+.vp-doc img {
+  border-radius: 12px;
+  box-shadow: var(--vp-shadow-3);
+  margin: 24px 0;
+  transition: transform var(--vp-transition-duration) var(--vp-transition-timing);
+}
+
+.vp-doc img:hover {
+  transform: scale(1.02);
+}
+
+/* 🔗 链接现代化 */
+.vp-doc a {
+  color: var(--vp-c-brand-1);
+  text-decoration: none;
+  font-weight: 500;
+  transition: all var(--vp-transition-duration) var(--vp-transition-timing);
+  border-bottom: 1px solid transparent;
+}
+
+.vp-doc a:hover {
+  color: var(--vp-c-brand-2);
+  border-bottom-color: var(--vp-c-brand-2);
+}
+
+/* 🏷️ 标签样式 */
+.vp-doc code {
+  background: var(--vp-c-brand-soft);
+  color: var(--vp-c-brand-1);
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 0.875em;
+  font-weight: 500;
+}
+
+/* 📱 响应式优化 */
+@media (max-width: 768px) {
+  .VPHomeHero .name {
+    font-size: 2.5rem;
+  }
+  
+  .VPHomeHero .main {
+    padding: 32px 24px;
+  }
+  
+  .vp-doc {
+    padding: 24px 16px;
+  }
+  
+  .vp-doc table {
+    font-size: 14px;
+  }
+  
+  .vp-doc table th,
+  .vp-doc table td {
+    padding: 12px 8px;
+  }
+}
+
+/* 🎭 动画效果 */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.vp-doc > * {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+/* 🔝 滚动条现代化 */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--vp-c-bg-alt);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--vp-c-brand-1);
+  border-radius: 4px;
+  transition: background var(--vp-transition-duration) var(--vp-transition-timing);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--vp-c-brand-2);
+}
+
+/* 🎯 搜索框现代化 */
+.VPNavBarSearch {
+  margin-right: 16px;
+}
+
+.DocSearch-Button {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+  transition: all var(--vp-transition-duration) var(--vp-transition-timing);
+}
+
+.DocSearch-Button:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* 🦶 页脚现代化 */
+.VPFooter {
+  background: var(--vp-c-gradient-primary);
+  color: rgba(255, 255, 255, 0.9);
+  text-align: center;
+  padding: 32px 24px;
+  margin-top: 64px;
+}
+
+.VPFooter .message {
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.VPFooter .copyright {
+  opacity: 0.8;
+  font-size: 0.875rem;
+}
