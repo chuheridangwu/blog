@@ -24,6 +24,9 @@
   /* 动画系统 */
   --vp-transition-duration: 0.25s;
   --vp-transition-timing: cubic-bezier(0.4, 0, 0.2, 1);
+
+  --custom-block-tip-left: #009400;
+  --custom-block-tip-bg: #e6f6e6;
 }
 
 /* 深色模式优化 */
@@ -181,7 +184,6 @@
 .VPSidebar {
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(20px);
-  border-right: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .dark .VPSidebar {
@@ -292,17 +294,16 @@
 
 /* 💬 引用块现代化 */
 .vp-doc blockquote {
-  border-left: 4px solid var(--vp-c-brand-1);
+  border-left: 4px solid var(--custom-block-tip-left);
   padding: 20px 24px;
   margin: 24px 0;
-  background: var(--vp-c-bg-soft);
-  border-radius: 0 12px 12px 0;
+  background: var(--custom-block-tip-bg);
+  border-radius: 8px;
   position: relative;
   box-shadow: var(--vp-shadow-1);
 }
 
 .vp-doc blockquote::before {
-  content: '"';
   position: absolute;
   top: -10px;
   left: 16px;
@@ -401,16 +402,6 @@
   border-bottom-color: var(--vp-c-brand-2);
 }
 
-/* 🏷️ 标签样式 */
-.vp-doc code {
-  background: var(--vp-c-brand-soft);
-  color: var(--vp-c-brand-1);
-  padding: 4px 8px;
-  border-radius: 6px;
-  font-size: 0.875em;
-  font-weight: 500;
-}
-
 /* 📱 响应式优化 */
 @media (max-width: 768px) {
   .VPHomeHero .name {
@@ -453,8 +444,8 @@
 
 /* 🔝 滚动条现代化 */
 ::-webkit-scrollbar {
-  width: 2px;
-  height: 8px;
+  width: 0px;
+  height: 2px;
 }
 
 ::-webkit-scrollbar-track {

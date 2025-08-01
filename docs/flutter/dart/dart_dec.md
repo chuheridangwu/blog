@@ -4,7 +4,7 @@ Dart的开发工具:`Android Studio`、`VSCode` 或者是命令行`dart hellowor
 Dart的入口是`main`函数,使用`print`进行打印:
 ```dart
 main() { 
-   print("Hello World!"); 
+   print("Hello World!");
 }
 ```
 
