@@ -1,0 +1,41 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- 主背景 -->
+  <rect width="64" height="64" rx="16" fill="url(#bgGradient)"/>
+  
+  <!-- 风的抽象表现 - 流动的线条 -->
+  <g opacity="0.3">
+    <path d="M8 16 Q16 14 24 16 Q32 18 40 16 Q48 14 56 16" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    <path d="M8 24 Q16 22 24 24 Q32 26 40 24 Q48 22 56 24" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    <path d="M8 48 Q16 46 24 48 Q32 50 40 48 Q48 46 56 48" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  </g>
+  
+  <!-- 主要图标 - 代码与风的结合 -->
+  <g transform="translate(32, 32)">
+    <!-- 代码标签 -->
+    <g stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <!-- 左尖括号 -->
+      <path d="M-6 -8 L-12 0 L-6 8"/>
+      <!-- 右尖括号 -->
+      <path d="M6 -8 L12 0 L6 8"/>
+      <!-- 中间的风符号 -->
+      <path d="M-4 -2 Q0 -4 4 -2" stroke-width="2"/>
+      <path d="M-4 2 Q0 0 4 2" stroke-width="2"/>
+    </g>
+  </g>
+  
+  <!-- 装饰元素 -->
+  <circle cx="12" cy="12" r="2" fill="white" opacity="0.2"/>
+  <circle cx="52" cy="12" r="1.5" fill="white" opacity="0.15"/>
+  <circle cx="12" cy="52" r="1.5" fill="white" opacity="0.15"/>
+  <circle cx="52" cy="52" r="2" fill="white" opacity="0.2"/>
+  
+  <!-- 渐变定义 -->
+  <defs>
+    <!-- 背景渐变 -->
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#646cff"/>
+      <stop offset="50%" style="stop-color:#747bff"/>
+      <stop offset="100%" style="stop-color:#9499ff"/>
+    </linearGradient>
+  </defs>
+</svg>

@@ -1,0 +1,33 @@
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- 主背景 -->
+  <rect width="32" height="32" rx="8" fill="url(#bgGradient)"/>
+  
+  <!-- 风的抽象表现 -->
+  <g opacity="0.3">
+    <path d="M4 8 Q8 7 12 8 Q16 9 20 8 Q24 7 28 8" stroke="white" stroke-width="0.8" fill="none" stroke-linecap="round"/>
+    <path d="M4 12 Q8 11 12 12 Q16 13 20 12 Q24 11 28 12" stroke="white" stroke-width="0.8" fill="none" stroke-linecap="round"/>
+    <path d="M4 24 Q8 23 12 24 Q16 25 20 24 Q24 23 28 24" stroke="white" stroke-width="0.8" fill="none" stroke-linecap="round"/>
+  </g>
+  
+  <!-- 主要图标 -->
+  <g transform="translate(16, 16)">
+    <g stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <!-- 左尖括号 -->
+      <path d="M-3 -4 L-6 0 L-3 4"/>
+      <!-- 右尖括号 -->
+      <path d="M3 -4 L6 0 L3 4"/>
+      <!-- 中间的风符号 -->
+      <path d="M-2 -1 Q0 -2 2 -1" stroke-width="1"/>
+      <path d="M-2 1 Q0 0 2 1" stroke-width="1"/>
+    </g>
+  </g>
+  
+  <!-- 渐变定义 -->
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#646cff"/>
+      <stop offset="50%" style="stop-color:#747bff"/>
+      <stop offset="100%" style="stop-color:#9499ff"/>
+    </linearGradient>
+  </defs>
+</svg>
