@@ -505,9 +505,9 @@ export default defineConfig({
             { text: '05-Buffer', link: '/web/node/05-Buffer' },
             { text: '06-Http', link: '/web/node/06-Http' },
             { text: '07-Express', link: '/web/node/07-Express' },
-            { text: '08-会话控制', link: '/web/node/08-会话控制' },
-            { text: '09-MongoDB', link: '/web/node/09-MongoDB' },
-            { text: '10-接口', link: '/web/node/10-接口' }
+            { text: '08-koa', link: '/web/node/08-koa' },
+            { text: '09-MySQL', link: '/web/node/09-MySQL' },
+            { text: '10-MySQL2', link: '/web/node/10-mysql2' }
           ]
         },
         {
