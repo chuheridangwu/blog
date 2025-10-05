@@ -1,15 +1,16 @@
 # Widget目录
-Flutter一共有很多很多很多的Widget,在本章中对它进行分类归类，根据官网的方式将常用的Widget进行列出，可以当做一个Widget字典，不知道用什么控件实现的时候可以来此进行查询。
+Flutter有非常多的的Widget,在本章中对它进行分类归类。
+![](../imgs/flutter_img_5.png)
 
-## 常见的Widget
+## 常用Widget
 主要列举一些经常用到的Widget,根据不同的作用对它们进行区分，比如 动画相关的Widget、布局相关的Widget、Text相关的Widget、Button相关的Widget、图片相关的Widget。
 
-#### 布局相关的Widget
+### 布局相关的Widget
 布局相关的小部件可以分为:单个子元素的Widget、多个子元素的Widget、Sliver的widget。参考[Flutter官网Layout Widget](https://flutter.cn/docs/development/ui/widgets/layout)
 
 >LayoutBuilder，当不知道当前的父类约束是多少的时候，可以通过LayoutBuilder进行查看当前小部件的约束
 
-##### 拥有单个子元素的Widget
+### 拥有单个子元素的Widget
 
 Widget | 描述
 ------- | -------
@@ -34,7 +35,7 @@ IntrinsicWidth | 一个widget，它将它的子widget的宽度调整其本身实
 Transform | 一个widgegt,在绘制小部件之前将它进行旋转的小部件。快速创建的方法有`Transform.rotate()`/`Transform.scale()`/`Transform.translate()`
 Directionality  | 修改小部件的阅读方向，适配阿拉伯语时需要，参数`textDirection`
 
-##### 拥有多个子元素的Widget
+### 拥有多个子元素的Widget
 多个子元素的Widget是指在一个小部件内可以装多个小部件。
 
 Widget | 描述
@@ -52,7 +53,7 @@ CustomMultiChildLayout | 通过delegate去实现自定义布局，通过提供�
 Table | 不能滚动的表格视图，内部包含多个TableRow。
 LayoutBuilder | 在添加小部件之前可以知道当前的约束是多少。
 
-##### Sliver的widget
+### Sliver的widget
 
 Sliver控件名称 | 说明
 ------- | -------
@@ -74,9 +75,7 @@ SliverIgnorePointer | 不允许点击
 SliverFillRemaining | 占领Sliver组件剩余的屏幕空间
 SliverLayoutBuilder | 知道当前滚动视窗的剩余约束
 
-#### 容器类
-
-#### 滚动视图类的Widget
+### 滚动视图类的Widget
 
 Widget | 场景
 ------- | -------
@@ -111,7 +110,7 @@ DefaultTextStyle | 应用于没有明确样式的后代 Text 小部件的文本�
 RichText | 富文本，文本使用 TextSpan 对象数描述。
 Text | 具有单一样式的文本。
 
-#### 手势相关的类
+### 手势相关的类
 
 Widget | 描述
 ------- | -------
@@ -120,7 +119,7 @@ Draggable | 可以拖拽的小部件
 DraggableScrollableSheet | 可以滑动的小部件
 
 
-#### 其他的控件
+### 其他的控件
 Divider | 分割线
 RotatedBox  | 旋转控件,可以选择子控件
 ListTile | 配合ListView进行适配，类似于iOS中的一行cell，有左侧图标、标题、副标题 右侧图标
@@ -148,7 +147,7 @@ Checkbox  |  复选框
 3、使用滴滴开源的 dokit
 
 
-#### 功能性相关的类
+### 功能性相关的类
 ChangeNotifier
 StreamBuilder
 Listener  监听触摸事件或者鼠标事件
@@ -179,7 +178,7 @@ globalToLocal
 locakToGlobal
 这两个值得到的都是自身控件到屏幕的X、Y，不同的地方在于是以自己为参照物还是以屏幕为参照物，以自己为参照物得到的是负值，以屏幕为参照物得到的是正值
 
-#### [Cupertino iOS风格的Widget](https://flutter.cn/docs/development/ui/widgets/cupertino)
+### [Cupertino iOS风格的Widget](https://flutter.cn/docs/development/ui/widgets/cupertino)
 Material 设计风格是为全平台设计的。当编写一个 Material 风格的 app 时，它运行在任何平台上都是有着 Material 的设计展示，即使是在 iOS 下。但是如果你想要让你的 app 更像标准的 iOS 风格的话，需要用到 Cupertino 库。
 
 安卓和iOS的手机是两种风格,Flutter有些地方为了我们做了适配，比如滚动视图，如果是安卓手机下拉到顶的时候不会有回弹效果，而iOS则会回弹一下再归位, 下面是iOS风格的一些Widge。

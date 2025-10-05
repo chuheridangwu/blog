@@ -507,7 +507,8 @@ export default defineConfig({
             { text: '07-Express', link: '/web/node/07-Express' },
             { text: '08-koa', link: '/web/node/08-koa' },
             { text: '09-MySQL', link: '/web/node/09-MySQL' },
-            { text: '10-MySQL2', link: '/web/node/10-mysql2' }
+            { text: '10-MySQL2', link: '/web/node/10-mysql2' },
+            { text: '11-Linux服务器', link: '/web/node/11-Linux服务器' }
           ]
         },
         {
