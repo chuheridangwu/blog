@@ -570,6 +570,7 @@ export default defineConfig({
           text: '📚 第三方框架',
           collapsed: false,
           items: [
+            { text: '下载apk', link: '/android/thirdparty/01-下载apk' },
             { text: '第三方框架', link: '/android/thirdparty/thirdparty' },
             { text: 'AdMob', link: '/android/thirdparty/admob1' },
             { text: 'Retrofit', link: '/android/thirdparty/retrofit' },
