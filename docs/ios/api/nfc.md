@@ -5,12 +5,11 @@ NFC，如同过去的电子票券智能卡一般，将允许移动支付取代�
 * iOS13系统基本支持目前已经部署的NFC协议的读写操作。
 * 开发者可以通过`CoreNFC Framework`提供的native protocols与 tags 直接通信
 
-## iOS NFC 开发流程
+## 1、添加 NFC 权限
 苹果在 iOS11 中提供`NFCNDEFReaderSession`类，仅支持NDEF格式的数据。在 iOS13 中对 `CoreNFC 框架`进行扩展, 提供`NFCTagReaderSession`API，支持`ISO7816Tag`、`ISO15693Tag`、`MiFareTag`、`FeliCaTag`类型的数据格式，并且允许使用 APDU 的方式对其进行通信。
 
-> 添加 NFC 权限
-
-在Xcode中向添加 `Near Field Communication Tag Reading`,生成对应的权限文件，如果证书不是自动签名需要先到苹果开发者后台进行添加
+### 1.1 在Xcode中添加权限
+在Xcode中 `Signing & Capabilities` -> `+ Capability` 添加-> `Near Field Communication Tag Reading`,生成对应的权限文件，如果证书不是自动签名需要到苹果开发者后台添加NFC权限。生成的权限文件如下：
 ```xml
 <key>com.apple.developer.nfc.readersession.formats</key>
 <array>
@@ -18,9 +17,13 @@ NFC，如同过去的电子票券智能卡一般，将允许移动支付取代�
     <string>TAG</string>
 </array>
 ```
+Xcode中的NFC权限
+![](../imgs/ios_img_132.png)
 
+### 1.2 在info.plist文件中添加权限
 在info.plist 中添加`Privacy - NFC Scan Usage Description`请求权限，允许用户访问 NFC 功能
 
+### 1.3 如果是公交卡添加AID
 如果需要跟 `ISO7816`、 `ISO15693` 、`FeliCa`、 `MIFARE tags` 类型的 IC 卡进行交互, 则需要在info.plist 添加对应的AID,例如城市一卡通的AID：A00000000386980701, **注意：苹果的 NFC 功能不支持支付类型的AID**
 ```xml
 <key>com.apple.developer.nfc.readersession.felica.systemcodes</key>
@@ -33,8 +36,9 @@ NFC，如同过去的电子票券智能卡一般，将允许移动支付取代�
 </array>
 ```
 
-> 与 NFC 相关的API
+## 2、 NFC 相关API
 
+### 2.1 系统API
 1. 创建会话标签,一次只能选择一种`NFCNDEFReaderSession` 或者是 `NFCTagReaderSession`
 
 ```objc
@@ -68,7 +72,7 @@ self.session = [[NFCNDEFReaderSession alloc] initWithDelegate:self queue:nil inv
 }
 ```
 
-### 完整代码，仅展示 NFCNDEFReaderSession 
+### 2.1 完整代码，仅展示 NFCNDEFReaderSession 
 身份证、银行卡信息、小区门禁卡不能被读取到数据信息, 可以在苹果的 快捷指令 -> 自动化 -> 创建个人自动化 -> NFC -> NFC标签, 扫描对应的 卡片 ,可以添加一些动作。比如扫描到对应的NFC就快速拨打某个电话。
 
 * `NFCManager.h`文件内容
@@ -356,7 +360,7 @@ API_AVAILABLE(ios(11.0)){
 @end
 ```
 
-## iOS 与 CPU 卡之间的交互
+## 3、iOS 与 CPU 卡之间的交互
 CPU 卡又叫智能卡，卡内具有中央处理器（CPU）、随机存储器（RAM）、程序存储器（ROM）、数据存储器（EEPROM）以及片内操作系统（COS）,CPU 卡对应的标准：
 ```
 ISO 10536：识别卡－非接触式的集成电路卡
@@ -430,7 +434,7 @@ EMV：支付系统的集成电路卡规范和支付系统的集成电路卡终�
 }
 ```
 
-## 推荐网址
+## 4、推荐网址
 * [我们如何从iPhone将银行卡加载到钥匙串中](https://tech-zh.netlify.app/articles/zh-cn515602/ )  五星 
 * [iOS NFC读取上海公交卡](https://juejin.cn/post/6844904177684971527) 五星
 * [iOS NFC开发(读标签与写标签)](https://www.jianshu.com/p/7822103337ae) 五星
@@ -447,7 +451,7 @@ EMV：支付系统的集成电路卡规范和支付系统的集成电路卡终�
 * [NFC手机模拟加密门禁卡](https://hceng.cn/2019/07/12/NFC%E6%89%8B%E6%9C%BA%E6%A8%A1%E6%8B%9F%E5%8A%A0%E5%AF%86%E9%97%A8%E7%A6%81%E5%8D%A1/)
 * [公交行业CPU卡总结（发卡，消费，充值）](https://www.cxyzjd.com/article/rzq_123/100771934)
 
-## 什么是AID
+## 5、什么是AID
 AID-即唯一标识一个应用，分为两部分，RID(5字节) + PIX（最多11字节）
 * RID:注册标识符，由ISO组织来分配，标识一个全球唯一的应用提供商，一般是分配给卡组织。比如分配给银联，我们遵循的是PBOC规范，分配到的RID=A000000333 
 * PIX:扩展应用标识符，一般是由应用提供商自己定义。比如银联定义的借记应用的PIX=010101，贷记应用的PIX=010102,准贷记应用的PIX=010103,纯电子现金应用的PIX=010106
@@ -463,11 +467,11 @@ A0 00 00 03 33 | 01 01 06  |  PBOC纯电子现金应用
 * [银行卡对应的AID索引](https://blog.csdn.net/yxtxiaotian/article/details/88013182)
 
 
-## 什么是 APDU
+## 6、什么是 APDU
 有两种类别的APDU：命令APDU和响应APDU。命令APDU由读卡器发送到智能卡-它包含了一个**必选的4字节的头部（CLA，INS，P1，P2）和0到255字节的数据**。响应APDU由智能卡发送到读卡器-它包含了必选的**2字节的状态字和0到256字节的数**据。
 ![](../imgs/ios_img_66.jpg)
 
-### APDU 指令集
+### 6.1 APDU 指令集
 
 指令 | 指令类别 | 指令码 | 功能描述
 ------- | ------- | ------- | -------
@@ -493,7 +497,7 @@ INITIALIZE FOR XXX | 80 | 50 | 初始化XXX交易
 UNBLOCK | 80 | 2C | 解锁被锁住的口令
 UPDATE OVERDRAW LIMIT | 80 | 58 | 修改透支限额
 
-### APDU 错误码
+### 6.2 APDU 错误码
 
 状态码 | 性质 | 错误解释
 ------- | ------- | -------
@@ -546,7 +550,7 @@ UPDATE OVERDRAW LIMIT | 80 | 58 | 修改透支限额
 6603 | 警告 | 当前DF文件无FCI
 6604 | 警告 | 当前DF下无SF或KF
 
-## 公交卡相关报文
+## 7、公交卡相关报文
 公交卡一般使用CPU芯片,使用APDU发送指令和接收NFC返回的数据，有对应的格式：
 ```
 //00B0950000 读取15文件   000047100000000002000000471000010008284920211110209912300000
