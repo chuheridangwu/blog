@@ -20,7 +20,7 @@
     "eslint": "^8.0.0",
     "prettier": "^3.0.0",
     "sass": "^1.69.0",
-    "vitepress": "^1.0.0"
+    "vitepress": "^2.0.0-alpha.16"
   },
   "keywords": [
     "blog",

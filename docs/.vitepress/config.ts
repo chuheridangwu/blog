@@ -372,6 +372,7 @@ export default defineConfig({
             { text: '📋 工具概述', link: '/tool/' },
             { text: '🐙 GitHub 优质项目', link: '/tool/01-GitHub项目' },
             { text: '💻 VSCode 使用指南', link: '/tool/02-vscode' },
+            { text: 'yt-dlp使用文档', link: '/tool/03-yt-dlp' },
             { text: '🔧 调试技巧', link: '/tool/skill' },
             { text: '🍎 MAC 电脑', link: '/tool/mac' },
             { text: '📦 抓包工具', link: '/tool/package' },
