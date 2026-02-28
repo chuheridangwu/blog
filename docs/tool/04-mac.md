@@ -58,8 +58,6 @@ Shift-Command-N | 创建一个新的应用
 `shasum + 文件路径/文件名` | 查看本地文件的hash值
 `defaults write com.apple.finder AppleShowAllFiles -bool true` | 显示隐藏文件
 `defaults write com.apple.finder AppleShowAllFiles  YES` | 显示隐藏文件
-`defaults write com.apple.finder AppleShowAllFiles  N` | 隐藏文件
-`defaults write com.apple.finder AppleShowAllFiles -bool false` | 隐藏文件
 `killall Finder `   |  重启Finer
 `zip -e ~/Desktop/a.zip  ~/Desktop/file.text` | 单个文件加密成zip
 `zip -er ~/Desktop/a.zip  ~/Desktop/相册` | 文件夹加密成zip
