@@ -1,24 +1,6 @@
 ---
 layout: home
 
-hero:
-  name: "起风了"
-  text: "全栈开发技术文档"
-  tagline: "记录技术成长路径，分享开发实战经验"
-  image:
-    src: /logo.svg
-    alt: 起风了
-  actions:
-    - theme: brand
-      text: 📱 移动开发
-      link: /flutter/
-    - theme: alt
-      text: 🌐 前端开发
-      link: /web/
-    - theme: alt
-      text: 🛠️ 开发工具
-      link: /tool/
-
 features:
   - icon: 📱
     title: 移动开发

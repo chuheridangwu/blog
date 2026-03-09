@@ -14,7 +14,6 @@
   * [2.5 获取屏幕尺寸](flutter/preface/05-size.md)
   * [2.6 枚举速查表](flutter/preface/06-enum.md)
 * 第三章: Fluter基础组件
-  * [3.1 学习Widget之前](flutter/widgets/前言.md)
   * [3.1 Container](flutter/widgets/container.md) 
   * [3.2 图片](flutter/widgets/image.md)
   * [3.3 TextField](flutter/widgets/textfield.md)

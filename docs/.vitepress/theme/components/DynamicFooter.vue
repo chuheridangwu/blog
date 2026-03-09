@@ -5,7 +5,7 @@
       <div class="copyright">Copyright © 2020 - 至今</div>
       <div class="author">
         <a
-          href="https://gitee.com/pandauser/Lean"
+          href="https://github.com/chuheridangwu"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -29,7 +29,7 @@ const calculateRunTime = () => {
 
   const years = Math.floor(diff / (1000 * 60 * 60 * 24 * 365));
   const days = Math.floor(
-    (diff % (1000 * 60 * 60 * 24 * 365)) / (1000 * 60 * 60 * 24)
+    (diff % (1000 * 60 * 60 * 24 * 365)) / (1000 * 60 * 60 * 24),
   );
   const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
   const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
